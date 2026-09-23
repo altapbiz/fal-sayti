@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔮 Fal Dünyası</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      color: #fff;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(137, 72, 255, .35), transparent 30%),
+        radial-gradient(circle at 80% 20%, rgba(0, 210, 255, .25), transparent 30%),
+        radial-gradient(circle at 50% 90%, rgba(255, 0, 170, .20), transparent 35%),
+        #08070d;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        120deg,
+        transparent 30%,
+        rgba(255,255,255,.025),
+        transparent 70%
+      );
+      animation: shine 7s linear infinite;
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    header {
+      width: 100%;
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(8,7,13,.75);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: .5px;
+    }
+
+    .logo span {
+      color: #c77dff;
+    }
+
+    .login-btn {
+      border: 1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.07);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    .hero {
+      max-width: 1050px;
+      margin: auto;
+      padding: 70px 20px 35px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 30px;
+      background: rgba(180, 90, 255, .12);
+      border: 1px solid rgba(180, 90, 255, .35);
+      color: #d9a7ff;
+      margin-bottom: 20px;
+      font-size: 13px;
+    }
+
+    h1 {
+      font-size: clamp(38px, 8vw, 72px);
+      line-height: 1;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, #fff, #d59aff, #6edcff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      color: #aaa6b8;
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .services {
+      max-width: 1100px;
+      margin: 30px auto 80px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      position: relative;
+      padding: 25px;
+      min-height: 220px;
+      border-radius: 24px;
+      background: linear-gradient(
+        145deg,
+        rgba(255,255,255,.09),
+        rgba(255,255,255,.025)
+      );
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 15px 50px rgba(0,0,0,.25);
+      transition: .3s;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(196,120,255,.55);
+      box-shadow: 0 20px 60px rgba(140,60,255,.18);
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      right: -50px;
+      top: -50px;
+      background: #a855f7;
+      filter: blur(60px);
+      opacity: .18;
+    }
+
+    .icon {
+      font-size: 42px;
+      margin-bottom: 16px;
+    }
+
+    .card h2 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: #aaa6b8;
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 43px;
+    }
+
+    .bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 22px;
+    }
+
+    .price {
+      font-size: 20px;
+      font-weight: 800;
+      color: #e4b4ff;
+    }
+
+    .view-btn {
+      border: 0;
+      color: white;
+      background: linear-gradient(135deg, #8b35ff, #d51aff);
+      padding: 11px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 8px 25px rgba(145,50,255,.25);
+    }
+
+    .view-btn:hover {
+      filter: brightness(1.15);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: #777384;
+      border-top: 1px solid rgba(255,255,255,.07);
+      font-size: 13px;
+    }
+
+    @media(max-width:600px) {
+      .hero {
+        padding-top: 50px;
+      }
+
+      .services {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        min-height: 190px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">🔮 <span>Fal</span> Dünyası</div>
+  <button class="login-btn">Daxil ol</button>
+</header>
+
+<section class="hero">
+  <div class="badge">✨ Sənin sirli dünyan</div>
+
+  <h1>Taleyinin izlərini kəşf et</h1>
+
+  <p>
+    Tarot, əl falı, sevgi, yuxu yozmaları və digər
+    mistik analizlərlə öz suallarına cavab axtar.
+  </p>
+</section>
+
+<section class="services">
+
+  <div class="card">
+    <div class="icon">🔮</div>
+    <h2>Tarot Falı</h2>
+    <p>Kartların simvolik mənalarını kəşf et.</p>
+    <div class="bottom">
+      <div class="price">5 AZN</div>
+      <button class="view-btn" onclick="openService('Tarot Falı',5)">
+        Bax
+      </button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon">✋</div>
+    <h2>Əl Falı</h2>
+    <p>Əlinin xətlərinin simvolik yozumunu öyrən.</p>
+    <div class="bottom">
+      <div class="price">3 AZN</div>
+      <button class="view-btn" onclick="openService('Əl Falı',3)">
+        Bax
+      </button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon">❤️</div>
+    <h2>Sevgi Analizi</h2>
+    <p>Münasibətiniz haqqında əyləncə xarakterli analiz.</p>
+    <div class="bottom">
+      <div class="price">4 AZN</div>
+      <button class="view-btn" onclick="openService('Sevgi Analizi',4)">
+        Bax
+      </button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon">🌙</div>
+    <h2>Yuxu Yozmaları</h2>
+    <p>Yuxundakı simvolların mümkün mənalarını kəşf et.</p>
+    <div class="bottom">
+      <div class="price">2 AZN</div>
+      <button class="view-btn" onclick="openService('Yuxu Yozmaları',2)">
+        Bax
+      </button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon">⭐</div>
+    <h2>Bürc / Günün Falı</h2>
+    <p>Günün üçün simvolik bürc və enerji analizi.</p>
+    <div class="bottom">
+      <div class="price">2 AZN</div>
+      <button class="view-btn" onclick="openService('Bürc / Günün Falı',2)">
+        Bax
+      </button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon">🗺️</div>
+    <h2>Doğum Xəritəsi</h2>
+    <p>Doğum məlumatlarına əsaslanan astroloji şərh.</p>
+    <div class="bottom">
+      <div class="price">7 AZN</div>
+      <button class="view-btn" onclick="openService('Doğum Xəritəsi',7)">
+        Bax
+      </button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon">👤</div>
+    <h2>Adın Mənası</h2>
+    <p>Adının mənası və simvolik xüsusiyyətləri.</p>
+    <div class="bottom">
+      <div class="price">1 AZN</div>
+      <button class="view-btn" onclick="openService('Adın Mənası',1)">
+        Bax
+      </button>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  © 2026 Fal Dünyası — Əyləncə və mistik interpretasiya platforması
+</footer>
+
+<script>
+  function openService(name, price) {
+    alert(
+      name + " — " + price + " AZN\n\n" +
+      "Bu xidmət üçün əvvəlcə hesabınıza daxil olmalısınız."
+    );
+  }
+</script>
+
+</body>
+</html>
