@@ -263,8 +263,6 @@ border-top:1px solid rgba(255,255,255,.07);
 font-size:13px
 }
 
-/* MODALS */
-
 .modal{
 position:fixed;
 inset:0;
@@ -386,7 +384,8 @@ border-radius:10px;
 background:rgba(255,255,255,.06);
 color:#ddd;
 font-size:13px;
-line-height:1.5
+line-height:1.5;
+word-break:break-word
 }
 
 .message.show{
@@ -488,6 +487,21 @@ margin-right:6px
 
 @keyframes spin{
 to{transform:rotate(360deg)}
+}
+
+.debug-box{
+display:none;
+margin-top:10px;
+padding:12px;
+border-radius:10px;
+background:#050509;
+border:1px solid rgba(255,80,110,.3);
+font-family:monospace;
+font-size:11px;
+line-height:1.5;
+white-space:pre-wrap;
+word-break:break-word;
+color:#ff9caf
 }
 
 @media(max-width:600px){
@@ -821,37 +835,21 @@ Bax
 </footer>
 
 
-<!-- AUTH MODAL -->
+<!-- AUTH -->
 
-<div
-class="modal"
-id="authModal"
->
+<div class="modal" id="authModal">
 
 <div class="modal-box">
 
-<button
-class="close"
-onclick="closeModal('authModal')"
->
-×
-</button>
+<button class="close" onclick="closeModal('authModal')">×</button>
 
-<h2 id="authTitle">
-Daxil ol
-</h2>
+<h2 id="authTitle">Daxil ol</h2>
 
-<p
-class="modal-subtitle"
-id="authSubtitle"
->
+<p class="modal-subtitle" id="authSubtitle">
 Hesabına daxil olaraq xidmətlərdən istifadə et.
 </p>
 
-<div
-class="message"
-id="authMessage"
-></div>
+<div class="message" id="authMessage"></div>
 
 <input
 class="input"
@@ -881,10 +879,7 @@ Daxil ol
 Hesabın yoxdur?
 </span>
 
-<button
-onclick="switchAuth()"
-id="switchButton"
->
+<button onclick="switchAuth()" id="switchButton">
 Qeydiyyatdan keç
 </button>
 
@@ -894,25 +889,15 @@ Qeydiyyatdan keç
 </div>
 
 
-<!-- ORDER MODAL -->
+<!-- ORDER -->
 
-<div
-class="modal"
-id="orderModal"
->
+<div class="modal" id="orderModal">
 
 <div class="modal-box">
 
-<button
-class="close"
-onclick="closeModal('orderModal')"
->
-×
-</button>
+<button class="close" onclick="closeModal('orderModal')">×</button>
 
-<h2 id="orderTitle">
-Tarot Falı
-</h2>
+<h2 id="orderTitle">Tarot Falı</h2>
 
 <p class="modal-subtitle">
 Sualını yaz və ödəniş qəbzini göndər.
@@ -934,7 +919,6 @@ id="question"
 placeholder="Sualını buraya yaz..."
 ></textarea>
 
-
 <div class="receipt-area">
 
 <div class="receipt-title">
@@ -955,10 +939,7 @@ accept="image/jpeg,image/png,image/webp"
 onchange="previewReceipt(event)"
 >
 
-<div
-class="file-name"
-id="fileName"
-></div>
+<div class="file-name" id="fileName"></div>
 
 <img
 id="receiptPreview"
@@ -968,11 +949,9 @@ alt="Qəbz önizləmə"
 
 </div>
 
+<div class="message" id="orderMessage"></div>
 
-<div
-class="message"
-id="orderMessage"
-></div>
+<div class="debug-box" id="debugBox"></div>
 
 <button
 class="main-btn"
@@ -1010,7 +989,6 @@ SUPABASE_KEY
 ========================= */
 
 let authMode = "login";
-
 let selectedService = null;
 let selectedPrice = null;
 
@@ -1020,19 +998,11 @@ let selectedPrice = null;
 ========================= */
 
 function openModal(id){
-
-document
-.getElementById(id)
-.classList.add("active");
-
+document.getElementById(id).classList.add("active");
 }
 
 function closeModal(id){
-
-document
-.getElementById(id)
-.classList.remove("active");
-
+document.getElementById(id).classList.remove("active");
 }
 
 
@@ -1044,19 +1014,17 @@ function openAuth(){
 
 authMode="login";
 
-document.getElementById("authTitle").textContent =
-"Daxil ol";
+document.getElementById("authTitle").textContent="Daxil ol";
 
-document.getElementById("authSubtitle").textContent =
+document.getElementById("authSubtitle").textContent=
 "Hesabına daxil olaraq xidmətlərdən istifadə et.";
 
-document.getElementById("authSubmit").textContent =
-"Daxil ol";
+document.getElementById("authSubmit").textContent="Daxil ol";
 
-document.getElementById("switchText").textContent =
+document.getElementById("switchText").textContent=
 "Hesabın yoxdur?";
 
-document.getElementById("switchButton").textContent =
+document.getElementById("switchButton").textContent=
 "Qeydiyyatdan keç";
 
 clearAuthMessage();
@@ -1077,36 +1045,33 @@ clearAuthMessage();
 
 if(authMode === "register"){
 
-document.getElementById("authTitle").textContent =
-"Qeydiyyat";
+document.getElementById("authTitle").textContent="Qeydiyyat";
 
-document.getElementById("authSubtitle").textContent =
+document.getElementById("authSubtitle").textContent=
 "Yeni hesab yarat.";
 
-document.getElementById("authSubmit").textContent =
+document.getElementById("authSubmit").textContent=
 "Qeydiyyatdan keç";
 
-document.getElementById("switchText").textContent =
+document.getElementById("switchText").textContent=
 "Artıq hesabın var?";
 
-document.getElementById("switchButton").textContent =
+document.getElementById("switchButton").textContent=
 "Daxil ol";
 
 }else{
 
-document.getElementById("authTitle").textContent =
-"Daxil ol";
+document.getElementById("authTitle").textContent="Daxil ol";
 
-document.getElementById("authSubtitle").textContent =
+document.getElementById("authSubtitle").textContent=
 "Hesabına daxil olaraq xidmətlərdən istifadə et.";
 
-document.getElementById("authSubmit").textContent =
-"Daxil ol";
+document.getElementById("authSubmit").textContent="Daxil ol";
 
-document.getElementById("switchText").textContent =
+document.getElementById("switchText").textContent=
 "Hesabın yoxdur?";
 
-document.getElementById("switchButton").textContent =
+document.getElementById("switchButton").textContent=
 "Qeydiyyatdan keç";
 
 }
@@ -1119,13 +1084,12 @@ function showAuthMessage(message,type=""){
 const box =
 document.getElementById("authMessage");
 
-box.textContent = message;
+box.textContent=message;
 
-box.className = "message show";
+box.className="message show";
 
-if(type){
+if(type)
 box.classList.add(type);
-}
 
 }
 
@@ -1135,9 +1099,9 @@ function clearAuthMessage(){
 const box =
 document.getElementById("authMessage");
 
-box.textContent = "";
+box.textContent="";
 
-box.className = "message";
+box.className="message";
 
 }
 
@@ -1145,13 +1109,10 @@ box.className = "message";
 async function handleAuth(){
 
 const email =
-document.getElementById("email")
-.value
-.trim();
+document.getElementById("email").value.trim();
 
 const password =
-document.getElementById("password")
-.value;
+document.getElementById("password").value;
 
 if(!email || !password){
 
@@ -1161,7 +1122,6 @@ showAuthMessage(
 );
 
 return;
-
 }
 
 if(password.length < 6){
@@ -1172,17 +1132,16 @@ showAuthMessage(
 );
 
 return;
-
 }
 
 const button =
 document.getElementById("authSubmit");
 
-button.disabled = true;
+button.disabled=true;
 
 try{
 
-if(authMode === "register"){
+if(authMode==="register"){
 
 const {data,error} =
 await supabaseClient.auth.signUp({
@@ -1190,7 +1149,8 @@ email,
 password
 });
 
-if(error) throw error;
+if(error)
+throw error;
 
 if(data.session){
 
@@ -1213,7 +1173,8 @@ email,
 password
 });
 
-if(error) throw error;
+if(error)
+throw error;
 
 closeModal("authModal");
 
@@ -1224,13 +1185,13 @@ closeModal("authModal");
 console.error(error);
 
 showAuthMessage(
-translateAuthError(error.message),
+error?.message || "Giriş zamanı xəta baş verdi.",
 "error"
 );
 
 }finally{
 
-button.disabled = false;
+button.disabled=false;
 
 }
 
@@ -1238,36 +1199,18 @@ button.disabled = false;
 
 
 /* =========================
-   AUTH ERROR
-========================= */
-
-function translateAuthError(message){
-
-if(message.includes("Invalid login credentials"))
-return "E-poçt və ya şifrə yanlışdır.";
-
-if(message.includes("User already registered"))
-return "Bu e-poçtla artıq hesab mövcuddur.";
-
-if(message.includes("Email not confirmed"))
-return "E-poçt ünvanını təsdiqləməlisən.";
-
-if(message.includes("Password should be at least"))
-return "Şifrə ən azı 6 simvol olmalıdır.";
-
-return message;
-
-}
-
-
-/* =========================
-   USER UI
+   USER
 ========================= */
 
 async function updateUserUI(){
 
-const {data} =
+const {data,error} =
 await supabaseClient.auth.getSession();
+
+if(error){
+console.error("SESSION ERROR:",error);
+return;
+}
 
 const user =
 data.session?.user;
@@ -1283,29 +1226,20 @@ document.getElementById("userEmail");
 
 if(user){
 
-loginButton.style.display = "none";
-
-userMenu.style.display = "flex";
-
-userEmail.textContent =
-user.email || "";
+loginButton.style.display="none";
+userMenu.style.display="flex";
+userEmail.textContent=user.email || "";
 
 }else{
 
-loginButton.style.display = "block";
-
-userMenu.style.display = "none";
-
-userEmail.textContent = "";
+loginButton.style.display="block";
+userMenu.style.display="none";
+userEmail.textContent="";
 
 }
 
 }
 
-
-/* =========================
-   LOGOUT
-========================= */
 
 async function logout(){
 
@@ -1322,8 +1256,22 @@ await updateUserUI();
 
 async function openService(name,price){
 
-const {data} =
+const {data,error} =
 await supabaseClient.auth.getSession();
+
+if(error){
+
+console.error(error);
+
+openAuth();
+
+showAuthMessage(
+error.message,
+"error"
+);
+
+return;
+}
 
 const user =
 data.session?.user;
@@ -1338,26 +1286,20 @@ showAuthMessage(
 );
 
 return;
-
 }
 
-selectedService = name;
-selectedPrice = price;
+selectedService=name;
+selectedPrice=price;
 
-document.getElementById("orderTitle").textContent =
-name;
+document.getElementById("orderTitle").textContent=name;
+document.getElementById("orderService").textContent=name;
+document.getElementById("orderPrice").textContent=price+" AZN";
 
-document.getElementById("orderService").textContent =
-name;
-
-document.getElementById("orderPrice").textContent =
-price + " AZN";
-
-document.getElementById("question").value = "";
+document.getElementById("question").value="";
 
 resetReceipt();
-
 clearOrderMessage();
+clearDebug();
 
 openModal("orderModal");
 
@@ -1365,7 +1307,7 @@ openModal("orderModal");
 
 
 /* =========================
-   RECEIPT PREVIEW
+   RECEIPT
 ========================= */
 
 function previewReceipt(event){
@@ -1382,12 +1324,11 @@ document.getElementById("receiptPreview");
 if(!file){
 
 resetReceipt();
-
 return;
 
 }
 
-const allowedTypes = [
+const allowedTypes=[
 "image/jpeg",
 "image/png",
 "image/webp"
@@ -1395,50 +1336,41 @@ const allowedTypes = [
 
 if(!allowedTypes.includes(file.type)){
 
-event.target.value = "";
+event.target.value="";
 
-fileName.textContent =
+fileName.textContent=
 "Yalnız JPG, PNG və WEBP qəbul edilir.";
 
-fileName.style.color = "#ff7190";
+fileName.style.color="#ff7190";
 
-preview.style.display = "none";
+preview.style.display="none";
 
 return;
-
 }
 
-if(file.size > 5 * 1024 * 1024){
+if(file.size > 5*1024*1024){
 
-event.target.value = "";
+event.target.value="";
 
-fileName.textContent =
+fileName.textContent=
 "Fayl maksimum 5 MB ola bilər.";
 
-fileName.style.color = "#ff7190";
+fileName.style.color="#ff7190";
 
-preview.style.display = "none";
+preview.style.display="none";
 
 return;
-
 }
 
-fileName.textContent =
-file.name;
+fileName.textContent=file.name;
+fileName.style.color="#c77dff";
 
-fileName.style.color =
-"#c77dff";
+const reader=new FileReader();
 
-const reader =
-new FileReader();
+reader.onload=function(e){
 
-reader.onload = function(e){
-
-preview.src =
-e.target.result;
-
-preview.style.display =
-"block";
+preview.src=e.target.result;
+preview.style.display="block";
 
 };
 
@@ -1446,10 +1378,6 @@ reader.readAsDataURL(file);
 
 }
 
-
-/* =========================
-   RESET RECEIPT
-========================= */
 
 function resetReceipt(){
 
@@ -1462,19 +1390,16 @@ document.getElementById("fileName");
 const preview =
 document.getElementById("receiptPreview");
 
-input.value = "";
-
-fileName.textContent = "";
-
-preview.src = "";
-
-preview.style.display = "none";
+input.value="";
+fileName.textContent="";
+preview.src="";
+preview.style.display="none";
 
 }
 
 
 /* =========================
-   ORDER MESSAGE
+   MESSAGES
 ========================= */
 
 function showOrderMessage(message,type=""){
@@ -1482,15 +1407,12 @@ function showOrderMessage(message,type=""){
 const box =
 document.getElementById("orderMessage");
 
-box.textContent =
-message;
+box.textContent=message;
 
-box.className =
-"message show";
+box.className="message show";
 
-if(type){
+if(type)
 box.classList.add(type);
-}
 
 }
 
@@ -1500,26 +1422,78 @@ function clearOrderMessage(){
 const box =
 document.getElementById("orderMessage");
 
-box.textContent = "";
+box.textContent="";
+box.className="message";
 
-box.className =
-"message";
+}
+
+
+function showDebug(title,error){
+
+const box =
+document.getElementById("debugBox");
+
+let output="";
+
+if(error){
+
+output += "TYPE: " +
+(error.name || "Unknown") +
+"\n\n";
+
+output += "MESSAGE: " +
+(error.message || "No message") +
+"\n\n";
+
+if(error.details)
+output += "DETAILS: " +
+error.details +
+"\n\n";
+
+if(error.hint)
+output += "HINT: " +
+error.hint +
+"\n\n";
+
+if(error.code)
+output += "CODE: " +
+error.code +
+"\n\n";
+
+}
+
+box.textContent =
+title +
+"\n\n" +
+output;
+
+box.style.display="block";
+
+}
+
+
+function clearDebug(){
+
+const box =
+document.getElementById("debugBox");
+
+box.textContent="";
+box.style.display="none";
 
 }
 
 
 /* =========================
-   CREATE ORDER + RECEIPT
+   ORDER
 ========================= */
 
 async function createOrderWithReceipt(){
 
 clearOrderMessage();
+clearDebug();
 
 const question =
-document.getElementById("question")
-.value
-.trim();
+document.getElementById("question").value.trim();
 
 const receiptInput =
 document.getElementById("receiptFile");
@@ -1539,7 +1513,6 @@ showOrderMessage(
 );
 
 return;
-
 }
 
 if(!file){
@@ -1550,10 +1523,9 @@ showOrderMessage(
 );
 
 return;
-
 }
 
-const allowedTypes = [
+const allowedTypes=[
 "image/jpeg",
 "image/png",
 "image/webp"
@@ -1567,10 +1539,9 @@ showOrderMessage(
 );
 
 return;
-
 }
 
-if(file.size > 5 * 1024 * 1024){
+if(file.size > 5*1024*1024){
 
 showOrderMessage(
 "Qəbz maksimum 5 MB ola bilər.",
@@ -1578,12 +1549,26 @@ showOrderMessage(
 );
 
 return;
-
 }
 
 
-const {data:sessionData} =
+const {data:sessionData,error:sessionError} =
 await supabaseClient.auth.getSession();
+
+if(sessionError){
+
+showOrderMessage(
+"Session xətası.",
+"error"
+);
+
+showDebug(
+"SESSION ERROR",
+sessionError
+);
+
+return;
+}
 
 const user =
 sessionData.session?.user;
@@ -1591,25 +1576,22 @@ sessionData.session?.user;
 if(!user){
 
 closeModal("orderModal");
-
 openAuth();
-
 return;
-
 }
 
 
-button.disabled = true;
+button.disabled=true;
 
-button.innerHTML =
+button.innerHTML=
 '<span class="loading"></span>Göndərilir...';
 
 
 try{
 
-/*
-   Xidməti database-dən tapırıq
-*/
+/* =========================
+   1. SERVICE TEST
+========================= */
 
 const {data:serviceData,error:serviceError} =
 await supabaseClient
@@ -1617,41 +1599,72 @@ await supabaseClient
 .select("id,name,price")
 .eq("name",selectedService)
 .eq("active",true)
-.single();
+.maybeSingle();
 
-if(serviceError)
+if(serviceError){
+
+showOrderMessage(
+"Xidmət bazadan alınarkən xəta baş verdi.",
+"error"
+);
+
+showDebug(
+"1. SERVICES DATABASE ERROR",
+serviceError
+);
+
 throw serviceError;
 
+}
 
-/*
-   Əvvəlcədən order ID yaradırıq.
-   Beləliklə qəbzi:
-   istifadəçi-ID/order-ID/fayl
-   formasında saxlaya bilərik.
-*/
+if(!serviceData){
+
+const customError =
+new Error(
+'Xidmət tapılmadı: "' +
+selectedService +
+'"'
+);
+
+showOrderMessage(
+"Seçilmiş xidmət bazada tapılmadı.",
+"error"
+);
+
+showDebug(
+"1. SERVICE NOT FOUND",
+customError
+);
+
+throw customError;
+
+}
+
+
+/* =========================
+   2. ORDER ID
+========================= */
 
 const orderId =
 crypto.randomUUID();
 
 
-/*
-   Fayl uzantısı
-*/
+/* =========================
+   3. EXTENSION
+========================= */
 
-let extension = "jpg";
+let extension="jpg";
 
-if(file.type === "image/png"){
-extension = "png";
-}
+if(file.type==="image/png")
+extension="png";
 
-if(file.type === "image/webp"){
-extension = "webp";
-}
+if(file.type==="image/webp")
+extension="webp";
 
 
-/*
-   Storage path
-*/
+/* =========================
+   4. STORAGE PATH
+========================= */
 
 const filePath =
 user.id +
@@ -1661,11 +1674,11 @@ orderId +
 extension;
 
 
-/*
-   Qəbzi Storage-a yükləyirik
-*/
+/* =========================
+   5. STORAGE UPLOAD
+========================= */
 
-const {error:uploadError} =
+const {data:uploadData,error:uploadError} =
 await supabaseClient
 .storage
 .from("receipts")
@@ -1678,15 +1691,28 @@ upsert:false
 }
 );
 
-if(uploadError)
+if(uploadError){
+
+showOrderMessage(
+"Qəbz Storage-a yüklənmədi.",
+"error"
+);
+
+showDebug(
+"2. STORAGE UPLOAD ERROR",
+uploadError
+);
+
 throw uploadError;
 
+}
 
-/*
-   Sifarişi database-ə yazırıq
-*/
 
-const {error:orderError} =
+/* =========================
+   6. ORDER INSERT
+========================= */
+
+const {data:orderData,error:orderError} =
 await supabaseClient
 .from("orders")
 .insert({
@@ -1711,12 +1737,16 @@ receipt_status:"waiting",
 
 receipt_uploaded_at:new Date().toISOString()
 
-});
+})
+.select()
+.single();
+
 
 if(orderError){
 
 /*
-   Order yaranmasa yüklənmiş faylı silməyə çalışırıq.
+Əgər order yaranmadısa,
+Storage-dakı faylı silirik.
 */
 
 await supabaseClient
@@ -1724,22 +1754,37 @@ await supabaseClient
 .from("receipts")
 .remove([filePath]);
 
+showOrderMessage(
+"Sifariş bazaya yazılmadı.",
+"error"
+);
+
+showDebug(
+"3. ORDERS DATABASE ERROR",
+orderError
+);
+
 throw orderError;
 
 }
 
 
-/*
-   Uğurlu
-*/
+/* =========================
+   SUCCESS
+========================= */
+
+console.log(
+"ORDER SUCCESS:",
+orderData
+);
 
 showOrderMessage(
 "Qəbz uğurla göndərildi. Sifarişiniz yoxlanılır.",
 "success"
 );
 
-button.innerHTML =
-"Qəbz göndərildi";
+button.innerHTML="Qəbz göndərildi";
+
 
 setTimeout(()=>{
 
@@ -1753,55 +1798,23 @@ alert(
 
 resetReceipt();
 
-button.disabled = false;
-
-button.innerHTML =
-"Sifarişi göndər";
+button.disabled=false;
+button.innerHTML="Sifarişi göndər";
 
 },1300);
 
 
 }catch(error){
 
-console.error("ORDER ERROR:",error);
-
-showOrderMessage(
-getFriendlyOrderError(error),
-"error"
+console.error(
+"FULL ORDER ERROR:",
+error
 );
 
-button.disabled = false;
-
-button.innerHTML =
-"Sifarişi göndər";
+button.disabled=false;
+button.innerHTML="Sifarişi göndər";
 
 }
-
-}
-
-
-/* =========================
-   ORDER ERROR
-========================= */
-
-function getFriendlyOrderError(error){
-
-const message =
-error?.message || "";
-
-if(message.includes("row-level security"))
-return "Qəbzin göndərilməsi üçün icazə problemi yarandı. Storage policy-lərini yoxlamaq lazımdır.";
-
-if(message.includes("duplicate"))
-return "Bu sifariş artıq mövcuddur. Yenidən cəhd et.";
-
-if(message.includes("Bucket not found"))
-return "Qəbz yaddaş sahəsi tapılmadı.";
-
-if(message.includes("The resource already exists"))
-return "Bu qəbz artıq yüklənib.";
-
-return "Sifariş göndərilmədi. Bir neçə saniyə sonra yenidən cəhd et.";
 
 }
 
@@ -1827,7 +1840,7 @@ updateUserUI();
 
 
 /* =========================
-   CLOSE MODAL OUTSIDE
+   MODAL OUTSIDE
 ========================= */
 
 document
@@ -1838,7 +1851,7 @@ modal.addEventListener(
 "click",
 function(e){
 
-if(e.target === modal){
+if(e.target===modal){
 
 modal.classList.remove("active");
 
@@ -1851,14 +1864,14 @@ modal.classList.remove("active");
 
 
 /* =========================
-   ESC KEY
+   ESC
 ========================= */
 
 document.addEventListener(
 "keydown",
 function(e){
 
-if(e.key === "Escape"){
+if(e.key==="Escape"){
 
 document
 .querySelectorAll(".modal.active")
