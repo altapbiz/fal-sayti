@@ -8,10 +8,16 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Arial,sans-serif
+}
 
 body{
-min-height:100vh;color:#fff;
+min-height:100vh;
+color:#fff;
 background:
 radial-gradient(circle at 20% 10%,rgba(137,72,255,.35),transparent 30%),
 radial-gradient(circle at 80% 20%,rgba(0,210,255,.25),transparent 30%),
@@ -21,8 +27,16 @@ overflow-x:hidden
 }
 
 body:before{
-content:"";position:fixed;inset:0;pointer-events:none;
-background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.025),transparent 70%);
+content:"";
+position:fixed;
+inset:0;
+pointer-events:none;
+background:linear-gradient(
+120deg,
+transparent 30%,
+rgba(255,255,255,.025),
+transparent 70%
+);
 animation:shine 7s linear infinite
 }
 
@@ -32,64 +46,118 @@ animation:shine 7s linear infinite
 }
 
 header{
-width:100%;padding:18px 20px;display:flex;
-justify-content:space-between;align-items:center;
-position:sticky;top:0;z-index:10;
+width:100%;
+padding:18px 20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:10;
 background:rgba(8,7,13,.75);
 backdrop-filter:blur(18px);
 border-bottom:1px solid rgba(255,255,255,.08)
 }
 
-.logo{font-size:22px;font-weight:800;letter-spacing:.5px}
-.logo span{color:#c77dff}
-
-.login-btn,.logout-btn{
-border:1px solid rgba(255,255,255,.15);
-background:rgba(255,255,255,.07);
-color:#fff;padding:10px 16px;border-radius:12px;cursor:pointer
+.logo{
+font-size:22px;
+font-weight:800;
+letter-spacing:.5px
 }
 
-.user-menu{display:none;align-items:center;gap:10px}
+.logo span{
+color:#c77dff
+}
+
+.login-btn,
+.logout-btn{
+border:1px solid rgba(255,255,255,.15);
+background:rgba(255,255,255,.07);
+color:#fff;
+padding:10px 16px;
+border-radius:12px;
+cursor:pointer
+}
+
+.login-btn:hover,
+.logout-btn:hover{
+background:rgba(255,255,255,.12)
+}
+
+.user-menu{
+display:none;
+align-items:center;
+gap:10px
+}
+
 .user-email{
-color:#aaa6b8;font-size:12px;max-width:150px;
-overflow:hidden;text-overflow:ellipsis;white-space:nowrap
+color:#aaa6b8;
+font-size:12px;
+max-width:150px;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap
 }
 
 .hero{
-max-width:1050px;margin:auto;padding:70px 20px 35px;text-align:center
+max-width:1050px;
+margin:auto;
+padding:70px 20px 35px;
+text-align:center
 }
 
 .badge{
-display:inline-block;padding:8px 14px;border-radius:30px;
+display:inline-block;
+padding:8px 14px;
+border-radius:30px;
 background:rgba(180,90,255,.12);
 border:1px solid rgba(180,90,255,.35);
-color:#d9a7ff;margin-bottom:20px;font-size:13px
+color:#d9a7ff;
+margin-bottom:20px;
+font-size:13px
 }
 
 h1{
-font-size:clamp(38px,8vw,72px);line-height:1;margin-bottom:20px;
+font-size:clamp(38px,8vw,72px);
+line-height:1;
+margin-bottom:20px;
 background:linear-gradient(90deg,#fff,#d59aff,#6edcff);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent
 }
 
 .hero p{
-max-width:650px;margin:auto;color:#aaa6b8;
-font-size:17px;line-height:1.7
+max-width:650px;
+margin:auto;
+color:#aaa6b8;
+font-size:17px;
+line-height:1.7
 }
 
 .services{
-max-width:1100px;margin:30px auto 80px;padding:0 20px;
-display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+max-width:1100px;
+margin:30px auto 80px;
+padding:0 20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
 gap:18px
 }
 
 .card{
-position:relative;padding:25px;min-height:235px;border-radius:24px;
-background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.025));
+position:relative;
+padding:25px;
+min-height:235px;
+border-radius:24px;
+background:
+linear-gradient(
+145deg,
+rgba(255,255,255,.09),
+rgba(255,255,255,.025)
+);
 border:1px solid rgba(255,255,255,.10);
 box-shadow:0 15px 50px rgba(0,0,0,.25);
-transition:.3s;overflow:hidden
+transition:.3s;
+overflow:hidden
 }
 
 .card:hover{
@@ -99,22 +167,39 @@ box-shadow:0 20px 60px rgba(140,60,255,.18)
 }
 
 .card:after{
-content:"";position:absolute;width:120px;height:120px;
-right:-50px;top:-50px;background:#a855f7;
-filter:blur(60px);opacity:.18
+content:"";
+position:absolute;
+width:120px;
+height:120px;
+right:-50px;
+top:-50px;
+background:#a855f7;
+filter:blur(60px);
+opacity:.18
 }
 
 .service-icon{
-width:58px;height:58px;display:flex;align-items:center;
-justify-content:center;margin-bottom:18px;border-radius:17px;
+width:58px;
+height:58px;
+display:flex;
+align-items:center;
+justify-content:center;
+margin-bottom:18px;
+border-radius:17px;
 background:rgba(255,255,255,.055);
 border:1px solid rgba(255,255,255,.10);
-position:relative;z-index:1
+position:relative;
+z-index:1
 }
 
 .service-icon svg{
-width:31px;height:31px;stroke:#d7a2ff;stroke-width:1.7;
-fill:none;stroke-linecap:round;stroke-linejoin:round
+width:31px;
+height:31px;
+stroke:#d7a2ff;
+stroke-width:1.7;
+fill:none;
+stroke-linecap:round;
+stroke-linejoin:round
 }
 
 .card:nth-child(2) .service-icon svg{stroke:#69ddff}
@@ -125,116 +210,308 @@ fill:none;stroke-linecap:round;stroke-linejoin:round
 .card:nth-child(7) .service-icon svg{stroke:#ff8fba}
 
 .card h2{
-font-size:20px;margin-bottom:8px;position:relative;z-index:1
+font-size:20px;
+margin-bottom:8px;
+position:relative;
+z-index:1
 }
 
 .card p{
-color:#aaa6b8;font-size:14px;line-height:1.5;
-min-height:43px;position:relative;z-index:1
+color:#aaa6b8;
+font-size:14px;
+line-height:1.5;
+min-height:43px;
+position:relative;
+z-index:1
 }
 
 .bottom{
-display:flex;justify-content:space-between;align-items:center;
-margin-top:22px;position:relative;z-index:1
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:22px;
+position:relative;
+z-index:1
 }
 
-.price{font-size:20px;font-weight:800;color:#e4b4ff}
+.price{
+font-size:20px;
+font-weight:800;
+color:#e4b4ff
+}
 
 .view-btn{
-border:0;color:white;
+border:0;
+color:white;
 background:linear-gradient(135deg,#8b35ff,#d51aff);
-padding:11px 16px;border-radius:12px;cursor:pointer;
-font-weight:700;box-shadow:0 8px 25px rgba(145,50,255,.25)
+padding:11px 16px;
+border-radius:12px;
+cursor:pointer;
+font-weight:700;
+box-shadow:0 8px 25px rgba(145,50,255,.25)
 }
 
-.view-btn:hover{filter:brightness(1.15)}
+.view-btn:hover{
+filter:brightness(1.15)
+}
 
 footer{
-text-align:center;padding:30px 20px;color:#777384;
-border-top:1px solid rgba(255,255,255,.07);font-size:13px
+text-align:center;
+padding:30px 20px;
+color:#777384;
+border-top:1px solid rgba(255,255,255,.07);
+font-size:13px
 }
 
 /* MODALS */
 
 .modal{
-position:fixed;inset:0;background:rgba(0,0,0,.75);
-backdrop-filter:blur(10px);display:none;
-align-items:center;justify-content:center;
-padding:20px;z-index:100
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.75);
+backdrop-filter:blur(10px);
+display:none;
+align-items:center;
+justify-content:center;
+padding:20px;
+z-index:100
 }
 
-.modal.active{display:flex}
+.modal.active{
+display:flex
+}
 
 .modal-box{
-width:100%;max-width:430px;background:#12101a;
+width:100%;
+max-width:450px;
+max-height:90vh;
+overflow-y:auto;
+background:#12101a;
 border:1px solid rgba(255,255,255,.12);
-border-radius:24px;padding:28px;
+border-radius:24px;
+padding:28px;
 box-shadow:0 30px 100px rgba(0,0,0,.55);
 position:relative
 }
 
-.modal-box h2{margin-bottom:8px;font-size:24px}
+.modal-box h2{
+margin-bottom:8px;
+font-size:24px
+}
 
 .modal-subtitle{
-color:#aaa6b8;font-size:14px;line-height:1.5;margin-bottom:20px
+color:#aaa6b8;
+font-size:14px;
+line-height:1.5;
+margin-bottom:20px
 }
 
 .close{
-position:absolute;right:18px;top:15px;border:0;
-background:transparent;color:#aaa;font-size:26px;cursor:pointer
+position:absolute;
+right:18px;
+top:15px;
+border:0;
+background:transparent;
+color:#aaa;
+font-size:26px;
+cursor:pointer
 }
 
 .input{
-width:100%;padding:13px 14px;margin-bottom:12px;
-border-radius:12px;border:1px solid rgba(255,255,255,.12);
-background:rgba(255,255,255,.05);color:white;outline:none
+width:100%;
+padding:13px 14px;
+margin-bottom:12px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,.12);
+background:rgba(255,255,255,.05);
+color:white;
+outline:none
 }
 
-.input:focus{border-color:#a855f7}
+.input:focus{
+border-color:#a855f7
+}
 
-textarea.input{min-height:120px;resize:vertical}
+textarea.input{
+min-height:120px;
+resize:vertical
+}
 
 .main-btn{
-width:100%;padding:13px;border:0;border-radius:12px;
-color:white;font-weight:700;cursor:pointer;
+width:100%;
+padding:13px;
+border:0;
+border-radius:12px;
+color:white;
+font-weight:700;
+cursor:pointer;
 background:linear-gradient(135deg,#8b35ff,#d51aff)
 }
 
+.main-btn:disabled{
+opacity:.55;
+cursor:not-allowed
+}
+
 .secondary-btn{
-width:100%;margin-top:10px;padding:12px;border-radius:12px;
+width:100%;
+margin-top:10px;
+padding:12px;
+border-radius:12px;
 border:1px solid rgba(255,255,255,.12);
-background:rgba(255,255,255,.05);color:white;cursor:pointer
+background:rgba(255,255,255,.05);
+color:white;
+cursor:pointer
 }
 
 .switch-text{
-text-align:center;margin-top:16px;color:#aaa6b8;font-size:13px
+text-align:center;
+margin-top:16px;
+color:#aaa6b8;
+font-size:13px
 }
 
 .switch-text button{
-background:none;border:0;color:#c77dff;cursor:pointer
+background:none;
+border:0;
+color:#c77dff;
+cursor:pointer
 }
 
 .message{
-display:none;padding:11px 12px;margin-bottom:13px;
-border-radius:10px;background:rgba(255,255,255,.06);
-color:#ddd;font-size:13px;line-height:1.4
+display:none;
+padding:11px 12px;
+margin-bottom:13px;
+border-radius:10px;
+background:rgba(255,255,255,.06);
+color:#ddd;
+font-size:13px;
+line-height:1.5
 }
 
-.message.show{display:block}
+.message.show{
+display:block
+}
+
+.message.success{
+background:rgba(40,200,130,.10);
+border:1px solid rgba(40,200,130,.25)
+}
+
+.message.error{
+background:rgba(255,70,100,.10);
+border:1px solid rgba(255,70,100,.25)
+}
 
 .order-info{
-display:flex;justify-content:space-between;padding:13px;
-border-radius:12px;background:rgba(255,255,255,.05);
-margin-bottom:15px
+display:flex;
+justify-content:space-between;
+padding:13px;
+border-radius:12px;
+background:rgba(255,255,255,.05);
+margin-bottom:10px
 }
 
-.order-info span:last-child{color:#d7a2ff;font-weight:700}
+.order-info span:first-child{
+color:#aaa6b8
+}
+
+.order-info span:last-child{
+color:#d7a2ff;
+font-weight:700;
+text-align:right;
+max-width:65%;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap
+}
+
+.receipt-area{
+margin-top:8px;
+padding:16px;
+border:1px dashed rgba(199,125,255,.45);
+border-radius:15px;
+background:rgba(168,85,247,.05)
+}
+
+.receipt-title{
+font-size:14px;
+font-weight:700;
+margin-bottom:6px
+}
+
+.receipt-help{
+font-size:12px;
+color:#9691a3;
+line-height:1.5;
+margin-bottom:12px
+}
+
+.file-input{
+width:100%;
+padding:11px;
+border-radius:10px;
+border:1px solid rgba(255,255,255,.10);
+background:rgba(255,255,255,.04);
+color:#bbb;
+font-size:12px
+}
+
+.file-name{
+margin-top:9px;
+font-size:12px;
+color:#c77dff;
+word-break:break-word
+}
+
+.receipt-preview{
+display:none;
+width:100%;
+max-height:180px;
+object-fit:contain;
+border-radius:10px;
+margin-top:12px;
+border:1px solid rgba(255,255,255,.1)
+}
+
+.loading{
+display:inline-block;
+width:14px;
+height:14px;
+border:2px solid rgba(255,255,255,.3);
+border-top-color:white;
+border-radius:50%;
+animation:spin .7s linear infinite;
+vertical-align:-2px;
+margin-right:6px
+}
+
+@keyframes spin{
+to{transform:rotate(360deg)}
+}
 
 @media(max-width:600px){
-.hero{padding-top:50px}
-.services{grid-template-columns:1fr}
-.card{min-height:210px}
-.user-email{display:none}
+
+.hero{
+padding-top:50px
+}
+
+.services{
+grid-template-columns:1fr
+}
+
+.card{
+min-height:210px
+}
+
+.user-email{
+display:none
+}
+
+.modal-box{
+padding:23px
+}
+
 }
 </style>
 </head>
@@ -247,13 +524,29 @@ margin-bottom:15px
 <span>Fal</span> Dünyası
 </div>
 
-<button class="login-btn" id="loginButton" onclick="openAuth()">
+<button
+class="login-btn"
+id="loginButton"
+onclick="openAuth()"
+>
 Daxil ol
 </button>
 
-<div class="user-menu" id="userMenu">
-<span class="user-email" id="userEmail"></span>
-<button class="logout-btn" onclick="logout()">Çıxış</button>
+<div
+class="user-menu"
+id="userMenu"
+>
+<span
+class="user-email"
+id="userEmail"
+></span>
+
+<button
+class="logout-btn"
+onclick="logout()"
+>
+Çıxış
+</button>
 </div>
 
 </header>
@@ -281,6 +574,7 @@ mistik analizlərlə öz suallarına cavab axtar.
 
 
 <div class="card">
+
 <div class="service-icon">
 <svg viewBox="0 0 24 24">
 <rect x="6" y="3" width="12" height="18" rx="2"/>
@@ -291,18 +585,30 @@ mistik analizlərlə öz suallarına cavab axtar.
 </div>
 
 <h2>Tarot Falı</h2>
-<p>Kartların simvolik mənalarını kəşf et.</p>
+
+<p>
+Kartların simvolik mənalarını kəşf et.
+</p>
 
 <div class="bottom">
-<div class="price">5 AZN</div>
-<button class="view-btn" onclick="openService('Tarot Falı',5)">
+
+<div class="price">
+5 AZN
+</div>
+
+<button
+class="view-btn"
+onclick="openService('Tarot Falı',5)"
+>
 Bax
 </button>
+
 </div>
 </div>
 
 
 <div class="card">
+
 <div class="service-icon">
 <svg viewBox="0 0 24 24">
 <path d="M8 11V5a1.5 1.5 0 0 1 3 0v5"/>
@@ -313,18 +619,30 @@ Bax
 </div>
 
 <h2>Əl Falı</h2>
-<p>Əlinin xətlərinin simvolik yozumunu öyrən.</p>
+
+<p>
+Əlinin xətlərinin simvolik yozumunu öyrən.
+</p>
 
 <div class="bottom">
-<div class="price">3 AZN</div>
-<button class="view-btn" onclick="openService('Əl Falı',3)">
+
+<div class="price">
+3 AZN
+</div>
+
+<button
+class="view-btn"
+onclick="openService('Əl Falı',3)"
+>
 Bax
 </button>
+
 </div>
 </div>
 
 
 <div class="card">
+
 <div class="service-icon">
 <svg viewBox="0 0 24 24">
 <path d="M20.8 8.7c0 5.2-8.8 10.2-8.8 10.2S3.2 13.9 3.2 8.7A4.7 4.7 0 0 1 12 6.2a4.7 4.7 0 0 1 8.8 2.5Z"/>
@@ -332,18 +650,30 @@ Bax
 </div>
 
 <h2>Sevgi Analizi</h2>
-<p>Münasibətiniz haqqında əyləncə xarakterli analiz.</p>
+
+<p>
+Münasibətiniz haqqında əyləncə xarakterli analiz.
+</p>
 
 <div class="bottom">
-<div class="price">4 AZN</div>
-<button class="view-btn" onclick="openService('Sevgi Analizi',4)">
+
+<div class="price">
+4 AZN
+</div>
+
+<button
+class="view-btn"
+onclick="openService('Sevgi Analizi',4)"
+>
 Bax
 </button>
+
 </div>
 </div>
 
 
 <div class="card">
+
 <div class="service-icon">
 <svg viewBox="0 0 24 24">
 <path d="M18 15.5A7 7 0 0 1 9 6.8 7.2 7.2 0 1 0 18 15.5Z"/>
@@ -353,18 +683,30 @@ Bax
 </div>
 
 <h2>Yuxu Yozmaları</h2>
-<p>Yuxundakı simvolların mümkün mənalarını kəşf et.</p>
+
+<p>
+Yuxundakı simvolların mümkün mənalarını kəşf et.
+</p>
 
 <div class="bottom">
-<div class="price">2 AZN</div>
-<button class="view-btn" onclick="openService('Yuxu Yozmaları',2)">
+
+<div class="price">
+2 AZN
+</div>
+
+<button
+class="view-btn"
+onclick="openService('Yuxu Yozmaları',2)"
+>
 Bax
 </button>
+
 </div>
 </div>
 
 
 <div class="card">
+
 <div class="service-icon">
 <svg viewBox="0 0 24 24">
 <circle cx="12" cy="12" r="4"/>
@@ -380,18 +722,30 @@ Bax
 </div>
 
 <h2>Bürc / Günün Falı</h2>
-<p>Günün üçün simvolik bürc və enerji analizi.</p>
+
+<p>
+Günün üçün simvolik bürc və enerji analizi.
+</p>
 
 <div class="bottom">
-<div class="price">2 AZN</div>
-<button class="view-btn" onclick="openService('Bürc / Günün Falı',2)">
+
+<div class="price">
+2 AZN
+</div>
+
+<button
+class="view-btn"
+onclick="openService('Bürc / Günün Falı',2)"
+>
 Bax
 </button>
+
 </div>
 </div>
 
 
 <div class="card">
+
 <div class="service-icon">
 <svg viewBox="0 0 24 24">
 <circle cx="12" cy="12" r="8.5"/>
@@ -404,18 +758,30 @@ Bax
 </div>
 
 <h2>Doğum Xəritəsi</h2>
-<p>Doğum məlumatlarına əsaslanan astroloji şərh.</p>
+
+<p>
+Doğum məlumatlarına əsaslanan astroloji şərh.
+</p>
 
 <div class="bottom">
-<div class="price">7 AZN</div>
-<button class="view-btn" onclick="openService('Doğum Xəritəsi',7)">
+
+<div class="price">
+7 AZN
+</div>
+
+<button
+class="view-btn"
+onclick="openService('Doğum Xəritəsi',7)"
+>
 Bax
 </button>
+
 </div>
 </div>
 
 
 <div class="card">
+
 <div class="service-icon">
 <svg viewBox="0 0 24 24">
 <path d="M5 19 12 5l7 14"/>
@@ -426,13 +792,24 @@ Bax
 </div>
 
 <h2>Adın Mənası</h2>
-<p>Adının mənası və simvolik xüsusiyyətləri.</p>
+
+<p>
+Adının mənası və simvolik xüsusiyyətləri.
+</p>
 
 <div class="bottom">
-<div class="price">1 AZN</div>
-<button class="view-btn" onclick="openService('Adın Mənası',1)">
+
+<div class="price">
+1 AZN
+</div>
+
+<button
+class="view-btn"
+onclick="openService('Adın Mənası',1)"
+>
 Bax
 </button>
+
 </div>
 </div>
 
@@ -444,21 +821,37 @@ Bax
 </footer>
 
 
-<!-- LOGIN / REGISTER -->
+<!-- AUTH MODAL -->
 
-<div class="modal" id="authModal">
+<div
+class="modal"
+id="authModal"
+>
 
 <div class="modal-box">
 
-<button class="close" onclick="closeModal('authModal')">×</button>
+<button
+class="close"
+onclick="closeModal('authModal')"
+>
+×
+</button>
 
-<h2 id="authTitle">Daxil ol</h2>
+<h2 id="authTitle">
+Daxil ol
+</h2>
 
-<p class="modal-subtitle" id="authSubtitle">
+<p
+class="modal-subtitle"
+id="authSubtitle"
+>
 Hesabına daxil olaraq xidmətlərdən istifadə et.
 </p>
 
-<div class="message" id="authMessage"></div>
+<div
+class="message"
+id="authMessage"
+></div>
 
 <input
 class="input"
@@ -474,33 +867,55 @@ type="password"
 placeholder="Şifrə"
 >
 
-<button class="main-btn" onclick="handleAuth()" id="authSubmit">
+<button
+class="main-btn"
+onclick="handleAuth()"
+id="authSubmit"
+>
 Daxil ol
 </button>
 
 <div class="switch-text">
-<span id="switchText">Hesabın yoxdur?</span>
-<button onclick="switchAuth()" id="switchButton">
+
+<span id="switchText">
+Hesabın yoxdur?
+</span>
+
+<button
+onclick="switchAuth()"
+id="switchButton"
+>
 Qeydiyyatdan keç
 </button>
-</div>
 
 </div>
+
+</div>
 </div>
 
 
-<!-- ORDER -->
+<!-- ORDER MODAL -->
 
-<div class="modal" id="orderModal">
+<div
+class="modal"
+id="orderModal"
+>
 
 <div class="modal-box">
 
-<button class="close" onclick="closeModal('orderModal')">×</button>
+<button
+class="close"
+onclick="closeModal('orderModal')"
+>
+×
+</button>
 
-<h2 id="orderTitle">Tarot Falı</h2>
+<h2 id="orderTitle">
+Tarot Falı
+</h2>
 
 <p class="modal-subtitle">
-Sualını yaz və sifarişi yarat.
+Sualını yaz və ödəniş qəbzini göndər.
 </p>
 
 <div class="order-info">
@@ -519,10 +934,52 @@ id="question"
 placeholder="Sualını buraya yaz..."
 ></textarea>
 
-<div class="message" id="orderMessage"></div>
 
-<button class="main-btn" onclick="createOrder()">
-Sifarişi yarat
+<div class="receipt-area">
+
+<div class="receipt-title">
+Ödəniş qəbzi
+</div>
+
+<div class="receipt-help">
+Ödənişi etdikdən sonra qəbzin şəklini seç.
+Yalnız JPG, PNG və WEBP formatları qəbul edilir.
+Maksimum ölçü 5 MB-dır.
+</div>
+
+<input
+class="file-input"
+id="receiptFile"
+type="file"
+accept="image/jpeg,image/png,image/webp"
+onchange="previewReceipt(event)"
+>
+
+<div
+class="file-name"
+id="fileName"
+></div>
+
+<img
+id="receiptPreview"
+class="receipt-preview"
+alt="Qəbz önizləmə"
+>
+
+</div>
+
+
+<div
+class="message"
+id="orderMessage"
+></div>
+
+<button
+class="main-btn"
+onclick="createOrderWithReceipt()"
+id="orderSubmit"
+>
+Sifarişi göndər
 </button>
 
 </div>
@@ -531,7 +988,9 @@ Sifarişi yarat
 
 <script>
 
-/* SUPABASE */
+/* =========================
+   SUPABASE
+========================= */
 
 const SUPABASE_URL =
 "https://hwwxxhgmumshjvkfhhir.supabase.co";
@@ -546,7 +1005,9 @@ SUPABASE_KEY
 );
 
 
-/* VARIABLES */
+/* =========================
+   VARIABLES
+========================= */
 
 let authMode = "login";
 
@@ -554,38 +1015,54 @@ let selectedService = null;
 let selectedPrice = null;
 
 
-/* MODAL */
+/* =========================
+   MODAL
+========================= */
 
 function openModal(id){
-document.getElementById(id).classList.add("active");
+
+document
+.getElementById(id)
+.classList.add("active");
+
 }
 
 function closeModal(id){
-document.getElementById(id).classList.remove("active");
+
+document
+.getElementById(id)
+.classList.remove("active");
+
 }
 
 
-/* AUTH */
+/* =========================
+   AUTH
+========================= */
 
 function openAuth(){
+
 authMode="login";
 
-document.getElementById("authTitle").textContent="Daxil ol";
+document.getElementById("authTitle").textContent =
+"Daxil ol";
 
-document.getElementById("authSubtitle").textContent=
+document.getElementById("authSubtitle").textContent =
 "Hesabına daxil olaraq xidmətlərdən istifadə et.";
 
-document.getElementById("authSubmit").textContent="Daxil ol";
+document.getElementById("authSubmit").textContent =
+"Daxil ol";
 
-document.getElementById("switchText").textContent=
+document.getElementById("switchText").textContent =
 "Hesabın yoxdur?";
 
-document.getElementById("switchButton").textContent=
+document.getElementById("switchButton").textContent =
 "Qeydiyyatdan keç";
 
 clearAuthMessage();
 
 openModal("authModal");
+
 }
 
 
@@ -598,38 +1075,38 @@ authMode === "login"
 
 clearAuthMessage();
 
-if(authMode==="register"){
+if(authMode === "register"){
 
-document.getElementById("authTitle").textContent=
+document.getElementById("authTitle").textContent =
 "Qeydiyyat";
 
-document.getElementById("authSubtitle").textContent=
+document.getElementById("authSubtitle").textContent =
 "Yeni hesab yarat.";
 
-document.getElementById("authSubmit").textContent=
+document.getElementById("authSubmit").textContent =
 "Qeydiyyatdan keç";
 
-document.getElementById("switchText").textContent=
+document.getElementById("switchText").textContent =
 "Artıq hesabın var?";
 
-document.getElementById("switchButton").textContent=
+document.getElementById("switchButton").textContent =
 "Daxil ol";
 
 }else{
 
-document.getElementById("authTitle").textContent=
+document.getElementById("authTitle").textContent =
 "Daxil ol";
 
-document.getElementById("authSubtitle").textContent=
+document.getElementById("authSubtitle").textContent =
 "Hesabına daxil olaraq xidmətlərdən istifadə et.";
 
-document.getElementById("authSubmit").textContent=
+document.getElementById("authSubmit").textContent =
 "Daxil ol";
 
-document.getElementById("switchText").textContent=
+document.getElementById("switchText").textContent =
 "Hesabın yoxdur?";
 
-document.getElementById("switchButton").textContent=
+document.getElementById("switchButton").textContent =
 "Qeydiyyatdan keç";
 
 }
@@ -637,64 +1114,83 @@ document.getElementById("switchButton").textContent=
 }
 
 
-function showAuthMessage(message){
-const box=document.getElementById("authMessage");
+function showAuthMessage(message,type=""){
 
-box.textContent=message;
-box.classList.add("show");
+const box =
+document.getElementById("authMessage");
+
+box.textContent = message;
+
+box.className = "message show";
+
+if(type){
+box.classList.add(type);
+}
+
 }
 
 
 function clearAuthMessage(){
-const box=document.getElementById("authMessage");
 
-box.textContent="";
-box.classList.remove("show");
+const box =
+document.getElementById("authMessage");
+
+box.textContent = "";
+
+box.className = "message";
+
 }
 
 
 async function handleAuth(){
 
-const email=
-document.getElementById("email").value.trim();
+const email =
+document.getElementById("email")
+.value
+.trim();
 
-const password=
-document.getElementById("password").value;
+const password =
+document.getElementById("password")
+.value;
 
 if(!email || !password){
 
 showAuthMessage(
-"E-poçt və şifrəni daxil et."
+"E-poçt və şifrəni daxil et.",
+"error"
 );
 
 return;
+
 }
 
 if(password.length < 6){
 
 showAuthMessage(
-"Şifrə ən azı 6 simvoldan ibarət olmalıdır."
+"Şifrə ən azı 6 simvoldan ibarət olmalıdır.",
+"error"
 );
 
 return;
+
 }
 
+const button =
+document.getElementById("authSubmit");
 
-document.getElementById("authSubmit").disabled=true;
-
+button.disabled = true;
 
 try{
 
-if(authMode==="register"){
+if(authMode === "register"){
 
 const {data,error} =
 await supabaseClient.auth.signUp({
-email:email,
-password:password
+email,
+password
 });
 
 if(error) throw error;
-
 
 if(data.session){
 
@@ -703,7 +1199,8 @@ closeModal("authModal");
 }else{
 
 showAuthMessage(
-"Qeydiyyat tamamlandı. E-poçtuna təsdiq məktubu gəlibsə, hesabını təsdiqlə."
+"Qeydiyyat tamamlandı. E-poçt təsdiqi tələb olunursa, məktubdakı linkə daxil ol.",
+"success"
 );
 
 }
@@ -712,8 +1209,8 @@ showAuthMessage(
 
 const {error} =
 await supabaseClient.auth.signInWithPassword({
-email:email,
-password:password
+email,
+password
 });
 
 if(error) throw error;
@@ -724,20 +1221,25 @@ closeModal("authModal");
 
 }catch(error){
 
+console.error(error);
+
 showAuthMessage(
-translateAuthError(error.message)
+translateAuthError(error.message),
+"error"
 );
 
 }finally{
 
-document.getElementById("authSubmit").disabled=false;
+button.disabled = false;
 
 }
 
 }
 
 
-/* AUTH ERROR */
+/* =========================
+   AUTH ERROR
+========================= */
 
 function translateAuthError(message){
 
@@ -758,119 +1260,322 @@ return message;
 }
 
 
-/* USER UI */
+/* =========================
+   USER UI
+========================= */
 
 async function updateUserUI(){
 
 const {data} =
 await supabaseClient.auth.getSession();
 
-const user=data.session?.user;
+const user =
+data.session?.user;
 
-const loginButton=
+const loginButton =
 document.getElementById("loginButton");
 
-const userMenu=
+const userMenu =
 document.getElementById("userMenu");
 
-const userEmail=
+const userEmail =
 document.getElementById("userEmail");
-
 
 if(user){
 
-loginButton.style.display="none";
+loginButton.style.display = "none";
 
-userMenu.style.display="flex";
+userMenu.style.display = "flex";
 
-userEmail.textContent=user.email;
+userEmail.textContent =
+user.email || "";
 
 }else{
 
-loginButton.style.display="block";
+loginButton.style.display = "block";
 
-userMenu.style.display="none";
+userMenu.style.display = "none";
 
-userEmail.textContent="";
-
-}
+userEmail.textContent = "";
 
 }
 
+}
 
-/* LOGOUT */
+
+/* =========================
+   LOGOUT
+========================= */
 
 async function logout(){
 
 await supabaseClient.auth.signOut();
 
-updateUserUI();
+await updateUserUI();
 
 }
 
 
-/* SERVICE */
+/* =========================
+   SERVICE
+========================= */
 
 async function openService(name,price){
 
 const {data} =
 await supabaseClient.auth.getSession();
 
-const user=data.session?.user;
-
+const user =
+data.session?.user;
 
 if(!user){
 
 openAuth();
 
 showAuthMessage(
-"Xidmətdən istifadə etmək üçün əvvəlcə hesabına daxil ol."
+"Xidmətdən istifadə etmək üçün əvvəlcə hesabına daxil ol.",
+"error"
 );
 
 return;
 
 }
 
+selectedService = name;
+selectedPrice = price;
 
-selectedService=name;
-selectedPrice=price;
-
-
-document.getElementById("orderTitle").textContent=
+document.getElementById("orderTitle").textContent =
 name;
 
-document.getElementById("orderService").textContent=
+document.getElementById("orderService").textContent =
 name;
 
-document.getElementById("orderPrice").textContent=
-price+" AZN";
+document.getElementById("orderPrice").textContent =
+price + " AZN";
 
-document.getElementById("question").value="";
+document.getElementById("question").value = "";
 
-document.getElementById("orderMessage").classList.remove("show");
+resetReceipt();
+
+clearOrderMessage();
 
 openModal("orderModal");
 
 }
 
 
-/* CREATE ORDER */
+/* =========================
+   RECEIPT PREVIEW
+========================= */
 
-async function createOrder(){
+function previewReceipt(event){
 
-const question=
-document.getElementById("question").value.trim();
+const file =
+event.target.files[0];
 
-const message=
+const fileName =
+document.getElementById("fileName");
+
+const preview =
+document.getElementById("receiptPreview");
+
+if(!file){
+
+resetReceipt();
+
+return;
+
+}
+
+const allowedTypes = [
+"image/jpeg",
+"image/png",
+"image/webp"
+];
+
+if(!allowedTypes.includes(file.type)){
+
+event.target.value = "";
+
+fileName.textContent =
+"Yalnız JPG, PNG və WEBP qəbul edilir.";
+
+fileName.style.color = "#ff7190";
+
+preview.style.display = "none";
+
+return;
+
+}
+
+if(file.size > 5 * 1024 * 1024){
+
+event.target.value = "";
+
+fileName.textContent =
+"Fayl maksimum 5 MB ola bilər.";
+
+fileName.style.color = "#ff7190";
+
+preview.style.display = "none";
+
+return;
+
+}
+
+fileName.textContent =
+file.name;
+
+fileName.style.color =
+"#c77dff";
+
+const reader =
+new FileReader();
+
+reader.onload = function(e){
+
+preview.src =
+e.target.result;
+
+preview.style.display =
+"block";
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+
+/* =========================
+   RESET RECEIPT
+========================= */
+
+function resetReceipt(){
+
+const input =
+document.getElementById("receiptFile");
+
+const fileName =
+document.getElementById("fileName");
+
+const preview =
+document.getElementById("receiptPreview");
+
+input.value = "";
+
+fileName.textContent = "";
+
+preview.src = "";
+
+preview.style.display = "none";
+
+}
+
+
+/* =========================
+   ORDER MESSAGE
+========================= */
+
+function showOrderMessage(message,type=""){
+
+const box =
 document.getElementById("orderMessage");
+
+box.textContent =
+message;
+
+box.className =
+"message show";
+
+if(type){
+box.classList.add(type);
+}
+
+}
+
+
+function clearOrderMessage(){
+
+const box =
+document.getElementById("orderMessage");
+
+box.textContent = "";
+
+box.className =
+"message";
+
+}
+
+
+/* =========================
+   CREATE ORDER + RECEIPT
+========================= */
+
+async function createOrderWithReceipt(){
+
+clearOrderMessage();
+
+const question =
+document.getElementById("question")
+.value
+.trim();
+
+const receiptInput =
+document.getElementById("receiptFile");
+
+const file =
+receiptInput.files[0];
+
+const button =
+document.getElementById("orderSubmit");
 
 
 if(!question){
 
-message.textContent=
-"Zəhmət olmasa sualını yaz.";
+showOrderMessage(
+"Zəhmət olmasa əvvəlcə sualını yaz.",
+"error"
+);
 
-message.classList.add("show");
+return;
+
+}
+
+if(!file){
+
+showOrderMessage(
+"Ödəniş qəbzinin şəklini seç.",
+"error"
+);
+
+return;
+
+}
+
+const allowedTypes = [
+"image/jpeg",
+"image/png",
+"image/webp"
+];
+
+if(!allowedTypes.includes(file.type)){
+
+showOrderMessage(
+"Yalnız JPG, PNG və WEBP şəkilləri qəbul edilir.",
+"error"
+);
+
+return;
+
+}
+
+if(file.size > 5 * 1024 * 1024){
+
+showOrderMessage(
+"Qəbz maksimum 5 MB ola bilər.",
+"error"
+);
 
 return;
 
@@ -880,8 +1585,8 @@ return;
 const {data:sessionData} =
 await supabaseClient.auth.getSession();
 
-const user=sessionData.session?.user;
-
+const user =
+sessionData.session?.user;
 
 if(!user){
 
@@ -894,6 +1599,18 @@ return;
 }
 
 
+button.disabled = true;
+
+button.innerHTML =
+'<span class="loading"></span>Göndərilir...';
+
+
+try{
+
+/*
+   Xidməti database-dən tapırıq
+*/
+
 const {data:serviceData,error:serviceError} =
 await supabaseClient
 .from("services")
@@ -902,25 +1619,79 @@ await supabaseClient
 .eq("active",true)
 .single();
 
+if(serviceError)
+throw serviceError;
 
-if(serviceError){
 
-message.textContent=
-"Xidmət məlumatı tapılmadı.";
+/*
+   Əvvəlcədən order ID yaradırıq.
+   Beləliklə qəbzi:
+   istifadəçi-ID/order-ID/fayl
+   formasında saxlaya bilərik.
+*/
 
-message.classList.add("show");
+const orderId =
+crypto.randomUUID();
 
-console.error(serviceError);
 
-return;
+/*
+   Fayl uzantısı
+*/
 
+let extension = "jpg";
+
+if(file.type === "image/png"){
+extension = "png";
+}
+
+if(file.type === "image/webp"){
+extension = "webp";
 }
 
 
-const {error} =
+/*
+   Storage path
+*/
+
+const filePath =
+user.id +
+"/" +
+orderId +
+"/receipt." +
+extension;
+
+
+/*
+   Qəbzi Storage-a yükləyirik
+*/
+
+const {error:uploadError} =
+await supabaseClient
+.storage
+.from("receipts")
+.upload(
+filePath,
+file,
+{
+contentType:file.type,
+upsert:false
+}
+);
+
+if(uploadError)
+throw uploadError;
+
+
+/*
+   Sifarişi database-ə yazırıq
+*/
+
+const {error:orderError} =
 await supabaseClient
 .from("orders")
 .insert({
+
+id:orderId,
 
 user_id:user.id,
 
@@ -932,46 +1703,112 @@ amount:serviceData.price,
 
 status:"pending",
 
-question:question
+question:question,
+
+receipt_path:filePath,
+
+receipt_status:"waiting",
+
+receipt_uploaded_at:new Date().toISOString()
 
 });
 
+if(orderError){
 
-if(error){
+/*
+   Order yaranmasa yüklənmiş faylı silməyə çalışırıq.
+*/
 
-message.textContent=
-"Sifariş yaradılmadı: "+error.message;
+await supabaseClient
+.storage
+.from("receipts")
+.remove([filePath]);
 
-message.classList.add("show");
-
-console.error(error);
-
-return;
+throw orderError;
 
 }
 
 
-message.textContent=
-"Sifariş uğurla yaradıldı.";
+/*
+   Uğurlu
+*/
 
-message.classList.add("show");
+showOrderMessage(
+"Qəbz uğurla göndərildi. Sifarişiniz yoxlanılır.",
+"success"
+);
 
+button.innerHTML =
+"Qəbz göndərildi";
 
 setTimeout(()=>{
 
 closeModal("orderModal");
 
 alert(
-"Sifarişiniz qəbul edildi.\n\n"+
-"Ödəniş mərhələsi növbəti mərhələdə əlavə olunacaq."
+"Sifarişiniz qəbul edildi.\n\n" +
+"Ödəniş qəbzi yoxlanılır. " +
+"Təsdiqdən sonra fal nəticəniz açılacaq."
 );
 
-},900);
+resetReceipt();
+
+button.disabled = false;
+
+button.innerHTML =
+"Sifarişi göndər";
+
+},1300);
+
+
+}catch(error){
+
+console.error("ORDER ERROR:",error);
+
+showOrderMessage(
+getFriendlyOrderError(error),
+"error"
+);
+
+button.disabled = false;
+
+button.innerHTML =
+"Sifarişi göndər";
+
+}
 
 }
 
 
-/* AUTH STATE */
+/* =========================
+   ORDER ERROR
+========================= */
+
+function getFriendlyOrderError(error){
+
+const message =
+error?.message || "";
+
+if(message.includes("row-level security"))
+return "Qəbzin göndərilməsi üçün icazə problemi yarandı. Storage policy-lərini yoxlamaq lazımdır.";
+
+if(message.includes("duplicate"))
+return "Bu sifariş artıq mövcuddur. Yenidən cəhd et.";
+
+if(message.includes("Bucket not found"))
+return "Qəbz yaddaş sahəsi tapılmadı.";
+
+if(message.includes("The resource already exists"))
+return "Bu qəbz artıq yüklənib.";
+
+return "Sifariş göndərilmədi. Bir neçə saniyə sonra yenidən cəhd et.";
+
+}
+
+
+/* =========================
+   AUTH STATE
+========================= */
 
 supabaseClient.auth.onAuthStateChange(
 (event,session)=>{
@@ -982,26 +1819,57 @@ updateUserUI();
 );
 
 
-/* START */
+/* =========================
+   START
+========================= */
 
 updateUserUI();
 
 
-/* CLOSE MODAL OUTSIDE */
+/* =========================
+   CLOSE MODAL OUTSIDE
+========================= */
 
-document.querySelectorAll(".modal").forEach(modal=>{
+document
+.querySelectorAll(".modal")
+.forEach(modal=>{
 
-modal.addEventListener("click",function(e){
+modal.addEventListener(
+"click",
+function(e){
 
-if(e.target===modal){
+if(e.target === modal){
 
 modal.classList.remove("active");
 
 }
 
-});
+}
+);
 
 });
+
+
+/* =========================
+   ESC KEY
+========================= */
+
+document.addEventListener(
+"keydown",
+function(e){
+
+if(e.key === "Escape"){
+
+document
+.querySelectorAll(".modal.active")
+.forEach(modal=>{
+modal.classList.remove("active");
+});
+
+}
+
+}
+);
 
 </script>
 
