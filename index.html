@@ -1,312 +1,278 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fal Dünyası</title>
 
-  <title>Fal Dünyası</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
 
-    body {
-      min-height: 100vh;
-      color: #fff;
-      background:
-        radial-gradient(circle at 20% 10%, rgba(137, 72, 255, .35), transparent 30%),
-        radial-gradient(circle at 80% 20%, rgba(0, 210, 255, .25), transparent 30%),
-        radial-gradient(circle at 50% 90%, rgba(255, 0, 170, .20), transparent 35%),
-        #08070d;
-      overflow-x: hidden;
-    }
+body{
+min-height:100vh;color:#fff;
+background:
+radial-gradient(circle at 20% 10%,rgba(137,72,255,.35),transparent 30%),
+radial-gradient(circle at 80% 20%,rgba(0,210,255,.25),transparent 30%),
+radial-gradient(circle at 50% 90%,rgba(255,0,170,.20),transparent 35%),
+#08070d;
+overflow-x:hidden
+}
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background: linear-gradient(
-        120deg,
-        transparent 30%,
-        rgba(255,255,255,.025),
-        transparent 70%
-      );
-      animation: shine 7s linear infinite;
-    }
+body:before{
+content:"";position:fixed;inset:0;pointer-events:none;
+background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.025),transparent 70%);
+animation:shine 7s linear infinite
+}
 
-    @keyframes shine {
-      0% {
-        transform: translateX(-100%);
-      }
+@keyframes shine{
+0%{transform:translateX(-100%)}
+100%{transform:translateX(100%)}
+}
 
-      100% {
-        transform: translateX(100%);
-      }
-    }
+header{
+width:100%;padding:18px 20px;display:flex;
+justify-content:space-between;align-items:center;
+position:sticky;top:0;z-index:10;
+background:rgba(8,7,13,.75);
+backdrop-filter:blur(18px);
+border-bottom:1px solid rgba(255,255,255,.08)
+}
 
-    header {
-      width: 100%;
-      padding: 18px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(8,7,13,.75);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(255,255,255,.08);
-    }
+.logo{font-size:22px;font-weight:800;letter-spacing:.5px}
+.logo span{color:#c77dff}
 
-    .logo {
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: .5px;
-    }
+.login-btn,.logout-btn{
+border:1px solid rgba(255,255,255,.15);
+background:rgba(255,255,255,.07);
+color:#fff;padding:10px 16px;border-radius:12px;cursor:pointer
+}
 
-    .logo span {
-      color: #c77dff;
-    }
+.user-menu{display:none;align-items:center;gap:10px}
+.user-email{
+color:#aaa6b8;font-size:12px;max-width:150px;
+overflow:hidden;text-overflow:ellipsis;white-space:nowrap
+}
 
-    .login-btn {
-      border: 1px solid rgba(255,255,255,.15);
-      background: rgba(255,255,255,.07);
-      color: #fff;
-      padding: 10px 16px;
-      border-radius: 12px;
-      cursor: pointer;
-    }
+.hero{
+max-width:1050px;margin:auto;padding:70px 20px 35px;text-align:center
+}
 
-    .hero {
-      max-width: 1050px;
-      margin: auto;
-      padding: 70px 20px 35px;
-      text-align: center;
-    }
+.badge{
+display:inline-block;padding:8px 14px;border-radius:30px;
+background:rgba(180,90,255,.12);
+border:1px solid rgba(180,90,255,.35);
+color:#d9a7ff;margin-bottom:20px;font-size:13px
+}
 
-    .badge {
-      display: inline-block;
-      padding: 8px 14px;
-      border-radius: 30px;
-      background: rgba(180, 90, 255, .12);
-      border: 1px solid rgba(180, 90, 255, .35);
-      color: #d9a7ff;
-      margin-bottom: 20px;
-      font-size: 13px;
-    }
+h1{
+font-size:clamp(38px,8vw,72px);line-height:1;margin-bottom:20px;
+background:linear-gradient(90deg,#fff,#d59aff,#6edcff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent
+}
 
-    h1 {
-      font-size: clamp(38px, 8vw, 72px);
-      line-height: 1;
-      margin-bottom: 20px;
-      background: linear-gradient(90deg, #fff, #d59aff, #6edcff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+.hero p{
+max-width:650px;margin:auto;color:#aaa6b8;
+font-size:17px;line-height:1.7
+}
 
-    .hero p {
-      max-width: 650px;
-      margin: auto;
-      color: #aaa6b8;
-      font-size: 17px;
-      line-height: 1.7;
-    }
+.services{
+max-width:1100px;margin:30px auto 80px;padding:0 20px;
+display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:18px
+}
 
-    .services {
-      max-width: 1100px;
-      margin: 30px auto 80px;
-      padding: 0 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 18px;
-    }
+.card{
+position:relative;padding:25px;min-height:235px;border-radius:24px;
+background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.025));
+border:1px solid rgba(255,255,255,.10);
+box-shadow:0 15px 50px rgba(0,0,0,.25);
+transition:.3s;overflow:hidden
+}
 
-    .card {
-      position: relative;
-      padding: 25px;
-      min-height: 235px;
-      border-radius: 24px;
-      background: linear-gradient(
-        145deg,
-        rgba(255,255,255,.09),
-        rgba(255,255,255,.025)
-      );
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: 0 15px 50px rgba(0,0,0,.25);
-      transition: .3s;
-      overflow: hidden;
-    }
+.card:hover{
+transform:translateY(-6px);
+border-color:rgba(196,120,255,.55);
+box-shadow:0 20px 60px rgba(140,60,255,.18)
+}
 
-    .card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(196,120,255,.55);
-      box-shadow: 0 20px 60px rgba(140,60,255,.18);
-    }
+.card:after{
+content:"";position:absolute;width:120px;height:120px;
+right:-50px;top:-50px;background:#a855f7;
+filter:blur(60px);opacity:.18
+}
 
-    .card::after {
-      content: "";
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      right: -50px;
-      top: -50px;
-      background: #a855f7;
-      filter: blur(60px);
-      opacity: .18;
-    }
+.service-icon{
+width:58px;height:58px;display:flex;align-items:center;
+justify-content:center;margin-bottom:18px;border-radius:17px;
+background:rgba(255,255,255,.055);
+border:1px solid rgba(255,255,255,.10);
+position:relative;z-index:1
+}
 
-    /* Xidmət ikonları */
+.service-icon svg{
+width:31px;height:31px;stroke:#d7a2ff;stroke-width:1.7;
+fill:none;stroke-linecap:round;stroke-linejoin:round
+}
 
-    .service-icon {
-      width: 58px;
-      height: 58px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 18px;
-      border-radius: 17px;
-      background: rgba(255,255,255,.055);
-      border: 1px solid rgba(255,255,255,.10);
-      position: relative;
-      z-index: 1;
-    }
+.card:nth-child(2) .service-icon svg{stroke:#69ddff}
+.card:nth-child(3) .service-icon svg{stroke:#ff73bd}
+.card:nth-child(4) .service-icon svg{stroke:#9d9cff}
+.card:nth-child(5) .service-icon svg{stroke:#ffd166}
+.card:nth-child(6) .service-icon svg{stroke:#6ee7d8}
+.card:nth-child(7) .service-icon svg{stroke:#ff8fba}
 
-    .service-icon svg {
-      width: 31px;
-      height: 31px;
-      stroke: #d7a2ff;
-      stroke-width: 1.7;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
+.card h2{
+font-size:20px;margin-bottom:8px;position:relative;z-index:1
+}
 
-    .card:nth-child(2) .service-icon svg {
-      stroke: #69ddff;
-    }
+.card p{
+color:#aaa6b8;font-size:14px;line-height:1.5;
+min-height:43px;position:relative;z-index:1
+}
 
-    .card:nth-child(3) .service-icon svg {
-      stroke: #ff73bd;
-    }
+.bottom{
+display:flex;justify-content:space-between;align-items:center;
+margin-top:22px;position:relative;z-index:1
+}
 
-    .card:nth-child(4) .service-icon svg {
-      stroke: #9d9cff;
-    }
+.price{font-size:20px;font-weight:800;color:#e4b4ff}
 
-    .card:nth-child(5) .service-icon svg {
-      stroke: #ffd166;
-    }
+.view-btn{
+border:0;color:white;
+background:linear-gradient(135deg,#8b35ff,#d51aff);
+padding:11px 16px;border-radius:12px;cursor:pointer;
+font-weight:700;box-shadow:0 8px 25px rgba(145,50,255,.25)
+}
 
-    .card:nth-child(6) .service-icon svg {
-      stroke: #6ee7d8;
-    }
+.view-btn:hover{filter:brightness(1.15)}
 
-    .card:nth-child(7) .service-icon svg {
-      stroke: #ff8fba;
-    }
+footer{
+text-align:center;padding:30px 20px;color:#777384;
+border-top:1px solid rgba(255,255,255,.07);font-size:13px
+}
 
-    .card h2 {
-      font-size: 20px;
-      margin-bottom: 8px;
-      position: relative;
-      z-index: 1;
-    }
+/* MODALS */
 
-    .card p {
-      color: #aaa6b8;
-      font-size: 14px;
-      line-height: 1.5;
-      min-height: 43px;
-      position: relative;
-      z-index: 1;
-    }
+.modal{
+position:fixed;inset:0;background:rgba(0,0,0,.75);
+backdrop-filter:blur(10px);display:none;
+align-items:center;justify-content:center;
+padding:20px;z-index:100
+}
 
-    .bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 22px;
-      position: relative;
-      z-index: 1;
-    }
+.modal.active{display:flex}
 
-    .price {
-      font-size: 20px;
-      font-weight: 800;
-      color: #e4b4ff;
-    }
+.modal-box{
+width:100%;max-width:430px;background:#12101a;
+border:1px solid rgba(255,255,255,.12);
+border-radius:24px;padding:28px;
+box-shadow:0 30px 100px rgba(0,0,0,.55);
+position:relative
+}
 
-    .view-btn {
-      border: 0;
-      color: white;
-      background: linear-gradient(135deg, #8b35ff, #d51aff);
-      padding: 11px 16px;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: 700;
-      box-shadow: 0 8px 25px rgba(145,50,255,.25);
-    }
+.modal-box h2{margin-bottom:8px;font-size:24px}
 
-    .view-btn:hover {
-      filter: brightness(1.15);
-    }
+.modal-subtitle{
+color:#aaa6b8;font-size:14px;line-height:1.5;margin-bottom:20px
+}
 
-    footer {
-      text-align: center;
-      padding: 30px 20px;
-      color: #777384;
-      border-top: 1px solid rgba(255,255,255,.07);
-      font-size: 13px;
-    }
+.close{
+position:absolute;right:18px;top:15px;border:0;
+background:transparent;color:#aaa;font-size:26px;cursor:pointer
+}
 
-    @media(max-width:600px) {
-      .hero {
-        padding-top: 50px;
-      }
+.input{
+width:100%;padding:13px 14px;margin-bottom:12px;
+border-radius:12px;border:1px solid rgba(255,255,255,.12);
+background:rgba(255,255,255,.05);color:white;outline:none
+}
 
-      .services {
-        grid-template-columns: 1fr;
-      }
+.input:focus{border-color:#a855f7}
 
-      .card {
-        min-height: 210px;
-      }
-    }
-  </style>
+textarea.input{min-height:120px;resize:vertical}
+
+.main-btn{
+width:100%;padding:13px;border:0;border-radius:12px;
+color:white;font-weight:700;cursor:pointer;
+background:linear-gradient(135deg,#8b35ff,#d51aff)
+}
+
+.secondary-btn{
+width:100%;margin-top:10px;padding:12px;border-radius:12px;
+border:1px solid rgba(255,255,255,.12);
+background:rgba(255,255,255,.05);color:white;cursor:pointer
+}
+
+.switch-text{
+text-align:center;margin-top:16px;color:#aaa6b8;font-size:13px
+}
+
+.switch-text button{
+background:none;border:0;color:#c77dff;cursor:pointer
+}
+
+.message{
+display:none;padding:11px 12px;margin-bottom:13px;
+border-radius:10px;background:rgba(255,255,255,.06);
+color:#ddd;font-size:13px;line-height:1.4
+}
+
+.message.show{display:block}
+
+.order-info{
+display:flex;justify-content:space-between;padding:13px;
+border-radius:12px;background:rgba(255,255,255,.05);
+margin-bottom:15px
+}
+
+.order-info span:last-child{color:#d7a2ff;font-weight:700}
+
+@media(max-width:600px){
+.hero{padding-top:50px}
+.services{grid-template-columns:1fr}
+.card{min-height:210px}
+.user-email{display:none}
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <div class="logo">
-    <span>Fal</span> Dünyası
-  </div>
 
-  <button class="login-btn">
-    Daxil ol
-  </button>
+<div class="logo">
+<span>Fal</span> Dünyası
+</div>
+
+<button class="login-btn" id="loginButton" onclick="openAuth()">
+Daxil ol
+</button>
+
+<div class="user-menu" id="userMenu">
+<span class="user-email" id="userEmail"></span>
+<button class="logout-btn" onclick="logout()">Çıxış</button>
+</div>
+
 </header>
 
 
 <section class="hero">
 
-  <div class="badge">
-    Sənin sirli dünyan
-  </div>
+<div class="badge">
+Sənin sirli dünyan
+</div>
 
-  <h1>
-    Taleyinin izlərini kəşf et
-  </h1>
+<h1>
+Taleyinin izlərini kəşf et
+</h1>
 
-  <p>
-    Tarot, əl falı, sevgi, yuxu yozmaları və digər
-    mistik analizlərlə öz suallarına cavab axtar.
-  </p>
+<p>
+Tarot, əl falı, sevgi, yuxu yozmaları və digər
+mistik analizlərlə öz suallarına cavab axtar.
+</p>
 
 </section>
 
@@ -314,253 +280,728 @@
 <section class="services">
 
 
-  <!-- TAROT -->
+<div class="card">
+<div class="service-icon">
+<svg viewBox="0 0 24 24">
+<rect x="6" y="3" width="12" height="18" rx="2"/>
+<path d="M9 7h6"/>
+<circle cx="12" cy="12" r="2.5"/>
+<path d="M10 17h4"/>
+</svg>
+</div>
 
-  <div class="card">
+<h2>Tarot Falı</h2>
+<p>Kartların simvolik mənalarını kəşf et.</p>
 
-    <div class="service-icon">
-      <svg viewBox="0 0 24 24">
-        <rect x="6" y="3" width="12" height="18" rx="2"/>
-        <path d="M9 7h6"/>
-        <circle cx="12" cy="12" r="2.5"/>
-        <path d="M10 17h4"/>
-      </svg>
-    </div>
-
-    <h2>Tarot Falı</h2>
-
-    <p>
-      Kartların simvolik mənalarını kəşf et.
-    </p>
-
-    <div class="bottom">
-      <div class="price">5 AZN</div>
-
-      <button
-        class="view-btn"
-        onclick="openService('Tarot Falı',5)">
-        Bax
-      </button>
-    </div>
-
-  </div>
+<div class="bottom">
+<div class="price">5 AZN</div>
+<button class="view-btn" onclick="openService('Tarot Falı',5)">
+Bax
+</button>
+</div>
+</div>
 
 
-  <!-- ƏL FALI -->
+<div class="card">
+<div class="service-icon">
+<svg viewBox="0 0 24 24">
+<path d="M8 11V5a1.5 1.5 0 0 1 3 0v5"/>
+<path d="M11 10V4a1.5 1.5 0 0 1 3 0v6"/>
+<path d="M14 10V5.5a1.5 1.5 0 0 1 3 0V12"/>
+<path d="M17 11V8.5a1.5 1.5 0 0 1 3 0v6.2c0 4.2-2.7 6.3-6.7 6.3h-1.8c-2.2 0-3.6-.8-4.8-2.5L4 14.7a1.7 1.7 0 0 1 2.7-2.1L8 14"/>
+</svg>
+</div>
 
-  <div class="card">
+<h2>Əl Falı</h2>
+<p>Əlinin xətlərinin simvolik yozumunu öyrən.</p>
 
-    <div class="service-icon">
-      <svg viewBox="0 0 24 24">
-        <path d="M8 11V5a1.5 1.5 0 0 1 3 0v5"/>
-        <path d="M11 10V4a1.5 1.5 0 0 1 3 0v6"/>
-        <path d="M14 10V5.5a1.5 1.5 0 0 1 3 0V12"/>
-        <path d="M17 11V8.5a1.5 1.5 0 0 1 3 0v6.2c0 4.2-2.7 6.3-6.7 6.3h-1.8c-2.2 0-3.6-.8-4.8-2.5L4 14.7a1.7 1.7 0 0 1 2.7-2.1L8 14"/>
-      </svg>
-    </div>
-
-    <h2>Əl Falı</h2>
-
-    <p>
-      Əlinin xətlərinin simvolik yozumunu öyrən.
-    </p>
-
-    <div class="bottom">
-      <div class="price">3 AZN</div>
-
-      <button
-        class="view-btn"
-        onclick="openService('Əl Falı',3)">
-        Bax
-      </button>
-    </div>
-
-  </div>
+<div class="bottom">
+<div class="price">3 AZN</div>
+<button class="view-btn" onclick="openService('Əl Falı',3)">
+Bax
+</button>
+</div>
+</div>
 
 
-  <!-- SEVGİ -->
+<div class="card">
+<div class="service-icon">
+<svg viewBox="0 0 24 24">
+<path d="M20.8 8.7c0 5.2-8.8 10.2-8.8 10.2S3.2 13.9 3.2 8.7A4.7 4.7 0 0 1 12 6.2a4.7 4.7 0 0 1 8.8 2.5Z"/>
+</svg>
+</div>
 
-  <div class="card">
+<h2>Sevgi Analizi</h2>
+<p>Münasibətiniz haqqında əyləncə xarakterli analiz.</p>
 
-    <div class="service-icon">
-      <svg viewBox="0 0 24 24">
-        <path d="M20.8 8.7c0 5.2-8.8 10.2-8.8 10.2S3.2 13.9 3.2 8.7A4.7 4.7 0 0 1 12 6.2a4.7 4.7 0 0 1 8.8 2.5Z"/>
-      </svg>
-    </div>
-
-    <h2>Sevgi Analizi</h2>
-
-    <p>
-      Münasibətiniz haqqında əyləncə xarakterli analiz.
-    </p>
-
-    <div class="bottom">
-      <div class="price">4 AZN</div>
-
-      <button
-        class="view-btn"
-        onclick="openService('Sevgi Analizi',4)">
-        Bax
-      </button>
-    </div>
-
-  </div>
+<div class="bottom">
+<div class="price">4 AZN</div>
+<button class="view-btn" onclick="openService('Sevgi Analizi',4)">
+Bax
+</button>
+</div>
+</div>
 
 
-  <!-- YUXU -->
+<div class="card">
+<div class="service-icon">
+<svg viewBox="0 0 24 24">
+<path d="M18 15.5A7 7 0 0 1 9 6.8 7.2 7.2 0 1 0 18 15.5Z"/>
+<path d="M18 4v3"/>
+<path d="M16.5 5.5h3"/>
+</svg>
+</div>
 
-  <div class="card">
+<h2>Yuxu Yozmaları</h2>
+<p>Yuxundakı simvolların mümkün mənalarını kəşf et.</p>
 
-    <div class="service-icon">
-      <svg viewBox="0 0 24 24">
-        <path d="M18 15.5A7 7 0 0 1 9 6.8 7.2 7.2 0 1 0 18 15.5Z"/>
-        <path d="M18 4v3"/>
-        <path d="M16.5 5.5h3"/>
-      </svg>
-    </div>
-
-    <h2>Yuxu Yozmaları</h2>
-
-    <p>
-      Yuxundakı simvolların mümkün mənalarını kəşf et.
-    </p>
-
-    <div class="bottom">
-      <div class="price">2 AZN</div>
-
-      <button
-        class="view-btn"
-        onclick="openService('Yuxu Yozmaları',2)">
-        Bax
-      </button>
-    </div>
-
-  </div>
+<div class="bottom">
+<div class="price">2 AZN</div>
+<button class="view-btn" onclick="openService('Yuxu Yozmaları',2)">
+Bax
+</button>
+</div>
+</div>
 
 
-  <!-- BÜRC -->
+<div class="card">
+<div class="service-icon">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="4"/>
+<path d="M12 2v2"/>
+<path d="M12 20v2"/>
+<path d="M2 12h2"/>
+<path d="M20 12h2"/>
+<path d="m4.9 4.9 1.4 1.4"/>
+<path d="m17.7 17.7 1.4 1.4"/>
+<path d="m19.1 4.9-1.4 1.4"/>
+<path d="m6.3 17.7-1.4 1.4"/>
+</svg>
+</div>
 
-  <div class="card">
+<h2>Bürc / Günün Falı</h2>
+<p>Günün üçün simvolik bürc və enerji analizi.</p>
 
-    <div class="service-icon">
-      <svg viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="4"/>
-        <path d="M12 2v2"/>
-        <path d="M12 20v2"/>
-        <path d="M2 12h2"/>
-        <path d="M20 12h2"/>
-        <path d="m4.9 4.9 1.4 1.4"/>
-        <path d="m17.7 17.7 1.4 1.4"/>
-        <path d="m19.1 4.9-1.4 1.4"/>
-        <path d="m6.3 17.7-1.4 1.4"/>
-      </svg>
-    </div>
-
-    <h2>Bürc / Günün Falı</h2>
-
-    <p>
-      Günün üçün simvolik bürc və enerji analizi.
-    </p>
-
-    <div class="bottom">
-      <div class="price">2 AZN</div>
-
-      <button
-        class="view-btn"
-        onclick="openService('Bürc / Günün Falı',2)">
-        Bax
-      </button>
-    </div>
-
-  </div>
+<div class="bottom">
+<div class="price">2 AZN</div>
+<button class="view-btn" onclick="openService('Bürc / Günün Falı',2)">
+Bax
+</button>
+</div>
+</div>
 
 
-  <!-- DOĞUM XƏRİTƏSİ -->
+<div class="card">
+<div class="service-icon">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="8.5"/>
+<path d="M3.5 12h17"/>
+<path d="M12 3.5c2.3 2.3 3.4 5.1 3.4 8.5s-1.1 6.2-3.4 8.5"/>
+<path d="M12 3.5c-2.3 2.3-3.4 5.1-3.4 8.5s1.1 6.2 3.4 8.5"/>
+<path d="M5 7.5c4.7 1.7 9.3 1.7 14 0"/>
+<path d="M5 16.5c4.7-1.7 9.3-1.7 14 0"/>
+</svg>
+</div>
 
-  <div class="card">
+<h2>Doğum Xəritəsi</h2>
+<p>Doğum məlumatlarına əsaslanan astroloji şərh.</p>
 
-    <div class="service-icon">
-      <svg viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="8.5"/>
-        <path d="M3.5 12h17"/>
-        <path d="M12 3.5c2.3 2.3 3.4 5.1 3.4 8.5s-1.1 6.2-3.4 8.5"/>
-        <path d="M12 3.5c-2.3 2.3-3.4 5.1-3.4 8.5s1.1 6.2 3.4 8.5"/>
-        <path d="M5 7.5c4.7 1.7 9.3 1.7 14 0"/>
-        <path d="M5 16.5c4.7-1.7 9.3-1.7 14 0"/>
-      </svg>
-    </div>
-
-    <h2>Doğum Xəritəsi</h2>
-
-    <p>
-      Doğum məlumatlarına əsaslanan astroloji şərh.
-    </p>
-
-    <div class="bottom">
-      <div class="price">7 AZN</div>
-
-      <button
-        class="view-btn"
-        onclick="openService('Doğum Xəritəsi',7)">
-        Bax
-      </button>
-    </div>
-
-  </div>
+<div class="bottom">
+<div class="price">7 AZN</div>
+<button class="view-btn" onclick="openService('Doğum Xəritəsi',7)">
+Bax
+</button>
+</div>
+</div>
 
 
-  <!-- ADIN MƏNASI -->
+<div class="card">
+<div class="service-icon">
+<svg viewBox="0 0 24 24">
+<path d="M5 19 12 5l7 14"/>
+<path d="M8 14h8"/>
+<path d="M4 19h4"/>
+<path d="M16 19h4"/>
+</svg>
+</div>
 
-  <div class="card">
+<h2>Adın Mənası</h2>
+<p>Adının mənası və simvolik xüsusiyyətləri.</p>
 
-    <div class="service-icon">
-      <svg viewBox="0 0 24 24">
-        <path d="M5 19 12 5l7 14"/>
-        <path d="M8 14h8"/>
-        <path d="M4 19h4"/>
-        <path d="M16 19h4"/>
-      </svg>
-    </div>
-
-    <h2>Adın Mənası</h2>
-
-    <p>
-      Adının mənası və simvolik xüsusiyyətləri.
-    </p>
-
-    <div class="bottom">
-      <div class="price">1 AZN</div>
-
-      <button
-        class="view-btn"
-        onclick="openService('Adın Mənası',1)">
-        Bax
-      </button>
-    </div>
-
-  </div>
+<div class="bottom">
+<div class="price">1 AZN</div>
+<button class="view-btn" onclick="openService('Adın Mənası',1)">
+Bax
+</button>
+</div>
+</div>
 
 </section>
 
 
 <footer>
-  © 2026 Fal Dünyası — Əyləncə və mistik interpretasiya platforması
+© 2026 Fal Dünyası — Əyləncə və mistik interpretasiya platforması
 </footer>
+
+
+<!-- LOGIN / REGISTER -->
+
+<div class="modal" id="authModal">
+
+<div class="modal-box">
+
+<button class="close" onclick="closeModal('authModal')">×</button>
+
+<h2 id="authTitle">Daxil ol</h2>
+
+<p class="modal-subtitle" id="authSubtitle">
+Hesabına daxil olaraq xidmətlərdən istifadə et.
+</p>
+
+<div class="message" id="authMessage"></div>
+
+<input
+class="input"
+id="email"
+type="email"
+placeholder="E-poçt ünvanı"
+>
+
+<input
+class="input"
+id="password"
+type="password"
+placeholder="Şifrə"
+>
+
+<button class="main-btn" onclick="handleAuth()" id="authSubmit">
+Daxil ol
+</button>
+
+<div class="switch-text">
+<span id="switchText">Hesabın yoxdur?</span>
+<button onclick="switchAuth()" id="switchButton">
+Qeydiyyatdan keç
+</button>
+</div>
+
+</div>
+</div>
+
+
+<!-- ORDER -->
+
+<div class="modal" id="orderModal">
+
+<div class="modal-box">
+
+<button class="close" onclick="closeModal('orderModal')">×</button>
+
+<h2 id="orderTitle">Tarot Falı</h2>
+
+<p class="modal-subtitle">
+Sualını yaz və sifarişi yarat.
+</p>
+
+<div class="order-info">
+<span>Xidmət</span>
+<span id="orderService">Tarot Falı</span>
+</div>
+
+<div class="order-info">
+<span>Məbləğ</span>
+<span id="orderPrice">5 AZN</span>
+</div>
+
+<textarea
+class="input"
+id="question"
+placeholder="Sualını buraya yaz..."
+></textarea>
+
+<div class="message" id="orderMessage"></div>
+
+<button class="main-btn" onclick="createOrder()">
+Sifarişi yarat
+</button>
+
+</div>
+</div>
 
 
 <script>
 
-  function openService(name, price) {
+/* SUPABASE */
 
-    alert(
-      name +
-      " — " +
-      price +
-      " AZN\n\n" +
-      "Bu xidmət üçün əvvəlcə hesabınıza daxil olmalısınız."
-    );
+const SUPABASE_URL =
+"https://hwwxxhgmumshjvkfhhir.supabase.co";
 
-  }
+const SUPABASE_KEY =
+"sb_publishable_2PeGoyW4DP-H27mkhnxBfQ_3LfGRDZs";
+
+const supabaseClient =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+
+/* VARIABLES */
+
+let authMode = "login";
+
+let selectedService = null;
+let selectedPrice = null;
+
+
+/* MODAL */
+
+function openModal(id){
+document.getElementById(id).classList.add("active");
+}
+
+function closeModal(id){
+document.getElementById(id).classList.remove("active");
+}
+
+
+/* AUTH */
+
+function openAuth(){
+authMode="login";
+
+document.getElementById("authTitle").textContent="Daxil ol";
+
+document.getElementById("authSubtitle").textContent=
+"Hesabına daxil olaraq xidmətlərdən istifadə et.";
+
+document.getElementById("authSubmit").textContent="Daxil ol";
+
+document.getElementById("switchText").textContent=
+"Hesabın yoxdur?";
+
+document.getElementById("switchButton").textContent=
+"Qeydiyyatdan keç";
+
+clearAuthMessage();
+
+openModal("authModal");
+}
+
+
+function switchAuth(){
+
+authMode =
+authMode === "login"
+? "register"
+: "login";
+
+clearAuthMessage();
+
+if(authMode==="register"){
+
+document.getElementById("authTitle").textContent=
+"Qeydiyyat";
+
+document.getElementById("authSubtitle").textContent=
+"Yeni hesab yarat.";
+
+document.getElementById("authSubmit").textContent=
+"Qeydiyyatdan keç";
+
+document.getElementById("switchText").textContent=
+"Artıq hesabın var?";
+
+document.getElementById("switchButton").textContent=
+"Daxil ol";
+
+}else{
+
+document.getElementById("authTitle").textContent=
+"Daxil ol";
+
+document.getElementById("authSubtitle").textContent=
+"Hesabına daxil olaraq xidmətlərdən istifadə et.";
+
+document.getElementById("authSubmit").textContent=
+"Daxil ol";
+
+document.getElementById("switchText").textContent=
+"Hesabın yoxdur?";
+
+document.getElementById("switchButton").textContent=
+"Qeydiyyatdan keç";
+
+}
+
+}
+
+
+function showAuthMessage(message){
+const box=document.getElementById("authMessage");
+
+box.textContent=message;
+box.classList.add("show");
+}
+
+
+function clearAuthMessage(){
+const box=document.getElementById("authMessage");
+
+box.textContent="";
+box.classList.remove("show");
+}
+
+
+async function handleAuth(){
+
+const email=
+document.getElementById("email").value.trim();
+
+const password=
+document.getElementById("password").value;
+
+if(!email || !password){
+
+showAuthMessage(
+"E-poçt və şifrəni daxil et."
+);
+
+return;
+}
+
+if(password.length < 6){
+
+showAuthMessage(
+"Şifrə ən azı 6 simvoldan ibarət olmalıdır."
+);
+
+return;
+}
+
+
+document.getElementById("authSubmit").disabled=true;
+
+
+try{
+
+if(authMode==="register"){
+
+const {data,error} =
+await supabaseClient.auth.signUp({
+email:email,
+password:password
+});
+
+if(error) throw error;
+
+
+if(data.session){
+
+closeModal("authModal");
+
+}else{
+
+showAuthMessage(
+"Qeydiyyat tamamlandı. E-poçtuna təsdiq məktubu gəlibsə, hesabını təsdiqlə."
+);
+
+}
+
+}else{
+
+const {error} =
+await supabaseClient.auth.signInWithPassword({
+email:email,
+password:password
+});
+
+if(error) throw error;
+
+closeModal("authModal");
+
+}
+
+}catch(error){
+
+showAuthMessage(
+translateAuthError(error.message)
+);
+
+}finally{
+
+document.getElementById("authSubmit").disabled=false;
+
+}
+
+}
+
+
+/* AUTH ERROR */
+
+function translateAuthError(message){
+
+if(message.includes("Invalid login credentials"))
+return "E-poçt və ya şifrə yanlışdır.";
+
+if(message.includes("User already registered"))
+return "Bu e-poçtla artıq hesab mövcuddur.";
+
+if(message.includes("Email not confirmed"))
+return "E-poçt ünvanını təsdiqləməlisən.";
+
+if(message.includes("Password should be at least"))
+return "Şifrə ən azı 6 simvol olmalıdır.";
+
+return message;
+
+}
+
+
+/* USER UI */
+
+async function updateUserUI(){
+
+const {data} =
+await supabaseClient.auth.getSession();
+
+const user=data.session?.user;
+
+const loginButton=
+document.getElementById("loginButton");
+
+const userMenu=
+document.getElementById("userMenu");
+
+const userEmail=
+document.getElementById("userEmail");
+
+
+if(user){
+
+loginButton.style.display="none";
+
+userMenu.style.display="flex";
+
+userEmail.textContent=user.email;
+
+}else{
+
+loginButton.style.display="block";
+
+userMenu.style.display="none";
+
+userEmail.textContent="";
+
+}
+
+}
+
+
+/* LOGOUT */
+
+async function logout(){
+
+await supabaseClient.auth.signOut();
+
+updateUserUI();
+
+}
+
+
+/* SERVICE */
+
+async function openService(name,price){
+
+const {data} =
+await supabaseClient.auth.getSession();
+
+const user=data.session?.user;
+
+
+if(!user){
+
+openAuth();
+
+showAuthMessage(
+"Xidmətdən istifadə etmək üçün əvvəlcə hesabına daxil ol."
+);
+
+return;
+
+}
+
+
+selectedService=name;
+selectedPrice=price;
+
+
+document.getElementById("orderTitle").textContent=
+name;
+
+document.getElementById("orderService").textContent=
+name;
+
+document.getElementById("orderPrice").textContent=
+price+" AZN";
+
+document.getElementById("question").value="";
+
+document.getElementById("orderMessage").classList.remove("show");
+
+openModal("orderModal");
+
+}
+
+
+/* CREATE ORDER */
+
+async function createOrder(){
+
+const question=
+document.getElementById("question").value.trim();
+
+const message=
+document.getElementById("orderMessage");
+
+
+if(!question){
+
+message.textContent=
+"Zəhmət olmasa sualını yaz.";
+
+message.classList.add("show");
+
+return;
+
+}
+
+
+const {data:sessionData} =
+await supabaseClient.auth.getSession();
+
+const user=sessionData.session?.user;
+
+
+if(!user){
+
+closeModal("orderModal");
+
+openAuth();
+
+return;
+
+}
+
+
+const {data:serviceData,error:serviceError} =
+await supabaseClient
+.from("services")
+.select("id,name,price")
+.eq("name",selectedService)
+.eq("active",true)
+.single();
+
+
+if(serviceError){
+
+message.textContent=
+"Xidmət məlumatı tapılmadı.";
+
+message.classList.add("show");
+
+console.error(serviceError);
+
+return;
+
+}
+
+
+const {error} =
+await supabaseClient
+.from("orders")
+.insert({
+
+user_id:user.id,
+
+service_id:serviceData.id,
+
+service_name:serviceData.name,
+
+amount:serviceData.price,
+
+status:"pending",
+
+question:question
+
+});
+
+
+if(error){
+
+message.textContent=
+"Sifariş yaradılmadı: "+error.message;
+
+message.classList.add("show");
+
+console.error(error);
+
+return;
+
+}
+
+
+message.textContent=
+"Sifariş uğurla yaradıldı.";
+
+message.classList.add("show");
+
+
+setTimeout(()=>{
+
+closeModal("orderModal");
+
+alert(
+"Sifarişiniz qəbul edildi.\n\n"+
+"Ödəniş mərhələsi növbəti mərhələdə əlavə olunacaq."
+);
+
+},900);
+
+}
+
+
+/* AUTH STATE */
+
+supabaseClient.auth.onAuthStateChange(
+(event,session)=>{
+
+updateUserUI();
+
+}
+);
+
+
+/* START */
+
+updateUserUI();
+
+
+/* CLOSE MODAL OUTSIDE */
+
+document.querySelectorAll(".modal").forEach(modal=>{
+
+modal.addEventListener("click",function(e){
+
+if(e.target===modal){
+
+modal.classList.remove("active");
+
+}
+
+});
+
+});
 
 </script>
 
