@@ -8,524 +8,140 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
-font-family:Arial,sans-serif
-}
-
+*{box-sizing:border-box}
 body{
+margin:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#10001c,#21003a,#090014);
+color:#fff;
 min-height:100vh;
-color:#fff;
-background:
-radial-gradient(circle at 20% 10%,rgba(137,72,255,.35),transparent 30%),
-radial-gradient(circle at 80% 20%,rgba(0,210,255,.25),transparent 30%),
-radial-gradient(circle at 50% 90%,rgba(255,0,170,.20),transparent 35%),
-#08070d;
-overflow-x:hidden
 }
-
-body:before{
-content:"";
-position:fixed;
-inset:0;
-pointer-events:none;
-background:linear-gradient(
-120deg,
-transparent 30%,
-rgba(255,255,255,.025),
-transparent 70%
-);
-animation:shine 7s linear infinite
-}
-
-@keyframes shine{
-0%{transform:translateX(-100%)}
-100%{transform:translateX(100%)}
-}
-
 header{
-width:100%;
-padding:18px 20px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-position:sticky;
-top:0;
-z-index:10;
-background:rgba(8,7,13,.75);
-backdrop-filter:blur(18px);
-border-bottom:1px solid rgba(255,255,255,.08)
-}
-
-.logo{
-font-size:22px;
-font-weight:800;
-letter-spacing:.5px
-}
-
-.logo span{
-color:#c77dff
-}
-
-.login-btn,
-.logout-btn{
-border:1px solid rgba(255,255,255,.15);
-background:rgba(255,255,255,.07);
-color:#fff;
-padding:10px 16px;
-border-radius:12px;
-cursor:pointer
-}
-
-.login-btn:hover,
-.logout-btn:hover{
-background:rgba(255,255,255,.12)
-}
-
-.user-menu{
-display:none;
-align-items:center;
-gap:10px
-}
-
-.user-email{
-color:#aaa6b8;
-font-size:12px;
-max-width:150px;
-overflow:hidden;
-text-overflow:ellipsis;
-white-space:nowrap
-}
-
-.hero{
-max-width:1050px;
-margin:auto;
-padding:70px 20px 35px;
-text-align:center
-}
-
-.badge{
-display:inline-block;
-padding:8px 14px;
-border-radius:30px;
-background:rgba(180,90,255,.12);
-border:1px solid rgba(180,90,255,.35);
-color:#d9a7ff;
-margin-bottom:20px;
-font-size:13px
-}
-
-h1{
-font-size:clamp(38px,8vw,72px);
-line-height:1;
-margin-bottom:20px;
-background:linear-gradient(90deg,#fff,#d59aff,#6edcff);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent
-}
-
-.hero p{
-max-width:650px;
-margin:auto;
-color:#aaa6b8;
-font-size:17px;
-line-height:1.7
-}
-
-.services{
-max-width:1100px;
-margin:30px auto 80px;
-padding:0 20px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-gap:18px
-}
-
-.card{
-position:relative;
-padding:25px;
-min-height:235px;
-border-radius:24px;
-background:
-linear-gradient(
-145deg,
-rgba(255,255,255,.09),
-rgba(255,255,255,.025)
-);
-border:1px solid rgba(255,255,255,.10);
-box-shadow:0 15px 50px rgba(0,0,0,.25);
-transition:.3s;
-overflow:hidden
-}
-
-.card:hover{
-transform:translateY(-6px);
-border-color:rgba(196,120,255,.55);
-box-shadow:0 20px 60px rgba(140,60,255,.18)
-}
-
-.card:after{
-content:"";
-position:absolute;
-width:120px;
-height:120px;
-right:-50px;
-top:-50px;
-background:#a855f7;
-filter:blur(60px);
-opacity:.18
-}
-
-.service-icon{
-width:58px;
-height:58px;
-display:flex;
-align-items:center;
-justify-content:center;
-margin-bottom:18px;
-border-radius:17px;
-background:rgba(255,255,255,.055);
-border:1px solid rgba(255,255,255,.10);
-position:relative;
-z-index:1
-}
-
-.service-icon svg{
-width:31px;
-height:31px;
-stroke:#d7a2ff;
-stroke-width:1.7;
-fill:none;
-stroke-linecap:round;
-stroke-linejoin:round
-}
-
-.card:nth-child(2) .service-icon svg{stroke:#69ddff}
-.card:nth-child(3) .service-icon svg{stroke:#ff73bd}
-.card:nth-child(4) .service-icon svg{stroke:#9d9cff}
-.card:nth-child(5) .service-icon svg{stroke:#ffd166}
-.card:nth-child(6) .service-icon svg{stroke:#6ee7d8}
-.card:nth-child(7) .service-icon svg{stroke:#ff8fba}
-
-.card h2{
-font-size:20px;
-margin-bottom:8px;
-position:relative;
-z-index:1
-}
-
-.card p{
-color:#aaa6b8;
-font-size:14px;
-line-height:1.5;
-min-height:43px;
-position:relative;
-z-index:1
-}
-
-.bottom{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-top:22px;
-position:relative;
-z-index:1
-}
-
-.price{
-font-size:20px;
-font-weight:800;
-color:#e4b4ff
-}
-
-.view-btn{
-border:0;
-color:white;
-background:linear-gradient(135deg,#8b35ff,#d51aff);
-padding:11px 16px;
-border-radius:12px;
-cursor:pointer;
-font-weight:700;
-box-shadow:0 8px 25px rgba(145,50,255,.25)
-}
-
-.view-btn:hover{
-filter:brightness(1.15)
-}
-
-footer{
+padding:20px;
 text-align:center;
-padding:30px 20px;
-color:#777384;
-border-top:1px solid rgba(255,255,255,.07);
-font-size:13px
+background:rgba(0,0,0,.35);
+border-bottom:1px solid rgba(255,255,255,.1);
 }
-
+.logo{
+font-size:30px;
+font-weight:bold;
+color:#d88cff;
+}
+.container{
+max-width:1100px;
+margin:auto;
+padding:25px 15px;
+}
+.hero{
+text-align:center;
+padding:35px 10px;
+}
+.hero h1{
+font-size:38px;
+margin:0 0 12px;
+}
+.hero p{
+color:#ccc;
+font-size:17px;
+}
+.services{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:18px;
+}
+.card{
+background:rgba(255,255,255,.07);
+border:1px solid rgba(255,255,255,.12);
+border-radius:18px;
+padding:22px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+.card h3{
+margin:8px 0;
+}
+.price{
+font-size:22px;
+font-weight:bold;
+color:#d88cff;
+margin:12px 0;
+}
+button{
+border:0;
+border-radius:12px;
+padding:12px 20px;
+background:linear-gradient(90deg,#8b35ff,#d34cff);
+color:white;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
+}
+button:hover{opacity:.9}
+.topbtn{
+position:absolute;
+right:15px;
+top:15px;
+}
 .modal{
+display:none;
 position:fixed;
 inset:0;
 background:rgba(0,0,0,.75);
-backdrop-filter:blur(10px);
-display:none;
 align-items:center;
 justify-content:center;
-padding:20px;
-z-index:100
+padding:15px;
+z-index:10;
 }
-
-.modal.active{
-display:flex
-}
-
 .modal-box{
 width:100%;
-max-width:450px;
-max-height:90vh;
-overflow-y:auto;
-background:#12101a;
-border:1px solid rgba(255,255,255,.12);
-border-radius:24px;
-padding:28px;
-box-shadow:0 30px 100px rgba(0,0,0,.55);
-position:relative
+max-width:500px;
+background:#180025;
+border:1px solid rgba(255,255,255,.15);
+border-radius:20px;
+padding:25px;
 }
-
 .modal-box h2{
-margin-bottom:8px;
-font-size:24px
+margin-top:0;
 }
-
-.modal-subtitle{
-color:#aaa6b8;
-font-size:14px;
-line-height:1.5;
-margin-bottom:20px
-}
-
-.close{
-position:absolute;
-right:18px;
-top:15px;
-border:0;
-background:transparent;
-color:#aaa;
-font-size:26px;
-cursor:pointer
-}
-
-.input{
+input,textarea{
 width:100%;
-padding:13px 14px;
-margin-bottom:12px;
-border-radius:12px;
-border:1px solid rgba(255,255,255,.12);
-background:rgba(255,255,255,.05);
-color:white;
-outline:none
+padding:13px;
+margin:8px 0 14px;
+border-radius:10px;
+border:1px solid #59316d;
+background:#0e0017;
+color:#fff;
+outline:none;
 }
-
-.input:focus{
-border-color:#a855f7
-}
-
-textarea.input{
+textarea{
 min-height:120px;
-resize:vertical
+resize:vertical;
 }
-
-.main-btn{
-width:100%;
-padding:13px;
-border:0;
-border-radius:12px;
-color:white;
-font-weight:700;
-cursor:pointer;
-background:linear-gradient(135deg,#8b35ff,#d51aff)
-}
-
-.main-btn:disabled{
-opacity:.55;
-cursor:not-allowed
-}
-
-.secondary-btn{
-width:100%;
-margin-top:10px;
-padding:12px;
-border-radius:12px;
-border:1px solid rgba(255,255,255,.12);
-background:rgba(255,255,255,.05);
-color:white;
-cursor:pointer
-}
-
-.switch-text{
-text-align:center;
-margin-top:16px;
-color:#aaa6b8;
-font-size:13px
-}
-
-.switch-text button{
-background:none;
-border:0;
-color:#c77dff;
-cursor:pointer
-}
-
-.message{
-display:none;
-padding:11px 12px;
-margin-bottom:13px;
-border-radius:10px;
-background:rgba(255,255,255,.06);
-color:#ddd;
-font-size:13px;
-line-height:1.5;
-word-break:break-word
-}
-
-.message.show{
-display:block
-}
-
-.message.success{
-background:rgba(40,200,130,.10);
-border:1px solid rgba(40,200,130,.25)
-}
-
-.message.error{
-background:rgba(255,70,100,.10);
-border:1px solid rgba(255,70,100,.25)
-}
-
-.order-info{
-display:flex;
-justify-content:space-between;
-padding:13px;
-border-radius:12px;
-background:rgba(255,255,255,.05);
-margin-bottom:10px
-}
-
-.order-info span:first-child{
-color:#aaa6b8
-}
-
-.order-info span:last-child{
-color:#d7a2ff;
-font-weight:700;
-text-align:right;
-max-width:65%;
-overflow:hidden;
-text-overflow:ellipsis;
-white-space:nowrap
-}
-
-.receipt-area{
-margin-top:8px;
-padding:16px;
-border:1px dashed rgba(199,125,255,.45);
-border-radius:15px;
-background:rgba(168,85,247,.05)
-}
-
-.receipt-title{
+label{
 font-size:14px;
-font-weight:700;
-margin-bottom:6px
+color:#ddd;
 }
-
-.receipt-help{
-font-size:12px;
-color:#9691a3;
-line-height:1.5;
-margin-bottom:12px
+.close{
+float:right;
+cursor:pointer;
+font-size:25px;
+color:#aaa;
 }
-
-.file-input{
-width:100%;
-padding:11px;
-border-radius:10px;
-border:1px solid rgba(255,255,255,.10);
-background:rgba(255,255,255,.04);
-color:#bbb;
-font-size:12px
+.auth{
+display:flex;
+gap:10px;
+justify-content:center;
+margin-top:15px;
 }
-
-.file-name{
-margin-top:9px;
-font-size:12px;
-color:#c77dff;
-word-break:break-word
+.hidden{display:none}
+.small{
+font-size:13px;
+color:#aaa;
 }
-
-.receipt-preview{
-display:none;
-width:100%;
-max-height:180px;
-object-fit:contain;
-border-radius:10px;
-margin-top:12px;
-border:1px solid rgba(255,255,255,.1)
-}
-
-.loading{
-display:inline-block;
-width:14px;
-height:14px;
-border:2px solid rgba(255,255,255,.3);
-border-top-color:white;
-border-radius:50%;
-animation:spin .7s linear infinite;
-vertical-align:-2px;
-margin-right:6px
-}
-
-@keyframes spin{
-to{transform:rotate(360deg)}
-}
-
-.debug-box{
-display:none;
-margin-top:10px;
-padding:12px;
-border-radius:10px;
-background:#050509;
-border:1px solid rgba(255,80,110,.3);
-font-family:monospace;
-font-size:11px;
-line-height:1.5;
-white-space:pre-wrap;
-word-break:break-word;
-color:#ff9caf
-}
-
-@media(max-width:600px){
-
-.hero{
-padding-top:50px
-}
-
-.services{
-grid-template-columns:1fr
-}
-
-.card{
-min-height:210px
-}
-
-.user-email{
-display:none
-}
-
-.modal-box{
-padding:23px
-}
-
+footer{
+text-align:center;
+padding:30px;
+color:#888;
 }
 </style>
 </head>
@@ -533,443 +149,171 @@ padding:23px
 <body>
 
 <header>
-
-<div class="logo">
-<span>Fal</span> Dünyası
-</div>
-
-<button
-class="login-btn"
-id="loginButton"
-onclick="openAuth()"
->
-Daxil ol
-</button>
-
-<div
-class="user-menu"
-id="userMenu"
->
-<span
-class="user-email"
-id="userEmail"
-></span>
-
-<button
-class="logout-btn"
-onclick="logout()"
->
-Çıxış
-</button>
-</div>
-
+<div class="logo">🔮 Fal Dünyası</div>
+<div id="userArea"></div>
 </header>
 
+<div class="container">
 
 <section class="hero">
-
-<div class="badge">
-Sənin sirli dünyan
-</div>
-
-<h1>
-Taleyinin izlərini kəşf et
-</h1>
-
-<p>
-Tarot, əl falı, sevgi, yuxu yozmaları və digər
-mistik analizlərlə öz suallarına cavab axtar.
+<h1>✨ Sənin sirli dünyan</h1>
+<p>Taleyinin izlərini kəşf et</p>
+<p class="small">
+Tarot, əl falı, sevgi, yuxu yozmaları və digər mistik analizlərlə
+öz suallarına cavab axtar.
 </p>
 
+<div class="auth">
+<button onclick="openAuth()">Daxil ol / Qeydiyyat</button>
+</div>
 </section>
-
 
 <section class="services">
 
+<div class="card">
+<div style="font-size:40px">🔮</div>
+<h3>Tarot Falı</h3>
+<p>Kartların simvolik mənalarını kəşf et.</p>
+<div class="price">5 AZN</div>
+<button onclick="openService('Tarot Falı',5)">Bax</button>
+</div>
 
 <div class="card">
-
-<div class="service-icon">
-<svg viewBox="0 0 24 24">
-<rect x="6" y="3" width="12" height="18" rx="2"/>
-<path d="M9 7h6"/>
-<circle cx="12" cy="12" r="2.5"/>
-<path d="M10 17h4"/>
-</svg>
+<div style="font-size:40px">🖐️</div>
+<h3>Əl Falı</h3>
+<p>Əl xətlərinin simvolik yozumunu öyrən.</p>
+<div class="price">3 AZN</div>
+<button onclick="openService('Əl Falı',3)">Bax</button>
 </div>
-
-<h2>Tarot Falı</h2>
-
-<p>
-Kartların simvolik mənalarını kəşf et.
-</p>
-
-<div class="bottom">
-
-<div class="price">
-5 AZN
-</div>
-
-<button
-class="view-btn"
-onclick="openService('Tarot Falı',5)"
->
-Bax
-</button>
-
-</div>
-</div>
-
 
 <div class="card">
-
-<div class="service-icon">
-<svg viewBox="0 0 24 24">
-<path d="M8 11V5a1.5 1.5 0 0 1 3 0v5"/>
-<path d="M11 10V4a1.5 1.5 0 0 1 3 0v6"/>
-<path d="M14 10V5.5a1.5 1.5 0 0 1 3 0V12"/>
-<path d="M17 11V8.5a1.5 1.5 0 0 1 3 0v6.2c0 4.2-2.7 6.3-6.7 6.3h-1.8c-2.2 0-3.6-.8-4.8-2.5L4 14.7a1.7 1.7 0 0 1 2.7-2.1L8 14"/>
-</svg>
+<div style="font-size:40px">❤️</div>
+<h3>Sevgi Analizi</h3>
+<p>Münasibətlər haqqında mistik analiz.</p>
+<div class="price">4 AZN</div>
+<button onclick="openService('Sevgi Analizi',4)">Bax</button>
 </div>
-
-<h2>Əl Falı</h2>
-
-<p>
-Əlinin xətlərinin simvolik yozumunu öyrən.
-</p>
-
-<div class="bottom">
-
-<div class="price">
-3 AZN
-</div>
-
-<button
-class="view-btn"
-onclick="openService('Əl Falı',3)"
->
-Bax
-</button>
-
-</div>
-</div>
-
 
 <div class="card">
-
-<div class="service-icon">
-<svg viewBox="0 0 24 24">
-<path d="M20.8 8.7c0 5.2-8.8 10.2-8.8 10.2S3.2 13.9 3.2 8.7A4.7 4.7 0 0 1 12 6.2a4.7 4.7 0 0 1 8.8 2.5Z"/>
-</svg>
+<div style="font-size:40px">🌙</div>
+<h3>Yuxu Yozmaları</h3>
+<p>Gördüyün yuxunun simvolik mənasını öyrən.</p>
+<div class="price">2 AZN</div>
+<button onclick="openService('Yuxu Yozmaları',2)">Bax</button>
 </div>
-
-<h2>Sevgi Analizi</h2>
-
-<p>
-Münasibətiniz haqqında əyləncə xarakterli analiz.
-</p>
-
-<div class="bottom">
-
-<div class="price">
-4 AZN
-</div>
-
-<button
-class="view-btn"
-onclick="openService('Sevgi Analizi',4)"
->
-Bax
-</button>
-
-</div>
-</div>
-
 
 <div class="card">
-
-<div class="service-icon">
-<svg viewBox="0 0 24 24">
-<path d="M18 15.5A7 7 0 0 1 9 6.8 7.2 7.2 0 1 0 18 15.5Z"/>
-<path d="M18 4v3"/>
-<path d="M16.5 5.5h3"/>
-</svg>
+<div style="font-size:40px">♈</div>
+<h3>Bürc / Günün Falı</h3>
+<p>Bu gün üçün mistik yozumunu kəşf et.</p>
+<div class="price">2 AZN</div>
+<button onclick="openService('Bürc / Günün Falı',2)">Bax</button>
 </div>
-
-<h2>Yuxu Yozmaları</h2>
-
-<p>
-Yuxundakı simvolların mümkün mənalarını kəşf et.
-</p>
-
-<div class="bottom">
-
-<div class="price">
-2 AZN
-</div>
-
-<button
-class="view-btn"
-onclick="openService('Yuxu Yozmaları',2)"
->
-Bax
-</button>
-
-</div>
-</div>
-
 
 <div class="card">
-
-<div class="service-icon">
-<svg viewBox="0 0 24 24">
-<circle cx="12" cy="12" r="4"/>
-<path d="M12 2v2"/>
-<path d="M12 20v2"/>
-<path d="M2 12h2"/>
-<path d="M20 12h2"/>
-<path d="m4.9 4.9 1.4 1.4"/>
-<path d="m17.7 17.7 1.4 1.4"/>
-<path d="m19.1 4.9-1.4 1.4"/>
-<path d="m6.3 17.7-1.4 1.4"/>
-</svg>
+<div style="font-size:40px">🌌</div>
+<h3>Doğum Xəritəsi</h3>
+<p>Doğum məlumatlarına əsaslanan analiz.</p>
+<div class="price">7 AZN</div>
+<button onclick="openService('Doğum Xəritəsi',7)">Bax</button>
 </div>
-
-<h2>Bürc / Günün Falı</h2>
-
-<p>
-Günün üçün simvolik bürc və enerji analizi.
-</p>
-
-<div class="bottom">
-
-<div class="price">
-2 AZN
-</div>
-
-<button
-class="view-btn"
-onclick="openService('Bürc / Günün Falı',2)"
->
-Bax
-</button>
-
-</div>
-</div>
-
 
 <div class="card">
-
-<div class="service-icon">
-<svg viewBox="0 0 24 24">
-<circle cx="12" cy="12" r="8.5"/>
-<path d="M3.5 12h17"/>
-<path d="M12 3.5c2.3 2.3 3.4 5.1 3.4 8.5s-1.1 6.2-3.4 8.5"/>
-<path d="M12 3.5c-2.3 2.3-3.4 5.1-3.4 8.5s1.1 6.2 3.4 8.5"/>
-<path d="M5 7.5c4.7 1.7 9.3 1.7 14 0"/>
-<path d="M5 16.5c4.7-1.7 9.3-1.7 14 0"/>
-</svg>
-</div>
-
-<h2>Doğum Xəritəsi</h2>
-
-<p>
-Doğum məlumatlarına əsaslanan astroloji şərh.
-</p>
-
-<div class="bottom">
-
-<div class="price">
-7 AZN
-</div>
-
-<button
-class="view-btn"
-onclick="openService('Doğum Xəritəsi',7)"
->
-Bax
-</button>
-
-</div>
-</div>
-
-
-<div class="card">
-
-<div class="service-icon">
-<svg viewBox="0 0 24 24">
-<path d="M5 19 12 5l7 14"/>
-<path d="M8 14h8"/>
-<path d="M4 19h4"/>
-<path d="M16 19h4"/>
-</svg>
-</div>
-
-<h2>Adın Mənası</h2>
-
-<p>
-Adının mənası və simvolik xüsusiyyətləri.
-</p>
-
-<div class="bottom">
-
-<div class="price">
-1 AZN
-</div>
-
-<button
-class="view-btn"
-onclick="openService('Adın Mənası',1)"
->
-Bax
-</button>
-
-</div>
+<div style="font-size:40px">🔤</div>
+<h3>Adın Mənası</h3>
+<p>Adının simvolik və mistik mənasını öyrən.</p>
+<div class="price">1 AZN</div>
+<button onclick="openService('Adın Mənası',1)">Bax</button>
 </div>
 
 </section>
 
+<section style="margin-top:40px;text-align:center">
+<h2>💳 Ödənişlər</h2>
+<p class="small">
+Xidmət seçdikdən sonra ödənişi edib qəbzi göndərə bilərsiniz.
+</p>
+</section>
+
+</div>
 
 <footer>
-© 2026 Fal Dünyası — Əyləncə və mistik interpretasiya platforması
+© 2026 Fal Dünyası
 </footer>
 
 
-<!-- AUTH -->
+<!-- AUTH MODAL -->
 
 <div class="modal" id="authModal">
-
 <div class="modal-box">
+<span class="close" onclick="closeAuth()">×</span>
 
-<button class="close" onclick="closeModal('authModal')">×</button>
+<h2>🔐 Daxil ol</h2>
 
-<h2 id="authTitle">Daxil ol</h2>
+<input id="authEmail" type="email" placeholder="Email">
+<input id="authPassword" type="password" placeholder="Şifrə">
 
-<p class="modal-subtitle" id="authSubtitle">
-Hesabına daxil olaraq xidmətlərdən istifadə et.
-</p>
-
-<div class="message" id="authMessage"></div>
-
-<input
-class="input"
-id="email"
-type="email"
-placeholder="E-poçt ünvanı"
->
-
-<input
-class="input"
-id="password"
-type="password"
-placeholder="Şifrə"
->
-
-<button
-class="main-btn"
-onclick="handleAuth()"
-id="authSubmit"
->
-Daxil ol
+<button onclick="login()">Daxil ol</button>
+<button onclick="register()" style="margin-left:8px">
+Qeydiyyat
 </button>
 
-<div class="switch-text">
-
-<span id="switchText">
-Hesabın yoxdur?
-</span>
-
-<button onclick="switchAuth()" id="switchButton">
-Qeydiyyatdan keç
-</button>
-
-</div>
-
+<p id="authMsg" class="small"></p>
 </div>
 </div>
 
 
-<!-- ORDER -->
+<!-- ORDER MODAL -->
 
 <div class="modal" id="orderModal">
-
 <div class="modal-box">
 
-<button class="close" onclick="closeModal('orderModal')">×</button>
+<span class="close" onclick="closeOrder()">×</span>
 
-<h2 id="orderTitle">Tarot Falı</h2>
+<h2 id="orderTitle">🔮 Fal sifarişi</h2>
 
-<p class="modal-subtitle">
-Sualını yaz və ödəniş qəbzini göndər.
+<p id="orderPrice"></p>
+
+<label>📱 WhatsApp nömrən</label>
+<input
+id="whatsapp"
+type="tel"
+placeholder="+994501234567"
+>
+
+<p class="small">
+Fal nəticəsini bu WhatsApp nömrəsinə göndərəcəyik.
+Nömrəni ölkə kodu ilə yaz.
 </p>
 
-<div class="order-info">
-<span>Xidmət</span>
-<span id="orderService">Tarot Falı</span>
-</div>
-
-<div class="order-info">
-<span>Məbləğ</span>
-<span id="orderPrice">5 AZN</span>
-</div>
-
+<label>💬 Sualın</label>
 <textarea
-class="input"
 id="question"
-placeholder="Sualını buraya yaz..."
+placeholder="Sualını ətraflı yaz..."
 ></textarea>
 
-<div class="receipt-area">
-
-<div class="receipt-title">
-Ödəniş qəbzi
-</div>
-
-<div class="receipt-help">
-Ödənişi etdikdən sonra qəbzin şəklini seç.
-Yalnız JPG, PNG və WEBP formatları qəbul edilir.
-Maksimum ölçü 5 MB-dır.
-</div>
-
+<label>🧾 Ödəniş qəbzi</label>
 <input
-class="file-input"
-id="receiptFile"
+id="receipt"
 type="file"
 accept="image/jpeg,image/png,image/webp"
-onchange="previewReceipt(event)"
 >
 
-<div class="file-name" id="fileName"></div>
+<p class="small">
+JPG, PNG və ya WEBP. Maksimum 5 MB.
+</p>
 
-<img
-id="receiptPreview"
-class="receipt-preview"
-alt="Qəbz önizləmə"
->
-
-</div>
-
-<div class="message" id="orderMessage"></div>
-
-<div class="debug-box" id="debugBox"></div>
-
-<button
-class="main-btn"
-onclick="createOrderWithReceipt()"
-id="orderSubmit"
->
-Sifarişi göndər
+<button onclick="createOrderWithReceipt()">
+Qəbzi göndər
 </button>
+
+<p id="orderMsg" class="small"></p>
 
 </div>
 </div>
 
 
 <script>
-
-/* =========================
-   SUPABASE
-========================= */
 
 const SUPABASE_URL =
 "https://hwwxxhgmumshjvkfhhir.supabase.co";
@@ -983,189 +327,64 @@ SUPABASE_URL,
 SUPABASE_KEY
 );
 
-
-/* =========================
-   VARIABLES
-========================= */
-
-let authMode = "login";
 let selectedService = null;
 let selectedPrice = null;
 
 
-/* =========================
-   MODAL
-========================= */
-
-function openModal(id){
-document.getElementById(id).classList.add("active");
-}
-
-function closeModal(id){
-document.getElementById(id).classList.remove("active");
-}
-
-
-/* =========================
-   AUTH
-========================= */
-
 function openAuth(){
+document.getElementById("authModal").style.display="flex";
+}
 
-authMode="login";
-
-document.getElementById("authTitle").textContent="Daxil ol";
-
-document.getElementById("authSubtitle").textContent=
-"Hesabına daxil olaraq xidmətlərdən istifadə et.";
-
-document.getElementById("authSubmit").textContent="Daxil ol";
-
-document.getElementById("switchText").textContent=
-"Hesabın yoxdur?";
-
-document.getElementById("switchButton").textContent=
-"Qeydiyyatdan keç";
-
-clearAuthMessage();
-
-openModal("authModal");
-
+function closeAuth(){
+document.getElementById("authModal").style.display="none";
 }
 
 
-function switchAuth(){
-
-authMode =
-authMode === "login"
-? "register"
-: "login";
-
-clearAuthMessage();
-
-if(authMode === "register"){
-
-document.getElementById("authTitle").textContent="Qeydiyyat";
-
-document.getElementById("authSubtitle").textContent=
-"Yeni hesab yarat.";
-
-document.getElementById("authSubmit").textContent=
-"Qeydiyyatdan keç";
-
-document.getElementById("switchText").textContent=
-"Artıq hesabın var?";
-
-document.getElementById("switchButton").textContent=
-"Daxil ol";
-
-}else{
-
-document.getElementById("authTitle").textContent="Daxil ol";
-
-document.getElementById("authSubtitle").textContent=
-"Hesabına daxil olaraq xidmətlərdən istifadə et.";
-
-document.getElementById("authSubmit").textContent="Daxil ol";
-
-document.getElementById("switchText").textContent=
-"Hesabın yoxdur?";
-
-document.getElementById("switchButton").textContent=
-"Qeydiyyatdan keç";
-
-}
-
-}
-
-
-function showAuthMessage(message,type=""){
-
-const box =
-document.getElementById("authMessage");
-
-box.textContent=message;
-
-box.className="message show";
-
-if(type)
-box.classList.add(type);
-
-}
-
-
-function clearAuthMessage(){
-
-const box =
-document.getElementById("authMessage");
-
-box.textContent="";
-
-box.className="message";
-
-}
-
-
-async function handleAuth(){
+async function register(){
 
 const email =
-document.getElementById("email").value.trim();
+document.getElementById("authEmail").value.trim();
 
 const password =
-document.getElementById("password").value;
+document.getElementById("authPassword").value;
 
 if(!email || !password){
-
-showAuthMessage(
-"E-poçt və şifrəni daxil et.",
-"error"
-);
-
+document.getElementById("authMsg").innerText=
+"Email və şifrəni yaz.";
 return;
 }
 
-if(password.length < 6){
-
-showAuthMessage(
-"Şifrə ən azı 6 simvoldan ibarət olmalıdır.",
-"error"
-);
-
-return;
-}
-
-const button =
-document.getElementById("authSubmit");
-
-button.disabled=true;
-
-try{
-
-if(authMode==="register"){
-
-const {data,error} =
+const {error} =
 await supabaseClient.auth.signUp({
 email,
 password
 });
 
-if(error)
-throw error;
+if(error){
+document.getElementById("authMsg").innerText=
+error.message;
+return;
+}
 
-if(data.session){
-
-closeModal("authModal");
-
-}else{
-
-showAuthMessage(
-"Qeydiyyat tamamlandı. E-poçt təsdiqi tələb olunursa, məktubdakı linkə daxil ol.",
-"success"
-);
+document.getElementById("authMsg").innerText=
+"Qeydiyyat tamamlandı. Email təsdiqi tələb oluna bilər.";
 
 }
 
-}else{
+
+async function login(){
+
+const email =
+document.getElementById("authEmail").value.trim();
+
+const password =
+document.getElementById("authPassword").value;
+
+if(!email || !password){
+document.getElementById("authMsg").innerText=
+"Email və şifrəni yaz.";
+return;
+}
 
 const {error} =
 await supabaseClient.auth.signInWithPassword({
@@ -1173,70 +392,14 @@ email,
 password
 });
 
-if(error)
-throw error;
-
-closeModal("authModal");
-
-}
-
-}catch(error){
-
-console.error(error);
-
-showAuthMessage(
-error?.message || "Giriş zamanı xəta baş verdi.",
-"error"
-);
-
-}finally{
-
-button.disabled=false;
-
-}
-
-}
-
-
-/* =========================
-   USER
-========================= */
-
-async function updateUserUI(){
-
-const {data,error} =
-await supabaseClient.auth.getSession();
-
 if(error){
-console.error("SESSION ERROR:",error);
+document.getElementById("authMsg").innerText=
+error.message;
 return;
 }
 
-const user =
-data.session?.user;
-
-const loginButton =
-document.getElementById("loginButton");
-
-const userMenu =
-document.getElementById("userMenu");
-
-const userEmail =
-document.getElementById("userEmail");
-
-if(user){
-
-loginButton.style.display="none";
-userMenu.style.display="flex";
-userEmail.textContent=user.email || "";
-
-}else{
-
-loginButton.style.display="block";
-userMenu.style.display="none";
-userEmail.textContent="";
-
-}
+closeAuth();
+updateUserArea();
 
 }
 
@@ -1245,353 +408,179 @@ async function logout(){
 
 await supabaseClient.auth.signOut();
 
-await updateUserUI();
+updateUserArea();
 
 }
 
 
-/* =========================
-   SERVICE
-========================= */
+async function updateUserArea(){
+
+const {data} =
+await supabaseClient.auth.getUser();
+
+const area =
+document.getElementById("userArea");
+
+if(data.user){
+
+area.innerHTML =
+`
+<span style="margin-right:10px">
+${data.user.email}
+</span>
+<button onclick="logout()">Çıxış</button>
+`;
+
+}else{
+
+area.innerHTML="";
+
+}
+
+}
+
 
 async function openService(name,price){
 
-const {data,error} =
-await supabaseClient.auth.getSession();
+const {data} =
+await supabaseClient.auth.getUser();
 
-if(error){
-
-console.error(error);
+if(!data.user){
 
 openAuth();
 
-showAuthMessage(
-error.message,
-"error"
-);
+document.getElementById("authMsg").innerText =
+"Əvvəlcə hesabına daxil ol.";
 
 return;
+
 }
 
-const user =
-data.session?.user;
+selectedService = name;
+selectedPrice = price;
 
-if(!user){
+document.getElementById("orderTitle").innerText =
+"🔮 " + name;
 
-openAuth();
+document.getElementById("orderPrice").innerText =
+"Qiymət: " + price + " AZN";
 
-showAuthMessage(
-"Xidmətdən istifadə etmək üçün əvvəlcə hesabına daxil ol.",
-"error"
-);
-
-return;
-}
-
-selectedService=name;
-selectedPrice=price;
-
-document.getElementById("orderTitle").textContent=name;
-document.getElementById("orderService").textContent=name;
-document.getElementById("orderPrice").textContent=price+" AZN";
-
+document.getElementById("whatsapp").value="";
 document.getElementById("question").value="";
+document.getElementById("receipt").value="";
+document.getElementById("orderMsg").innerText="";
 
-resetReceipt();
-clearOrderMessage();
-clearDebug();
-
-openModal("orderModal");
+document.getElementById("orderModal").style.display="flex";
 
 }
 
 
-/* =========================
-   RECEIPT
-========================= */
+function closeOrder(){
 
-function previewReceipt(event){
-
-const file =
-event.target.files[0];
-
-const fileName =
-document.getElementById("fileName");
-
-const preview =
-document.getElementById("receiptPreview");
-
-if(!file){
-
-resetReceipt();
-return;
-
-}
-
-const allowedTypes=[
-"image/jpeg",
-"image/png",
-"image/webp"
-];
-
-if(!allowedTypes.includes(file.type)){
-
-event.target.value="";
-
-fileName.textContent=
-"Yalnız JPG, PNG və WEBP qəbul edilir.";
-
-fileName.style.color="#ff7190";
-
-preview.style.display="none";
-
-return;
-}
-
-if(file.size > 5*1024*1024){
-
-event.target.value="";
-
-fileName.textContent=
-"Fayl maksimum 5 MB ola bilər.";
-
-fileName.style.color="#ff7190";
-
-preview.style.display="none";
-
-return;
-}
-
-fileName.textContent=file.name;
-fileName.style.color="#c77dff";
-
-const reader=new FileReader();
-
-reader.onload=function(e){
-
-preview.src=e.target.result;
-preview.style.display="block";
-
-};
-
-reader.readAsDataURL(file);
+document.getElementById("orderModal").style.display="none";
 
 }
 
 
-function resetReceipt(){
+function normalizeWhatsApp(value){
 
-const input =
-document.getElementById("receiptFile");
-
-const fileName =
-document.getElementById("fileName");
-
-const preview =
-document.getElementById("receiptPreview");
-
-input.value="";
-fileName.textContent="";
-preview.src="";
-preview.style.display="none";
+return value
+.trim()
+.replace(/[^\d+]/g,"");
 
 }
 
-
-/* =========================
-   MESSAGES
-========================= */
-
-function showOrderMessage(message,type=""){
-
-const box =
-document.getElementById("orderMessage");
-
-box.textContent=message;
-
-box.className="message show";
-
-if(type)
-box.classList.add(type);
-
-}
-
-
-function clearOrderMessage(){
-
-const box =
-document.getElementById("orderMessage");
-
-box.textContent="";
-box.className="message";
-
-}
-
-
-function showDebug(title,error){
-
-const box =
-document.getElementById("debugBox");
-
-let output="";
-
-if(error){
-
-output += "TYPE: " +
-(error.name || "Unknown") +
-"\n\n";
-
-output += "MESSAGE: " +
-(error.message || "No message") +
-"\n\n";
-
-if(error.details)
-output += "DETAILS: " +
-error.details +
-"\n\n";
-
-if(error.hint)
-output += "HINT: " +
-error.hint +
-"\n\n";
-
-if(error.code)
-output += "CODE: " +
-error.code +
-"\n\n";
-
-}
-
-box.textContent =
-title +
-"\n\n" +
-output;
-
-box.style.display="block";
-
-}
-
-
-function clearDebug(){
-
-const box =
-document.getElementById("debugBox");
-
-box.textContent="";
-box.style.display="none";
-
-}
-
-
-/* =========================
-   ORDER
-========================= */
 
 async function createOrderWithReceipt(){
 
-clearOrderMessage();
-clearDebug();
+const orderMsg =
+document.getElementById("orderMsg");
+
+orderMsg.innerText="";
+
+const whatsapp =
+normalizeWhatsApp(
+document.getElementById("whatsapp").value
+);
 
 const question =
 document.getElementById("question").value.trim();
 
-const receiptInput =
-document.getElementById("receiptFile");
-
 const file =
-receiptInput.files[0];
+document.getElementById("receipt").files[0];
 
-const button =
-document.getElementById("orderSubmit");
+
+if(!whatsapp){
+orderMsg.innerText =
+"WhatsApp nömrəsini yaz.";
+return;
+}
+
+
+const digits =
+whatsapp.replace(/\D/g,"");
+
+if(
+!whatsapp.startsWith("+") ||
+digits.length < 10 ||
+digits.length > 15
+){
+
+orderMsg.innerText =
+"Nömrəni ölkə kodu ilə yaz. Məsələn: +994501234567";
+
+return;
+
+}
 
 
 if(!question){
 
-showOrderMessage(
-"Zəhmət olmasa əvvəlcə sualını yaz.",
-"error"
-);
+orderMsg.innerText =
+"Sualını yaz.";
 
 return;
+
 }
+
 
 if(!file){
 
-showOrderMessage(
-"Ödəniş qəbzinin şəklini seç.",
-"error"
-);
+orderMsg.innerText =
+"Ödəniş qəbzini seç.";
 
 return;
-}
 
-const allowedTypes=[
-"image/jpeg",
-"image/png",
-"image/webp"
-];
-
-if(!allowedTypes.includes(file.type)){
-
-showOrderMessage(
-"Yalnız JPG, PNG və WEBP şəkilləri qəbul edilir.",
-"error"
-);
-
-return;
-}
-
-if(file.size > 5*1024*1024){
-
-showOrderMessage(
-"Qəbz maksimum 5 MB ola bilər.",
-"error"
-);
-
-return;
 }
 
 
-const {data:sessionData,error:sessionError} =
-await supabaseClient.auth.getSession();
+if(file.size > 5 * 1024 * 1024){
 
-if(sessionError){
-
-showOrderMessage(
-"Session xətası.",
-"error"
-);
-
-showDebug(
-"SESSION ERROR",
-sessionError
-);
+orderMsg.innerText =
+"Qəbz maksimum 5 MB ola bilər.";
 
 return;
-}
 
-const user =
-sessionData.session?.user;
-
-if(!user){
-
-closeModal("orderModal");
-openAuth();
-return;
 }
 
 
-button.disabled=true;
-
-button.innerHTML=
-'<span class="loading"></span>Göndərilir...';
+const {data:userData,error:userError} =
+await supabaseClient.auth.getUser();
 
 
-try{
+if(userError || !userData.user){
 
-/* =========================
-   1. SERVICE TEST
-========================= */
+orderMsg.innerText =
+"Hesaba daxil olmaq lazımdır.";
+
+return;
+
+}
+
+
+orderMsg.innerText =
+"Qəbz yüklənir...";
+
 
 const {data:serviceData,error:serviceError} =
 await supabaseClient
@@ -1599,127 +588,69 @@ await supabaseClient
 .select("id,name,price")
 .eq("name",selectedService)
 .eq("active",true)
-.maybeSingle();
+.single();
 
-if(serviceError){
 
-showOrderMessage(
-"Xidmət bazadan alınarkən xəta baş verdi.",
-"error"
-);
+if(serviceError || !serviceData){
 
-showDebug(
-"1. SERVICES DATABASE ERROR",
-serviceError
-);
+orderMsg.innerText =
+"Xidmət tapılmadı.";
 
-throw serviceError;
+return;
 
 }
 
-if(!serviceData){
-
-const customError =
-new Error(
-'Xidmət tapılmadı: "' +
-selectedService +
-'"'
-);
-
-showOrderMessage(
-"Seçilmiş xidmət bazada tapılmadı.",
-"error"
-);
-
-showDebug(
-"1. SERVICE NOT FOUND",
-customError
-);
-
-throw customError;
-
-}
-
-
-/* =========================
-   2. ORDER ID
-========================= */
 
 const orderId =
 crypto.randomUUID();
 
 
-/* =========================
-   3. EXTENSION
-========================= */
+const extension =
+file.name.split(".").pop().toLowerCase();
 
-let extension="jpg";
-
-if(file.type==="image/png")
-extension="png";
-
-if(file.type==="image/webp")
-extension="webp";
-
-
-/* =========================
-   4. STORAGE PATH
-========================= */
 
 const filePath =
-user.id +
-"/" +
-orderId +
-"/receipt." +
-extension;
+`${userData.user.id}/${orderId}/receipt.${extension}`;
 
 
-/* =========================
-   5. STORAGE UPLOAD
-========================= */
-
-const {data:uploadData,error:uploadError} =
-await supabaseClient
-.storage
+const {error:uploadError} =
+await supabaseClient.storage
 .from("receipts")
 .upload(
 filePath,
 file,
 {
-contentType:file.type,
-upsert:false
+upsert:false,
+contentType:file.type
 }
 );
+
 
 if(uploadError){
 
-showOrderMessage(
-"Qəbz Storage-a yüklənmədi.",
-"error"
-);
+orderMsg.innerText =
+"Qəbz yüklənmədi: " +
+uploadError.message;
 
-showDebug(
-"2. STORAGE UPLOAD ERROR",
-uploadError
-);
-
-throw uploadError;
+return;
 
 }
 
 
-/* =========================
-   6. ORDER INSERT
-========================= */
+const finalQuestion =
+`WhatsApp: ${whatsapp}
 
-const {data:orderData,error:orderError} =
+Sual: ${question}`;
+
+
+const {error:insertError} =
 await supabaseClient
 .from("orders")
 .insert({
 
 id:orderId,
 
-user_id:user.id,
+user_id:userData.user.id,
 
 service_id:serviceData.id,
 
@@ -1729,160 +660,56 @@ amount:serviceData.price,
 
 status:"pending",
 
-question:question,
+question:finalQuestion,
 
 receipt_path:filePath,
 
 receipt_status:"waiting",
 
-receipt_uploaded_at:new Date().toISOString()
+receipt_uploaded_at:
+new Date().toISOString()
 
-})
-.select()
-.single();
+});
 
 
-if(orderError){
+if(insertError){
 
-/*
-Əgər order yaranmadısa,
-Storage-dakı faylı silirik.
-*/
-
-await supabaseClient
-.storage
+await supabaseClient.storage
 .from("receipts")
 .remove([filePath]);
 
-showOrderMessage(
-"Sifariş bazaya yazılmadı.",
-"error"
-);
+orderMsg.innerText =
+"Sifariş göndərilmədi: " +
+insertError.message;
 
-showDebug(
-"3. ORDERS DATABASE ERROR",
-orderError
-);
-
-throw orderError;
+return;
 
 }
 
 
-/* =========================
-   SUCCESS
-========================= */
-
-console.log(
-"ORDER SUCCESS:",
-orderData
-);
-
-showOrderMessage(
-"Qəbz uğurla göndərildi. Sifarişiniz yoxlanılır.",
-"success"
-);
-
-button.innerHTML="Qəbz göndərildi";
-
+orderMsg.innerText =
+"Qəbz uğurla göndərildi. Sifarişiniz yoxlanılır.";
 
 setTimeout(()=>{
 
-closeModal("orderModal");
+closeOrder();
 
 alert(
-"Sifarişiniz qəbul edildi.\n\n" +
-"Ödəniş qəbzi yoxlanılır. " +
-"Təsdiqdən sonra fal nəticəniz açılacaq."
+"Ödəniş qəbzi göndərildi. Ödəniş yoxlanıldıqdan sonra fal nəticəniz WhatsApp nömrənizə göndəriləcək."
 );
 
-resetReceipt();
-
-button.disabled=false;
-button.innerHTML="Sifarişi göndər";
-
-},1300);
-
-
-}catch(error){
-
-console.error(
-"FULL ORDER ERROR:",
-error
-);
-
-button.disabled=false;
-button.innerHTML="Sifarişi göndər";
+},800);
 
 }
 
-}
-
-
-/* =========================
-   AUTH STATE
-========================= */
 
 supabaseClient.auth.onAuthStateChange(
-(event,session)=>{
-
-updateUserUI();
-
+()=>{
+updateUserArea();
 }
 );
 
-
-/* =========================
-   START
-========================= */
-
-updateUserUI();
-
-
-/* =========================
-   MODAL OUTSIDE
-========================= */
-
-document
-.querySelectorAll(".modal")
-.forEach(modal=>{
-
-modal.addEventListener(
-"click",
-function(e){
-
-if(e.target===modal){
-
-modal.classList.remove("active");
-
-}
-
-}
-);
-
-});
-
-
-/* =========================
-   ESC
-========================= */
-
-document.addEventListener(
-"keydown",
-function(e){
-
-if(e.key==="Escape"){
-
-document
-.querySelectorAll(".modal.active")
-.forEach(modal=>{
-modal.classList.remove("active");
-});
-
-}
-
-}
-);
+updateUserArea();
 
 </script>
 
