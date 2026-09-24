@@ -143,23 +143,8 @@ margin:6px 4px;
 background:linear-gradient(90deg,#6335ff,#a83cff);
 }
 
-.paymentSection{
-margin-top:45px;
-padding:25px;
-text-align:center;
-background:rgba(255,255,255,.045);
-border:1px solid rgba(255,255,255,.08);
-border-radius:20px;
-}
-
-.paymentIcon{
-font-size:42px;
-margin-bottom:8px;
-}
-
 .cardNumber{
-margin:18px auto 12px;
-max-width:420px;
+margin:15px 0 20px;
 padding:16px 18px;
 border-radius:15px;
 background:rgba(0,0,0,.35);
@@ -167,14 +152,15 @@ border:1px solid rgba(216,140,255,.35);
 font-size:20px;
 font-weight:bold;
 letter-spacing:2px;
+text-align:center;
 color:#fff;
 box-shadow:0 0 20px rgba(216,140,255,.12);
 }
 
 .cardLabel{
-font-size:13px;
-color:#aaa;
-margin-bottom:5px;
+font-size:14px;
+color:#ddd;
+margin-top:15px;
 }
 
 .small{
@@ -292,7 +278,9 @@ color:#aaa;
 }
 
 @media(max-width:600px){
+
 .hero h1{font-size:31px}
+
 .logo{font-size:26px}
 
 .services{
@@ -300,8 +288,14 @@ grid-template-columns:1fr 1fr;
 gap:12px;
 }
 
-.card{padding:18px 10px}
-.card h3{font-size:17px}
+.card{
+padding:18px 10px;
+}
+
+.card h3{
+font-size:17px;
+}
+
 .card p{
 font-size:13px;
 min-height:55px;
@@ -313,12 +307,15 @@ height:65px;
 font-size:31px;
 }
 
-.price{font-size:19px}
+.price{
+font-size:19px;
+}
 
 .cardNumber{
 font-size:17px;
 letter-spacing:1px;
 }
+
 }
 </style>
 </head>
@@ -353,6 +350,7 @@ mistik analizlərlə öz suallarına cavab axtar.
 <div id="authArea" class="auth"></div>
 
 </section>
+
 
 <section class="services">
 
@@ -414,32 +412,8 @@ mistik analizlərlə öz suallarına cavab axtar.
 
 </section>
 
-<section class="paymentSection">
-
-<div class="paymentIcon">💳</div>
-
-<h2>Ödənişlər</h2>
-
-<p class="small">
-Xidmət seçdikdən sonra aşağıdakı karta ödəniş edib
-qəbzi sifariş formasından göndərə bilərsiniz.
-</p>
-
-<div class="cardLabel">
-💳 Ödəniş üçün kart
 </div>
 
-<div class="cardNumber">
-5315 9921 2781 2672
-</div>
-
-<p class="small">
-Ödəniş etdikdən sonra qəbzin şəklini sifariş formasına əlavə edin.
-</p>
-
-</section>
-
-</div>
 
 <footer>
 ©️ 2026 Fal Dünyası
@@ -502,6 +476,21 @@ Qeydiyyat üçün yalnız istifadəçi adı və şifrə kifayətdir.
 
 <p id="orderPrice"></p>
 
+
+<div class="cardLabel">
+💳 Ödəniş üçün kart
+</div>
+
+<div class="cardNumber">
+5315 9921 2781 2672
+</div>
+
+<p class="small">
+Əvvəlcə yuxarıdakı karta ödəniş edin,
+sonra ödəniş qəbzini aşağıdakı bölmədən göndərin.
+</p>
+
+
 <label>📱 WhatsApp nömrən</label>
 
 <input
@@ -515,12 +504,14 @@ Fal nəticəsini bu WhatsApp nömrəsinə göndərəcəyik.
 Nömrəni ölkə kodu ilə yaz.
 </p>
 
+
 <label>💬 Sualın</label>
 
 <textarea
 id="question"
 placeholder="Sualını ətraflı yaz..."
 ></textarea>
+
 
 <label>🧾 Ödəniş qəbzi</label>
 
@@ -533,6 +524,7 @@ accept="image/jpeg,image/png,image/webp"
 <p class="small">
 JPG, PNG və ya WEBP. Maksimum 5 MB.
 </p>
+
 
 <button onclick="createOrderWithReceipt()">
 Qəbzi göndər
@@ -673,6 +665,7 @@ result.message ||
 return;
 }
 
+
 if(result.session){
 
 const {error} =
@@ -690,6 +683,7 @@ return;
 }
 
 }
+
 
 msg.innerText =
 action === "register"
