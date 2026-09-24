@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fal Dünyası — Admin</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#08080f;
+  color:#fff;
+  font-family:Arial,sans-serif;
+}
+header{
+  padding:20px;
+  border-bottom:1px solid #252535;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.logo{
+  font-size:22px;
+  font-weight:bold;
+  color:#c084fc;
+}
+button{
+  border:0;
+  border-radius:10px;
+  padding:11px 16px;
+  cursor:pointer;
+  font-weight:bold;
+}
+.login{
+  background:#7c3aed;
+  color:white;
+}
+.logout{
+  background:#252535;
+  color:white;
+}
+.container{
+  max-width:1100px;
+  margin:30px auto;
+  padding:0 16px;
+}
+h1{margin-bottom:8px}
+.subtitle{color:#999}
+#status{
+  margin:20px 0;
+  padding:14px;
+  background:#12121d;
+  border:1px solid #28283a;
+  border-radius:12px;
+}
+.order{
+  background:#11111a;
+  border:1px solid #29293a;
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:16px;
+}
+.row{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+}
+.label{
+  color:#999;
+  font-size:13px;
+  margin-top:10px;
+}
+.value{
+  margin-top:4px;
+  line-height:1.5;
+}
+.actions{
+  margin-top:18px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.approve{
+  background:#16a34a;
+  color:#fff;
+}
+.reject{
+  background:#dc2626;
+  color:#fff;
+}
+.receipt{
+  display:inline-block;
+  margin-top:15px;
+  color:#c084fc;
+  text-decoration:none;
+}
+.note{
+  width:100%;
+  margin-top:12px;
+  background:#09090f;
+  color:#fff;
+  border:1px solid #303044;
+  border-radius:10px;
+  padding:12px;
+  min-height:70px;
+}
+.empty{
+  padding:30px;
+  text-align:center;
+  color:#999;
+  background:#11111a;
+  border-radius:16px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">🔮 Fal Dünyası — Admin</div>
+  <button class="logout" onclick="logout()">Çıxış</button>
+</header>
+
+<div class="container">
+
+  <h1>Sifarişlər</h1>
+  <div class="subtitle">Ödəniş qəbzlərini yoxla və sifarişləri idarə et.</div>
+
+  <div id="status">Yüklənir...</div>
+
+  <div id="orders"></div>
+
+</div>
+
+<script>
+
+const SUPABASE_URL =
+"https://hwwxxhgmumshjvkfhhir.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_2PeGoyW4DP-H27mkhnxBfQ_3LfGRDZs";
+
+const { createClient } =
+supabase;
+
+const db = createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+const FUNCTION_URL =
+SUPABASE_URL +
+"/functions/v1/smooth-api";
+
+
+async function checkAdmin(){
+
+  const {
+    data:{session}
+  } = await db.auth.getSession();
+
+  if(!session){
+
+    document.getElementById("status").innerHTML =
+      "Admin hesabı ilə giriş edilməyib.";
+
+    return;
+  }
+
+  document.getElementById("status").innerHTML =
+    "Admin hesabı ilə giriş edildi.";
+
+  await loadOrders();
+}
+
+
+async function loadOrders(){
+
+  const {
+    data:{session}
+  } = await db.auth.getSession();
+
+  if(!session) return;
+
+  try{
+
+    const response = await fetch(
+      FUNCTION_URL,
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization":
+            "Bearer " + session.access_token
+        },
+        body:JSON.stringify({
+          action:"list"
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if(!response.ok){
+      throw new Error(
+        data.error || "Sifarişlər yüklənmədi."
+      );
+    }
+
+    renderOrders(data.orders || []);
+
+  }catch(error){
+
+    document.getElementById("status").innerHTML =
+      "Xəta: " + error.message;
+  }
+}
+
+
+function renderOrders(orders){
+
+  const box =
+    document.getElementById("orders");
+
+  if(!orders.length){
+
+    box.innerHTML =
+      '<div class="empty">Gözləyən sifariş yoxdur.</div>';
+
+    return;
+  }
+
+  box.innerHTML =
+    orders.map(order => `
+
+      <div class="order">
+
+        <div class="row">
+
+          <div>
+            <div class="label">Xidmət</div>
+            <div class="value">
+              <b>${escapeHtml(order.service_name)}</b>
+            </div>
+          </div>
+
+          <div>
+            <div class="label">Məbləğ</div>
+            <div class="value">
+              ${escapeHtml(String(order.amount))} AZN
+            </div>
+          </div>
+
+          <div>
+            <div class="label">Status</div>
+            <div class="value">
+              ${escapeHtml(order.receipt_status || "")}
+            </div>
+          </div>
+
+        </div>
+
+        <div class="label">İstifadəçinin sualı</div>
+
+        <div class="value">
+          ${escapeHtml(order.question || "")}
+        </div>
+
+        ${
+          order.receipt_url
+          ?
+          `<a class="receipt"
+             href="${order.receipt_url}"
+             target="_blank">
+             🧾 Qəbzə bax
+           </a>`
+          :
+          ""
+        }
+
+        <textarea
+          class="note"
+          id="note-${order.id}"
+          placeholder="Admin qeydi (istəyə bağlı)">
+        </textarea>
+
+        <div class="actions">
+
+          <button
+            class="approve"
+            onclick="processOrder('${order.id}','approve')">
+            ✅ Təsdiqlə və falı yarat
+          </button>
+
+          <button
+            class="reject"
+            onclick="processOrder('${order.id}','reject')">
+            ❌ Rədd et
+          </button>
+
+        </div>
+
+      </div>
+
+    `).join("");
+}
+
+
+async function processOrder(orderId,action){
+
+  const {
+    data:{session}
+  } = await db.auth.getSession();
+
+  if(!session){
+    alert("Admin hesabı ilə giriş edin.");
+    return;
+  }
+
+  const noteElement =
+    document.getElementById(
+      "note-" + orderId
+    );
+
+  const adminNote =
+    noteElement ? noteElement.value : "";
+
+  const message =
+    action === "approve"
+      ? "Ödənişi təsdiqləyib AI falını yaratmaq istəyirsən?"
+      : "Bu qəbzi rədd etmək istəyirsən?";
+
+  if(!confirm(message)) return;
+
+  try{
+
+    document.getElementById("status").innerHTML =
+      "Əməliyyat icra olunur...";
+
+    const response = await fetch(
+      FUNCTION_URL,
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization":
+            "Bearer " + session.access_token
+        },
+
+        body:JSON.stringify({
+          order_id:orderId,
+          action:action,
+          admin_note:adminNote
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if(!response.ok){
+      throw new Error(
+        data.error || "Əməliyyat uğursuz oldu."
+      );
+    }
+
+    alert(
+      data.message ||
+      "Əməliyyat uğurla tamamlandı."
+    );
+
+    await loadOrders();
+
+  }catch(error){
+
+    alert(
+      "Xəta: " + error.message
+    );
+
+    document.getElementById("status").innerHTML =
+      "Xəta baş verdi.";
+  }
+}
+
+
+async function logout(){
+
+  await db.auth.signOut();
+
+  location.reload();
+}
+
+
+function escapeHtml(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+
+db.auth.onAuthStateChange(
+  () => checkAdmin()
+);
+
+checkAdmin();
+
+</script>
+
+</body>
+</html>
