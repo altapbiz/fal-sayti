@@ -484,14 +484,14 @@ qəbzi göndərə bilərsiniz.
 <h2>🔐 Hesaba giriş</h2>
 
 <label>
-👤 İstifadəçi adı
+📧 Email
 </label>
 
 <input
-id="authUsername"
-type="text"
-placeholder="İstifadəçi adını yaz"
-autocomplete="username"
+id="authEmail"
+type="email"
+placeholder="example@gmail.com"
+autocomplete="email"
 >
 
 <label>
@@ -517,7 +517,7 @@ Qeydiyyat
 </button>
 
 <p class="small">
-Qeydiyyat üçün Gmail və ya telefon nömrəsi lazım deyil.
+Qeydiyyatdan sonra email ünvanına təsdiq linki göndəriləcək.
 </p>
 
 <p id="authMsg" class="small"></p>
@@ -600,7 +600,7 @@ Qəbzi göndər
 
 <h2>👤 Şəxsi Kabinet</h2>
 
-<p class="small" id="cabinetUsername"></p>
+<p class="small" id="cabinetEmail"></p>
 
 <button
 class="cabinetButton"
@@ -640,27 +640,7 @@ let selectedService = null;
 let selectedPrice = null;
 
 
-/* USERNAME */
-
-function normalizeUsername(value){
-
-return value
-.trim()
-.toLowerCase()
-.replace(/\s+/g,"")
-.replace(/[^a-z0-9_]/g,"");
-
-}
-
-
-function usernameToEmail(username){
-
-return username + "@fal-dunyasi.az";
-
-}
-
-
-/* AUTH MODAL */
+/* AUTH */
 
 function openAuth(){
 
@@ -680,11 +660,8 @@ document.getElementById("authModal").style.display="none";
 
 async function register(){
 
-const rawUsername =
-document.getElementById("authUsername").value;
-
-const username =
-normalizeUsername(rawUsername);
+const email =
+document.getElementById("authEmail").value.trim();
 
 const password =
 document.getElementById("authPassword").value;
@@ -693,20 +670,10 @@ const msg =
 document.getElementById("authMsg");
 
 
-if(!username){
+if(!email){
 
 msg.innerText =
-"İstifadəçi adını yaz.";
-
-return;
-
-}
-
-
-if(username.length < 3){
-
-msg.innerText =
-"İstifadəçi adı ən azı 3 simvol olmalıdır.";
+"Email ünvanını yaz.";
 
 return;
 
@@ -733,37 +700,29 @@ return;
 }
 
 
-const email =
-usernameToEmail(username);
-
-
 msg.innerText =
 "Qeydiyyat edilir...";
 
 
 const {data,error} =
 await supabaseClient.auth.signUp({
+
 email:email,
-password:password
+
+password:password,
+
+options:{
+emailRedirectTo:
+"https://altapbiz.github.io/fal-sayti/"
+}
+
 });
 
 
 if(error){
 
-if(
-error.message.toLowerCase().includes("already") ||
-error.message.toLowerCase().includes("registered")
-){
-
-msg.innerText =
-"Bu istifadəçi adı artıq mövcuddur.";
-
-}else{
-
 msg.innerText =
 error.message;
-
-}
 
 return;
 
@@ -771,14 +730,15 @@ return;
 
 
 /*
-  Əgər email təsdiqi bağlıdırsa,
-  istifadəçi dərhal hesabına daxil olacaq.
+  Email təsdiqi aktivdirsə session boş olacaq.
+  İstifadəçi Gmail-dən linkə basdıqda
+  birbaşa sayta qayıdacaq.
 */
 
 if(data.session){
 
 msg.innerText =
-"✅ Qeydiyyat tamamlandı!";
+"✅ Qeydiyyat tamamlandı.";
 
 setTimeout(()=>{
 
@@ -790,7 +750,7 @@ updateUserArea();
 }else{
 
 msg.innerText =
-"✅ Qeydiyyat yaradıldı. İndi daxil ola bilərsiniz.";
+"✅ Qeydiyyat tamamlandı. Gmail ünvanınızı yoxlayın və təsdiq linkinə basın.";
 
 }
 
@@ -801,11 +761,8 @@ msg.innerText =
 
 async function login(){
 
-const rawUsername =
-document.getElementById("authUsername").value;
-
-const username =
-normalizeUsername(rawUsername);
+const email =
+document.getElementById("authEmail").value.trim();
 
 const password =
 document.getElementById("authPassword").value;
@@ -814,10 +771,10 @@ const msg =
 document.getElementById("authMsg");
 
 
-if(!username){
+if(!email){
 
 msg.innerText =
-"İstifadəçi adını yaz.";
+"Email ünvanını yaz.";
 
 return;
 
@@ -834,25 +791,24 @@ return;
 }
 
 
-const email =
-usernameToEmail(username);
-
-
 msg.innerText =
 "Daxil olunur...";
 
 
 const {error} =
 await supabaseClient.auth.signInWithPassword({
+
 email:email,
+
 password:password
+
 });
 
 
 if(error){
 
 msg.innerText =
-"İstifadəçi adı və ya şifrə yanlışdır.";
+error.message;
 
 return;
 
@@ -896,17 +852,9 @@ document.getElementById("cabinetArea");
 
 if(data.user){
 
-const email =
-data.user.email || "";
-
-const username =
-email
-.replace("@fal-dunyasi.az","");
-
-
 userArea.innerHTML = `
 <span class="userEmail">
-👤 ${escapeHtml(username)}
+👤 ${escapeHtml(data.user.email || "")}
 </span>
 <button onclick="logout()">Çıxış</button>
 `;
@@ -990,15 +938,8 @@ return;
 }
 
 
-const email =
-userData.user.email || "";
-
-const username =
-email.replace("@fal-dunyasi.az","");
-
-
-document.getElementById("cabinetUsername").innerText =
-"👤 İstifadəçi adı: " + username;
+document.getElementById("cabinetEmail").innerText =
+"📧 " + userData.user.email;
 
 
 const {data,error} =
@@ -1403,6 +1344,8 @@ updateUserArea();
 }
 );
 
+
+/* START */
 
 updateUserArea();
 
