@@ -42,6 +42,10 @@ text-shadow:0 0 18px rgba(216,140,255,.5);
 margin-top:12px;
 }
 
+#cabinetArea{
+margin-top:12px;
+}
+
 .container{
 max-width:1100px;
 margin:auto;
@@ -175,6 +179,11 @@ display:inline-block;
 margin-right:8px;
 color:#ddd;
 font-size:14px;
+}
+
+.cabinetButton{
+margin:6px 4px;
+background:linear-gradient(90deg,#6335ff,#a83cff);
 }
 
 .paymentSection{
@@ -313,6 +322,41 @@ margin-top:5px;
 }
 
 
+/* ƏMƏLİYYATLAR */
+
+.operation{
+background:rgba(255,255,255,.055);
+border:1px solid rgba(255,255,255,.1);
+border-radius:16px;
+padding:16px;
+margin:12px 0;
+}
+
+.operationTitle{
+font-size:17px;
+font-weight:bold;
+color:#e09aff;
+margin-bottom:8px;
+}
+
+.operationRow{
+font-size:14px;
+color:#ccc;
+margin:5px 0;
+}
+
+.completed{
+color:#65e69a;
+font-weight:bold;
+}
+
+.emptyOperations{
+text-align:center;
+padding:25px 10px;
+color:#aaa;
+}
+
+
 /* MOBILE */
 
 @media(max-width:600px){
@@ -369,6 +413,8 @@ font-size:19px;
 </div>
 
 <div id="userArea"></div>
+
+<div id="cabinetArea"></div>
 
 </header>
 
@@ -693,6 +739,39 @@ Qəbzi göndər
 
 
 
+<!-- CABINET -->
+
+<div class="modal" id="cabinetModal">
+
+<div class="modal-box">
+
+<span class="close" onclick="closeCabinet()">×</span>
+
+<h2>👤 Şəxsi Kabinet</h2>
+
+<p class="small" id="cabinetEmail"></p>
+
+<button
+class="cabinetButton"
+onclick="loadOperations()"
+>
+📋 Əməliyyatlar
+</button>
+
+<div id="operationsList" style="margin-top:20px;">
+
+<div class="emptyOperations">
+Əməliyyatlar yüklənir...
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
 <script>
 
 
@@ -840,10 +919,11 @@ document.getElementById("userArea");
 const authArea =
 document.getElementById("authArea");
 
+const cabinetArea =
+document.getElementById("cabinetArea");
+
 
 if(data.user){
-
-/* DAXİL OLMUŞ İSTİFADƏÇİ */
 
 userArea.innerHTML = `
 <span class="userEmail">
@@ -854,9 +934,16 @@ userArea.innerHTML = `
 
 authArea.innerHTML = "";
 
-}else{
+cabinetArea.innerHTML = `
+<button
+class="cabinetButton"
+onclick="openCabinet()"
+>
+👤 Şəxsi Kabinet
+</button>
+`;
 
-/* DAXİL OLMAYAN İSTİFADƏÇİ */
+}else{
 
 userArea.innerHTML = "";
 
@@ -866,7 +953,162 @@ authArea.innerHTML = `
 </button>
 `;
 
+cabinetArea.innerHTML = "";
+
 }
+
+}
+
+
+
+function openCabinet(){
+
+document.getElementById("cabinetModal").style.display="flex";
+
+loadOperations();
+
+}
+
+
+
+function closeCabinet(){
+
+document.getElementById("cabinetModal").style.display="none";
+
+}
+
+
+
+async function loadOperations(){
+
+const list =
+document.getElementById("operationsList");
+
+list.innerHTML =
+`
+<div class="emptyOperations">
+⏳ Əməliyyatlar yüklənir...
+</div>
+`;
+
+
+const {data:userData,error:userError} =
+await supabaseClient.auth.getUser();
+
+
+if(userError || !userData.user){
+
+list.innerHTML =
+`
+<div class="emptyOperations">
+Hesaba daxil olmaq lazımdır.
+</div>
+`;
+
+return;
+
+}
+
+
+document.getElementById("cabinetEmail").innerText =
+userData.user.email;
+
+
+
+const {data,error} =
+await supabaseClient
+.from("orders")
+.select(`
+id,
+service_name,
+amount,
+status,
+created_at,
+receipt_status
+`)
+.eq("user_id",userData.user.id)
+.eq("status","completed")
+.order("created_at",{ascending:false});
+
+
+
+if(error){
+
+list.innerHTML =
+`
+<div class="emptyOperations">
+Əməliyyatlar yüklənərkən xəta baş verdi.
+</div>
+`;
+
+return;
+
+}
+
+
+
+if(!data || data.length === 0){
+
+list.innerHTML =
+`
+<div class="emptyOperations">
+
+📋 Hələ təsdiqlənmiş əməliyyatınız yoxdur.
+
+</div>
+`;
+
+return;
+
+}
+
+
+
+list.innerHTML = data.map(order=>{
+
+const date =
+new Date(order.created_at)
+.toLocaleString("az-AZ");
+
+
+return `
+
+<div class="operation">
+
+<div class="operationTitle">
+🔮 ${escapeHtml(order.service_name)}
+</div>
+
+<div class="operationRow">
+💰 Məbləğ: <b>${order.amount} AZN</b>
+</div>
+
+<div class="operationRow">
+📅 Tarix: ${date}
+</div>
+
+<div class="operationRow completed">
+✅ Ödəniş təsdiqləndi
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+
+function escapeHtml(value){
+
+return String(value)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
 
 }
 
