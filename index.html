@@ -9,16 +9,12 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-
-*{
-box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
 margin:0;
 font-family:Arial,sans-serif;
-background:
-radial-gradient(circle at top,#35104f 0%,#160020 40%,#07000c 100%);
+background:radial-gradient(circle at top,#35104f 0%,#160020 40%,#07000c 100%);
 color:#fff;
 min-height:100vh;
 }
@@ -38,13 +34,7 @@ color:#d98cff;
 text-shadow:0 0 18px rgba(216,140,255,.5);
 }
 
-#userArea{
-margin-top:12px;
-}
-
-#cabinetArea{
-margin-top:12px;
-}
+#userArea,#cabinetArea{margin-top:12px}
 
 .container{
 max-width:1100px;
@@ -68,9 +58,7 @@ font-size:17px;
 line-height:1.6;
 }
 
-.auth{
-margin-top:20px;
-}
+.auth{margin-top:20px}
 
 .services{
 display:grid;
@@ -79,18 +67,12 @@ gap:18px;
 }
 
 .card{
-background:linear-gradient(
-145deg,
-rgba(255,255,255,.09),
-rgba(255,255,255,.035)
-);
+background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.035));
 border:1px solid rgba(255,255,255,.12);
 border-radius:22px;
 padding:25px 20px;
 text-align:center;
-box-shadow:
-0 15px 35px rgba(0,0,0,.3),
-inset 0 1px rgba(255,255,255,.05);
+box-shadow:0 15px 35px rgba(0,0,0,.3),inset 0 1px rgba(255,255,255,.05);
 transition:.25s;
 }
 
@@ -108,15 +90,9 @@ align-items:center;
 justify-content:center;
 border-radius:50%;
 font-size:38px;
-background:
-radial-gradient(
-circle,
-rgba(216,140,255,.25),
-rgba(116,25,153,.08)
-);
+background:radial-gradient(circle,rgba(216,140,255,.25),rgba(116,25,153,.08));
 border:1px solid rgba(216,140,255,.3);
-box-shadow:
-0 0 25px rgba(216,140,255,.15);
+box-shadow:0 0 25px rgba(216,140,255,.15);
 }
 
 .card h3{
@@ -141,18 +117,12 @@ button{
 border:0;
 border-radius:13px;
 padding:12px 21px;
-background:
-linear-gradient(
-90deg,
-#8b35ff,
-#d34cff
-);
+background:linear-gradient(90deg,#8b35ff,#d34cff);
 color:white;
 font-size:15px;
 font-weight:bold;
 cursor:pointer;
-box-shadow:
-0 7px 20px rgba(143,52,255,.25);
+box-shadow:0 7px 20px rgba(143,52,255,.25);
 transition:.2s;
 }
 
@@ -161,7 +131,7 @@ transform:translateY(-2px);
 opacity:.92;
 }
 
-.userEmail{
+.userName{
 display:inline-block;
 margin-right:8px;
 color:#ddd;
@@ -215,22 +185,14 @@ width:100%;
 max-width:500px;
 max-height:90vh;
 overflow-y:auto;
-background:
-linear-gradient(
-145deg,
-#21002f,
-#100016
-);
+background:linear-gradient(145deg,#21002f,#100016);
 border:1px solid rgba(255,255,255,.14);
 border-radius:22px;
 padding:25px;
-box-shadow:
-0 20px 60px rgba(0,0,0,.6);
+box-shadow:0 20px 60px rgba(0,0,0,.6);
 }
 
-.modal-box h2{
-margin-top:0;
-}
+.modal-box h2{margin-top:0}
 
 .close{
 float:right;
@@ -240,12 +202,9 @@ color:#aaa;
 line-height:20px;
 }
 
-.close:hover{
-color:white;
-}
+.close:hover{color:white}
 
-input,
-textarea{
+input,textarea{
 width:100%;
 padding:14px;
 margin:8px 0 15px;
@@ -257,8 +216,7 @@ outline:none;
 font-size:15px;
 }
 
-input:focus,
-textarea:focus{
+input:focus,textarea:focus{
 border-color:#b84cff;
 }
 
@@ -274,9 +232,7 @@ color:#ddd;
 margin-top:10px;
 }
 
-.modal button{
-margin-top:5px;
-}
+.modal button{margin-top:5px}
 
 .operation{
 background:rgba(255,255,255,.055);
@@ -316,28 +272,16 @@ color:#aaa;
 }
 
 @media(max-width:600px){
-
-.hero h1{
-font-size:31px;
-}
-
-.logo{
-font-size:26px;
-}
+.hero h1{font-size:31px}
+.logo{font-size:26px}
 
 .services{
 grid-template-columns:1fr 1fr;
 gap:12px;
 }
 
-.card{
-padding:18px 10px;
-}
-
-.card h3{
-font-size:17px;
-}
-
+.card{padding:18px 10px}
+.card h3{font-size:17px}
 .card p{
 font-size:13px;
 min-height:55px;
@@ -349,12 +293,8 @@ height:65px;
 font-size:31px;
 }
 
-.price{
-font-size:19px;
+.price{font-size:19px}
 }
-
-}
-
 </style>
 </head>
 
@@ -378,9 +318,7 @@ font-size:19px;
 
 <h1>✨ Sənin sirli dünyan</h1>
 
-<p>
-Taleyinin izlərini kəşf et
-</p>
+<p>Taleyinin izlərini kəşf et</p>
 
 <p class="small">
 Tarot, əl falı, sevgi, yuxu yozmaları və digər
@@ -453,9 +391,7 @@ mistik analizlərlə öz suallarına cavab axtar.
 
 <section class="paymentSection">
 
-<div class="paymentIcon">
-💳
-</div>
+<div class="paymentIcon">💳</div>
 
 <h2>Ödənişlər</h2>
 
@@ -469,7 +405,7 @@ qəbzi göndərə bilərsiniz.
 </div>
 
 <footer>
-© 2026 Fal Dünyası
+©️ 2026 Fal Dünyası
 </footer>
 
 
@@ -483,20 +419,16 @@ qəbzi göndərə bilərsiniz.
 
 <h2>🔐 Hesaba giriş</h2>
 
-<label>
-📧 Email
-</label>
+<label>👤 İstifadəçi adı</label>
 
 <input
-id="authEmail"
-type="email"
-placeholder="example@gmail.com"
-autocomplete="email"
+id="authUsername"
+type="text"
+placeholder="İstifadəçi adı"
+autocomplete="username"
 >
 
-<label>
-🔑 Şifrə
-</label>
+<label>🔑 Şifrə</label>
 
 <input
 id="authPassword"
@@ -505,25 +437,19 @@ placeholder="Şifrə"
 autocomplete="current-password"
 >
 
-<button onclick="login()">
-Daxil ol
-</button>
+<button onclick="login()">Daxil ol</button>
 
-<button
-onclick="register()"
-style="margin-left:8px"
->
+<button onclick="register()" style="margin-left:8px">
 Qeydiyyat
 </button>
 
 <p class="small">
-Qeydiyyatdan sonra email ünvanına təsdiq linki göndəriləcək.
+Qeydiyyat üçün yalnız istifadəçi adı və şifrə kifayətdir.
 </p>
 
 <p id="authMsg" class="small"></p>
 
 </div>
-
 </div>
 
 
@@ -535,15 +461,11 @@ Qeydiyyatdan sonra email ünvanına təsdiq linki göndəriləcək.
 
 <span class="close" onclick="closeOrder()">×</span>
 
-<h2 id="orderTitle">
-🔮 Fal sifarişi
-</h2>
+<h2 id="orderTitle">🔮 Fal sifarişi</h2>
 
 <p id="orderPrice"></p>
 
-<label>
-📱 WhatsApp nömrən
-</label>
+<label>📱 WhatsApp nömrən</label>
 
 <input
 id="whatsapp"
@@ -556,18 +478,14 @@ Fal nəticəsini bu WhatsApp nömrəsinə göndərəcəyik.
 Nömrəni ölkə kodu ilə yaz.
 </p>
 
-<label>
-💬 Sualın
-</label>
+<label>💬 Sualın</label>
 
 <textarea
 id="question"
 placeholder="Sualını ətraflı yaz..."
 ></textarea>
 
-<label>
-🧾 Ödəniş qəbzi
-</label>
+<label>🧾 Ödəniş qəbzi</label>
 
 <input
 id="receipt"
@@ -586,7 +504,6 @@ Qəbzi göndər
 <p id="orderMsg" class="small"></p>
 
 </div>
-
 </div>
 
 
@@ -600,7 +517,7 @@ Qəbzi göndər
 
 <h2>👤 Şəxsi Kabinet</h2>
 
-<p class="small" id="cabinetEmail"></p>
+<p class="small" id="cabinetUsername"></p>
 
 <button
 class="cabinetButton"
@@ -618,7 +535,6 @@ onclick="loadOperations()"
 </div>
 
 </div>
-
 </div>
 
 
@@ -636,22 +552,136 @@ SUPABASE_URL,
 SUPABASE_KEY
 );
 
+const AUTH_FUNCTION_URL =
+"https://hwwxxhgmumshjvkfhhir.supabase.co/functions/v1/bright-service";
+
 let selectedService = null;
 let selectedPrice = null;
 
 
-/* AUTH */
+/* AUTH MODAL */
 
 function openAuth(){
-
 document.getElementById("authModal").style.display="flex";
+}
+
+function closeAuth(){
+document.getElementById("authModal").style.display="none";
+}
+
+
+/* CUSTOM AUTH REQUEST */
+
+async function authRequest(action){
+
+const username =
+document.getElementById("authUsername").value.trim();
+
+const password =
+document.getElementById("authPassword").value;
+
+const msg =
+document.getElementById("authMsg");
+
+if(!username){
+msg.innerText="İstifadəçi adını yaz.";
+return;
+}
+
+if(!password){
+msg.innerText="Şifrəni yaz.";
+return;
+}
+
+if(username.length < 3){
+msg.innerText="İstifadəçi adı ən azı 3 simvol olmalıdır.";
+return;
+}
+
+if(password.length < 6){
+msg.innerText="Şifrə ən azı 6 simvol olmalıdır.";
+return;
+}
+
+msg.innerText =
+action === "register"
+? "Qeydiyyat edilir..."
+: "Daxil olunur...";
+
+try{
+
+const response =
+await fetch(AUTH_FUNCTION_URL,{
+method:"POST",
+headers:{
+"Content-Type":"application/json",
+"apikey":SUPABASE_KEY
+},
+body:JSON.stringify({
+action,
+username,
+password
+})
+});
+
+const result =
+await response.json();
+
+if(!response.ok || !result.success){
+
+msg.innerText =
+result.message ||
+"Əməliyyat zamanı xəta baş verdi.";
+
+return;
+}
+
+
+/*
+  Supabase Auth session-i qurulur.
+  Beləliklə orders sistemi əvvəlki kimi
+  auth.uid() ilə işləməyə davam edir.
+*/
+
+if(result.session){
+
+const {error} =
+await supabaseClient.auth.setSession({
+access_token:result.session.access_token,
+refresh_token:result.session.refresh_token
+});
+
+if(error){
+
+msg.innerText =
+"Giriş sessiyası yaradıla bilmədi.";
+
+return;
+}
 
 }
 
 
-function closeAuth(){
+msg.innerText =
+action === "register"
+? "✅ Qeydiyyat tamamlandı."
+: "✅ Giriş uğurludur.";
 
-document.getElementById("authModal").style.display="none";
+setTimeout(()=>{
+
+closeAuth();
+updateUserArea();
+
+},500);
+
+}catch(error){
+
+console.error(error);
+
+msg.innerText =
+"Serverə qoşulmaq mümkün olmadı.";
+
+}
 
 }
 
@@ -659,166 +689,14 @@ document.getElementById("authModal").style.display="none";
 /* REGISTER */
 
 async function register(){
-
-const email =
-document.getElementById("authEmail").value.trim();
-
-const password =
-document.getElementById("authPassword").value;
-
-const msg =
-document.getElementById("authMsg");
-
-
-if(!email){
-
-msg.innerText =
-"Email ünvanını yaz.";
-
-return;
-
-}
-
-
-if(!password){
-
-msg.innerText =
-"Şifrəni yaz.";
-
-return;
-
-}
-
-
-if(password.length < 6){
-
-msg.innerText =
-"Şifrə ən azı 6 simvol olmalıdır.";
-
-return;
-
-}
-
-
-msg.innerText =
-"Qeydiyyat edilir...";
-
-
-const {data,error} =
-await supabaseClient.auth.signUp({
-
-email:email,
-
-password:password,
-
-options:{
-emailRedirectTo:
-"https://altapbiz.github.io/fal-sayti/"
-}
-
-});
-
-
-if(error){
-
-msg.innerText =
-error.message;
-
-return;
-
-}
-
-
-/*
-  Email təsdiqi aktivdirsə session boş olacaq.
-  İstifadəçi Gmail-dən linkə basdıqda
-  birbaşa sayta qayıdacaq.
-*/
-
-if(data.session){
-
-msg.innerText =
-"✅ Qeydiyyat tamamlandı.";
-
-setTimeout(()=>{
-
-closeAuth();
-updateUserArea();
-
-},700);
-
-}else{
-
-msg.innerText =
-"✅ Qeydiyyat tamamlandı. Gmail ünvanınızı yoxlayın və təsdiq linkinə basın.";
-
-}
-
+await authRequest("register");
 }
 
 
 /* LOGIN */
 
 async function login(){
-
-const email =
-document.getElementById("authEmail").value.trim();
-
-const password =
-document.getElementById("authPassword").value;
-
-const msg =
-document.getElementById("authMsg");
-
-
-if(!email){
-
-msg.innerText =
-"Email ünvanını yaz.";
-
-return;
-
-}
-
-
-if(!password){
-
-msg.innerText =
-"Şifrəni yaz.";
-
-return;
-
-}
-
-
-msg.innerText =
-"Daxil olunur...";
-
-
-const {error} =
-await supabaseClient.auth.signInWithPassword({
-
-email:email,
-
-password:password
-
-});
-
-
-if(error){
-
-msg.innerText =
-error.message;
-
-return;
-
-}
-
-
-closeAuth();
-
-updateUserArea();
-
+await authRequest("login");
 }
 
 
@@ -852,16 +730,21 @@ document.getElementById("cabinetArea");
 
 if(data.user){
 
+const username =
+data.user.user_metadata?.username ||
+data.user.email?.split("@")[0] ||
+"İstifadəçi";
+
 userArea.innerHTML = `
-<span class="userEmail">
-👤 ${escapeHtml(data.user.email || "")}
+<span class="userName">
+👤 ${escapeHtml(username)}
 </span>
 <button onclick="logout()">Çıxış</button>
 `;
 
-authArea.innerHTML = "";
+authArea.innerHTML="";
 
-cabinetArea.innerHTML = `
+cabinetArea.innerHTML=`
 <button
 class="cabinetButton"
 onclick="openCabinet()"
@@ -872,15 +755,15 @@ onclick="openCabinet()"
 
 }else{
 
-userArea.innerHTML = "";
+userArea.innerHTML="";
 
-authArea.innerHTML = `
+authArea.innerHTML=`
 <button onclick="openAuth()">
 🔐 Daxil ol / Qeydiyyat
 </button>
 `;
 
-cabinetArea.innerHTML = "";
+cabinetArea.innerHTML="";
 
 }
 
@@ -897,7 +780,6 @@ loadOperations();
 
 }
 
-
 function closeCabinet(){
 
 document.getElementById("cabinetModal").style.display="none";
@@ -912,22 +794,18 @@ async function loadOperations(){
 const list =
 document.getElementById("operationsList");
 
-list.innerHTML =
-`
+list.innerHTML=`
 <div class="emptyOperations">
 ⏳ Əməliyyatlar yüklənir...
 </div>
 `;
 
-
 const {data:userData,error:userError} =
 await supabaseClient.auth.getUser();
 
-
 if(userError || !userData.user){
 
-list.innerHTML =
-`
+list.innerHTML=`
 <div class="emptyOperations">
 Hesaba daxil olmaq lazımdır.
 </div>
@@ -937,9 +815,13 @@ return;
 
 }
 
+const username =
+userData.user.user_metadata?.username ||
+userData.user.email?.split("@")[0] ||
+"İstifadəçi";
 
-document.getElementById("cabinetEmail").innerText =
-"📧 " + userData.user.email;
+document.getElementById("cabinetUsername").innerText =
+"👤 " + username;
 
 
 const {data,error} =
@@ -960,8 +842,9 @@ receipt_status
 
 if(error){
 
-list.innerHTML =
-`
+console.error(error);
+
+list.innerHTML=`
 <div class="emptyOperations">
 Əməliyyatlar yüklənərkən xəta baş verdi.
 </div>
@@ -972,10 +855,9 @@ return;
 }
 
 
-if(!data || data.length === 0){
+if(!data || data.length===0){
 
-list.innerHTML =
-`
+list.innerHTML=`
 <div class="emptyOperations">
 📋 Hələ heç bir əməliyyatınız yoxdur.
 </div>
@@ -986,12 +868,12 @@ return;
 }
 
 
-list.innerHTML = data.map(order=>{
+list.innerHTML =
+data.map(order=>{
 
 const date =
 new Date(order.created_at)
 .toLocaleString("az-AZ");
-
 
 const statusHtml =
 order.status === "completed"
@@ -1008,9 +890,7 @@ order.status === "completed"
 </div>
 `;
 
-
 return `
-
 <div class="operation">
 
 <div class="operationTitle">
@@ -1028,7 +908,6 @@ return `
 ${statusHtml}
 
 </div>
-
 `;
 
 }).join("");
@@ -1036,7 +915,7 @@ ${statusHtml}
 }
 
 
-/* HTML SECURITY */
+/* SECURITY */
 
 function escapeHtml(value){
 
@@ -1057,7 +936,6 @@ async function openService(name,price){
 const {data} =
 await supabaseClient.auth.getUser();
 
-
 if(!data.user){
 
 openAuth();
@@ -1069,32 +947,26 @@ return;
 
 }
 
-
-selectedService = name;
-
-selectedPrice = price;
-
+selectedService=name;
+selectedPrice=price;
 
 document.getElementById("orderTitle").innerText =
 "🔮 " + name;
 
-
 document.getElementById("orderPrice").innerText =
 "Qiymət: " + price + " AZN";
 
-
 document.getElementById("whatsapp").value="";
-
 document.getElementById("question").value="";
-
 document.getElementById("receipt").value="";
-
 document.getElementById("orderMsg").innerText="";
 
 document.getElementById("orderModal").style.display="flex";
 
 }
 
+
+/* CLOSE ORDER */
 
 function closeOrder(){
 
@@ -1123,16 +995,13 @@ document.getElementById("orderMsg");
 
 orderMsg.innerText="";
 
-
 const whatsapp =
 normalizeWhatsApp(
 document.getElementById("whatsapp").value
 );
 
-
 const question =
 document.getElementById("question").value.trim();
-
 
 const file =
 document.getElementById("receipt").files[0];
@@ -1147,10 +1016,8 @@ return;
 
 }
 
-
 const digits =
 whatsapp.replace(/\D/g,"");
-
 
 if(
 !whatsapp.startsWith("+") ||
@@ -1165,7 +1032,6 @@ return;
 
 }
 
-
 if(!question){
 
 orderMsg.innerText =
@@ -1175,7 +1041,6 @@ return;
 
 }
 
-
 if(!file){
 
 orderMsg.innerText =
@@ -1184,7 +1049,6 @@ orderMsg.innerText =
 return;
 
 }
-
 
 if(file.size > 5 * 1024 * 1024){
 
@@ -1198,7 +1062,6 @@ return;
 
 const {data:userData,error:userError} =
 await supabaseClient.auth.getUser();
-
 
 if(userError || !userData.user){
 
@@ -1236,10 +1099,8 @@ return;
 const orderId =
 crypto.randomUUID();
 
-
 const extension =
 file.name.split(".").pop().toLowerCase();
-
 
 const filePath =
 `${userData.user.id}/${orderId}/receipt.${extension}`;
@@ -1322,7 +1183,6 @@ return;
 orderMsg.innerText =
 "Qəbz uğurla göndərildi. Sifarişiniz yoxlanılır.";
 
-
 setTimeout(()=>{
 
 closeOrder();
@@ -1338,11 +1198,9 @@ alert(
 
 /* AUTH LISTENER */
 
-supabaseClient.auth.onAuthStateChange(
-()=>{
+supabaseClient.auth.onAuthStateChange(()=>{
 updateUserArea();
-}
-);
+});
 
 
 /* START */
