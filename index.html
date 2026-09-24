@@ -14,42 +14,90 @@
 body{
 margin:0;
 font-family:Arial,sans-serif;
-background:radial-gradient(circle at top,#35104f 0%,#160020 40%,#07000c 100%);
+background:
+radial-gradient(circle at 20% 10%,rgba(150,50,255,.28),transparent 30%),
+radial-gradient(circle at 80% 20%,rgba(255,60,180,.18),transparent 30%),
+linear-gradient(135deg,#08000f,#180025,#050008);
 color:#fff;
 min-height:100vh;
 }
 
 header{
 position:relative;
-padding:20px;
+padding:22px 15px 18px;
 text-align:center;
-background:rgba(0,0,0,.35);
+background:rgba(0,0,0,.42);
 border-bottom:1px solid rgba(255,255,255,.1);
+backdrop-filter:blur(15px);
 }
 
 .logo{
-font-size:30px;
-font-weight:800;
-color:#d98cff;
-text-shadow:0 0 18px rgba(216,140,255,.5);
+font-size:32px;
+font-weight:900;
+color:#e8a2ff;
+text-shadow:0 0 20px rgba(216,140,255,.65);
 }
 
-#userArea,#cabinetArea{margin-top:12px}
+.subtitle{
+margin-top:5px;
+font-size:13px;
+color:#9f8ca9;
+}
+
+/* SAAT */
+
+.clockBox{
+width:max-content;
+max-width:100%;
+margin:18px auto 0;
+padding:13px 22px;
+border-radius:18px;
+background:linear-gradient(145deg,rgba(255,255,255,.1),rgba(255,255,255,.035));
+border:1px solid rgba(216,140,255,.25);
+box-shadow:0 0 30px rgba(145,45,255,.12);
+}
+
+.clockTime{
+font-size:28px;
+font-weight:900;
+letter-spacing:2px;
+color:#fff;
+text-shadow:0 0 15px rgba(216,140,255,.5);
+}
+
+.clockDate{
+margin-top:5px;
+font-size:13px;
+color:#cbbbd3;
+}
+
+/* USER */
+
+#userArea,#cabinetArea{
+margin-top:12px;
+}
+
+/* CONTAINER */
 
 .container{
-max-width:1100px;
+max-width:1150px;
 margin:auto;
 padding:20px 15px 50px;
 }
 
+/* HERO */
+
 .hero{
 text-align:center;
-padding:35px 10px 40px;
+padding:38px 10px 42px;
 }
 
 .hero h1{
-font-size:38px;
+font-size:42px;
 margin:0 0 12px;
+background:linear-gradient(90deg,#fff,#df9cff,#fff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
 .hero p{
@@ -58,71 +106,104 @@ font-size:17px;
 line-height:1.6;
 }
 
-.auth{margin-top:20px}
+.auth{
+margin-top:22px;
+}
+
+/* SERVICES */
 
 .services{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:18px;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:20px;
 }
 
 .card{
-background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.035));
+position:relative;
+overflow:hidden;
+background:
+linear-gradient(145deg,rgba(255,255,255,.1),rgba(255,255,255,.025));
 border:1px solid rgba(255,255,255,.12);
-border-radius:22px;
-padding:25px 20px;
+border-radius:25px;
+padding:28px 20px;
 text-align:center;
-box-shadow:0 15px 35px rgba(0,0,0,.3),inset 0 1px rgba(255,255,255,.05);
-transition:.25s;
+box-shadow:
+0 20px 45px rgba(0,0,0,.35),
+inset 0 1px rgba(255,255,255,.05);
+transition:.3s;
+}
+
+.card:before{
+content:"";
+position:absolute;
+width:120px;
+height:120px;
+border-radius:50%;
+background:rgba(184,76,255,.12);
+filter:blur(30px);
+top:-50px;
+left:-40px;
 }
 
 .card:hover{
-transform:translateY(-5px);
-border-color:rgba(216,140,255,.45);
+transform:translateY(-7px);
+border-color:rgba(216,140,255,.5);
+box-shadow:
+0 25px 55px rgba(0,0,0,.45),
+0 0 30px rgba(173,60,255,.12);
 }
 
 .icon{
-width:76px;
-height:76px;
-margin:0 auto 15px;
+position:relative;
+width:82px;
+height:82px;
+margin:0 auto 17px;
 display:flex;
 align-items:center;
 justify-content:center;
 border-radius:50%;
-font-size:38px;
-background:radial-gradient(circle,rgba(216,140,255,.25),rgba(116,25,153,.08));
-border:1px solid rgba(216,140,255,.3);
-box-shadow:0 0 25px rgba(216,140,255,.15);
+font-size:40px;
+background:
+radial-gradient(circle,rgba(216,140,255,.3),rgba(116,25,153,.08));
+border:1px solid rgba(216,140,255,.35);
+box-shadow:
+0 0 30px rgba(216,140,255,.18),
+inset 0 0 20px rgba(216,140,255,.08);
 }
 
 .card h3{
+position:relative;
 font-size:20px;
 margin:8px 0 10px;
 }
 
 .card p{
-color:#bbb;
+position:relative;
+color:#aaa;
 line-height:1.5;
 min-height:45px;
 }
 
 .price{
-font-size:22px;
+position:relative;
+font-size:23px;
 font-weight:bold;
 color:#e09aff;
-margin:15px 0;
+margin:16px 0;
 }
+
+/* BUTTON */
 
 button{
 border:0;
-border-radius:13px;
-padding:12px 21px;
+border-radius:14px;
+padding:12px 22px;
 background:linear-gradient(90deg,#8b35ff,#d34cff);
 color:white;
 font-size:15px;
 font-weight:bold;
 cursor:pointer;
-box-shadow:0 7px 20px rgba(143,52,255,.25);
+box-shadow:0 8px 25px rgba(143,52,255,.28);
 transition:.2s;
 }
 
@@ -143,18 +224,20 @@ margin:6px 4px;
 background:linear-gradient(90deg,#6335ff,#a83cff);
 }
 
+/* CARD PAYMENT */
+
 .cardNumber{
 margin:15px 0 20px;
-padding:16px 18px;
-border-radius:15px;
-background:rgba(0,0,0,.35);
+padding:17px 18px;
+border-radius:16px;
+background:rgba(0,0,0,.4);
 border:1px solid rgba(216,140,255,.35);
 font-size:20px;
 font-weight:bold;
 letter-spacing:2px;
 text-align:center;
 color:#fff;
-box-shadow:0 0 20px rgba(216,140,255,.12);
+box-shadow:0 0 25px rgba(216,140,255,.12);
 }
 
 .cardLabel{
@@ -169,21 +252,26 @@ color:#aaa;
 line-height:1.5;
 }
 
+/* FOOTER */
+
 footer{
 text-align:center;
 padding:35px 15px;
 color:#777;
 }
 
+/* MODAL */
+
 .modal{
 display:none;
 position:fixed;
 inset:0;
-background:rgba(0,0,0,.78);
+background:rgba(0,0,0,.8);
 align-items:center;
 justify-content:center;
 padding:15px;
 z-index:100;
+backdrop-filter:blur(6px);
 }
 
 .modal-box{
@@ -191,14 +279,17 @@ width:100%;
 max-width:500px;
 max-height:90vh;
 overflow-y:auto;
-background:linear-gradient(145deg,#21002f,#100016);
+background:
+linear-gradient(145deg,#21002f,#100016);
 border:1px solid rgba(255,255,255,.14);
-border-radius:22px;
+border-radius:24px;
 padding:25px;
-box-shadow:0 20px 60px rgba(0,0,0,.6);
+box-shadow:0 20px 70px rgba(0,0,0,.7);
 }
 
-.modal-box h2{margin-top:0}
+.modal-box h2{
+margin-top:0;
+}
 
 .close{
 float:right;
@@ -208,13 +299,15 @@ color:#aaa;
 line-height:20px;
 }
 
-.close:hover{color:white}
+.close:hover{
+color:white;
+}
 
 input,textarea{
 width:100%;
 padding:14px;
 margin:8px 0 15px;
-border-radius:12px;
+border-radius:13px;
 border:1px solid #59316d;
 background:#0d0015;
 color:#fff;
@@ -224,6 +317,7 @@ font-size:15px;
 
 input:focus,textarea:focus{
 border-color:#b84cff;
+box-shadow:0 0 15px rgba(184,76,255,.1);
 }
 
 textarea{
@@ -238,7 +332,11 @@ color:#ddd;
 margin-top:10px;
 }
 
-.modal button{margin-top:5px}
+.modal button{
+margin-top:5px;
+}
+
+/* OPERATIONS */
 
 .operation{
 background:rgba(255,255,255,.055);
@@ -277,11 +375,17 @@ padding:25px 10px;
 color:#aaa;
 }
 
+/* MOBILE */
+
 @media(max-width:600px){
 
-.hero h1{font-size:31px}
+.hero h1{
+font-size:31px;
+}
 
-.logo{font-size:26px}
+.logo{
+font-size:27px;
+}
 
 .services{
 grid-template-columns:1fr 1fr;
@@ -289,7 +393,7 @@ gap:12px;
 }
 
 .card{
-padding:18px 10px;
+padding:20px 10px;
 }
 
 .card h3{
@@ -316,6 +420,14 @@ font-size:17px;
 letter-spacing:1px;
 }
 
+.clockTime{
+font-size:24px;
+}
+
+.clockBox{
+padding:12px 18px;
+}
+
 }
 </style>
 </head>
@@ -328,11 +440,30 @@ letter-spacing:1px;
 🔮 Fal Dünyası
 </div>
 
+<div class="subtitle">
+✨ Sirli dünyana xoş gəlmisən
+</div>
+
+<!-- CANLI SAAT -->
+
+<div class="clockBox">
+
+<div class="clockTime" id="clockTime">
+00:00:00
+</div>
+
+<div class="clockDate" id="clockDate">
+24.09.2026 — Cümə axşamı
+</div>
+
+</div>
+
 <div id="userArea"></div>
 
 <div id="cabinetArea"></div>
 
 </header>
+
 
 <div class="container">
 
@@ -340,7 +471,9 @@ letter-spacing:1px;
 
 <h1>✨ Sənin sirli dünyan</h1>
 
-<p>Taleyinin izlərini kəşf et</p>
+<p>
+Taleyinin izlərini kəşf et
+</p>
 
 <p class="small">
 Tarot, əl falı, sevgi, yuxu yozmaları və digər
@@ -472,10 +605,11 @@ Qeydiyyat üçün yalnız istifadəçi adı və şifrə kifayətdir.
 
 <span class="close" onclick="closeOrder()">×</span>
 
-<h2 id="orderTitle">🔮 Fal sifarişi</h2>
+<h2 id="orderTitle">
+🔮 Fal sifarişi
+</h2>
 
 <p id="orderPrice"></p>
-
 
 <div class="cardLabel">
 💳 Ödəniş üçün kart
@@ -490,7 +624,6 @@ Qeydiyyat üçün yalnız istifadəçi adı və şifrə kifayətdir.
 sonra ödəniş qəbzini aşağıdakı bölmədən göndərin.
 </p>
 
-
 <label>📱 WhatsApp nömrən</label>
 
 <input
@@ -504,14 +637,12 @@ Fal nəticəsini bu WhatsApp nömrəsinə göndərəcəyik.
 Nömrəni ölkə kodu ilə yaz.
 </p>
 
-
 <label>💬 Sualın</label>
 
 <textarea
 id="question"
 placeholder="Sualını ətraflı yaz..."
 ></textarea>
-
 
 <label>🧾 Ödəniş qəbzi</label>
 
@@ -524,7 +655,6 @@ accept="image/jpeg,image/png,image/webp"
 <p class="small">
 JPG, PNG və ya WEBP. Maksimum 5 MB.
 </p>
-
 
 <button onclick="createOrderWithReceipt()">
 Qəbzi göndər
@@ -588,6 +718,47 @@ let selectedService = null;
 let selectedPrice = null;
 
 
+/* CANLI SAAT VƏ TARİX */
+
+function updateClock(){
+
+const now = new Date();
+
+const time =
+now.toLocaleTimeString("az-AZ",{
+hour:"2-digit",
+minute:"2-digit",
+second:"2-digit",
+hour12:false
+});
+
+const date =
+now.toLocaleDateString("az-AZ",{
+day:"2-digit",
+month:"2-digit",
+year:"numeric"
+});
+
+const weekday =
+now.toLocaleDateString("az-AZ",{
+weekday:"long"
+});
+
+document.getElementById("clockTime").innerText =
+"🕐 " + time;
+
+document.getElementById("clockDate").innerText =
+date + " — " +
+weekday.charAt(0).toUpperCase() +
+weekday.slice(1);
+
+}
+
+updateClock();
+
+setInterval(updateClock,1000);
+
+
 /* AUTH MODAL */
 
 function openAuth(){
@@ -599,7 +770,7 @@ document.getElementById("authModal").style.display="none";
 }
 
 
-/* CUSTOM AUTH REQUEST */
+/* CUSTOM AUTH */
 
 async function authRequest(action){
 
@@ -665,7 +836,6 @@ result.message ||
 return;
 }
 
-
 if(result.session){
 
 const {error} =
@@ -683,7 +853,6 @@ return;
 }
 
 }
-
 
 msg.innerText =
 action === "register"
@@ -749,7 +918,6 @@ document.getElementById("authArea");
 
 const cabinetArea =
 document.getElementById("cabinetArea");
-
 
 if(data.user){
 
@@ -846,7 +1014,6 @@ userData.user.email?.split("@")[0] ||
 document.getElementById("cabinetUsername").innerText =
 "👤 " + username;
 
-
 const {data,error} =
 await supabaseClient
 .from("orders")
@@ -862,7 +1029,6 @@ receipt_status
 .in("status",["completed","cancelled"])
 .order("created_at",{ascending:false});
 
-
 if(error){
 
 console.error(error);
@@ -877,7 +1043,6 @@ return;
 
 }
 
-
 if(!data || data.length===0){
 
 list.innerHTML=`
@@ -889,7 +1054,6 @@ list.innerHTML=`
 return;
 
 }
-
 
 list.innerHTML =
 data.map(order=>{
@@ -1029,7 +1193,6 @@ document.getElementById("question").value.trim();
 const file =
 document.getElementById("receipt").files[0];
 
-
 if(!whatsapp){
 
 orderMsg.innerText =
@@ -1082,7 +1245,6 @@ return;
 
 }
 
-
 const {data:userData,error:userError} =
 await supabaseClient.auth.getUser();
 
@@ -1095,10 +1257,8 @@ return;
 
 }
 
-
 orderMsg.innerText =
 "Qəbz yüklənir...";
-
 
 const {data:serviceData,error:serviceError} =
 await supabaseClient
@@ -1107,7 +1267,6 @@ await supabaseClient
 .eq("name",selectedService)
 .eq("active",true)
 .single();
-
 
 if(serviceError || !serviceData){
 
@@ -1118,7 +1277,6 @@ return;
 
 }
 
-
 const orderId =
 crypto.randomUUID();
 
@@ -1127,7 +1285,6 @@ file.name.split(".").pop().toLowerCase();
 
 const filePath =
 `${userData.user.id}/${orderId}/receipt.${extension}`;
-
 
 const {error:uploadError} =
 await supabaseClient.storage
@@ -1141,7 +1298,6 @@ contentType:file.type
 }
 );
 
-
 if(uploadError){
 
 orderMsg.innerText =
@@ -1152,12 +1308,10 @@ return;
 
 }
 
-
 const finalQuestion =
 `WhatsApp: ${whatsapp}
 
 Sual: ${question}`;
-
 
 const {error:insertError} =
 await supabaseClient
@@ -1187,7 +1341,6 @@ new Date().toISOString()
 
 });
 
-
 if(insertError){
 
 await supabaseClient.storage
@@ -1201,7 +1354,6 @@ insertError.message;
 return;
 
 }
-
 
 orderMsg.innerText =
 "Qəbz uğurla göndərildi. Sifarişiniz yoxlanılır.";
