@@ -350,6 +350,11 @@ color:#65e69a;
 font-weight:bold;
 }
 
+.cancelled{
+color:#ff6b7a;
+font-weight:bold;
+}
+
 .emptyOperations{
 text-align:center;
 padding:25px 10px;
@@ -1027,7 +1032,7 @@ created_at,
 receipt_status
 `)
 .eq("user_id",userData.user.id)
-.eq("status","completed")
+.in("status",["completed","cancelled"])
 .order("created_at",{ascending:false});
 
 
@@ -1053,7 +1058,7 @@ list.innerHTML =
 `
 <div class="emptyOperations">
 
-📋 Hələ təsdiqlənmiş əməliyyatınız yoxdur.
+📋 Hələ heç bir əməliyyatınız yoxdur.
 
 </div>
 `;
@@ -1069,6 +1074,22 @@ list.innerHTML = data.map(order=>{
 const date =
 new Date(order.created_at)
 .toLocaleString("az-AZ");
+
+
+const statusHtml =
+order.status === "completed"
+?
+`
+<div class="operationRow completed">
+✅ Ödəniş təsdiqləndi
+</div>
+`
+:
+`
+<div class="operationRow cancelled">
+❌ Ödəniş ləğv edildi
+</div>
+`;
 
 
 return `
@@ -1087,9 +1108,7 @@ return `
 📅 Tarix: ${date}
 </div>
 
-<div class="operationRow completed">
-✅ Ödəniş təsdiqləndi
-</div>
+${statusHtml}
 
 </div>
 
