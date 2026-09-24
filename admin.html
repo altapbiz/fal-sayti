@@ -9,12 +9,14 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
   margin:0;
   background:#08080f;
   color:#fff;
   font-family:Arial,sans-serif;
 }
+
 header{
   padding:20px;
   border-bottom:1px solid #252535;
@@ -22,33 +24,44 @@ header{
   justify-content:space-between;
   align-items:center;
 }
+
 .logo{
   font-size:22px;
   font-weight:bold;
   color:#c084fc;
 }
+
 button{
   border:0;
   border-radius:10px;
-  padding:11px 16px;
+  padding:12px 16px;
   cursor:pointer;
   font-weight:bold;
 }
+
 .login{
   background:#7c3aed;
   color:white;
+  width:100%;
 }
+
 .logout{
   background:#252535;
   color:white;
 }
+
 .container{
   max-width:1100px;
   margin:30px auto;
   padding:0 16px;
 }
+
 h1{margin-bottom:8px}
-.subtitle{color:#999}
+
+.subtitle{
+  color:#999;
+}
+
 #status{
   margin:20px 0;
   padding:14px;
@@ -56,6 +69,36 @@ h1{margin-bottom:8px}
   border:1px solid #28283a;
   border-radius:12px;
 }
+
+.login-box{
+  max-width:420px;
+  margin:70px auto;
+  background:#11111a;
+  border:1px solid #29293a;
+  border-radius:18px;
+  padding:25px;
+}
+
+.login-box h2{
+  margin-top:0;
+}
+
+input{
+  width:100%;
+  margin:8px 0 14px;
+  padding:13px;
+  border-radius:10px;
+  border:1px solid #303044;
+  background:#09090f;
+  color:white;
+  outline:none;
+}
+
+.error{
+  color:#f87171;
+  margin-top:12px;
+}
+
 .order{
   background:#11111a;
   border:1px solid #29293a;
@@ -63,41 +106,49 @@ h1{margin-bottom:8px}
   padding:20px;
   margin-bottom:16px;
 }
+
 .row{
   display:flex;
   justify-content:space-between;
   gap:15px;
   flex-wrap:wrap;
 }
+
 .label{
   color:#999;
   font-size:13px;
   margin-top:10px;
 }
+
 .value{
   margin-top:4px;
   line-height:1.5;
 }
+
 .actions{
   margin-top:18px;
   display:flex;
   gap:10px;
   flex-wrap:wrap;
 }
+
 .approve{
   background:#16a34a;
   color:#fff;
 }
+
 .reject{
   background:#dc2626;
   color:#fff;
 }
+
 .receipt{
   display:inline-block;
   margin-top:15px;
   color:#c084fc;
   text-decoration:none;
 }
+
 .note{
   width:100%;
   margin-top:12px;
@@ -108,6 +159,7 @@ h1{margin-bottom:8px}
   padding:12px;
   min-height:70px;
 }
+
 .empty{
   padding:30px;
   text-align:center;
@@ -122,17 +174,58 @@ h1{margin-bottom:8px}
 
 <header>
   <div class="logo">🔮 Fal Dünyası — Admin</div>
-  <button class="logout" onclick="logout()">Çıxış</button>
+  <button class="logout" id="logoutBtn" onclick="logout()" style="display:none">
+    Çıxış
+  </button>
 </header>
 
 <div class="container">
 
-  <h1>Sifarişlər</h1>
-  <div class="subtitle">Ödəniş qəbzlərini yoxla və sifarişləri idarə et.</div>
+  <div id="loginBox" class="login-box">
 
-  <div id="status">Yüklənir...</div>
+    <h2>🔐 Admin girişi</h2>
 
-  <div id="orders"></div>
+    <div class="subtitle">
+      Admin hesabınızla daxil olun.
+    </div>
+
+    <input
+      type="email"
+      id="email"
+      placeholder="Admin email"
+      autocomplete="email"
+    >
+
+    <input
+      type="password"
+      id="password"
+      placeholder="Şifrə"
+      autocomplete="current-password"
+    >
+
+    <button class="login" onclick="login()">
+      Daxil ol
+    </button>
+
+    <div id="loginError" class="error"></div>
+
+  </div>
+
+  <div id="adminPanel" style="display:none">
+
+    <h1>Sifarişlər</h1>
+
+    <div class="subtitle">
+      Ödəniş qəbzlərini yoxla və sifarişləri idarə et.
+    </div>
+
+    <div id="status">
+      Yüklənir...
+    </div>
+
+    <div id="orders"></div>
+
+  </div>
 
 </div>
 
@@ -144,8 +237,7 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_2PeGoyW4DP-H27mkhnxBfQ_3LfGRDZs";
 
-const { createClient } =
-supabase;
+const { createClient } = supabase;
 
 const db = createClient(
   SUPABASE_URL,
@@ -157,24 +249,106 @@ SUPABASE_URL +
 "/functions/v1/smooth-api";
 
 
+async function login(){
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  const errorBox =
+    document.getElementById("loginError");
+
+  errorBox.textContent = "";
+
+  if(!email || !password){
+
+    errorBox.textContent =
+      "Email və şifrəni daxil edin.";
+
+    return;
+  }
+
+  try{
+
+    const {
+      data,
+      error
+    } = await db.auth.signInWithPassword({
+      email:email,
+      password:password
+    });
+
+    if(error){
+      throw error;
+    }
+
+    if(!data.session){
+
+      throw new Error(
+        "Giriş sessiyası yaradılmadı."
+      );
+
+    }
+
+    showAdmin();
+
+    await loadOrders();
+
+  }catch(error){
+
+    errorBox.textContent =
+      error.message ||
+      "Giriş uğursuz oldu.";
+
+  }
+}
+
+
 async function checkAdmin(){
 
   const {
     data:{session}
   } = await db.auth.getSession();
 
-  if(!session){
+  if(session){
 
-    document.getElementById("status").innerHTML =
-      "Admin hesabı ilə giriş edilməyib.";
+    showAdmin();
 
-    return;
+    await loadOrders();
+
+  }else{
+
+    showLogin();
+
   }
+}
 
-  document.getElementById("status").innerHTML =
-    "Admin hesabı ilə giriş edildi.";
 
-  await loadOrders();
+function showLogin(){
+
+  document.getElementById("loginBox")
+    .style.display = "block";
+
+  document.getElementById("adminPanel")
+    .style.display = "none";
+
+  document.getElementById("logoutBtn")
+    .style.display = "none";
+}
+
+
+function showAdmin(){
+
+  document.getElementById("loginBox")
+    .style.display = "none";
+
+  document.getElementById("adminPanel")
+    .style.display = "block";
+
+  document.getElementById("logoutBtn")
+    .style.display = "block";
 }
 
 
@@ -186,17 +360,22 @@ async function loadOrders(){
 
   if(!session) return;
 
+  document.getElementById("status").innerHTML =
+    "Sifarişlər yüklənir...";
+
   try{
 
     const response = await fetch(
       FUNCTION_URL,
       {
         method:"POST",
+
         headers:{
           "Content-Type":"application/json",
           "Authorization":
             "Bearer " + session.access_token
         },
+
         body:JSON.stringify({
           action:"list"
         })
@@ -206,10 +385,16 @@ async function loadOrders(){
     const data = await response.json();
 
     if(!response.ok){
+
       throw new Error(
-        data.error || "Sifarişlər yüklənmədi."
+        data.error ||
+        "Sifarişlər yüklənmədi."
       );
+
     }
+
+    document.getElementById("status").innerHTML =
+      "Admin hesabı ilə giriş edildi.";
 
     renderOrders(data.orders || []);
 
@@ -217,6 +402,7 @@ async function loadOrders(){
 
     document.getElementById("status").innerHTML =
       "Xəta: " + error.message;
+
   }
 }
 
@@ -244,14 +430,14 @@ function renderOrders(orders){
           <div>
             <div class="label">Xidmət</div>
             <div class="value">
-              <b>${escapeHtml(order.service_name)}</b>
+              <b>${escapeHtml(order.service_name || "")}</b>
             </div>
           </div>
 
           <div>
             <div class="label">Məbləğ</div>
             <div class="value">
-              ${escapeHtml(String(order.amount))} AZN
+              ${escapeHtml(String(order.amount || ""))} AZN
             </div>
           </div>
 
@@ -264,7 +450,9 @@ function renderOrders(orders){
 
         </div>
 
-        <div class="label">İstifadəçinin sualı</div>
+        <div class="label">
+          İstifadəçinin sualı
+        </div>
 
         <div class="value">
           ${escapeHtml(order.question || "")}
@@ -274,7 +462,7 @@ function renderOrders(orders){
           order.receipt_url
           ?
           `<a class="receipt"
-             href="${order.receipt_url}"
+             href="${escapeHtml(order.receipt_url)}"
              target="_blank">
              🧾 Qəbzə bax
            </a>`
@@ -284,7 +472,7 @@ function renderOrders(orders){
 
         <textarea
           class="note"
-          id="note-${order.id}"
+          id="note-${escapeHtml(order.id)}"
           placeholder="Admin qeydi (istəyə bağlı)">
         </textarea>
 
@@ -292,13 +480,13 @@ function renderOrders(orders){
 
           <button
             class="approve"
-            onclick="processOrder('${order.id}','approve')">
+            onclick="processOrder('${escapeHtml(order.id)}','approve')">
             ✅ Təsdiqlə və falı yarat
           </button>
 
           <button
             class="reject"
-            onclick="processOrder('${order.id}','reject')">
+            onclick="processOrder('${escapeHtml(order.id)}','reject')">
             ❌ Rədd et
           </button>
 
@@ -317,7 +505,13 @@ async function processOrder(orderId,action){
   } = await db.auth.getSession();
 
   if(!session){
-    alert("Admin hesabı ilə giriş edin.");
+
+    alert(
+      "Admin hesabı ilə giriş edin."
+    );
+
+    showLogin();
+
     return;
   }
 
@@ -327,7 +521,9 @@ async function processOrder(orderId,action){
     );
 
   const adminNote =
-    noteElement ? noteElement.value : "";
+    noteElement
+      ? noteElement.value
+      : "";
 
   const message =
     action === "approve"
@@ -363,9 +559,12 @@ async function processOrder(orderId,action){
     const data = await response.json();
 
     if(!response.ok){
+
       throw new Error(
-        data.error || "Əməliyyat uğursuz oldu."
+        data.error ||
+        "Əməliyyat uğursuz oldu."
       );
+
     }
 
     alert(
@@ -383,6 +582,7 @@ async function processOrder(orderId,action){
 
     document.getElementById("status").innerHTML =
       "Xəta baş verdi.";
+
   }
 }
 
@@ -391,7 +591,8 @@ async function logout(){
 
   await db.auth.signOut();
 
-  location.reload();
+  showLogin();
+
 }
 
 
@@ -403,12 +604,28 @@ function escapeHtml(value){
     .replaceAll(">","&gt;")
     .replaceAll('"',"&quot;")
     .replaceAll("'","&#039;");
+
 }
 
 
 db.auth.onAuthStateChange(
-  () => checkAdmin()
+  async (event,session) => {
+
+    if(session){
+
+      showAdmin();
+
+      await loadOrders();
+
+    }else{
+
+      showLogin();
+
+    }
+
+  }
 );
+
 
 checkAdmin();
 
