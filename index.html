@@ -157,6 +157,26 @@ font-size:42px;
 margin-bottom:8px;
 }
 
+.cardNumber{
+margin:18px auto 12px;
+max-width:420px;
+padding:16px 18px;
+border-radius:15px;
+background:rgba(0,0,0,.35);
+border:1px solid rgba(216,140,255,.35);
+font-size:20px;
+font-weight:bold;
+letter-spacing:2px;
+color:#fff;
+box-shadow:0 0 20px rgba(216,140,255,.12);
+}
+
+.cardLabel{
+font-size:13px;
+color:#aaa;
+margin-bottom:5px;
+}
+
 .small{
 font-size:13px;
 color:#aaa;
@@ -294,6 +314,11 @@ font-size:31px;
 }
 
 .price{font-size:19px}
+
+.cardNumber{
+font-size:17px;
+letter-spacing:1px;
+}
 }
 </style>
 </head>
@@ -396,8 +421,20 @@ mistik analizlərlə öz suallarına cavab axtar.
 <h2>Ödənişlər</h2>
 
 <p class="small">
-Xidmət seçdikdən sonra ödənişi edib
-qəbzi göndərə bilərsiniz.
+Xidmət seçdikdən sonra aşağıdakı karta ödəniş edib
+qəbzi sifariş formasından göndərə bilərsiniz.
+</p>
+
+<div class="cardLabel">
+💳 Ödəniş üçün kart
+</div>
+
+<div class="cardNumber">
+5315 9921 2781 2672
+</div>
+
+<p class="small">
+Ödəniş etdikdən sonra qəbzin şəklini sifariş formasına əlavə edin.
 </p>
 
 </section>
@@ -636,13 +673,6 @@ result.message ||
 return;
 }
 
-
-/*
-  Supabase Auth session-i qurulur.
-  Beləliklə orders sistemi əvvəlki kimi
-  auth.uid() ilə işləməyə davam edir.
-*/
-
 if(result.session){
 
 const {error} =
@@ -660,7 +690,6 @@ return;
 }
 
 }
-
 
 msg.innerText =
 action === "register"
