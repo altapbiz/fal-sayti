@@ -1,1 +1,253 @@
-salam
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Panel</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #050505, #171717);
+            color: white;
+            min-height: 100vh;
+            padding: 25px 15px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #aaa;
+            font-size: 15px;
+        }
+
+        .section {
+            background: #101010;
+            border: 1px solid #292929;
+            border-radius: 18px;
+            padding: 22px;
+            margin-bottom: 22px;
+            box-shadow: 0 10px 30px rgba(0,0,0,.35);
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .like-title {
+            color: #ff2d55;
+        }
+
+        .follower-title {
+            color: #00f2ea;
+        }
+
+        .packages {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .package {
+            background: #1a1a1a;
+            border: 1px solid #303030;
+            border-radius: 14px;
+            padding: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: .2s;
+        }
+
+        .package:hover {
+            transform: translateY(-3px);
+            border-color: #555;
+        }
+
+        .amount {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .price {
+            color: #00f2ea;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .like-section .price {
+            color: #ff2d55;
+        }
+
+        .order {
+            text-align: center;
+            background: linear-gradient(135deg, #111, #1b1b1b);
+            border-radius: 20px;
+            padding: 28px 20px;
+            border: 1px solid #303030;
+        }
+
+        .order h2 {
+            margin-bottom: 8px;
+            font-size: 24px;
+        }
+
+        .order p {
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+
+        .whatsapp {
+            display: inline-block;
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 15px 28px;
+            border-radius: 12px;
+            transition: .2s;
+        }
+
+        .whatsapp:hover {
+            background: #1ebe5d;
+            transform: scale(1.03);
+        }
+
+        .number {
+            margin-top: 13px;
+            color: #ccc;
+            font-size: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .packages {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>🎵 TikTok Panel</h1>
+        <p>Bəyəni və takipçi paketləri</p>
+    </div>
+
+    <!-- BƏYƏNİ PAKETLƏRİ -->
+    <div class="section like-section">
+
+        <div class="section-title like-title">
+            ❤️ TikTok Bəyəni Paketləri 👇
+        </div>
+
+        <div class="packages">
+
+            <div class="package">
+                <span class="amount">1.000 bəyəni</span>
+                <span class="price">8,73₼</span>
+            </div>
+
+            <div class="package">
+                <span class="amount">2.000 bəyəni</span>
+                <span class="price">19,62₼</span>
+            </div>
+
+            <div class="package">
+                <span class="amount">5.000 bəyəni</span>
+                <span class="price">39,73₼</span>
+            </div>
+
+            <div class="package">
+                <span class="amount">10.000 bəyəni</span>
+                <span class="price">65,39₼</span>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- TAKİPÇİ PAKETLƏRİ -->
+    <div class="section">
+
+        <div class="section-title follower-title">
+            👤 TikTok Takipçi Paketləri 👇
+        </div>
+
+        <div class="packages">
+
+            <div class="package">
+                <span class="amount">1.000 takipçi</span>
+                <span class="price">7,78₼</span>
+            </div>
+
+            <div class="package">
+                <span class="amount">2.000 takipçi</span>
+                <span class="price">15,83₼</span>
+            </div>
+
+            <div class="package">
+                <span class="amount">5.000 takipçi</span>
+                <span class="price">31,82₼</span>
+            </div>
+
+            <div class="package">
+                <span class="amount">10.000 takipçi</span>
+                <span class="price">57,01₼</span>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- SİFARİŞ -->
+    <div class="order">
+
+        <h2>📲 Sifariş vermək istəyirsən?</h2>
+
+        <p>Sifariş üçün WhatsApp üzərindən bizimlə əlaqə saxla.</p>
+
+        <a class="whatsapp"
+           href="https://wa.me/994552334814?text=Salam%2C%20TikTok%20panelden%20sifaris%20vermek%20isteyirem."
+           target="_blank">
+            💬 WhatsApp-dan Sifariş Ver
+        </a>
+
+        <div class="number">
+            📞 055-233-48-14
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
