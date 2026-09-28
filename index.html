@@ -1,248 +1,817 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TikTok Panel</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<title>TikTok Panel</title>
 
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #050505, #171717);
-            color: white;
-            min-height: 100vh;
-            padding: 25px 15px;
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        .container {
-            max-width: 850px;
-            margin: auto;
-        }
+:root{
+    --pink:#ff0050;
+    --cyan:#00f2ea;
+    --green:#25D366;
+    --dark:#05070d;
+    --card:#0b1019;
+}
 
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 10% 10%, rgba(255,0,80,.12), transparent 25%),
+        radial-gradient(circle at 90% 30%, rgba(0,242,234,.10), transparent 25%),
+        #05070d;
+    color:#fff;
+    min-height:100vh;
+    overflow-x:hidden;
+}
 
-        .header h1 {
-            font-size: 32px;
-            margin-bottom: 8px;
-        }
+/* NEON XƏTTLƏR */
 
-        .header p {
-            color: #aaa;
-            font-size: 15px;
-        }
+body::before,
+body::after{
+    content:"";
+    position:fixed;
+    width:90px;
+    height:6px;
+    border-radius:20px;
+    z-index:-1;
+    transform:rotate(-45deg);
+}
 
-        .section {
-            background: #101010;
-            border: 1px solid #292929;
-            border-radius: 18px;
-            padding: 22px;
-            margin-bottom: 22px;
-            box-shadow: 0 10px 30px rgba(0,0,0,.35);
-        }
+body::before{
+    top:45px;
+    left:-20px;
+    background:var(--pink);
+    box-shadow:0 0 20px var(--pink);
+}
 
-        .section-title {
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 18px;
-        }
+body::after{
+    bottom:50px;
+    right:-20px;
+    background:var(--cyan);
+    box-shadow:0 0 20px var(--cyan);
+}
 
-        .like-title {
-            color: #ff2d55;
-        }
+/* CONTAINER */
 
-        .follower-title {
-            color: #00f2ea;
-        }
+.container{
+    width:100%;
+    max-width:1050px;
+    margin:auto;
+    padding:25px 18px 45px;
+}
 
-        .packages {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-        }
+/* HEADER */
 
-        .package {
-            background: #1a1a1a;
-            border: 1px solid #303030;
-            border-radius: 14px;
-            padding: 18px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: .2s;
-        }
+.header{
+    text-align:center;
+    padding:25px 10px 35px;
+    position:relative;
+}
 
-        .package:hover {
-            transform: translateY(-3px);
-            border-color: #555;
-        }
+.logo-area{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:18px;
+}
 
-        .amount {
-            font-size: 18px;
-            font-weight: bold;
-        }
+.tiktok-logo{
+    font-size:78px;
+    line-height:1;
+    text-shadow:
+        -4px -3px 0 var(--cyan),
+        4px 3px 0 var(--pink),
+        0 0 30px rgba(255,0,80,.4);
+}
 
-        .price {
-            color: #00f2ea;
-            font-size: 18px;
-            font-weight: bold;
-        }
+.header h1{
+    font-size:70px;
+    font-weight:900;
+    letter-spacing:-3px;
+    line-height:.9;
+}
 
-        .like-section .price {
-            color: #ff2d55;
-        }
+.header h1 span{
+    display:block;
+    background:linear-gradient(90deg,#ff0050,#fff,#00f2ea);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
 
-        .order {
-            text-align: center;
-            background: linear-gradient(135deg, #111, #1b1b1b);
-            border-radius: 20px;
-            padding: 28px 20px;
-            border: 1px solid #303030;
-        }
+.subtitle{
+    margin-top:22px;
+    font-size:18px;
+    color:#ddd;
+}
 
-        .order h2 {
-            margin-bottom: 8px;
-            font-size: 24px;
-        }
+.subtitle span{
+    margin:0 10px;
+    color:#777;
+}
 
-        .order p {
-            color: #aaa;
-            margin-bottom: 20px;
-        }
+/* SECTION */
 
-        .whatsapp {
-            display: inline-block;
-            background: #25D366;
-            color: white;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: bold;
-            padding: 15px 28px;
-            border-radius: 12px;
-            transition: .2s;
-        }
+.section{
+    position:relative;
+    background:linear-gradient(
+        145deg,
+        rgba(12,16,25,.97),
+        rgba(5,8,14,.97)
+    );
+    border-radius:27px;
+    padding:27px;
+    margin-bottom:25px;
+    overflow:hidden;
+}
 
-        .whatsapp:hover {
-            background: #1ebe5d;
-            transform: scale(1.03);
-        }
+.like-section{
+    border:2px solid var(--pink);
+    box-shadow:
+        0 0 20px rgba(255,0,80,.16),
+        inset 0 0 30px rgba(255,0,80,.03);
+}
 
-        .number {
-            margin-top: 13px;
-            color: #ccc;
-            font-size: 15px;
-        }
+.follow-section{
+    border:2px solid var(--cyan);
+    box-shadow:
+        0 0 20px rgba(0,242,234,.14),
+        inset 0 0 30px rgba(0,242,234,.03);
+}
 
-        @media (max-width: 600px) {
-            .packages {
-                grid-template-columns: 1fr;
-            }
+/* SECTION TITLE */
 
-            .header h1 {
-                font-size: 27px;
-            }
-        }
-    </style>
+.section-title{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    margin-bottom:24px;
+    font-size:30px;
+    font-weight:900;
+}
+
+.section-title .main-icon{
+    width:65px;
+    height:65px;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:35px;
+}
+
+.like-title{
+    color:var(--pink);
+}
+
+.like-title .main-icon{
+    background:linear-gradient(145deg,#ff0050,#ff236b);
+    box-shadow:0 0 25px rgba(255,0,80,.4);
+}
+
+.follow-title{
+    color:var(--cyan);
+}
+
+.follow-title .main-icon{
+    background:linear-gradient(145deg,#00d9d2,#00f2ea);
+    box-shadow:0 0 25px rgba(0,242,234,.35);
+}
+
+.arrow{
+    color:#ffd400;
+    font-size:30px;
+}
+
+/* PACKAGES */
+
+.packages{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.package{
+    min-height:112px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:18px 20px;
+    background:
+        linear-gradient(145deg,#101722,#080c13);
+    border-radius:18px;
+    transition:.25s;
+}
+
+.like-section .package{
+    border:1px solid rgba(255,0,80,.75);
+}
+
+.follow-section .package{
+    border:1px solid rgba(0,242,234,.75);
+}
+
+.package:hover{
+    transform:translateY(-5px) scale(1.01);
+}
+
+.like-section .package:hover{
+    box-shadow:0 0 25px rgba(255,0,80,.18);
+}
+
+.follow-section .package:hover{
+    box-shadow:0 0 25px rgba(0,242,234,.16);
+}
+
+/* PACKAGE ICON */
+
+.package-icon{
+    width:55px;
+    height:55px;
+    min-width:55px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:29px;
+}
+
+.like-icon{
+    background:rgba(255,0,80,.12);
+    color:#ff174f;
+    text-shadow:0 0 15px #ff0050;
+}
+
+.user-icon{
+    background:rgba(0,242,234,.10);
+    color:#00f2ea;
+    text-shadow:0 0 15px #00f2ea;
+}
+
+/* PACKAGE TEXT */
+
+.package-info{
+    flex:1;
+}
+
+.amount{
+    font-size:27px;
+    font-weight:900;
+    line-height:1;
+}
+
+.label{
+    display:block;
+    margin-top:6px;
+    color:#bfc4ce;
+    font-size:18px;
+}
+
+/* PRICE */
+
+.price{
+    padding:13px 18px;
+    border-radius:13px;
+    font-size:21px;
+    font-weight:900;
+    white-space:nowrap;
+}
+
+.like-section .price{
+    background:linear-gradient(135deg,#ff0050,#ff1764);
+    box-shadow:0 0 18px rgba(255,0,80,.25);
+}
+
+.follow-section .price{
+    background:linear-gradient(135deg,#00d8d2,#00f2ea);
+    color:#041013;
+    box-shadow:0 0 18px rgba(0,242,234,.2);
+}
+
+/* ORDER */
+
+.order{
+    position:relative;
+    display:flex;
+    align-items:center;
+    gap:30px;
+    padding:30px;
+    border:2px solid #15e96c;
+    border-radius:27px;
+    background:
+        radial-gradient(circle at 5% 50%,rgba(37,211,102,.16),transparent 35%),
+        #07100d;
+    box-shadow:
+        0 0 25px rgba(37,211,102,.12),
+        inset 0 0 35px rgba(37,211,102,.04);
+}
+
+.whatsapp-big{
+    width:120px;
+    height:120px;
+    min-width:120px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:65px;
+    background:#25D366;
+    box-shadow:
+        0 0 25px rgba(37,211,102,.55),
+        0 0 60px rgba(37,211,102,.18);
+}
+
+.order-content{
+    flex:1;
+}
+
+.order h2{
+    font-size:31px;
+    margin-bottom:9px;
+}
+
+.order p{
+    color:#c7d0ca;
+    font-size:17px;
+    margin-bottom:20px;
+}
+
+.whatsapp-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:15px 27px;
+    border-radius:13px;
+    background:#25D366;
+    color:#fff;
+    text-decoration:none;
+    font-size:19px;
+    font-weight:900;
+    box-shadow:0 0 20px rgba(37,211,102,.25);
+    transition:.25s;
+}
+
+.whatsapp-btn:hover{
+    transform:scale(1.04);
+    background:#20bd5b;
+}
+
+.phone{
+    margin-top:12px;
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+/* FOOTER */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    margin-top:25px;
+    padding-top:20px;
+    border-top:1px solid #272b33;
+}
+
+.feature{
+    text-align:center;
+    color:#ddd;
+    font-size:14px;
+    border-right:1px solid #292d35;
+}
+
+.feature:last-child{
+    border:none;
+}
+
+.feature-icon{
+    display:block;
+    font-size:25px;
+    margin-bottom:7px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:750px){
+
+    .header h1{
+        font-size:48px;
+    }
+
+    .tiktok-logo{
+        font-size:55px;
+    }
+
+    .subtitle{
+        font-size:14px;
+    }
+
+    .section{
+        padding:18px;
+    }
+
+    .section-title{
+        font-size:23px;
+    }
+
+    .section-title .main-icon{
+        width:52px;
+        height:52px;
+        font-size:28px;
+    }
+
+    .packages{
+        grid-template-columns:1fr;
+    }
+
+    .package{
+        min-height:95px;
+    }
+
+    .amount{
+        font-size:23px;
+    }
+
+    .price{
+        font-size:18px;
+        padding:11px 14px;
+    }
+
+    .order{
+        padding:22px;
+        gap:18px;
+    }
+
+    .whatsapp-big{
+        width:80px;
+        height:80px;
+        min-width:80px;
+        font-size:43px;
+    }
+
+    .order h2{
+        font-size:23px;
+    }
+
+    .order p{
+        font-size:14px;
+    }
+
+    .whatsapp-btn{
+        width:100%;
+        font-size:16px;
+    }
+
+    .phone{
+        font-size:18px;
+    }
+
+    .features{
+        grid-template-columns:repeat(2,1fr);
+        row-gap:20px;
+    }
+
+    .feature:nth-child(2){
+        border:none;
+    }
+}
+
+@media(max-width:450px){
+
+    .container{
+        padding:12px 10px 30px;
+    }
+
+    .header{
+        padding-top:20px;
+    }
+
+    .logo-area{
+        gap:8px;
+    }
+
+    .tiktok-logo{
+        font-size:45px;
+    }
+
+    .header h1{
+        font-size:39px;
+    }
+
+    .subtitle span{
+        margin:0 4px;
+    }
+
+    .section-title{
+        font-size:20px;
+        gap:9px;
+    }
+
+    .arrow{
+        font-size:22px;
+    }
+
+    .package{
+        padding:14px;
+        gap:10px;
+    }
+
+    .package-icon{
+        width:45px;
+        height:45px;
+        min-width:45px;
+        font-size:23px;
+    }
+
+    .amount{
+        font-size:20px;
+    }
+
+    .label{
+        font-size:15px;
+    }
+
+    .price{
+        font-size:16px;
+        padding:10px 12px;
+    }
+
+    .order{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .order-content{
+        width:100%;
+    }
+
+    .whatsapp-btn{
+        width:100%;
+    }
+}
+</style>
 </head>
 
 <body>
 
 <div class="container">
 
-    <div class="header">
-        <h1>🎵 TikTok Panel</h1>
-        <p>Bəyəni və takipçi paketləri</p>
-    </div>
+    <!-- HEADER -->
 
-    <!-- BƏYƏNİ PAKETLƏRİ -->
-    <div class="section like-section">
+    <header class="header">
+
+        <div class="logo-area">
+
+            <div class="tiktok-logo">♪</div>
+
+            <h1>
+                TikTok
+                <span>PANEL</span>
+            </h1>
+
+        </div>
+
+        <div class="subtitle">
+            Daha çox bəyəni
+            <span>•</span>
+            Daha çox takipçi
+            <span>•</span>
+            Daha çox populyarlıq
+        </div>
+
+    </header>
+
+
+    <!-- BƏYƏNİ -->
+
+    <section class="section like-section">
 
         <div class="section-title like-title">
-            ❤️ TikTok Bəyəni Paketləri 👇
+
+            <div class="main-icon">♥</div>
+
+            <div>
+                TikTok Bəyəni Paketləri
+            </div>
+
+            <div class="arrow">👇</div>
+
         </div>
+
 
         <div class="packages">
 
             <div class="package">
-                <span class="amount">1.000 bəyəni</span>
-                <span class="price">8,73₼</span>
+
+                <div class="package-icon like-icon">♥</div>
+
+                <div class="package-info">
+                    <div class="amount">1.000</div>
+                    <span class="label">bəyəni</span>
+                </div>
+
+                <div class="price">8,73₼</div>
+
             </div>
 
-            <div class="package">
-                <span class="amount">2.000 bəyəni</span>
-                <span class="price">19,62₼</span>
-            </div>
 
             <div class="package">
-                <span class="amount">5.000 bəyəni</span>
-                <span class="price">39,73₼</span>
+
+                <div class="package-icon like-icon">♥</div>
+
+                <div class="package-info">
+                    <div class="amount">2.000</div>
+                    <span class="label">bəyəni</span>
+                </div>
+
+                <div class="price">19,62₼</div>
+
             </div>
 
+
             <div class="package">
-                <span class="amount">10.000 bəyəni</span>
-                <span class="price">65,39₼</span>
+
+                <div class="package-icon like-icon">♥</div>
+
+                <div class="package-info">
+                    <div class="amount">5.000</div>
+                    <span class="label">bəyəni</span>
+                </div>
+
+                <div class="price">39,73₼</div>
+
+            </div>
+
+
+            <div class="package">
+
+                <div class="package-icon like-icon">♥</div>
+
+                <div class="package-info">
+                    <div class="amount">10.000</div>
+                    <span class="label">bəyənmə</span>
+                </div>
+
+                <div class="price">65,39₼</div>
+
             </div>
 
         </div>
-    </div>
+
+    </section>
 
 
-    <!-- TAKİPÇİ PAKETLƏRİ -->
-    <div class="section">
 
-        <div class="section-title follower-title">
-            👤 TikTok Takipçi Paketləri 👇
+    <!-- TAKİPÇİ -->
+
+    <section class="section follow-section">
+
+        <div class="section-title follow-title">
+
+            <div class="main-icon">●</div>
+
+            <div>
+                TikTok Takipçi Paketləri
+            </div>
+
+            <div class="arrow">👇</div>
+
         </div>
+
 
         <div class="packages">
 
             <div class="package">
-                <span class="amount">1.000 takipçi</span>
-                <span class="price">7,78₼</span>
+
+                <div class="package-icon user-icon">●</div>
+
+                <div class="package-info">
+                    <div class="amount">1.000</div>
+                    <span class="label">takipçi</span>
+                </div>
+
+                <div class="price">7,78₼</div>
+
             </div>
 
-            <div class="package">
-                <span class="amount">2.000 takipçi</span>
-                <span class="price">15,83₼</span>
-            </div>
 
             <div class="package">
-                <span class="amount">5.000 takipçi</span>
-                <span class="price">31,82₼</span>
+
+                <div class="package-icon user-icon">●</div>
+
+                <div class="package-info">
+                    <div class="amount">2.000</div>
+                    <span class="label">takipçi</span>
+                </div>
+
+                <div class="price">15,83₼</div>
+
             </div>
 
+
             <div class="package">
-                <span class="amount">10.000 takipçi</span>
-                <span class="price">57,01₼</span>
+
+                <div class="package-icon user-icon">●</div>
+
+                <div class="package-info">
+                    <div class="amount">5.000</div>
+                    <span class="label">takipçi</span>
+                </div>
+
+                <div class="price">31,82₼</div>
+
+            </div>
+
+
+            <div class="package">
+
+                <div class="package-icon user-icon">●</div>
+
+                <div class="package-info">
+                    <div class="amount">10.000</div>
+                    <span class="label">takipçi</span>
+                </div>
+
+                <div class="price">57,01₼</div>
+
             </div>
 
         </div>
-    </div>
+
+    </section>
 
 
-    <!-- SİFARİŞ -->
-    <div class="order">
 
-        <h2>📲 Sifariş vermək istəyirsən?</h2>
+    <!-- WHATSAPP SİFARİŞ -->
 
-        <p>Sifariş üçün WhatsApp üzərindən bizimlə əlaqə saxla.</p>
+    <section class="order">
 
-        <a class="whatsapp"
-           href="https://wa.me/994552334814?text=Salam%2C%20TikTok%20panelden%20sifaris%20vermek%20isteyirem."
-           target="_blank">
-            💬 WhatsApp-dan Sifariş Ver
-        </a>
+        <div class="whatsapp-big">
+            ☎
+        </div>
 
-        <div class="number">
-            📞 055-233-48-14
+        <div class="order-content">
+
+            <h2>
+                Sifariş vermək istəyirsən?
+            </h2>
+
+            <p>
+                Sifariş üçün WhatsApp üzərindən
+                bizimlə əlaqə saxla.
+            </p>
+
+
+            <a
+                class="whatsapp-btn"
+                href="https://wa.me/994552334814?text=Salam%2C%20TikTok%20panelden%20sifaris%20vermek%20isteyirem."
+                target="_blank"
+            >
+                💬 WhatsApp-dan Sifariş Ver →
+            </a>
+
+
+            <div class="phone">
+                ☎ 055-233-48-14
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- XÜSUSİYYƏTLƏR -->
+
+    <div class="features">
+
+        <div class="feature">
+            <span class="feature-icon">⚡</span>
+            Sürətli çatdırılma
+        </div>
+
+        <div class="feature">
+            <span class="feature-icon">🛡</span>
+            Təhlükəsiz xidmət
+        </div>
+
+        <div class="feature">
+            <span class="feature-icon">★</span>
+            Zəmanətli nəticə
+        </div>
+
+        <div class="feature">
+            <span class="feature-icon">✦</span>
+            Keyfiyyətli xidmət
         </div>
 
     </div>
