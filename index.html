@@ -7,555 +7,649 @@
 <title>TikTok Panel</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-:root{
-    --pink:#ff0050;
-    --cyan:#00f2ea;
-    --green:#25D366;
-    --dark:#05070d;
-    --card:#0b1019;
+:root {
+    --pink: #ff0050;
+    --pink-light: #ff2d6d;
+    --cyan: #00f2ea;
+    --green: #25d366;
+    --bg: #05070d;
+    --card: #0c111a;
+    --card2: #101722;
+    --text: #ffffff;
+    --muted: #a8afb9;
 }
 
-body{
-    font-family:Arial, Helvetica, sans-serif;
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
     background:
-        radial-gradient(circle at 10% 10%, rgba(255,0,80,.12), transparent 25%),
-        radial-gradient(circle at 90% 30%, rgba(0,242,234,.10), transparent 25%),
-        #05070d;
-    color:#fff;
-    min-height:100vh;
-    overflow-x:hidden;
+        radial-gradient(circle at 10% 0%, rgba(255, 0, 80, 0.12), transparent 28%),
+        radial-gradient(circle at 90% 15%, rgba(0, 242, 234, 0.10), transparent 30%),
+        linear-gradient(180deg, #05070d 0%, #070a10 100%);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-/* NEON XƏTTLƏR */
+/* Background lights */
 
-body::before,
-body::after{
-    content:"";
-    position:fixed;
-    width:90px;
-    height:6px;
-    border-radius:20px;
-    z-index:-1;
-    transform:rotate(-45deg);
+.background-light {
+    position: fixed;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: .12;
+    pointer-events: none;
+    z-index: -1;
 }
 
-body::before{
-    top:45px;
-    left:-20px;
-    background:var(--pink);
-    box-shadow:0 0 20px var(--pink);
+.light-pink {
+    background: var(--pink);
+    left: -130px;
+    top: 200px;
 }
 
-body::after{
-    bottom:50px;
-    right:-20px;
-    background:var(--cyan);
-    box-shadow:0 0 20px var(--cyan);
+.light-cyan {
+    background: var(--cyan);
+    right: -130px;
+    top: 550px;
 }
 
-/* CONTAINER */
+/* Main */
 
-.container{
-    width:100%;
-    max-width:1050px;
-    margin:auto;
-    padding:25px 18px 45px;
+.container {
+    width: 100%;
+    max-width: 1050px;
+    margin: auto;
+    padding: 25px 18px 45px;
 }
 
-/* HEADER */
+/* Header */
 
-.header{
-    text-align:center;
-    padding:25px 10px 35px;
-    position:relative;
+.header {
+    text-align: center;
+    padding: 20px 10px 38px;
 }
 
-.logo-area{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:18px;
+.brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
 }
 
-.tiktok-logo{
-    font-size:78px;
-    line-height:1;
-    text-shadow:
-        -4px -3px 0 var(--cyan),
-        4px 3px 0 var(--pink),
-        0 0 30px rgba(255,0,80,.4);
+.tiktok-symbol {
+    width: 76px;
+    height: 76px;
+    filter: drop-shadow(-4px -3px 0 var(--cyan))
+            drop-shadow(4px 3px 0 var(--pink));
 }
 
-.header h1{
-    font-size:70px;
-    font-weight:900;
-    letter-spacing:-3px;
-    line-height:.9;
+.brand-title {
+    text-align: left;
+    font-size: 64px;
+    font-weight: 900;
+    line-height: .88;
+    letter-spacing: -3px;
 }
 
-.header h1 span{
-    display:block;
-    background:linear-gradient(90deg,#ff0050,#fff,#00f2ea);
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-}
-
-.subtitle{
-    margin-top:22px;
-    font-size:18px;
-    color:#ddd;
-}
-
-.subtitle span{
-    margin:0 10px;
-    color:#777;
-}
-
-/* SECTION */
-
-.section{
-    position:relative;
-    background:linear-gradient(
-        145deg,
-        rgba(12,16,25,.97),
-        rgba(5,8,14,.97)
+.brand-title span {
+    display: block;
+    background: linear-gradient(
+        90deg,
+        var(--pink),
+        #ffffff 45%,
+        var(--cyan)
     );
-    border-radius:27px;
-    padding:27px;
-    margin-bottom:25px;
-    overflow:hidden;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
-.like-section{
-    border:2px solid var(--pink);
-    box-shadow:
-        0 0 20px rgba(255,0,80,.16),
-        inset 0 0 30px rgba(255,0,80,.03);
+.subtitle {
+    margin-top: 24px;
+    color: #d6d9df;
+    font-size: 17px;
+    letter-spacing: .2px;
 }
 
-.follow-section{
-    border:2px solid var(--cyan);
-    box-shadow:
-        0 0 20px rgba(0,242,234,.14),
-        inset 0 0 30px rgba(0,242,234,.03);
+.subtitle .dot {
+    color: #555d68;
+    margin: 0 13px;
 }
 
-/* SECTION TITLE */
+/* Sections */
 
-.section-title{
-    display:flex;
-    align-items:center;
-    gap:16px;
-    margin-bottom:24px;
-    font-size:30px;
-    font-weight:900;
-}
-
-.section-title .main-icon{
-    width:65px;
-    height:65px;
-    border-radius:16px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:35px;
-}
-
-.like-title{
-    color:var(--pink);
-}
-
-.like-title .main-icon{
-    background:linear-gradient(145deg,#ff0050,#ff236b);
-    box-shadow:0 0 25px rgba(255,0,80,.4);
-}
-
-.follow-title{
-    color:var(--cyan);
-}
-
-.follow-title .main-icon{
-    background:linear-gradient(145deg,#00d9d2,#00f2ea);
-    box-shadow:0 0 25px rgba(0,242,234,.35);
-}
-
-.arrow{
-    color:#ffd400;
-    font-size:30px;
-}
-
-/* PACKAGES */
-
-.packages{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:18px;
-}
-
-.package{
-    min-height:112px;
-    display:flex;
-    align-items:center;
-    gap:16px;
-    padding:18px 20px;
+.section {
+    padding: 27px;
+    border-radius: 25px;
+    margin-bottom: 24px;
     background:
-        linear-gradient(145deg,#101722,#080c13);
-    border-radius:18px;
-    transition:.25s;
+        linear-gradient(
+            145deg,
+            rgba(15, 20, 30, .98),
+            rgba(7, 10, 16, .98)
+        );
+    overflow: hidden;
 }
 
-.like-section .package{
-    border:1px solid rgba(255,0,80,.75);
+.like-section {
+    border: 1px solid rgba(255, 0, 80, .9);
+    box-shadow:
+        0 0 25px rgba(255, 0, 80, .10),
+        inset 0 0 35px rgba(255, 0, 80, .025);
 }
 
-.follow-section .package{
-    border:1px solid rgba(0,242,234,.75);
+.follow-section {
+    border: 1px solid rgba(0, 242, 234, .9);
+    box-shadow:
+        0 0 25px rgba(0, 242, 234, .10),
+        inset 0 0 35px rgba(0, 242, 234, .025);
 }
 
-.package:hover{
-    transform:translateY(-5px) scale(1.01);
+/* Section title */
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 23px;
+    font-size: 29px;
+    font-weight: 800;
 }
 
-.like-section .package:hover{
-    box-shadow:0 0 25px rgba(255,0,80,.18);
+.title-icon {
+    width: 58px;
+    height: 58px;
+    min-width: 58px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.follow-section .package:hover{
-    box-shadow:0 0 25px rgba(0,242,234,.16);
+.title-icon svg {
+    width: 31px;
+    height: 31px;
 }
 
-/* PACKAGE ICON */
-
-.package-icon{
-    width:55px;
-    height:55px;
-    min-width:55px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:29px;
+.like-title {
+    color: var(--pink);
 }
 
-.like-icon{
-    background:rgba(255,0,80,.12);
-    color:#ff174f;
-    text-shadow:0 0 15px #ff0050;
+.like-title .title-icon {
+    background: linear-gradient(
+        145deg,
+        #ff0050,
+        #d90045
+    );
+    color: white;
+    box-shadow: 0 0 25px rgba(255, 0, 80, .3);
 }
 
-.user-icon{
-    background:rgba(0,242,234,.10);
-    color:#00f2ea;
-    text-shadow:0 0 15px #00f2ea;
+.follow-title {
+    color: var(--cyan);
 }
 
-/* PACKAGE TEXT */
-
-.package-info{
-    flex:1;
+.follow-title .title-icon {
+    background: linear-gradient(
+        145deg,
+        #00f2ea,
+        #00c8c2
+    );
+    color: #061113;
+    box-shadow: 0 0 25px rgba(0, 242, 234, .25);
 }
 
-.amount{
-    font-size:27px;
-    font-weight:900;
-    line-height:1;
+.arrow-icon {
+    margin-left: 3px;
+    color: #ffd000;
+    width: 23px;
+    height: 23px;
 }
 
-.label{
-    display:block;
-    margin-top:6px;
-    color:#bfc4ce;
-    font-size:18px;
+/* Packages */
+
+.packages {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
 }
 
-/* PRICE */
-
-.price{
-    padding:13px 18px;
-    border-radius:13px;
-    font-size:21px;
-    font-weight:900;
-    white-space:nowrap;
-}
-
-.like-section .price{
-    background:linear-gradient(135deg,#ff0050,#ff1764);
-    box-shadow:0 0 18px rgba(255,0,80,.25);
-}
-
-.follow-section .price{
-    background:linear-gradient(135deg,#00d8d2,#00f2ea);
-    color:#041013;
-    box-shadow:0 0 18px rgba(0,242,234,.2);
-}
-
-/* ORDER */
-
-.order{
-    position:relative;
-    display:flex;
-    align-items:center;
-    gap:30px;
-    padding:30px;
-    border:2px solid #15e96c;
-    border-radius:27px;
+.package {
+    min-height: 105px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-radius: 17px;
     background:
-        radial-gradient(circle at 5% 50%,rgba(37,211,102,.16),transparent 35%),
+        linear-gradient(
+            145deg,
+            #111824,
+            #080c13
+        );
+    transition: all .25s ease;
+}
+
+.like-section .package {
+    border: 1px solid rgba(255, 0, 80, .60);
+}
+
+.follow-section .package {
+    border: 1px solid rgba(0, 242, 234, .60);
+}
+
+.package:hover {
+    transform: translateY(-4px);
+}
+
+.like-section .package:hover {
+    border-color: var(--pink);
+    box-shadow: 0 8px 30px rgba(255, 0, 80, .13);
+}
+
+.follow-section .package:hover {
+    border-color: var(--cyan);
+    box-shadow: 0 8px 30px rgba(0, 242, 234, .13);
+}
+
+/* Package icon */
+
+.package-icon {
+    width: 51px;
+    height: 51px;
+    min-width: 51px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.package-icon svg {
+    width: 27px;
+    height: 27px;
+}
+
+.like-icon {
+    color: var(--pink);
+    background: rgba(255, 0, 80, .10);
+}
+
+.user-icon {
+    color: var(--cyan);
+    background: rgba(0, 242, 234, .09);
+}
+
+/* Package information */
+
+.package-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.amount {
+    font-size: 27px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.label {
+    display: block;
+    color: var(--muted);
+    margin-top: 7px;
+    font-size: 17px;
+}
+
+/* Price */
+
+.price {
+    padding: 12px 17px;
+    border-radius: 12px;
+    font-size: 20px;
+    font-weight: 900;
+    white-space: nowrap;
+}
+
+.like-section .price {
+    color: white;
+    background: linear-gradient(
+        135deg,
+        #ff0050,
+        #e60048
+    );
+    box-shadow: 0 0 18px rgba(255, 0, 80, .18);
+}
+
+.follow-section .price {
+    color: #031113;
+    background: linear-gradient(
+        135deg,
+        #00dcd5,
+        #00f2ea
+    );
+    box-shadow: 0 0 18px rgba(0, 242, 234, .16);
+}
+
+/* Order box */
+
+.order {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 30px;
+    margin-top: 4px;
+    border-radius: 25px;
+    border: 1px solid rgba(37, 211, 102, .9);
+    background:
+        radial-gradient(
+            circle at 5% 50%,
+            rgba(37, 211, 102, .13),
+            transparent 35%
+        ),
         #07100d;
     box-shadow:
-        0 0 25px rgba(37,211,102,.12),
-        inset 0 0 35px rgba(37,211,102,.04);
+        0 0 28px rgba(37, 211, 102, .09),
+        inset 0 0 30px rgba(37, 211, 102, .025);
 }
 
-.whatsapp-big{
-    width:120px;
-    height:120px;
-    min-width:120px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:65px;
-    background:#25D366;
+.whatsapp-icon {
+    width: 105px;
+    height: 105px;
+    min-width: 105px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: var(--green);
     box-shadow:
-        0 0 25px rgba(37,211,102,.55),
-        0 0 60px rgba(37,211,102,.18);
+        0 0 25px rgba(37, 211, 102, .42);
 }
 
-.order-content{
-    flex:1;
+.whatsapp-icon svg {
+    width: 58px;
+    height: 58px;
 }
 
-.order h2{
-    font-size:31px;
-    margin-bottom:9px;
+.order-content {
+    flex: 1;
 }
 
-.order p{
-    color:#c7d0ca;
-    font-size:17px;
-    margin-bottom:20px;
+.order-title {
+    font-size: 30px;
+    font-weight: 900;
+    margin-bottom: 8px;
 }
 
-.whatsapp-btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    padding:15px 27px;
-    border-radius:13px;
-    background:#25D366;
-    color:#fff;
-    text-decoration:none;
-    font-size:19px;
-    font-weight:900;
-    box-shadow:0 0 20px rgba(37,211,102,.25);
-    transition:.25s;
+.order-text {
+    color: #c2cbc5;
+    font-size: 16px;
+    margin-bottom: 19px;
 }
 
-.whatsapp-btn:hover{
-    transform:scale(1.04);
-    background:#20bd5b;
+.whatsapp-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 25px;
+    border-radius: 12px;
+    background: var(--green);
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 900;
+    transition: .25s;
+    box-shadow: 0 0 20px rgba(37, 211, 102, .20);
 }
 
-.phone{
-    margin-top:12px;
-    font-size:22px;
-    font-weight:900;
-    letter-spacing:1px;
+.whatsapp-button:hover {
+    transform: translateY(-2px);
+    background: #20bd5c;
+    box-shadow: 0 0 28px rgba(37, 211, 102, .30);
 }
 
-/* FOOTER */
-
-.features{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    margin-top:25px;
-    padding-top:20px;
-    border-top:1px solid #272b33;
+.whatsapp-button svg {
+    width: 23px;
+    height: 23px;
 }
 
-.feature{
-    text-align:center;
-    color:#ddd;
-    font-size:14px;
-    border-right:1px solid #292d35;
+.phone {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: .5px;
 }
 
-.feature:last-child{
-    border:none;
+.phone svg {
+    width: 20px;
+    height: 20px;
 }
 
-.feature-icon{
-    display:block;
-    font-size:25px;
-    margin-bottom:7px;
+/* Features */
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #252b34;
 }
 
-/* RESPONSIVE */
+.feature {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 35px;
+    color: #d4d8de;
+    font-size: 14px;
+    border-right: 1px solid #282e37;
+}
 
-@media(max-width:750px){
+.feature:last-child {
+    border-right: none;
+}
 
-    .header h1{
-        font-size:48px;
+.feature svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* Mobile */
+
+@media (max-width: 750px) {
+
+    .container {
+        padding: 18px 12px 35px;
     }
 
-    .tiktok-logo{
-        font-size:55px;
+    .brand {
+        gap: 10px;
     }
 
-    .subtitle{
-        font-size:14px;
+    .tiktok-symbol {
+        width: 55px;
+        height: 55px;
     }
 
-    .section{
-        padding:18px;
+    .brand-title {
+        font-size: 46px;
     }
 
-    .section-title{
-        font-size:23px;
+    .subtitle {
+        font-size: 14px;
+        line-height: 1.8;
     }
 
-    .section-title .main-icon{
-        width:52px;
-        height:52px;
-        font-size:28px;
+    .subtitle .dot {
+        margin: 0 5px;
     }
 
-    .packages{
-        grid-template-columns:1fr;
+    .section {
+        padding: 19px;
+        border-radius: 20px;
     }
 
-    .package{
-        min-height:95px;
+    .section-title {
+        font-size: 21px;
+        gap: 10px;
     }
 
-    .amount{
-        font-size:23px;
+    .title-icon {
+        width: 49px;
+        height: 49px;
+        min-width: 49px;
     }
 
-    .price{
-        font-size:18px;
-        padding:11px 14px;
+    .title-icon svg {
+        width: 27px;
+        height: 27px;
     }
 
-    .order{
-        padding:22px;
-        gap:18px;
+    .packages {
+        grid-template-columns: 1fr;
     }
 
-    .whatsapp-big{
-        width:80px;
-        height:80px;
-        min-width:80px;
-        font-size:43px;
+    .package {
+        min-height: 94px;
+        padding: 14px;
     }
 
-    .order h2{
-        font-size:23px;
+    .amount {
+        font-size: 22px;
     }
 
-    .order p{
-        font-size:14px;
+    .label {
+        font-size: 15px;
     }
 
-    .whatsapp-btn{
-        width:100%;
-        font-size:16px;
+    .price {
+        font-size: 17px;
+        padding: 10px 13px;
     }
 
-    .phone{
-        font-size:18px;
+    .order {
+        padding: 23px;
+        gap: 18px;
     }
 
-    .features{
-        grid-template-columns:repeat(2,1fr);
-        row-gap:20px;
+    .whatsapp-icon {
+        width: 76px;
+        height: 76px;
+        min-width: 76px;
     }
 
-    .feature:nth-child(2){
-        border:none;
+    .whatsapp-icon svg {
+        width: 43px;
+        height: 43px;
+    }
+
+    .order-title {
+        font-size: 23px;
+    }
+
+    .order-text {
+        font-size: 14px;
+    }
+
+    .whatsapp-button {
+        font-size: 16px;
+        padding: 13px 18px;
+    }
+
+    .phone {
+        font-size: 18px;
+    }
+
+    .features {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 15px;
+    }
+
+    .feature {
+        border-right: 1px solid #282e37;
+    }
+
+    .feature:nth-child(2),
+    .feature:nth-child(4) {
+        border-right: none;
     }
 }
 
-@media(max-width:450px){
+@media (max-width: 450px) {
 
-    .container{
-        padding:12px 10px 30px;
+    .brand-title {
+        font-size: 38px;
     }
 
-    .header{
-        padding-top:20px;
+    .tiktok-symbol {
+        width: 45px;
+        height: 45px;
     }
 
-    .logo-area{
-        gap:8px;
+    .section-title {
+        font-size: 19px;
     }
 
-    .tiktok-logo{
-        font-size:45px;
+    .arrow-icon {
+        width: 18px;
+        height: 18px;
     }
 
-    .header h1{
-        font-size:39px;
+    .package-icon {
+        width: 43px;
+        height: 43px;
+        min-width: 43px;
     }
 
-    .subtitle span{
-        margin:0 4px;
+    .package-icon svg {
+        width: 23px;
+        height: 23px;
     }
 
-    .section-title{
-        font-size:20px;
-        gap:9px;
+    .amount {
+        font-size: 20px;
     }
 
-    .arrow{
-        font-size:22px;
+    .price {
+        font-size: 15px;
+        padding: 9px 10px;
     }
 
-    .package{
-        padding:14px;
-        gap:10px;
+    .order {
+        flex-direction: column;
+        text-align: center;
     }
 
-    .package-icon{
-        width:45px;
-        height:45px;
-        min-width:45px;
-        font-size:23px;
+    .order-content {
+        width: 100%;
     }
 
-    .amount{
-        font-size:20px;
+    .phone {
+        justify-content: center;
     }
 
-    .label{
-        font-size:15px;
+    .whatsapp-button {
+        width: 100%;
     }
 
-    .price{
-        font-size:16px;
-        padding:10px 12px;
-    }
-
-    .order{
-        flex-direction:column;
-        text-align:center;
-    }
-
-    .order-content{
-        width:100%;
-    }
-
-    .whatsapp-btn{
-        width:100%;
+    .features {
+        font-size: 12px;
     }
 }
 </style>
@@ -563,258 +657,522 @@ body::after{
 
 <body>
 
+<div class="background-light light-pink"></div>
+<div class="background-light light-cyan"></div>
+
 <div class="container">
 
-    <!-- HEADER -->
+<!-- HEADER -->
 
-    <header class="header">
+<header class="header">
 
-        <div class="logo-area">
+    <div class="brand">
 
-            <div class="tiktok-logo">♪</div>
+        <!-- TikTok icon -->
+        <svg class="tiktok-symbol"
+             viewBox="0 0 64 64"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
 
-            <h1>
-                TikTok
-                <span>PANEL</span>
-            </h1>
+            <path
+                d="M38 8V38.5C38 47.06 31.06 54 22.5 54C15.04 54 10 49.07 10 43C10 36.37 15.37 31 22 31C24.25 31 26.35 31.62 28.17 32.7V22.1C26.4 21.38 24.47 21 22.45 21C10.04 21 0 30.91 0 43C0 54.6 9.4 64 21 64C34.81 64 46 52.81 46 39V25.4C50.48 29.2 56.36 31.5 63 31.5V21.5C54.72 21.5 48 14.78 48 6.5V4H38V8Z"
+                fill="white"/>
 
-        </div>
+        </svg>
 
-        <div class="subtitle">
-            Daha çox bəyəni
-            <span>•</span>
-            Daha çox takipçi
-            <span>•</span>
-            Daha çox populyarlıq
-        </div>
-
-    </header>
-
-
-    <!-- BƏYƏNİ -->
-
-    <section class="section like-section">
-
-        <div class="section-title like-title">
-
-            <div class="main-icon">♥</div>
-
-            <div>
-                TikTok Bəyəni Paketləri
-            </div>
-
-            <div class="arrow">👇</div>
-
-        </div>
-
-
-        <div class="packages">
-
-            <div class="package">
-
-                <div class="package-icon like-icon">♥</div>
-
-                <div class="package-info">
-                    <div class="amount">1.000</div>
-                    <span class="label">bəyəni</span>
-                </div>
-
-                <div class="price">8,73₼</div>
-
-            </div>
-
-
-            <div class="package">
-
-                <div class="package-icon like-icon">♥</div>
-
-                <div class="package-info">
-                    <div class="amount">2.000</div>
-                    <span class="label">bəyəni</span>
-                </div>
-
-                <div class="price">19,62₼</div>
-
-            </div>
-
-
-            <div class="package">
-
-                <div class="package-icon like-icon">♥</div>
-
-                <div class="package-info">
-                    <div class="amount">5.000</div>
-                    <span class="label">bəyəni</span>
-                </div>
-
-                <div class="price">39,73₼</div>
-
-            </div>
-
-
-            <div class="package">
-
-                <div class="package-icon like-icon">♥</div>
-
-                <div class="package-info">
-                    <div class="amount">10.000</div>
-                    <span class="label">bəyənmə</span>
-                </div>
-
-                <div class="price">65,39₼</div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- TAKİPÇİ -->
-
-    <section class="section follow-section">
-
-        <div class="section-title follow-title">
-
-            <div class="main-icon">●</div>
-
-            <div>
-                TikTok Takipçi Paketləri
-            </div>
-
-            <div class="arrow">👇</div>
-
-        </div>
-
-
-        <div class="packages">
-
-            <div class="package">
-
-                <div class="package-icon user-icon">●</div>
-
-                <div class="package-info">
-                    <div class="amount">1.000</div>
-                    <span class="label">takipçi</span>
-                </div>
-
-                <div class="price">7,78₼</div>
-
-            </div>
-
-
-            <div class="package">
-
-                <div class="package-icon user-icon">●</div>
-
-                <div class="package-info">
-                    <div class="amount">2.000</div>
-                    <span class="label">takipçi</span>
-                </div>
-
-                <div class="price">15,83₼</div>
-
-            </div>
-
-
-            <div class="package">
-
-                <div class="package-icon user-icon">●</div>
-
-                <div class="package-info">
-                    <div class="amount">5.000</div>
-                    <span class="label">takipçi</span>
-                </div>
-
-                <div class="price">31,82₼</div>
-
-            </div>
-
-
-            <div class="package">
-
-                <div class="package-icon user-icon">●</div>
-
-                <div class="package-info">
-                    <div class="amount">10.000</div>
-                    <span class="label">takipçi</span>
-                </div>
-
-                <div class="price">57,01₼</div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- WHATSAPP SİFARİŞ -->
-
-    <section class="order">
-
-        <div class="whatsapp-big">
-            ☎
-        </div>
-
-        <div class="order-content">
-
-            <h2>
-                Sifariş vermək istəyirsən?
-            </h2>
-
-            <p>
-                Sifariş üçün WhatsApp üzərindən
-                bizimlə əlaqə saxla.
-            </p>
-
-
-            <a
-                class="whatsapp-btn"
-                href="https://wa.me/994552334814?text=Salam%2C%20TikTok%20panelden%20sifaris%20vermek%20isteyirem."
-                target="_blank"
-            >
-                💬 WhatsApp-dan Sifariş Ver →
-            </a>
-
-
-            <div class="phone">
-                ☎ 055-233-48-14
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- XÜSUSİYYƏTLƏR -->
-
-    <div class="features">
-
-        <div class="feature">
-            <span class="feature-icon">⚡</span>
-            Sürətli çatdırılma
-        </div>
-
-        <div class="feature">
-            <span class="feature-icon">🛡</span>
-            Təhlükəsiz xidmət
-        </div>
-
-        <div class="feature">
-            <span class="feature-icon">★</span>
-            Zəmanətli nəticə
-        </div>
-
-        <div class="feature">
-            <span class="feature-icon">✦</span>
-            Keyfiyyətli xidmət
+        <div class="brand-title">
+            TikTok
+            <span>PANEL</span>
         </div>
 
     </div>
+
+    <div class="subtitle">
+        Daha çox bəyəni
+        <span class="dot">•</span>
+        Daha çox takipçi
+        <span class="dot">•</span>
+        Daha çox populyarlıq
+    </div>
+
+</header>
+
+
+<!-- BƏYƏNİ PAKETLƏRİ -->
+
+<section class="section like-section">
+
+    <div class="section-title like-title">
+
+        <div class="title-icon">
+
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round">
+
+                <path d="M20.8 8.6c0 5.4-8.8 10.4-8.8 10.4S3.2 14 3.2 8.6A4.6 4.6 0 0 1 12 6.2a4.6 4.6 0 0 1 8.8 2.4Z"/>
+
+            </svg>
+
+        </div>
+
+        <span>TikTok Bəyəni Paketləri</span>
+
+        <svg class="arrow-icon"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2.5"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+
+            <path d="M12 4v16"/>
+            <path d="m6 14 6 6 6-6"/>
+
+        </svg>
+
+    </div>
+
+
+    <div class="packages">
+
+        <!-- 1000 -->
+
+        <div class="package">
+
+            <div class="package-icon like-icon">
+
+                <svg viewBox="0 0 24 24"
+                     fill="currentColor">
+
+                    <path d="M12 21s-7.5-4.35-9.5-9.2C.8 7.65 3.1 4 6.8 4c2.1 0 3.7 1.2 5.2 3 1.5-1.8 3.1-3 5.2-3 3.7 0 6 3.65 4.3 7.8C19.5 16.65 12 21 12 21Z"/>
+
+                </svg>
+
+            </div>
+
+            <div class="package-info">
+                <div class="amount">1.000</div>
+                <span class="label">bəyəni</span>
+            </div>
+
+            <div class="price">8,73₼</div>
+
+        </div>
+
+
+        <!-- 2000 -->
+
+        <div class="package">
+
+            <div class="package-icon like-icon">
+
+                <svg viewBox="0 0 24 24"
+                     fill="currentColor">
+
+                    <path d="M12 21s-7.5-4.35-9.5-9.2C.8 7.65 3.1 4 6.8 4c2.1 0 3.7 1.2 5.2 3 1.5-1.8 3.1-3 5.2-3 3.7 0 6 3.65 4.3 7.8C19.5 16.65 12 21 12 21Z"/>
+
+                </svg>
+
+            </div>
+
+            <div class="package-info">
+                <div class="amount">2.000</div>
+                <span class="label">bəyəni</span>
+            </div>
+
+            <div class="price">19,62₼</div>
+
+        </div>
+
+
+        <!-- 5000 -->
+
+        <div class="package">
+
+            <div class="package-icon like-icon">
+
+                <svg viewBox="0 0 24 24"
+                     fill="currentColor">
+
+                    <path d="M12 21s-7.5-4.35-9.5-9.2C.8 7.65 3.1 4 6.8 4c2.1 0 3.7 1.2 5.2 3 1.5-1.8 3.1-3 5.2-3 3.7 0 6 3.65 4.3 7.8C19.5 16.65 12 21 12 21Z"/>
+
+                </svg>
+
+            </div>
+
+            <div class="package-info">
+                <div class="amount">5.000</div>
+                <span class="label">bəyəni</span>
+            </div>
+
+            <div class="price">39,73₼</div>
+
+        </div>
+
+
+        <!-- 10000 -->
+
+        <div class="package">
+
+            <div class="package-icon like-icon">
+
+                <svg viewBox="0 0 24 24"
+                     fill="currentColor">
+
+                    <path d="M12 21s-7.5-4.35-9.5-9.2C.8 7.65 3.1 4 6.8 4c2.1 0 3.7 1.2 5.2 3 1.5-1.8 3.1-3 5.2-3 3.7 0 6 3.65 4.3 7.8C19.5 16.65 12 21 12 21Z"/>
+
+                </svg>
+
+            </div>
+
+            <div class="package-info">
+                <div class="amount">10.000</div>
+                <span class="label">bəyənmə</span>
+            </div>
+
+            <div class="price">65,39₼</div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TAKİPÇİ PAKETLƏRİ -->
+
+<section class="section follow-section">
+
+    <div class="section-title follow-title">
+
+        <div class="title-icon">
+
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round">
+
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M3 21v-2a6 6 0 0 1 12 0v2"/>
+                <path d="M16 4.5a4 4 0 0 1 0 7.5"/>
+                <path d="M18 14a5 5 0 0 1 3 5v2"/>
+
+            </svg>
+
+        </div>
+
+        <span>TikTok Takipçi Paketləri</span>
+
+        <svg class="arrow-icon"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2.5"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+
+            <path d="M12 4v16"/>
+            <path d="m6 14 6 6 6-6"/>
+
+        </svg>
+
+    </div>
+
+
+    <div class="packages">
+
+        <!-- 1000 -->
+
+        <div class="package">
+
+            <div class="package-icon user-icon">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2"
+                     stroke-linecap="round"
+                     stroke-linejoin="round">
+
+                    <circle cx="12" cy="7" r="4"/>
+                    <path d="M4 21v-1a8 8 0 0 1 16 0v1"/>
+
+                </svg>
+
+            </div>
+
+            <div class="package-info">
+                <div class="amount">1.000</div>
+                <span class="label">takipçi</span>
+            </div>
+
+            <div class="price">7,78₼</div>
+
+        </div>
+
+
+        <!-- 2000 -->
+
+        <div class="package">
+
+            <div class="package-icon user-icon">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2"
+                     stroke-linecap="round"
+                     stroke-linejoin="round">
+
+                    <circle cx="12" cy="7" r="4"/>
+                    <path d="M4 21v-1a8 8 0 0 1 16 0v1"/>
+
+                </svg>
+
+            </div>
+
+            <div class="package-info">
+                <div class="amount">2.000</div>
+                <span class="label">takipçi</span>
+            </div>
+
+            <div class="price">15,83₼</div>
+
+        </div>
+
+
+        <!-- 5000 -->
+
+        <div class="package">
+
+            <div class="package-icon user-icon">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2"
+                     stroke-linecap="round"
+                     stroke-linejoin="round">
+
+                    <circle cx="12" cy="7" r="4"/>
+                    <path d="M4 21v-1a8 8 0 0 1 16 0v1"/>
+
+                </svg>
+
+            </div>
+
+            <div class="package-info">
+                <div class="amount">5.000</div>
+                <span class="label">takipçi</span>
+            </div>
+
+            <div class="price">31,82₼</div>
+
+        </div>
+
+
+        <!-- 10000 -->
+
+        <div class="package">
+
+            <div class="package-icon user-icon">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2"
+                     stroke-linecap="round"
+                     stroke-linejoin="round">
+
+                    <circle cx="12" cy="7" r="4"/>
+                    <path d="M4 21v-1a8 8 0 0 1 16 0v1"/>
+
+                </svg>
+
+            </div>
+
+            <div class="package-info">
+                <div class="amount">10.000</div>
+                <span class="label">takipçi</span>
+            </div>
+
+            <div class="price">57,01₼</div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- WHATSAPP -->
+
+<section class="order">
+
+    <div class="whatsapp-icon">
+
+        <svg viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.7"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+
+            <path d="M20 11.5a8 8 0 0 1-11.9 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z"/>
+            <path d="M8.5 9.2c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.7 1.7c.1.3.1.5-.1.7l-.5.6c.6 1.1 1.5 1.9 2.7 2.5l.5-.5c.2-.2.4-.2.7-.1l1.6.7c.3.1.4.3.4.6v.5c0 .3-.1.5-.4.7-.5.3-1.2.5-1.8.3-2.2-.6-4.1-2.4-5.3-4.2-.5-.8-.9-1.8-.9-2.6 0-.5.2-1 .5-1.3Z"/>
+
+        </svg>
+
+    </div>
+
+
+    <div class="order-content">
+
+        <div class="order-title">
+            Sifariş vermək istəyirsən?
+        </div>
+
+        <div class="order-text">
+            Sifariş üçün WhatsApp üzərindən bizimlə əlaqə saxla.
+        </div>
+
+
+        <a
+            class="whatsapp-button"
+            href="https://wa.me/994552334814?text=Salam%2C%20TikTok%20panelden%20sifaris%20vermek%20isteyirem."
+            target="_blank"
+            rel="noopener"
+        >
+
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="1.8"
+                 stroke-linecap="round"
+                 stroke-linejoin="round">
+
+                <path d="M20 11.5a8 8 0 0 1-11.9 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z"/>
+                <path d="M8.5 9.2c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.7 1.7c.1.3.1.5-.1.7l-.5.6c.6 1.1 1.5 1.9 2.7 2.5l.5-.5c.2-.2.4-.2.7-.1l1.6.7c.3.1.4.3.4.6v.5c0 .3-.1.5-.4.7-.5.3-1.2.5-1.8.3-2.2-.6-4.1-2.4-5.3-4.2-.5-.8-.9-1.8-.9-2.6 0-.5.2-1 .5-1.3Z"/>
+
+            </svg>
+
+            WhatsApp-dan Sifariş Ver
+
+        </a>
+
+
+        <div class="phone">
+
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round">
+
+                <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.2-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7A2 2 0 0 1 22 16.9Z"/>
+
+            </svg>
+
+            055-233-48-14
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<div class="features">
+
+    <div class="feature">
+
+        <svg viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+
+            <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/>
+
+        </svg>
+
+        Sürətli çatdırılma
+
+    </div>
+
+
+    <div class="feature">
+
+        <svg viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/>
+            <path d="m9 12 2 2 4-4"/>
+
+        </svg>
+
+        Təhlükəsiz xidmət
+
+    </div>
+
+
+    <div class="feature">
+
+        <svg viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+
+            <path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2 2 9.3l6.9-1L12 2Z"/>
+
+        </svg>
+
+        Zəmanətli nəticə
+
+    </div>
+
+
+    <div class="feature">
+
+        <svg viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+
+            <path d="M12 3v4"/>
+            <path d="M12 17v4"/>
+            <path d="m4.2 4.2 2.8 2.8"/>
+            <path d="m17 17 2.8 2.8"/>
+            <path d="M3 12h4"/>
+            <path d="M17 12h4"/>
+            <path d="m4.2 19.8 2.8-2.8"/>
+            <path d="m17 7 2.8-2.8"/>
+
+        </svg>
+
+        Keyfiyyətli xidmət
+
+    </div>
+
+</div>
 
 </div>
 
