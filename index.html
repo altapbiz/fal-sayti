@@ -12,14 +12,13 @@
   --bg:#080910;--panel:#11131e;--border:#292d40;
   --white:#f7f8ff;--muted:#9299ad;
   --cyan:#25f4ee;--pink:#fe2c55;
-  --m10:#6b36d9;--m10-light:#8d61f0
 }
 *{box-sizing:border-box}
 body{
   margin:0;
   background:
-  radial-gradient(ellipse at 10% 10%,#25f4ee13,transparent 40%),
-  radial-gradient(ellipse at 90% 65%,#fe2c5512,transparent 40%),var(--bg);
+    radial-gradient(ellipse at 10% 10%,#25f4ee13,transparent 40%),
+    radial-gradient(ellipse at 90% 65%,#fe2c5512,transparent 40%),var(--bg);
   color:var(--white);font-family:Arial,sans-serif
 }
 .container{width:min(1000px,100%);margin:auto;padding:0 20px}
@@ -54,43 +53,23 @@ button{cursor:pointer;border-radius:10px;padding:13px 16px;font-weight:bold;font
   background:linear-gradient(100deg,var(--cyan),#b0fff6);
   border:0;color:#080910;width:100%
 }
-.secondary{
-  background:#ffffff08;border:1px solid #393d51;
-  color:white;margin:4px 4px 4px 0
-}
+.secondary{background:#ffffff08;border:1px solid #393d51;color:white;margin:4px 4px 4px 0}
 button:disabled{opacity:.55;cursor:wait}
 .label{font-size:13px;color:#d9dceb;font-weight:bold}
 .balance{font-size:35px;font-weight:900;color:var(--cyan);margin:12px 0}
 .message{font-size:13px;line-height:1.7;overflow-wrap:anywhere;margin-top:12px;color:var(--cyan)}
-.video{
-  border:1px solid var(--border);border-radius:12px;
-  padding:14px;margin-top:10px;overflow-wrap:anywhere
-}
+.video{border:1px solid var(--border);border-radius:12px;padding:14px;margin-top:10px;overflow-wrap:anywhere}
 .video a{color:var(--cyan);word-break:break-all}
 .status{font-size:12px;font-weight:bold;margin-top:10px}
 .hidden{display:none!important}
 footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-size:12px}
 
-.m10-icon{
-  width:58px;height:58px;border-radius:16px;
-  background:#fff;display:flex;align-items:center;
-  justify-content:center;color:#6738c7;
-  font-weight:900;font-size:24px;letter-spacing:-1.5px;
-  flex-shrink:0;box-shadow:0 5px 22px #7040dc25
-}
 .m10-mark{
   display:inline-flex;align-items:center;justify-content:center;
   background:#fff;color:#6738c7;border-radius:6px;
   font-size:13px;font-weight:900;padding:5px 7px;
   letter-spacing:-.6px;flex-shrink:0
 }
-.m10-button{
-  background:linear-gradient(110deg,#6330c8,#8050e8);
-  color:white;border:0;width:100%;padding:15px;
-  box-shadow:0 5px 18px #7040dc25
-}
-.m10-button:hover{background:linear-gradient(110deg,#7542dc,#936cf0)}
-
 .m10-action{
   display:inline-flex;align-items:center;justify-content:center;
   gap:9px;flex-shrink:0;white-space:nowrap;
@@ -99,7 +78,11 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
   box-shadow:0 5px 18px #7040dc25
 }
 .m10-action:hover{background:linear-gradient(110deg,#7542dc,#936cf0)}
-
+.m10-button{
+  background:linear-gradient(110deg,#6330c8,#8050e8);
+  color:white;border:0;width:100%;padding:15px;
+  box-shadow:0 5px 18px #7040dc25
+}
 .account-balance-row{
   display:flex;align-items:center;justify-content:space-between;
   gap:12px;margin-top:12px
@@ -107,35 +90,20 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
 .account-balance-info{flex:1;min-width:0}
 .account-balance-info p{margin:0}
 .account-balance-info .balance{
-  margin:8px 0;font-size:clamp(25px,5vw,35px);
-  overflow-wrap:anywhere
+  margin:8px 0;font-size:clamp(25px,5vw,35px);overflow-wrap:anywhere
 }
-
-.m10-content{margin-top:18px}
 .notice{
   background:#ffffff08;border:1px solid #ffffff12;border-radius:12px;
   padding:12px;color:#c5c9d8;font-size:12px;line-height:1.7
 }
-.history-row{
-  display:flex;justify-content:space-between;align-items:flex-start;
-  gap:12px;flex-wrap:wrap
-}
-.pill{
-  display:inline-block;border-radius:20px;padding:5px 9px;
-  background:#ffffff12;font-size:11px;font-weight:bold
-}
 .minimum-note{color:#ffcf70;font-size:13px;font-weight:bold;margin:0 0 15px}
-
 .tariff-toggle{
   width:100%;display:flex;justify-content:space-between;align-items:center;
   gap:12px;text-align:left;background:#ffffff08;
   border:1px solid #393d51;color:white;padding:16px;
   border-radius:12px;font-size:15px
 }
-.tariff-toggle .arrow{
-  color:var(--cyan);font-size:20px;transition:transform .2s;
-  flex-shrink:0
-}
+.tariff-toggle .arrow{color:var(--cyan);font-size:20px;transition:transform .2s;flex-shrink:0}
 .tariff-toggle[aria-expanded="true"] .arrow{transform:rotate(180deg)}
 .tariff-content{margin-top:12px}
 .tariff-rate{
@@ -205,7 +173,6 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
         <div class="balance" id="balance">0.00 AZN</div>
       </div>
 
-      <!-- YALNIZ BİR M10 LOQOLU ÇIXARIŞ DÜYMƏSİ -->
       <button type="button" class="m10-action" id="accountWithdrawButton" aria-expanded="false">
         <span class="m10-mark">m10</span>
         <span id="accountWithdrawButtonText">Çıxarış et</span>
@@ -234,8 +201,7 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
 
     <section class="panel">
       <h2>Qazanc tarifləri</h2>
-      <button type="button" class="tariff-toggle"
-        id="tariffToggle" aria-expanded="false" aria-controls="tariffContent">
+      <button type="button" class="tariff-toggle" id="tariffToggle" aria-expanded="false" aria-controls="tariffContent">
         <span id="tariffButtonText">Qazanc qiymətlərinə bax</span>
         <span class="arrow" aria-hidden="true">⌄</span>
       </button>
@@ -252,10 +218,9 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
     </section>
   </div>
 
-  <!-- AŞAĞIDAKI PANELDƏ TƏKRAR M10 BAŞLIĞI VƏ DÜYMƏ YOXDUR.
-       Forma yuxarıdakı düyməyə basanda açılır. -->
-  <section class="panel" id="withdrawalPanel">
-    <div class="m10-content hidden" id="m10Content">
+  <!-- FORM BAŞLANĞICDA GİZLİDİR; BOŞ PANEL GÖRÜNMÜR -->
+  <section id="withdrawalPanel" class="hidden">
+    <div class="panel" id="m10Content">
       <div class="video">
         <div class="muted">Çıxarıla bilən balansın</div>
         <div class="balance" id="withdrawAvailable" style="font-size:27px">0.00 AZN</div>
@@ -270,6 +235,7 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
         <input id="m10Phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+994501234567" maxlength="16" required>
 
         <p class="muted">Nömrəni +994XXXXXXXXX formatında daxil et. Məsələn: +994501234567.</p>
+
         <button type="submit" id="withdrawSubmit" class="m10-button">
           <span class="m10-mark">m10</span>
           &nbsp; Pul çıxarışı tələb et
@@ -279,14 +245,13 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
       <div id="withdrawMessage" class="message" role="status"></div>
 
       <div class="notice" style="margin-top:18px">
-        <b>Ödəniş qaydası:</b> Minimum çıxarış məbləği 120 AZN-dir. Sorğun yoxlanıldıqdan sonra ödəniş əl ilə M10 nömrənə köçürüləcək. Sorğu göndərmək avtomatik ödəniş demək deyil.
+        <b>Ödəniş qaydası:</b> Minimum çıxarış məbləği 120 AZN-dir. Sorğun yoxlanıldıqdan sonra ödəniş M10 nömrənə köçürüləcək. Sorğu göndərmək avtomatik ödəniş demək deyil.
       </div>
     </div>
   </section>
 
   <section class="panel">
-    <button type="button" class="tariff-toggle"
-      id="withdrawalToggle" aria-expanded="false" aria-controls="withdrawalContent">
+    <button type="button" class="tariff-toggle" id="withdrawalToggle" aria-expanded="false" aria-controls="withdrawalContent">
       <span id="withdrawalButtonText">Çıxarış tarixçəm</span>
       <span class="arrow" aria-hidden="true">⌄</span>
     </button>
@@ -298,8 +263,7 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
   </section>
 
   <section class="panel">
-    <button type="button" class="tariff-toggle"
-      id="videosToggle" aria-expanded="false" aria-controls="videosContent">
+    <button type="button" class="tariff-toggle" id="videosToggle" aria-expanded="false" aria-controls="videosContent">
       <span id="videosButtonText">Göndərdiyim videolar</span>
       <span class="arrow" aria-hidden="true">⌄</span>
     </button>
@@ -342,22 +306,19 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
   setupToggle("tariffToggle","tariffContent","tariffButtonText",
     "Qazanc qiymətlərini bağla","Qazanc qiymətlərinə bax");
 
-  // Hesab panelindəki tək düymə M10 formasını açır və bağlayır.
+  // Tək hesab düyməsi formanın görünməsini idarə edir.
   function setM10Open(open) {
-    $("m10Content").classList.toggle("hidden", !open);
+    $("withdrawalPanel").classList.toggle("hidden", !open);
     $("accountWithdrawButton").setAttribute("aria-expanded", String(open));
     $("accountWithdrawButtonText").textContent = open ? "Formanı bağla" : "Çıxarış et";
   }
 
   $("accountWithdrawButton").addEventListener("click", () => {
-    const isOpen = !$("m10Content").classList.contains("hidden");
+    const isOpen = $("accountWithdrawButton").getAttribute("aria-expanded") === "true";
     setM10Open(!isOpen);
 
     if (!isOpen) {
-      $("withdrawalPanel").scrollIntoView({
-        behavior:"smooth",
-        block:"center"
-      });
+      $("withdrawalPanel").scrollIntoView({behavior:"smooth",block:"center"});
     }
   });
 
@@ -410,6 +371,7 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
     loadingUserId = null;
     $("dashboard").classList.add("hidden");
     $("authPanel").classList.remove("hidden");
+    setM10Open(false);
   }
 
   function errorText(error) {
@@ -445,23 +407,14 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
     msg("dashboardMessage", "Məlumatlar yüklənir...");
 
     const [profileResult, videosResult, withdrawalsResult] = await Promise.all([
-      client.from("profiles")
-        .select("balance")
-        .eq("id", uid)
-        .maybeSingle(),
-
+      client.from("profiles").select("balance").eq("id", uid).maybeSingle(),
       client.from("video_submissions")
         .select("id,tiktok_url,status,reward,views_count,created_at")
-        .eq("user_id", uid)
-        .order("created_at", {ascending:false})
-        .limit(50),
-
+        .eq("user_id", uid).order("created_at", {ascending:false}).limit(50),
       client.from("altap_withdrawal_requests")
         .select("id,amount,wallet_address,network,status,created_at,admin_note")
-        .eq("user_id", uid)
-        .eq("network", "M10")
-        .order("created_at", {ascending:false})
-        .limit(50)
+        .eq("user_id", uid).eq("network", "M10")
+        .order("created_at", {ascending:false}).limit(50)
     ]);
 
     if (!currentUser || currentUser.id !== uid) return;
@@ -505,14 +458,11 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
       return;
     }
 
-    const statusText = {
-      pending:"Yoxlanılır", approved:"Təsdiqlənib", rejected:"Rədd edilib"
-    };
+    const statusText = {pending:"Yoxlanılır",approved:"Təsdiqlənib",rejected:"Rədd edilib"};
 
     for (const video of result.data) {
       const item = makeElement("div","video");
       const link = makeElement("a","",video.tiktok_url);
-
       link.href = video.tiktok_url;
       link.target = "_blank";
       link.rel = "noopener noreferrer";
@@ -543,9 +493,7 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
       return;
     }
 
-    const statusText = {
-      pending:"Gözləmədə", approved:"Təsdiqlənib", rejected:"Rədd edilib"
-    };
+    const statusText = {pending:"Gözləmədə",approved:"Təsdiqlənib",rejected:"Rədd edilib"};
 
     for (const request of result.data) {
       const item = makeElement("div","video");
@@ -606,7 +554,6 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
         result = await client.auth.resetPasswordForEmail(email,{
           redirectTo:"https://altap.biz/"
         });
-
         if (!result.error) msg("authMessage","Əgər hesab mövcuddursa, bərpa məktubu göndəriləcək.");
       }
 
@@ -690,7 +637,6 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
 
       $("withdrawAmount").value = "";
       $("m10Phone").value = "";
-
       msg("withdrawMessage","Sorğun uğurla göndərildi. Ödəniş admin tərəfindən yoxlanılacaq.");
       await loadData();
     } catch (error) {
