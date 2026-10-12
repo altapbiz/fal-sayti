@@ -3,364 +3,215 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ALTAP VPN — Sürətli və təhlükəsiz internet</title>
-<meta name="description" content="ALTAP VPN — təhlükəsiz və stabil VPN xidməti.">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-    background:#07090d;
-    color:#fff;
-    min-height:100vh;
-}
-header{
-    width:100%;
-    border-bottom:1px solid #191d25;
-    background:rgba(7,9,13,.92);
-    position:sticky;
-    top:0;
-    z-index:20;
-    backdrop-filter:blur(14px);
-}
-.nav{
-    max-width:1150px;
-    margin:auto;
-    height:72px;
-    padding:0 22px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-.logo{
-    font-size:25px;
-    font-weight:800;
-    letter-spacing:2px;
-}
-.logo span{color:#36e39b}
-nav a{
-    color:#aeb5c2;
-    text-decoration:none;
-    margin-left:25px;
-    font-size:14px;
-}
-nav a:hover{color:#fff}
-.btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    border:0;
-    cursor:pointer;
-    text-decoration:none;
-    border-radius:12px;
-    padding:13px 21px;
-    font-weight:700;
-    font-size:14px;
-}
-.btn-green{
-    background:#36e39b;
-    color:#06120c;
-}
-.btn-dark{
-    background:#151922;
-    color:#fff;
-    border:1px solid #282e39;
-}
-.hero{
-    max-width:1150px;
-    margin:auto;
-    padding:90px 22px 70px;
-    display:grid;
-    grid-template-columns:1.15fr .85fr;
-    gap:55px;
-    align-items:center;
-}
-.badge{
-    display:inline-block;
-    padding:8px 13px;
-    border:1px solid #1e4938;
-    background:#0d211a;
-    color:#55e9aa;
-    border-radius:50px;
-    font-size:12px;
-    margin-bottom:20px;
-}
-h1{
-    font-size:58px;
-    line-height:1.03;
-    letter-spacing:-2px;
-    margin-bottom:22px;
-}
-h1 span{color:#36e39b}
-.hero p{
-    color:#9ca4b1;
-    font-size:18px;
-    line-height:1.7;
-    max-width:620px;
-}
-.hero-buttons{
-    display:flex;
-    gap:12px;
-    margin-top:30px;
-    flex-wrap:wrap;
-}
-.hero-card{
-    background:linear-gradient(145deg,#11151d,#0b0e13);
-    border:1px solid #252b36;
-    border-radius:25px;
-    padding:30px;
-    box-shadow:0 25px 80px rgba(0,0,0,.35);
-}
-.status{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding-bottom:20px;
-    border-bottom:1px solid #222832;
-    margin-bottom:22px;
-}
-.status-left{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-.dot{
-    width:10px;
-    height:10px;
-    border-radius:50%;
-    background:#36e39b;
-    box-shadow:0 0 12px #36e39b;
-}
-.status small{color:#858d9b}
-.server{
-    padding:18px;
-    background:#0a0d12;
-    border:1px solid #202631;
-    border-radius:15px;
-    margin-bottom:12px;
-}
-.server-top{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:10px;
-}
-.server-name{font-weight:700}
-.server-ping{color:#36e39b;font-size:13px}
-.progress{
-    width:100%;
-    height:5px;
-    background:#202631;
-    border-radius:20px;
-    overflow:hidden;
-}
-.progress div{
-    width:72%;
-    height:100%;
-    background:#36e39b;
-}
-.section{
-    max-width:1150px;
-    margin:auto;
-    padding:65px 22px;
-}
-.section-title{
-    text-align:center;
-    margin-bottom:38px;
-}
-.section-title h2{
-    font-size:35px;
-    margin-bottom:10px;
-}
-.section-title p{
-    color:#8f97a5;
-}
-.features{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-}
-.feature{
-    background:#0e1117;
-    border:1px solid #202631;
-    border-radius:18px;
-    padding:27px;
-}
-.icon{
-    width:45px;
-    height:45px;
-    border-radius:13px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#10251c;
-    color:#36e39b;
-    font-size:20px;
-    margin-bottom:18px;
-}
-.feature h3{margin-bottom:9px}
-.feature p{
-    color:#89919e;
-    line-height:1.6;
-    font-size:14px;
-}
-.pricing{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-}
-.price-card{
-    background:#0e1117;
-    border:1px solid #242a35;
-    border-radius:19px;
-    padding:25px;
-    position:relative;
-}
-.price-card.popular{
-    border-color:#36e39b;
-    box-shadow:0 0 35px rgba(54,227,155,.08);
-}
-.popular-label{
-    position:absolute;
-    right:15px;
-    top:15px;
-    background:#36e39b;
-    color:#06120c;
-    padding:5px 9px;
-    font-size:10px;
-    font-weight:800;
-    border-radius:20px;
-}
-.price-card h3{font-size:18px}
-.price{
-    font-size:36px;
-    font-weight:800;
-    margin:18px 0 5px;
-}
-.price small{
-    font-size:13px;
-    color:#7e8795;
-    font-weight:400;
-}
-.price-card ul{
-    list-style:none;
-    margin:22px 0;
-}
-.price-card li{
-    color:#a1a9b5;
-    font-size:13px;
-    padding:8px 0;
-}
-.price-card li::before{
-    content:"✓";
-    color:#36e39b;
-    margin-right:8px;
-}
-.price-card .btn{width:100%}
-.steps{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-}
-.step{
-    text-align:center;
-    padding:25px;
-}
-.number{
-    width:48px;
-    height:48px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin:0 auto 16px;
-    background:#36e39b;
-    color:#06120c;
-    font-weight:800;
-}
-.step p{
-    color:#89919e;
-    font-size:14px;
-    line-height:1.6;
-    margin-top:8px;
-}
-.cta{
-    max-width:1100px;
-    margin:50px auto 70px;
-    padding:55px 30px;
-    text-align:center;
-    border-radius:25px;
-    background:linear-gradient(135deg,#10271d,#0d1218);
-    border:1px solid #214a38;
-}
-.cta h2{font-size:35px;margin-bottom:12px}
-.cta p{color:#929aa7;margin-bottom:25px}
-footer{
-    border-top:1px solid #191d25;
-    padding:30px 22px;
-    color:#69717f;
-    font-size:13px;
-}
-.footer-inner{
-    max-width:1150px;
-    margin:auto;
-    display:flex;
-    justify-content:space-between;
-    gap:20px;
-}
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.72);
-    z-index:100;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-}
-.modal-box{
-    width:100%;
-    max-width:430px;
-    background:#10141b;
-    border:1px solid #292f3a;
-    border-radius:20px;
-    padding:27px;
-}
-.modal-box h2{margin-bottom:8px}
-.modal-box p{color:#858e9c;font-size:14px;margin-bottom:20px}
-.close{
-    float:right;
-    cursor:pointer;
-    color:#88909d;
-    font-size:22px;
-}
-.input{
-    width:100%;
-    padding:14px;
-    margin-bottom:11px;
-    border-radius:10px;
-    border:1px solid #292f3a;
-    background:#090c11;
-    color:#fff;
-    outline:none;
-}
-.modal .btn{width:100%;margin-top:5px}
+<meta name="theme-color" content="#031018">
+<title>Altap.Biz</title>
 
-@media(max-width:850px){
-    .hero{
-        grid-template-columns:1fr;
-        padding-top:60px;
-    }
-    h1{font-size:44px}
-    .features{grid-template-columns:1fr}
-    .pricing{grid-template-columns:1fr 1fr}
+<style>
+:root {
+  --bg: #031018;
+  --card: #071d29;
+  --line: #153a49;
+  --text: #effbff;
+  --muted: #9bb5c2;
+  --green: #00e5a0;
+  --blue: #149cff;
 }
-@media(max-width:560px){
-    nav a:not(.login-link){display:none}
-    .nav{height:64px}
-    h1{font-size:38px}
-    .hero p{font-size:16px}
-    .pricing{grid-template-columns:1fr}
-    .steps{grid-template-columns:1fr}
-    .footer-inner{flex-direction:column}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+}
+
+header {
+  padding: 17px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: #031018;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: 900;
+}
+
+.logo span {
+  color: var(--blue);
+}
+
+button {
+  cursor: pointer;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  padding: 12px 15px;
+  background: var(--card);
+  color: white;
+  font-weight: bold;
+}
+
+.primary {
+  background: var(--green);
+  color: #002219;
+  border-color: var(--green);
+}
+
+.container {
+  max-width: 950px;
+  margin: auto;
+  padding: 18px;
+}
+
+.hero {
+  padding: 35px 0;
+}
+
+.badge {
+  display: inline-block;
+  padding: 8px 12px;
+  border: 1px solid #087f78;
+  border-radius: 30px;
+  color: var(--green);
+  font-size: 12px;
+}
+
+h1 {
+  font-size: 42px;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.gradient {
+  color: var(--green);
+}
+
+p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.card {
+  background: linear-gradient(145deg, #092431, #05141e);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 20px;
+  margin: 15px 0;
+}
+
+.balance {
+  background: linear-gradient(120deg, #0757a8, #073247);
+  border-radius: 14px;
+  padding: 18px;
+  margin: 15px 0;
+}
+
+.balance h2 {
+  font-size: 30px;
+  margin: 10px 0;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  margin: 8px 0;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #03131c;
+  color: white;
+  font-size: 15px;
+}
+
+label {
+  display: block;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.plan {
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  padding: 16px;
+  background: var(--card);
+}
+
+.plan h3 {
+  margin-top: 0;
+}
+
+.plan button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.notice {
+  border: 1px solid #66501a;
+  background: #241e0c;
+  color: #f6dfa0;
+  padding: 13px;
+  border-radius: 12px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  padding: 13px 5px;
+  background: #031018;
+  border-top: 1px solid var(--line);
+  z-index: 10;
+}
+
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 12px;
+}
+
+footer {
+  border-top: 1px solid var(--line);
+  padding: 25px 18px 85px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+@media (max-width: 650px) {
+  h1 {
+    font-size: 38px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    padding: 14px;
+  }
 }
 </style>
 </head>
@@ -368,245 +219,428 @@ footer{
 <body>
 
 <header>
-<div class="nav">
-    <div class="logo">ALTA<span>P</span></div>
-    <nav>
-        <a href="#features">Üstünlüklər</a>
-        <a href="#pricing">Paketlər</a>
-        <a href="#how">Necə işləyir?</a>
-        <a href="#" class="login-link" onclick="openModal('login');return false;">Giriş</a>
-        <a href="#" class="btn btn-green" onclick="openModal('register');return false;">Qeydiyyat</a>
-    </nav>
-</div>
+  <div class="logo">▲ Altap<span>.Biz</span></div>
+
+  <div id="authButtons">
+    <button onclick="showAuth('login')">Daxil ol</button>
+    <button class="primary" onclick="showAuth('signup')">
+      Qeydiyyat
+    </button>
+  </div>
+
+  <button id="logoutButton" class="hidden" onclick="logout()">
+    Çıxış
+  </button>
 </header>
 
-<section class="hero">
-<div>
-    <div class="badge">● ALTAP VPN XİDMƏTİ</div>
-    <h1>İnternetdə daha çox <span>azadlıq.</span></h1>
+<main class="container">
+
+  <!-- ANA SƏHİFƏ -->
+  <section id="home" class="hero">
+    <span class="badge">ALTAP.BIZ · YENİ PLATFORMА</span>
+
+    <h1>
+      Maliyyə xidmətləriniz
+      <span class="gradient">bir məkanda.</span>
+    </h1>
+
     <p>
-        ALTAP ilə internet bağlantınızı qoruyun, şəxsi məlumatlarınızı
-        təhlükəsiz saxlayın və dəstəklənən serverlərə sürətli şəkildə qoşulun.
+      Altap.Biz şəxsi kabinet, hesab məlumatları
+      və əməliyyat tarixçəsi üçün hazırlanmış platformadır.
     </p>
 
-    <div class="hero-buttons">
-        <a href="#pricing" class="btn btn-green">VPN seç</a>
-        <a href="#how" class="btn btn-dark">Daha ətraflı</a>
+    <button class="primary" onclick="showAuth('signup')">
+      Hesab yarat →
+    </button>
+
+    <button onclick="showAuth('login')">
+      Hesaba daxil ol
+    </button>
+
+    <div class="card">
+      <h3>Şəxsi kabinet</h3>
+      <p>👤 İstifadəçi hesabı</p>
+      <p>💳 Ödəniş inteqrasiyası</p>
+      <p>📊 Əməliyyat tarixçəsi</p>
+      <p>🔗 Referal sistemi</p>
     </div>
-</div>
+  </section>
 
-<div class="hero-card">
-    <div class="status">
-        <div class="status-left">
-            <div class="dot"></div>
-            <strong>ALTAP VPN</strong>
-        </div>
-        <small>ONLINE</small>
-    </div>
+  <!-- QEYDİYYAT VƏ GİRİŞ -->
+  <section id="authSection" class="card hidden">
+    <h2 id="authTitle">Hesab yarat</h2>
 
-    <div class="server">
-        <div class="server-top">
-            <span class="server-name">🇩🇪 Germany</span>
-            <span class="server-ping">24 ms</span>
-        </div>
-        <div class="progress"><div></div></div>
-    </div>
+    <form id="authForm">
+      <div id="nameField">
+        <label>Ad və soyad</label>
+        <input id="fullName" type="text"
+               placeholder="Adınız və soyadınız">
+      </div>
 
-    <div class="server">
-        <div class="server-top">
-            <span class="server-name">🇳🇱 Netherlands</span>
-            <span class="server-ping">31 ms</span>
-        </div>
-        <div class="progress"><div style="width:61%"></div></div>
-    </div>
+      <label>E-poçt ünvanı</label>
+      <input id="email" type="email"
+             placeholder="example@gmail.com" required>
 
-    <div class="server">
-        <div class="server-top">
-            <span class="server-name">🇫🇮 Finland</span>
-            <span class="server-ping">38 ms</span>
-        </div>
-        <div class="progress"><div style="width:48%"></div></div>
-    </div>
-</div>
-</section>
+      <label>Şifrə</label>
+      <input id="password" type="password"
+             minlength="8" placeholder="Minimum 8 simvol" required>
 
-<section class="section" id="features">
-<div class="section-title">
-    <h2>Niyə ALTAP?</h2>
-    <p>Sadə, sürətli və istifadəçi üçün rahat VPN təcrübəsi.</p>
-</div>
+      <button class="primary" id="authSubmit"
+              type="submit" style="width:100%;margin-top:15px">
+        Qeydiyyat
+      </button>
+    </form>
 
-<div class="features">
-    <div class="feature">
-        <div class="icon">⚡</div>
-        <h3>Sürətli bağlantı</h3>
-        <p>Uyğun server seçərək bağlantınızı rahat şəkildə idarə edin.</p>
-    </div>
+    <p id="authMessage"></p>
 
-    <div class="feature">
-        <div class="icon">🔒</div>
-        <h3>Məxfilik</h3>
-        <p>VPN bağlantısı vasitəsilə internet trafikinizin qorunmasına kömək edin.</p>
-    </div>
+    <button onclick="hideAuth()">Bağla</button>
+  </section>
 
-    <div class="feature">
-        <div class="icon">📱</div>
-        <h3>Mobil uyğunluq</h3>
-        <p>Telefon, planşet və kompüter üçün rahat istifadə təcrübəsi.</p>
-    </div>
-</div>
-</section>
+  <!-- İSTİFADƏÇİ KABİNETİ -->
+  <section id="dashboard" class="hidden">
+    <div class="card">
+      <span class="badge">ŞƏXSİ KABİNET</span>
 
-<section class="section" id="pricing">
-<div class="section-title">
-    <h2>VPN paketləri</h2>
-    <p>Sizə uyğun paketi seçin.</p>
-</div>
+      <h2>Salam, <span id="userName">İstifadəçi</span>!</h2>
 
-<div class="pricing">
+      <p id="userEmail"></p>
 
-    <div class="price-card">
-        <h3>1 Ay</h3>
-        <div class="price">5.99 <small>AZN</small></div>
-        <ul>
-            <li>30 gün istifadə</li>
-            <li>1 cihaz</li>
-            <li>Server seçimi</li>
-            <li>Texniki dəstək</li>
-        </ul>
-        <button class="btn btn-dark" onclick="selectPlan('1 Ay — 5.99 AZN')">Seç</button>
+      <div class="balance">
+        <p>Hesab balansı</p>
+        <h2 id="balance">0.00 AZN</h2>
+        <small>Balans yalnız təsdiqlənmiş əməliyyatlarla dəyişir.</small>
+      </div>
+
+      <button onclick="showToast('Ödəniş provayderi qoşulmalıdır.')">
+        Depozit
+      </button>
+
+      <button onclick="showWithdraw()">
+        Çıxarış sorğusu
+      </button>
     </div>
 
-    <div class="price-card popular">
-        <div class="popular-label">POPULYAR</div>
-        <h3>3 Ay</h3>
-        <div class="price">14.99 <small>AZN</small></div>
-        <ul>
-            <li>90 gün istifadə</li>
-            <li>1 cihaz</li>
-            <li>Server seçimi</li>
-            <li>Texniki dəstək</li>
-        </ul>
-        <button class="btn btn-green" onclick="selectPlan('3 Ay — 14.99 AZN')">Seç</button>
+    <div class="card">
+      <h3>Hesab məlumatları</h3>
+      <p>E-poçt: <span id="profileEmail"></span></p>
+      <p>Hesab statusu: Aktiv</p>
     </div>
 
-    <div class="price-card">
-        <h3>6 Ay</h3>
-        <div class="price">26.99 <small>AZN</small></div>
-        <ul>
-            <li>180 gün istifadə</li>
-            <li>1 cihaz</li>
-            <li>Server seçimi</li>
-            <li>Texniki dəstək</li>
-        </ul>
-        <button class="btn btn-dark" onclick="selectPlan('6 Ay — 26.99 AZN')">Seç</button>
+    <div id="withdrawSection" class="card hidden">
+      <h3>Çıxarış sorğusu</h3>
+
+      <label>Məbləğ (AZN)</label>
+      <input id="withdrawAmount" type="number"
+             min="1" step="0.01" placeholder="Məbləğ">
+
+      <button class="primary" onclick="submitWithdrawal()">
+        Sorğu göndər
+      </button>
+
+      <p id="withdrawMessage"></p>
     </div>
 
-    <div class="price-card">
-        <h3>1 İl</h3>
-        <div class="price">44.99 <small>AZN</small></div>
-        <ul>
-            <li>365 gün istifadə</li>
-            <li>1 cihaz</li>
-            <li>Server seçimi</li>
-            <li>Texniki dəstək</li>
-        </ul>
-        <button class="btn btn-dark" onclick="selectPlan('1 İl — 44.99 AZN')">Seç</button>
+    <div class="card">
+      <h3>Əməliyyat tarixçəsi</h3>
+      <div id="transactions">
+        <p>Əməliyyatlar yüklənəcək.</p>
+      </div>
     </div>
+  </section>
 
-</div>
-</section>
+  <!-- XİDMƏT PAKETLƏRİ -->
+  <section id="packages">
+    <h2>Xidmət paketləri</h2>
+    <p>Platformanın xidmət bölməsi.</p>
 
-<section class="section" id="how">
-<div class="section-title">
-    <h2>Necə işləyir?</h2>
-    <p>Bir neçə sadə addım kifayətdir.</p>
-</div>
+    <div class="grid">
+      <div class="plan">
+        <h3>Başlanğıc</h3>
+        <h2>Pulsuz</h2>
+        <p>Platforma ilə tanışlıq.</p>
+        <button onclick="showToast('Bu xidmət hələ aktiv deyil.')">
+          Ətraflı
+        </button>
+      </div>
 
-<div class="steps">
-    <div class="step">
-        <div class="number">1</div>
-        <h3>Paket seç</h3>
-        <p>Sizə uyğun VPN paketini seçin.</p>
+      <div class="plan">
+        <h3>Standart</h3>
+        <h2>Tezliklə</h2>
+        <p>Xidmət şərtləri hazırlanır.</p>
+        <button onclick="showToast('Bu xidmət hələ aktiv deyil.')">
+          Ətraflı
+        </button>
+      </div>
+
+      <div class="plan">
+        <h3>Premium</h3>
+        <h2>Tezliklə</h2>
+        <p>Premium xidmətlər hazırlanır.</p>
+        <button onclick="showToast('Bu xidmət hələ aktiv deyil.')">
+          Ətraflı
+        </button>
+      </div>
     </div>
+  </section>
 
-    <div class="step">
-        <div class="number">2</div>
-        <h3>Hesab yarat</h3>
-        <p>Sadə qeydiyyatdan keçərək şəxsi kabinetinizi yaradın.</p>
-    </div>
+  <section class="card" id="referral">
+    <h3>Referal sistemi</h3>
+    <p>
+      İstifadəçilərə şəxsi dəvət linkləri yaratmaq
+      üçün verilənlər bazası inteqrasiyası lazımdır.
+    </p>
+  </section>
 
-    <div class="step">
-        <div class="number">3</div>
-        <h3>Qoşul</h3>
-        <p>Aktivləşdirilmiş hesabınızla dəstəklənən VPN serverinə qoşulun.</p>
-    </div>
-</div>
-</section>
+  <section class="notice">
+    <strong>Vacib:</strong>
+    Bu kodun qeydiyyat və giriş funksiyaları Supabase qoşulduqdan
+    sonra işləyəcək. Kart ödənişləri, real pul köçürmələri və
+    admin idarəetməsi ayrıca təhlükəsiz inteqrasiya tələb edir.
+    Bu səhifə investisiya gəliri vəd etmir.
+  </section>
 
-<div class="cta">
-    <h2>ALTAP ilə başlayın</h2>
-    <p>Sizə uyğun paketi seçin və hesabınızı yaradın.</p>
-    <a href="#pricing" class="btn btn-green">Paketlərə bax</a>
-</div>
+</main>
+
+<nav>
+  <a href="#home">⌂ Ana səhifə</a>
+  <a href="#packages">▤ Xidmətlər</a>
+  <a href="#dashboard">♙ Kabinet</a>
+  <a href="#referral">♧ Referal</a>
+</nav>
 
 <footer>
-<div class="footer-inner">
-    <div>© 2026 ALTAP VPN. Bütün hüquqlar qorunur.</div>
-    <div>altap.biz</div>
-</div>
+  © 2026 Altap.Biz · Bütün hüquqlar qorunur.
 </footer>
 
-<!-- LOGIN -->
-<div class="modal" id="login">
-<div class="modal-box">
-    <span class="close" onclick="closeModal('login')">×</span>
-    <h2>Hesaba giriş</h2>
-    <p>ALTAP hesabınıza daxil olun.</p>
-    <input class="input" type="email" placeholder="E-poçt">
-    <input class="input" type="password" placeholder="Şifrə">
-    <button class="btn btn-green" onclick="demoLogin()">Daxil ol</button>
-</div>
-</div>
+<script type="module">
+import { createClient } from
+'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-<!-- REGISTER -->
-<div class="modal" id="register">
-<div class="modal-box">
-    <span class="close" onclick="closeModal('register')">×</span>
-    <h2>Qeydiyyat</h2>
-    <p>Yeni ALTAP hesabı yaradın.</p>
-    <input class="input" type="text" placeholder="Ad">
-    <input class="input" type="email" placeholder="E-poçt">
-    <input class="input" type="password" placeholder="Şifrə">
-    <button class="btn btn-green" onclick="demoRegister()">Hesab yarat</button>
-</div>
-</div>
+/*
+  SUPABASE MƏLUMATLARINI BURAYA ƏLAVƏ ET.
 
-<script>
-function openModal(id){
-    document.getElementById(id).style.display="flex";
-}
+  URL: Supabase layihənin Project URL-si
+  KEY: publishable key və ya köhnə anon key
 
-function closeModal(id){
-    document.getElementById(id).style.display="none";
-}
+  service_role açarını heç vaxt buraya yazma.
+*/
 
-function selectPlan(plan){
-    alert("Seçilmiş paket: " + plan + "\n\nÖdəniş sistemi növbəti mərhələdə qoşulacaq.");
-}
+const SUPABASE_URL = 'SUPABASE_PROJECT_URL';
+const SUPABASE_KEY = 'SUPABASE_PUBLISHABLE_KEY';
 
-function demoLogin(){
-    alert("Demo giriş. Real hesab sistemi növbəti mərhələdə qoşulacaq.");
-}
+const configured =
+  SUPABASE_URL.startsWith('https://') &&
+  SUPABASE_KEY !== 'SUPABASE_PUBLISHABLE_KEY';
 
-function demoRegister(){
-    alert("Demo qeydiyyat. Real verilənlər bazası növbəti mərhələdə qoşulacaq.");
-}
+const supabase = configured
+  ? createClient(SUPABASE_URL, SUPABASE_KEY)
+  : null;
 
-window.onclick=function(e){
-    if(e.target.classList.contains("modal")){
-        e.target.style.display="none";
+let authMode = 'signup';
+
+window.showAuth = function(mode) {
+  authMode = mode;
+
+  document.getElementById('authTitle').textContent =
+    mode === 'signup' ? 'Hesab yarat' : 'Hesaba daxil ol';
+
+  document.getElementById('authSubmit').textContent =
+    mode === 'signup' ? 'Qeydiyyat' : 'Daxil ol';
+
+  document.getElementById('nameField').classList.toggle(
+    'hidden', mode !== 'signup'
+  );
+
+  document.getElementById('authSection').classList.remove('hidden');
+  document.getElementById('authSection').scrollIntoView({
+    behavior: 'smooth'
+  });
+};
+
+window.hideAuth = function() {
+  document.getElementById('authSection').classList.add('hidden');
+};
+
+document.getElementById('authForm').addEventListener(
+  'submit', async function(event) {
+    event.preventDefault();
+
+    if (!supabase) {
+      alert('Əvvəlcə Supabase URL və açarını əlavə et.');
+      return;
     }
+
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const fullName = document.getElementById('fullName').value.trim();
+
+    let result;
+
+    if (authMode === 'signup') {
+      result = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: { full_name: fullName }
+        }
+      });
+
+      if (!result.error && !result.data.session) {
+        document.getElementById('authMessage').textContent =
+          'Qeydiyyat yaradıldı. E-poçtunu təsdiqlə, sonra daxil ol.';
+        return;
+      }
+    } else {
+      result = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
+    }
+
+    if (result.error) {
+      alert(result.error.message);
+      return;
+    }
+
+    await refreshSession();
+  }
+);
+
+async function refreshSession() {
+  if (!supabase) return;
+
+  const { data } = await supabase.auth.getSession();
+  const user = data.session?.user;
+  const loggedIn = !!user;
+
+  document.getElementById('dashboard')
+    .classList.toggle('hidden', !loggedIn);
+
+  document.getElementById('home')
+    .classList.toggle('hidden', loggedIn);
+
+  document.getElementById('authButtons')
+    .classList.toggle('hidden', loggedIn);
+
+  document.getElementById('logoutButton')
+    .classList.toggle('hidden', !loggedIn);
+
+  if (loggedIn) {
+    document.getElementById('userName').textContent =
+      user.user_metadata?.full_name ||
+      user.email?.split('@')[0] || 'İstifadəçi';
+
+    document.getElementById('userEmail').textContent = user.email || '';
+    document.getElementById('profileEmail').textContent = user.email || '';
+
+    await loadTransactions(user.id);
+  }
+}
+
+async function loadTransactions(userId) {
+  const { data, error } = await supabase
+    .from('transactions')
+    .select('kind,amount,currency,status,created_at')
+    .eq('user_id', userId)
+    .order('created_at', { ascending: false })
+    .limit(20);
+
+  if (error) {
+    document.getElementById('transactions').textContent =
+      'Əməliyyat tarixçəsi üçün SQL sxemini qurmaq lazımdır.';
+    return;
+  }
+
+  let balance = 0;
+
+  for (const item of data || []) {
+    if (item.status === 'completed') {
+      if (item.kind === 'deposit') balance += Number(item.amount);
+      if (item.kind === 'withdrawal') balance -= Number(item.amount);
+    }
+  }
+
+  document.getElementById('balance').textContent =
+    balance.toFixed(2) + ' AZN';
+
+  const container = document.getElementById('transactions');
+  container.replaceChildren();
+
+  if (!data?.length) {
+    container.textContent = 'Hələ əməliyyat yoxdur.';
+    return;
+  }
+
+  for (const item of data) {
+    const row = document.createElement('p');
+    row.textContent =
+      `${item.kind} — ${item.amount} ${item.currency} (${item.status})`;
+    container.appendChild(row);
+  }
+}
+
+window.logout = async function() {
+  if (supabase) {
+    await supabase.auth.signOut();
+    location.reload();
+  }
+};
+
+window.showWithdraw = function() {
+  document.getElementById('withdrawSection')
+    .classList.toggle('hidden');
+};
+
+window.submitWithdrawal = async function() {
+  if (!supabase) {
+    alert('Əvvəlcə Supabase qoşulmalıdır.');
+    return;
+  }
+
+  const amount = Number(
+    document.getElementById('withdrawAmount').value
+  );
+
+  if (!Number.isFinite(amount) || amount <= 0) {
+    alert('Düzgün məbləğ daxil et.');
+    return;
+  }
+
+  const { data } = await supabase.auth.getUser();
+
+  if (!data.user) {
+    alert('Əvvəl hesabına daxil ol.');
+    return;
+  }
+
+  const { error } = await supabase
+    .from('withdrawal_requests')
+    .insert({
+      user_id: data.user.id,
+      amount,
+      currency: 'AZN'
+    });
+
+  document.getElementById('withdrawMessage').textContent =
+    error
+      ? 'Sorğu göndərilmədi: ' + error.message
+      : 'Sorğun qeydə alındı. Bu, bank köçürməsi deyil.';
+
+  if (!error) {
+    document.getElementById('withdrawAmount').value = '';
+  }
+};
+
+window.showToast = function(message) {
+  alert(message);
+};
+
+if (supabase) {
+  supabase.auth.onAuthStateChange(() => {
+    setTimeout(refreshSession, 0);
+  });
+
+  refreshSession();
 }
 </script>
 
