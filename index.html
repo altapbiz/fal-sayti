@@ -71,13 +71,18 @@ button:disabled{opacity:.55;cursor:wait}
 .hidden{display:none!important}
 footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-size:12px}
 
-.m10-heading{display:flex;align-items:center;gap:14px}
 .m10-icon{
   width:58px;height:58px;border-radius:16px;
   background:#fff;display:flex;align-items:center;
   justify-content:center;color:#6738c7;
   font-weight:900;font-size:24px;letter-spacing:-1.5px;
   flex-shrink:0;box-shadow:0 5px 22px #7040dc25
+}
+.m10-mark{
+  display:inline-flex;align-items:center;justify-content:center;
+  background:#fff;color:#6738c7;border-radius:6px;
+  font-size:13px;font-weight:900;padding:5px 7px;
+  letter-spacing:-.6px;flex-shrink:0
 }
 .m10-button{
   background:linear-gradient(110deg,#6330c8,#8050e8);
@@ -88,14 +93,12 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
 
 .m10-action{
   display:inline-flex;align-items:center;justify-content:center;
-  gap:8px;flex-shrink:0;white-space:nowrap;
+  gap:9px;flex-shrink:0;white-space:nowrap;
   background:linear-gradient(110deg,#6330c8,#8050e8);
-  color:white;border:0;padding:13px 17px;
+  color:white;border:0;padding:10px 13px;
   box-shadow:0 5px 18px #7040dc25
 }
 .m10-action:hover{background:linear-gradient(110deg,#7542dc,#936cf0)}
-.m10-action .arrow{color:#e4d9ff;font-size:20px;transition:transform .2s}
-.m10-action[aria-expanded="true"] .arrow{transform:rotate(180deg)}
 
 .account-balance-row{
   display:flex;align-items:center;justify-content:space-between;
@@ -108,25 +111,7 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
   overflow-wrap:anywhere
 }
 
-.m10-toggle{
-  width:100%;display:flex;justify-content:space-between;
-  align-items:center;gap:12px;text-align:left;
-  background:linear-gradient(110deg,#21163b,#151124);
-  border:1px solid #7040dc70;color:white;padding:16px;
-  border-radius:12px;font-size:16px
-}
-.m10-toggle .arrow{
-  color:#bda5ff;font-size:22px;
-  transition:transform .2s;flex-shrink:0
-}
-.m10-toggle[aria-expanded="true"] .arrow{transform:rotate(180deg)}
 .m10-content{margin-top:18px}
-.m10-mark{
-  display:inline-flex;align-items:center;justify-content:center;
-  background:#fff;color:#6738c7;border-radius:7px;
-  font-size:13px;font-weight:900;padding:5px 8px;
-  letter-spacing:-.6px
-}
 .notice{
   background:#ffffff08;border:1px solid #ffffff12;border-radius:12px;
   padding:12px;color:#c5c9d8;font-size:12px;line-height:1.7
@@ -171,7 +156,7 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
 }
 @media(max-width:380px){
   .account-balance-row{gap:7px}
-  #accountWithdrawButton{padding:10px;font-size:12px}
+  #accountWithdrawButton{padding:8px;font-size:12px;gap:6px}
   .account-balance-info .balance{font-size:24px}
 }
 </style>
@@ -209,7 +194,6 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
 
 <section id="dashboard" class="hidden">
 
-  <!-- HESABIN: Çıxarış et düyməsi balansın sağındadır -->
   <div class="panel">
     <p class="muted">HESABIN</p>
     <h2>Xoş gəldin!</h2>
@@ -221,8 +205,10 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
         <div class="balance" id="balance">0.00 AZN</div>
       </div>
 
-      <button type="button" class="m10-action" id="accountWithdrawButton">
-        Çıxarış et
+      <!-- YALNIZ BİR M10 LOQOLU ÇIXARIŞ DÜYMƏSİ -->
+      <button type="button" class="m10-action" id="accountWithdrawButton" aria-expanded="false">
+        <span class="m10-mark">m10</span>
+        <span id="accountWithdrawButtonText">Çıxarış et</span>
       </button>
     </div>
 
@@ -266,16 +252,9 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
     </section>
   </div>
 
-  <!-- M10 çıxarış forması: yuxarıdakı düymədən açılır -->
+  <!-- AŞAĞIDAKI PANELDƏ TƏKRAR M10 BAŞLIĞI VƏ DÜYMƏ YOXDUR.
+       Forma yuxarıdakı düyməyə basanda açılır. -->
   <section class="panel" id="withdrawalPanel">
-    <div class="m10-heading">
-      <span class="m10-icon" aria-label="M10 loqosu">m10</span>
-      <span>
-        <strong style="display:block;font-size:18px;margin-bottom:5px">M10 cüzdanı</strong>
-        <span class="muted">Qazancını M10 cüzdanına köçür</span>
-      </span>
-    </div>
-
     <div class="m10-content hidden" id="m10Content">
       <div class="video">
         <div class="muted">Çıxarıla bilən balansın</div>
@@ -363,11 +342,11 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
   setupToggle("tariffToggle","tariffContent","tariffButtonText",
     "Qazanc qiymətlərini bağla","Qazanc qiymətlərinə bax");
 
-  // M10 formasının açılıb-bağlanması
+  // Hesab panelindəki tək düymə M10 formasını açır və bağlayır.
   function setM10Open(open) {
     $("m10Content").classList.toggle("hidden", !open);
     $("accountWithdrawButton").setAttribute("aria-expanded", String(open));
-    $("accountWithdrawButton").textContent = open ? "Formanı bağla" : "Çıxarış et";
+    $("accountWithdrawButtonText").textContent = open ? "Formanı bağla" : "Çıxarış et";
   }
 
   $("accountWithdrawButton").addEventListener("click", () => {
