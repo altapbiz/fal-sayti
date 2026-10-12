@@ -16,7 +16,8 @@
 *{box-sizing:border-box}
 body{
   margin:0;
-  background:radial-gradient(ellipse at 10% 10%,#25f4ee13,transparent 40%),
+  background:
+  radial-gradient(ellipse at 10% 10%,#25f4ee13,transparent 40%),
   radial-gradient(ellipse at 90% 65%,#fe2c5512,transparent 40%),var(--bg);
   color:var(--white);font-family:Arial,sans-serif
 }
@@ -93,15 +94,15 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
 }
 .minimum-note{color:#ffcf70;font-size:13px;font-weight:bold;margin:0 0 15px}
 
-/* Qazanc tarifləri düyməsi */
 .tariff-toggle{
   width:100%;display:flex;justify-content:space-between;align-items:center;
   gap:12px;text-align:left;background:#ffffff08;
   border:1px solid #393d51;color:white;padding:16px;
-  border-radius:12px;font-size:16px
+  border-radius:12px;font-size:15px
 }
 .tariff-toggle .arrow{
-  color:var(--cyan);font-size:20px;transition:transform .2s
+  color:var(--cyan);font-size:20px;transition:transform .2s;
+  flex-shrink:0
 }
 .tariff-toggle[aria-expanded="true"] .arrow{transform:rotate(180deg)}
 .tariff-content{margin-top:12px}
@@ -111,6 +112,7 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
   border-radius:10px;margin-top:9px;background:#ffffff04
 }
 .tariff-rate b{color:var(--cyan);white-space:nowrap}
+.section-description{margin:10px 0}
 @media(max-width:650px){
   .grid{grid-template-columns:1fr}
   header{min-height:65px}
@@ -183,14 +185,9 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
     <section class="panel">
       <h2>Qazanc tarifləri</h2>
 
-      <!-- Düyməyə basanda tariflər açılır və bağlanır -->
-      <button
-        type="button"
-        class="tariff-toggle"
-        id="tariffToggle"
-        aria-expanded="false"
-        aria-controls="tariffContent">
-        <span>Qazanc qiymətlərinə bax</span>
+      <button type="button" class="tariff-toggle"
+        id="tariffToggle" aria-expanded="false" aria-controls="tariffContent">
+        <span id="tariffButtonText">Qazanc qiymətlərinə bax</span>
         <span class="arrow" aria-hidden="true">⌄</span>
       </button>
 
@@ -201,7 +198,6 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
         <div class="tariff-rate"><span>100 000 baxış</span><b>71 AZN</b></div>
         <div class="tariff-rate"><span>500 000 baxış</span><b>155 AZN</b></div>
         <div class="tariff-rate"><span>1 000 000 baxış</span><b>284 AZN</b></div>
-
         <p class="muted">Baxış və qazanc admin yoxlamasından sonra təsdiqlənir.</p>
       </div>
     </section>
@@ -240,16 +236,32 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
     </div>
   </section>
 
+  <!-- Açıla-bağlana bilən çıxarış tarixçəsi -->
   <section class="panel">
-    <h2>Çıxarış tarixçəm</h2>
-    <p class="muted">M10 pul çıxarışı sorğularının statusları burada görünəcək.</p>
-    <div id="withdrawalList" class="muted">Məlumatlar yüklənir...</div>
+    <button type="button" class="tariff-toggle"
+      id="withdrawalToggle" aria-expanded="false" aria-controls="withdrawalContent">
+      <span id="withdrawalButtonText">Çıxarış tarixçəm</span>
+      <span class="arrow" aria-hidden="true">⌄</span>
+    </button>
+
+    <div id="withdrawalContent" class="tariff-content hidden">
+      <p class="muted section-description">M10 pul çıxarışı sorğularının statusları burada görünəcək.</p>
+      <div id="withdrawalList" class="muted">Məlumatlar yüklənir...</div>
+    </div>
   </section>
 
+  <!-- Açıla-bağlana bilən göndərilmiş videolar -->
   <section class="panel">
-    <h2>Göndərdiyim videolar</h2>
-    <p class="muted">Videoların və yoxlama statusları burada görünəcək.</p>
-    <div id="videoList" class="muted">Məlumatlar yüklənir...</div>
+    <button type="button" class="tariff-toggle"
+      id="videosToggle" aria-expanded="false" aria-controls="videosContent">
+      <span id="videosButtonText">Göndərdiyim videolar</span>
+      <span class="arrow" aria-hidden="true">⌄</span>
+    </button>
+
+    <div id="videosContent" class="tariff-content hidden">
+      <p class="muted section-description">Videoların və yoxlama statusları burada görünəcək.</p>
+      <div id="videoList" class="muted">Məlumatlar yüklənir...</div>
+    </div>
   </section>
 
 </section>
@@ -268,18 +280,34 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
   let client, mode = "login", currentUser = null, busy = false;
   let loadingUserId = null;
 
-  // Qazanc tarifləri düyməsi
-  $("tariffToggle").addEventListener("click", () => {
-    const button = $("tariffToggle");
-    const content = $("tariffContent");
-    const isOpen = button.getAttribute("aria-expanded") === "true";
+  // Bölmələri açıb-bağlayan ümumi funksiya
+  function setupToggle(buttonId, contentId, textId, openText, closedText) {
+    const button = $(buttonId);
+    const content = $(contentId);
+    const label = $(textId);
 
-    button.setAttribute("aria-expanded", String(!isOpen));
-    content.classList.toggle("hidden", isOpen);
+    button.addEventListener("click", () => {
+      const isOpen = button.getAttribute("aria-expanded") === "true";
+      button.setAttribute("aria-expanded", String(!isOpen));
+      content.classList.toggle("hidden", isOpen);
+      label.textContent = isOpen ? closedText : openText;
+    });
+  }
 
-    button.querySelector("span:first-child").textContent =
-      isOpen ? "Qazanc qiymətlərinə bax" : "Qazanc qiymətlərini bağla";
-  });
+  setupToggle(
+    "tariffToggle", "tariffContent", "tariffButtonText",
+    "Qazanc qiymətlərini bağla", "Qazanc qiymətlərinə bax"
+  );
+
+  setupToggle(
+    "withdrawalToggle", "withdrawalContent", "withdrawalButtonText",
+    "Çıxarış tarixçəsini bağla", "Çıxarış tarixçəm"
+  );
+
+  setupToggle(
+    "videosToggle", "videosContent", "videosButtonText",
+    "Göndərdiyim videoları bağla", "Göndərdiyim videolar"
+  );
 
   function msg(id, text, error = false) {
     $(id).textContent = text;
@@ -334,21 +362,17 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
     if (t.includes("already registered")) return "Bu e-poçtla hesab var. Daxil ol.";
     if (t.includes("gündə maksimum 2 video")) return "Bu gün artıq 2 video göndərmisən.";
     if (t.includes("düzgün tiktok")) return "Düzgün TikTok video linki daxil et.";
-
     if (t.includes("minimum pul çıxarışı 120 azn") || t.includes("minimum 120")) {
       return "Minimum pul çıxarışı 120 AZN-dir.";
     }
-
     if (t.includes("düzgün çıxarış")) return "Düzgün çıxarış məbləği daxil et.";
     if (t.includes("m10 nömrəsini")) return "M10 nömrəsini +994XXXXXXXXX formatında yaz.";
     if (t.includes("balans kifayət etmir")) return "Balansın çıxarış üçün kifayət etmir.";
     if (t.includes("hesabına daxil olmalısan")) return "Pul çıxarmaq üçün hesabına daxil ol.";
     if (t.includes("profil tapılmadı")) return "Profil tapılmadı. Dəstəyə müraciət et.";
-
     if (t.includes("permission denied") || t.includes("row-level security")) {
       return "İcazə xətası. Supabase cədvəl icazələrini yoxlamaq lazımdır.";
     }
-
     return error?.message || "Xəta baş verdi. Yenidən yoxla.";
   }
 
@@ -400,7 +424,6 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
     }
 
     let pendingAmount = 0;
-
     if (!withdrawalsResult.error && withdrawalsResult.data) {
       pendingAmount = withdrawalsResult.data
         .filter(r => r.status === "pending")
@@ -501,7 +524,6 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
         : "";
 
       const created = makeElement("div","muted","Sorğu tarixi: " + date);
-
       item.append(top,phone,created);
 
       if (request.admin_note) {
