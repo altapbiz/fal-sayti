@@ -6,53 +6,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080910">
 <title>Altap.Biz — TikTok-da paylaş, pul qazan</title>
-
 <style>
-:root{
-  --bg:#080910;--panel:#11131e;--border:#292d40;
-  --white:#f7f8ff;--muted:#9299ad;
-  --cyan:#25f4ee;--pink:#fe2c55;
-}
+:root{--bg:#080910;--panel:#11131e;--border:#292d40;--white:#f7f8ff;--muted:#9299ad;--cyan:#25f4ee;--pink:#fe2c55}
 *{box-sizing:border-box}
-body{
-  margin:0;
-  background:
-    radial-gradient(ellipse at 10% 10%,#25f4ee13,transparent 40%),
-    radial-gradient(ellipse at 90% 65%,#fe2c5512,transparent 40%),var(--bg);
-  color:var(--white);font-family:Arial,sans-serif
-}
+body{margin:0;background:radial-gradient(ellipse at 10% 10%,#25f4ee13,transparent 40%),radial-gradient(ellipse at 90% 65%,#fe2c5512,transparent 40%),var(--bg);color:var(--white);font-family:Arial,sans-serif}
 .container{width:min(1000px,100%);margin:auto;padding:0 20px}
-header{
-  min-height:75px;display:flex;align-items:center;
-  justify-content:space-between;gap:12px;border-bottom:1px solid #ffffff12
-}
+header{min-height:75px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #ffffff12}
 .logo{font-size:26px;font-weight:900;color:white;text-decoration:none;white-space:nowrap}
 .dot{color:var(--pink)}
 .muted{color:var(--muted);font-size:13px;line-height:1.7}
 main{padding:25px 0 60px}
 h1{font-size:clamp(34px,6vw,58px);line-height:1.1;letter-spacing:-2px}
 h2{line-height:1.3}
-.gradient{
-  background:linear-gradient(90deg,var(--cyan),#a4aaff,var(--pink));
-  color:transparent;background-clip:text
-}
-.panel{
-  background:linear-gradient(145deg,#151826,#0e1019);
-  border:1px solid #303348;border-radius:20px;
-  padding:24px;margin:20px 0;min-width:0
-}
+.gradient{background:linear-gradient(90deg,var(--cyan),#a4aaff,var(--pink));color:transparent;background-clip:text}
+.panel{background:linear-gradient(145deg,#151826,#0e1019);border:1px solid #303348;border-radius:20px;padding:24px;margin:20px 0;min-width:0}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-input{
-  width:100%;padding:14px;margin:8px 0 15px;
-  border:1px solid #303449;border-radius:10px;
-  background:#090b13;color:white;font-size:15px
-}
+input{width:100%;padding:14px;margin:8px 0 15px;border:1px solid #303449;border-radius:10px;background:#090b13;color:white;font-size:15px}
 input:focus{outline:1px solid var(--cyan);border-color:var(--cyan)}
 button{cursor:pointer;border-radius:10px;padding:13px 16px;font-weight:bold;font-size:14px}
-.primary{
-  background:linear-gradient(100deg,var(--cyan),#b0fff6);
-  border:0;color:#080910;width:100%
-}
+.primary{background:linear-gradient(100deg,var(--cyan),#b0fff6);border:0;color:#080910;width:100%}
 .secondary{background:#ffffff08;border:1px solid #393d51;color:white;margin:4px 4px 4px 0}
 button:disabled{opacity:.55;cursor:wait}
 .label{font-size:13px;color:#d9dceb;font-weight:bold}
@@ -63,73 +35,28 @@ button:disabled{opacity:.55;cursor:wait}
 .status{font-size:12px;font-weight:bold;margin-top:10px}
 .hidden{display:none!important}
 footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-size:12px}
-
-.m10-mark{
-  display:inline-flex;align-items:center;justify-content:center;
-  background:#fff;color:#6738c7;border-radius:6px;
-  font-size:13px;font-weight:900;padding:5px 7px;
-  letter-spacing:-.6px;flex-shrink:0
-}
-.m10-action{
-  display:inline-flex;align-items:center;justify-content:center;
-  gap:9px;flex-shrink:0;white-space:nowrap;
-  background:linear-gradient(110deg,#6330c8,#8050e8);
-  color:white;border:0;padding:10px 13px;
-  box-shadow:0 5px 18px #7040dc25
-}
-.m10-action:hover{background:linear-gradient(110deg,#7542dc,#936cf0)}
-.m10-button{
-  background:linear-gradient(110deg,#6330c8,#8050e8);
-  color:white;border:0;width:100%;padding:15px;
-  box-shadow:0 5px 18px #7040dc25
-}
-.account-balance-row{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:12px;margin-top:12px
-}
+.m10-mark{display:inline-flex;align-items:center;justify-content:center;background:#fff;color:#6738c7;border-radius:6px;font-size:13px;font-weight:900;padding:5px 7px;letter-spacing:-.6px;flex-shrink:0}
+.m10-action{display:inline-flex;align-items:center;justify-content:center;gap:9px;flex-shrink:0;white-space:nowrap;background:linear-gradient(110deg,#6330c8,#8050e8);color:white;border:0;padding:10px 13px;box-shadow:0 5px 18px #7040dc25}
+.m10-action:hover,.m10-button:hover{background:linear-gradient(110deg,#7542dc,#936cf0)}
+.m10-button{background:linear-gradient(110deg,#6330c8,#8050e8);color:white;border:0;width:100%;padding:15px;box-shadow:0 5px 18px #7040dc25}
+.account-balance-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px}
 .account-balance-info{flex:1;min-width:0}
 .account-balance-info p{margin:0}
-.account-balance-info .balance{
-  margin:8px 0;font-size:clamp(25px,5vw,35px);overflow-wrap:anywhere
-}
-.notice{
-  background:#ffffff08;border:1px solid #ffffff12;border-radius:12px;
-  padding:12px;color:#c5c9d8;font-size:12px;line-height:1.7
-}
+.account-balance-info .balance{margin:8px 0;font-size:clamp(25px,5vw,35px);overflow-wrap:anywhere}
+.notice{background:#ffffff08;border:1px solid #ffffff12;border-radius:12px;padding:12px;color:#c5c9d8;font-size:12px;line-height:1.7}
 .minimum-note{color:#ffcf70;font-size:13px;font-weight:bold;margin:0 0 15px}
-.tariff-toggle{
-  width:100%;display:flex;justify-content:space-between;align-items:center;
-  gap:12px;text-align:left;background:#ffffff08;
-  border:1px solid #393d51;color:white;padding:16px;
-  border-radius:12px;font-size:15px
-}
+.tariff-toggle{width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;text-align:left;background:#ffffff08;border:1px solid #393d51;color:white;padding:16px;border-radius:12px;font-size:15px}
 .tariff-toggle .arrow{color:var(--cyan);font-size:20px;transition:transform .2s;flex-shrink:0}
 .tariff-toggle[aria-expanded="true"] .arrow{transform:rotate(180deg)}
 .tariff-content{margin-top:12px}
-.tariff-rate{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:12px;padding:15px;border:1px solid var(--border);
-  border-radius:10px;margin-top:9px;background:#ffffff04
-}
+.tariff-rate{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:15px;border:1px solid var(--border);border-radius:10px;margin-top:9px;background:#ffffff04}
 .tariff-rate b{color:var(--cyan);white-space:nowrap}
 .section-description{margin:10px 0}
-
-@media(max-width:650px){
-  .grid{grid-template-columns:1fr}
-  header{min-height:65px}
-  .panel{padding:18px}
-  main{padding-top:15px}
-  .muted.header-text{font-size:10px;text-align:right}
-  .tariff-rate{font-size:13px}
-}
-@media(max-width:380px){
-  .account-balance-row{gap:7px}
-  #accountWithdrawButton{padding:8px;font-size:12px;gap:6px}
-  .account-balance-info .balance{font-size:24px}
-}
+.withdraw-inline{border-top:1px solid #ffffff16;margin-top:20px;padding-top:20px}
+@media(max-width:650px){.grid{grid-template-columns:1fr}header{min-height:65px}.panel{padding:18px}main{padding-top:15px}.muted.header-text{font-size:10px;text-align:right}.tariff-rate{font-size:13px}}
+@media(max-width:380px){.account-balance-row{gap:7px}#accountWithdrawButton{padding:8px;font-size:12px;gap:6px}.account-balance-info .balance{font-size:24px}}
 </style>
 </head>
-
 <body>
 <header class="container">
   <a class="logo" href="/">Altap<span class="dot">.Biz</span></a>
@@ -137,32 +64,26 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
 </header>
 
 <main class="container">
-
 <section id="authPanel" class="panel">
   <h1>TikTok-da paylaş,<br><span class="gradient">pul qazan!</span></h1>
   <p class="muted">Altap.Biz-i TikTok videolarında tanıt. Video yoxlanıldıqdan sonra təsdiqlənmiş baxışlara görə qazanc əldə et.</p>
-
   <h2 id="authTitle">Hesabına daxil ol</h2>
   <form id="authForm">
     <label class="label" for="email">E-poçt ünvanı</label>
     <input id="email" type="email" autocomplete="email" placeholder="email@example.com" required>
-
     <div id="passwordArea">
       <label class="label" for="password">Şifrə</label>
       <input id="password" type="password" minlength="6" autocomplete="current-password" placeholder="Ən azı 6 simvol" required>
     </div>
-
     <button class="primary" id="authSubmit">Daxil ol</button>
   </form>
-
   <p><button type="button" class="secondary" id="switchAuth">Qeydiyyatdan keç</button></p>
   <p><button type="button" class="secondary" id="resetPassword">Şifrəni unutmusunuz?</button></p>
   <div id="authMessage" class="message" role="status"></div>
 </section>
 
 <section id="dashboard" class="hidden">
-
-  <div class="panel">
+  <div class="panel" id="accountPanel">
     <p class="muted">HESABIN</p>
     <h2>Xoş gəldin!</h2>
     <div id="userEmail" class="muted"></div>
@@ -172,7 +93,6 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
         <p class="muted">Mövcud balansın</p>
         <div class="balance" id="balance">0.00 AZN</div>
       </div>
-
       <button type="button" class="m10-action" id="accountWithdrawButton" aria-expanded="false">
         <span class="m10-mark">m10</span>
         <span id="accountWithdrawButtonText">Çıxarış et</span>
@@ -183,44 +103,9 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
     <button type="button" id="refresh" class="secondary">Məlumatları yenilə</button>
     <button type="button" id="logout" class="secondary">Hesabdan çıx</button>
     <div id="dashboardMessage" class="message" role="status"></div>
-  </div>
 
-  <div class="grid">
-    <section class="panel">
-      <h2>TikTok videosu göndər</h2>
-      <p class="muted">Gündə maksimum 2 video göndərə bilərsən. Link öz TikTok videona aid olmalıdır.</p>
-
-      <form id="videoForm">
-        <label class="label" for="tiktokUrl">TikTok video linki</label>
-        <input id="tiktokUrl" type="url" placeholder="https://www.tiktok.com/..." required>
-        <button id="submitVideo" class="primary">Videonu göndər</button>
-      </form>
-
-      <div id="videoMessage" class="message" role="status"></div>
-    </section>
-
-    <section class="panel">
-      <h2>Qazanc tarifləri</h2>
-      <button type="button" class="tariff-toggle" id="tariffToggle" aria-expanded="false" aria-controls="tariffContent">
-        <span id="tariffButtonText">Qazanc qiymətlərinə bax</span>
-        <span class="arrow" aria-hidden="true">⌄</span>
-      </button>
-
-      <div id="tariffContent" class="tariff-content hidden">
-        <div class="tariff-rate"><span>10 000 baxış</span><b>7 AZN</b></div>
-        <div class="tariff-rate"><span>20 000 baxış</span><b>14 AZN</b></div>
-        <div class="tariff-rate"><span>50 000 baxış</span><b>35 AZN</b></div>
-        <div class="tariff-rate"><span>100 000 baxış</span><b>71 AZN</b></div>
-        <div class="tariff-rate"><span>500 000 baxış</span><b>155 AZN</b></div>
-        <div class="tariff-rate"><span>1 000 000 baxış</span><b>284 AZN</b></div>
-        <p class="muted">Baxış və qazanc admin yoxlamasından sonra təsdiqlənir.</p>
-      </div>
-    </section>
-  </div>
-
-  <!-- FORM BAŞLANĞICDA GİZLİDİR; BOŞ PANEL GÖRÜNMÜR -->
-  <section id="withdrawalPanel" class="hidden">
-    <div class="panel" id="m10Content">
+    <!-- ÇIXARIŞ FORMASI ELƏ HESAB PANELİNİN İÇİNDƏ AÇILIR -->
+    <div id="m10Content" class="withdraw-inline hidden">
       <div class="video">
         <div class="muted">Çıxarıla bilən balansın</div>
         <div class="balance" id="withdrawAvailable" style="font-size:27px">0.00 AZN</div>
@@ -233,7 +118,6 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
 
         <label class="label" for="m10Phone">M10-a bağlı mobil nömrə</label>
         <input id="m10Phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+994501234567" maxlength="16" required>
-
         <p class="muted">Nömrəni +994XXXXXXXXX formatında daxil et. Məsələn: +994501234567.</p>
 
         <button type="submit" id="withdrawSubmit" class="m10-button">
@@ -241,21 +125,46 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
           &nbsp; Pul çıxarışı tələb et
         </button>
       </form>
-
       <div id="withdrawMessage" class="message" role="status"></div>
-
       <div class="notice" style="margin-top:18px">
-        <b>Ödəniş qaydası:</b> Minimum çıxarış məbləği 120 AZN-dir. Sorğun yoxlanıldıqdan sonra ödəniş M10 nömrənə köçürüləcək. Sorğu göndərmək avtomatik ödəniş demək deyil.
+        <b>Ödəniş qaydası:</b> Minimum çıxarış məbləği 120 AZN-dir. Sorğu yoxlanıldıqdan sonra ödəniş M10 nömrənə köçürüləcək. Sorğu göndərmək avtomatik ödəniş demək deyil.
       </div>
     </div>
-  </section>
+  </div>
+
+  <div class="grid">
+    <section class="panel">
+      <h2>TikTok videosu göndər</h2>
+      <p class="muted">Gündə maksimum 2 video göndərə bilərsən. Link öz TikTok videona aid olmalıdır.</p>
+      <form id="videoForm">
+        <label class="label" for="tiktokUrl">TikTok video linki</label>
+        <input id="tiktokUrl" type="url" placeholder="https://www.tiktok.com/..." required>
+        <button id="submitVideo" class="primary">Videonu göndər</button>
+      </form>
+      <div id="videoMessage" class="message" role="status"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Qazanc tarifləri</h2>
+      <button type="button" class="tariff-toggle" id="tariffToggle" aria-expanded="false" aria-controls="tariffContent">
+        <span id="tariffButtonText">Qazanc qiymətlərinə bax</span><span class="arrow">⌄</span>
+      </button>
+      <div id="tariffContent" class="tariff-content hidden">
+        <div class="tariff-rate"><span>10 000 baxış</span><b>7 AZN</b></div>
+        <div class="tariff-rate"><span>20 000 baxış</span><b>14 AZN</b></div>
+        <div class="tariff-rate"><span>50 000 baxış</span><b>35 AZN</b></div>
+        <div class="tariff-rate"><span>100 000 baxış</span><b>71 AZN</b></div>
+        <div class="tariff-rate"><span>500 000 baxış</span><b>155 AZN</b></div>
+        <div class="tariff-rate"><span>1 000 000 baxış</span><b>284 AZN</b></div>
+        <p class="muted">Baxış və qazanc admin yoxlamasından sonra təsdiqlənir.</p>
+      </div>
+    </section>
+  </div>
 
   <section class="panel">
     <button type="button" class="tariff-toggle" id="withdrawalToggle" aria-expanded="false" aria-controls="withdrawalContent">
-      <span id="withdrawalButtonText">Çıxarış tarixçəm</span>
-      <span class="arrow" aria-hidden="true">⌄</span>
+      <span id="withdrawalButtonText">Çıxarış tarixçəm</span><span class="arrow">⌄</span>
     </button>
-
     <div id="withdrawalContent" class="tariff-content hidden">
       <p class="muted section-description">M10 pul çıxarışı sorğularının statusları burada görünəcək.</p>
       <div id="withdrawalList" class="muted">Məlumatlar yüklənir...</div>
@@ -264,16 +173,13 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
 
   <section class="panel">
     <button type="button" class="tariff-toggle" id="videosToggle" aria-expanded="false" aria-controls="videosContent">
-      <span id="videosButtonText">Göndərdiyim videolar</span>
-      <span class="arrow" aria-hidden="true">⌄</span>
+      <span id="videosButtonText">Göndərdiyim videolar</span><span class="arrow">⌄</span>
     </button>
-
     <div id="videosContent" class="tariff-content hidden">
       <p class="muted section-description">Videoların və yoxlama statusları burada görünəcək.</p>
       <div id="videoList" class="muted">Məlumatlar yüklənir...</div>
     </div>
   </section>
-
 </section>
 </main>
 
@@ -291,10 +197,8 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
   let loadingUserId = null;
 
   function setupToggle(buttonId, contentId, textId, openText, closedText) {
-    const button = $(buttonId);
-    const content = $(contentId);
+    const button = $(buttonId), content = $(contentId);
     const label = textId ? $(textId) : null;
-
     button.addEventListener("click", () => {
       const isOpen = button.getAttribute("aria-expanded") === "true";
       button.setAttribute("aria-expanded", String(!isOpen));
@@ -303,12 +207,13 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
     });
   }
 
-  setupToggle("tariffToggle","tariffContent","tariffButtonText",
-    "Qazanc qiymətlərini bağla","Qazanc qiymətlərinə bax");
+  setupToggle("tariffToggle","tariffContent","tariffButtonText","Qazanc qiymətlərini bağla","Qazanc qiymətlərinə bax");
+  setupToggle("withdrawalToggle","withdrawalContent","withdrawalButtonText","Çıxarış tarixçəsini bağla","Çıxarış tarixçəm");
+  setupToggle("videosToggle","videosContent","videosButtonText","Göndərdiyim videoları bağla","Göndərdiyim videolar");
 
-  // Tək hesab düyməsi formanın görünməsini idarə edir.
+  // Forma hesab panelində açılır; səhifə heç yerə sürüşdürülmür.
   function setM10Open(open) {
-    $("withdrawalPanel").classList.toggle("hidden", !open);
+    $("m10Content").classList.toggle("hidden", !open);
     $("accountWithdrawButton").setAttribute("aria-expanded", String(open));
     $("accountWithdrawButtonText").textContent = open ? "Formanı bağla" : "Çıxarış et";
   }
@@ -316,17 +221,7 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
   $("accountWithdrawButton").addEventListener("click", () => {
     const isOpen = $("accountWithdrawButton").getAttribute("aria-expanded") === "true";
     setM10Open(!isOpen);
-
-    if (!isOpen) {
-      $("withdrawalPanel").scrollIntoView({behavior:"smooth",block:"center"});
-    }
   });
-
-  setupToggle("withdrawalToggle","withdrawalContent","withdrawalButtonText",
-    "Çıxarış tarixçəsini bağla","Çıxarış tarixçəm");
-
-  setupToggle("videosToggle","videosContent","videosButtonText",
-    "Göndərdiyim videoları bağla","Göndərdiyim videolar");
 
   function msg(id, text, error = false) {
     $(id).textContent = text;
@@ -335,21 +230,13 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
 
   function setMode(next) {
     mode = next;
-    $("authTitle").textContent =
-      mode === "register" ? "Yeni hesab yarat" :
-      mode === "reset" ? "Şifrəni bərpa et" : "Hesabına daxil ol";
-
-    $("authSubmit").textContent =
-      mode === "register" ? "Qeydiyyatdan keç" :
-      mode === "reset" ? "Bərpa məktubu göndər" : "Daxil ol";
-
+    $("authTitle").textContent = mode === "register" ? "Yeni hesab yarat" : mode === "reset" ? "Şifrəni bərpa et" : "Hesabına daxil ol";
+    $("authSubmit").textContent = mode === "register" ? "Qeydiyyatdan keç" : mode === "reset" ? "Bərpa məktubu göndər" : "Daxil ol";
     $("passwordArea").classList.toggle("hidden", mode === "reset");
     $("password").required = mode !== "reset";
     $("switchAuth").classList.toggle("hidden", mode === "reset");
     $("resetPassword").classList.toggle("hidden", mode === "reset");
-    $("switchAuth").textContent =
-      mode === "register" ? "Artıq hesabın var? Daxil ol" : "Qeydiyyatdan keç";
-
+    $("switchAuth").textContent = mode === "register" ? "Artıq hesabın var? Daxil ol" : "Qeydiyyatdan keç";
     msg("authMessage", "");
   }
 
@@ -359,7 +246,6 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
     $("authPanel").classList.add("hidden");
     $("dashboard").classList.remove("hidden");
     $("userEmail").textContent = user.email || "";
-
     if (loadingUserId !== user.id) {
       loadingUserId = user.id;
       loadData();
@@ -376,7 +262,6 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
 
   function errorText(error) {
     const t = (error?.message || "").toLowerCase();
-
     if (t.includes("invalid login credentials")) return "E-poçt və ya şifrə yanlışdır.";
     if (t.includes("email not confirmed")) return "Əvvəlcə e-poçtunu təsdiqlə.";
     if (t.includes("already registered")) return "Bu e-poçtla hesab var. Daxil ol.";
@@ -389,7 +274,6 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
     if (t.includes("hesabına daxil olmalısan")) return "Pul çıxarmaq üçün hesabına daxil ol.";
     if (t.includes("profil tapılmadı")) return "Profil tapılmadı. Dəstəyə müraciət et.";
     if (t.includes("permission denied") || t.includes("row-level security")) return "İcazə xətası. Supabase cədvəl icazələrini yoxlamaq lazımdır.";
-
     return error?.message || "Xəta baş verdi. Yenidən yoxla.";
   }
 
@@ -403,44 +287,32 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
   async function loadData() {
     if (!currentUser || !client) return;
     const uid = currentUser.id;
-
     msg("dashboardMessage", "Məlumatlar yüklənir...");
 
     const [profileResult, videosResult, withdrawalsResult] = await Promise.all([
       client.from("profiles").select("balance").eq("id", uid).maybeSingle(),
-      client.from("video_submissions")
-        .select("id,tiktok_url,status,reward,views_count,created_at")
-        .eq("user_id", uid).order("created_at", {ascending:false}).limit(50),
-      client.from("altap_withdrawal_requests")
-        .select("id,amount,wallet_address,network,status,created_at,admin_note")
-        .eq("user_id", uid).eq("network", "M10")
-        .order("created_at", {ascending:false}).limit(50)
+      client.from("video_submissions").select("id,tiktok_url,status,reward,views_count,created_at").eq("user_id", uid).order("created_at",{ascending:false}).limit(50),
+      client.from("altap_withdrawal_requests").select("id,amount,wallet_address,network,status,created_at,admin_note").eq("user_id", uid).eq("network","M10").order("created_at",{ascending:false}).limit(50)
     ]);
 
     if (!currentUser || currentUser.id !== uid) return;
-
     let balanceAmount = 0;
 
     if (profileResult.error) {
-      msg("dashboardMessage", "Balansı yükləmək olmadı: " + profileResult.error.message, true);
+      msg("dashboardMessage","Balansı yükləmək olmadı: " + profileResult.error.message,true);
     } else if (!profileResult.data) {
-      msg("dashboardMessage", "Profil tapılmadı. Supabase profil trigger-ini yoxlamaq lazımdır.", true);
+      msg("dashboardMessage","Profil tapılmadı. Supabase profil trigger-ini yoxlamaq lazımdır.",true);
     } else {
       balanceAmount = Number(profileResult.data.balance || 0);
       $("balance").textContent = balanceAmount.toFixed(2) + " AZN";
-      msg("dashboardMessage", "");
+      msg("dashboardMessage","");
     }
 
     let pendingAmount = 0;
     if (!withdrawalsResult.error && withdrawalsResult.data) {
-      pendingAmount = withdrawalsResult.data
-        .filter(r => r.status === "pending")
-        .reduce((sum, r) => sum + Number(r.amount || 0), 0);
+      pendingAmount = withdrawalsResult.data.filter(r => r.status === "pending").reduce((sum,r) => sum + Number(r.amount || 0),0);
     }
-
-    $("withdrawAvailable").textContent =
-      Math.max(0, balanceAmount - pendingAmount).toFixed(2) + " AZN";
-
+    $("withdrawAvailable").textContent = Math.max(0,balanceAmount-pendingAmount).toFixed(2) + " AZN";
     renderWithdrawals(withdrawalsResult);
     renderVideos(videosResult);
   }
@@ -450,30 +322,21 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
       $("videoList").textContent = "Videoları yükləmək olmadı: " + result.error.message;
       return;
     }
-
     $("videoList").replaceChildren();
-
     if (!result.data || !result.data.length) {
       $("videoList").textContent = "Hələ video göndərməmisən.";
       return;
     }
 
     const statusText = {pending:"Yoxlanılır",approved:"Təsdiqlənib",rejected:"Rədd edilib"};
-
     for (const video of result.data) {
       const item = makeElement("div","video");
       const link = makeElement("a","",video.tiktok_url);
       link.href = video.tiktok_url;
       link.target = "_blank";
       link.rel = "noopener noreferrer";
-
-      const status = makeElement("div","status",
-        "Status: " + (statusText[video.status] || video.status || "Naməlum"));
-
-      const detail = makeElement("div","muted",
-        "Baxış: " + Number(video.views_count || 0).toLocaleString("az-AZ") +
-        " · Qazanc: " + Number(video.reward || 0).toFixed(2) + " AZN");
-
+      const status = makeElement("div","status","Status: " + (statusText[video.status] || video.status || "Naməlum"));
+      const detail = makeElement("div","muted","Baxış: " + Number(video.views_count || 0).toLocaleString("az-AZ") + " · Qazanc: " + Number(video.reward || 0).toFixed(2) + " AZN");
       item.append(link,status,detail);
       $("videoList").append(item);
     }
@@ -482,81 +345,52 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
   function renderWithdrawals(result) {
     const box = $("withdrawalList");
     box.replaceChildren();
-
     if (result.error) {
       box.textContent = "Çıxarış tarixçəsini yükləmək olmadı: " + result.error.message;
       return;
     }
-
     if (!result.data || !result.data.length) {
       box.textContent = "Hələ çıxarış sorğusu göndərməmisən.";
       return;
     }
 
     const statusText = {pending:"Gözləmədə",approved:"Təsdiqlənib",rejected:"Rədd edilib"};
-
     for (const request of result.data) {
       const item = makeElement("div","video");
       const top = makeElement("div","history-row");
       const amount = makeElement("strong","",Number(request.amount).toFixed(2) + " AZN");
-      const status = makeElement("span","pill",
-        statusText[request.status] || request.status || "Naməlum");
-
+      const status = makeElement("span","pill",statusText[request.status] || request.status || "Naməlum");
       top.append(amount,status);
-
       const phone = makeElement("div","muted","M10 nömrəsi: " + (request.wallet_address || ""));
       const date = request.created_at ? new Date(request.created_at).toLocaleString("az-AZ") : "";
       const created = makeElement("div","muted","Sorğu tarixi: " + date);
-
       item.append(top,phone,created);
-
-      if (request.admin_note) {
-        item.append(makeElement("div","muted","Qeyd: " + request.admin_note));
-      }
-
+      if (request.admin_note) item.append(makeElement("div","muted","Qeyd: " + request.admin_note));
       box.append(item);
     }
   }
 
-  $("switchAuth").addEventListener("click", () =>
-    setMode(mode === "login" ? "register" : "login")
-  );
+  $("switchAuth").addEventListener("click",() => setMode(mode === "login" ? "register" : "login"));
+  $("resetPassword").addEventListener("click",() => setMode("reset"));
 
-  $("resetPassword").addEventListener("click", () => setMode("reset"));
-
-  $("authForm").addEventListener("submit", async e => {
+  $("authForm").addEventListener("submit",async e => {
     e.preventDefault();
     if (!client || busy) return;
-
-    const email = $("email").value.trim();
-    const password = $("password").value;
-
+    const email = $("email").value.trim(), password = $("password").value;
     busy = true;
     $("authSubmit").disabled = true;
 
     try {
       let result;
-
       if (mode === "register") {
-        result = await client.auth.signUp({
-          email,password,
-          options:{emailRedirectTo:"https://altap.biz/"}
-        });
-
-        if (!result.error) {
-          msg("authMessage", result.data.session
-            ? "Qeydiyyat uğurludur."
-            : "Qeydiyyat yaradıldı. E-poçt təsdiq linkini yoxla.");
-        }
+        result = await client.auth.signUp({email,password,options:{emailRedirectTo:"https://altap.biz/"}});
+        if (!result.error) msg("authMessage",result.data.session ? "Qeydiyyat uğurludur." : "Qeydiyyat yaradıldı. E-poçt təsdiq linkini yoxla.");
       } else if (mode === "login") {
         result = await client.auth.signInWithPassword({email,password});
       } else {
-        result = await client.auth.resetPasswordForEmail(email,{
-          redirectTo:"https://altap.biz/"
-        });
+        result = await client.auth.resetPasswordForEmail(email,{redirectTo:"https://altap.biz/"});
         if (!result.error) msg("authMessage","Əgər hesab mövcuddursa, bərpa məktubu göndəriləcək.");
       }
-
       if (result?.error) throw result.error;
       if (result?.data?.user && result.data.session) showDashboard(result.data.user);
     } catch (error) {
@@ -567,10 +401,9 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
     }
   });
 
-  $("videoForm").addEventListener("submit", async e => {
+  $("videoForm").addEventListener("submit",async e => {
     e.preventDefault();
     if (!currentUser) return;
-
     const link = $("tiktokUrl").value.trim();
 
     if (!/^https?:\/\/(www\.)?(vm\.tiktok\.com|vt\.tiktok\.com|tiktok\.com)\//i.test(link)) {
@@ -580,11 +413,9 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
 
     $("submitVideo").disabled = true;
     msg("videoMessage","Video göndərilir...");
-
     try {
       const {error} = await client.rpc("submit_altap_video",{p_tiktok_url:link});
       if (error) throw error;
-
       $("tiktokUrl").value = "";
       msg("videoMessage","Video uğurla göndərildi. Yoxlama gözlənilir.");
       await loadData();
@@ -595,9 +426,8 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
     }
   });
 
-  $("withdrawForm").addEventListener("submit", async e => {
+  $("withdrawForm").addEventListener("submit",async e => {
     e.preventDefault();
-
     if (!currentUser || !client) {
       msg("withdrawMessage","Əvvəlcə hesabına daxil ol.",true);
       return;
@@ -611,30 +441,22 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
       $("withdrawAmount").focus();
       return;
     }
-
-    if (Math.round(amount * 100) !== amount * 100) {
+    if (Math.round(amount*100) !== amount*100) {
       msg("withdrawMessage","Məbləği maksimum iki onluq rəqəmlə daxil et.",true);
       return;
     }
-
     if (phone.startsWith("00")) phone = "+" + phone.slice(2);
     if (/^994[0-9]{9}$/.test(phone)) phone = "+" + phone;
-
     if (!/^\+994[0-9]{9}$/.test(phone)) {
       msg("withdrawMessage","M10 nömrəsini +994XXXXXXXXX formatında yaz.",true);
       return;
     }
 
-    const button = $("withdrawSubmit");
-    button.disabled = true;
+    $("withdrawSubmit").disabled = true;
     msg("withdrawMessage","Çıxarış sorğusu göndərilir...");
-
     try {
-      const {error} = await client.rpc("submit_altap_withdrawal",{
-        p_amount:amount,p_m10_phone:phone
-      });
+      const {error} = await client.rpc("submit_altap_withdrawal",{p_amount:amount,p_m10_phone:phone});
       if (error) throw error;
-
       $("withdrawAmount").value = "";
       $("m10Phone").value = "";
       msg("withdrawMessage","Sorğun uğurla göndərildi. Ödəniş admin tərəfindən yoxlanılacaq.");
@@ -642,13 +464,12 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
     } catch (error) {
       msg("withdrawMessage",errorText(error),true);
     } finally {
-      button.disabled = false;
+      $("withdrawSubmit").disabled = false;
     }
   });
 
-  $("refresh").addEventListener("click", loadData);
-
-  $("logout").addEventListener("click", async () => {
+  $("refresh").addEventListener("click",loadData);
+  $("logout").addEventListener("click",async () => {
     const {error} = await client.auth.signOut();
     if (error) msg("dashboardMessage",errorText(error),true);
     else showAuth();
@@ -659,14 +480,11 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
       msg("authMessage","Giriş sistemi yüklənmədi. Səhifəni yenilə.",true);
       return;
     }
-
     client = window.supabase.createClient(URL,KEY);
-
     client.auth.onAuthStateChange((event,session) => {
       if (session?.user) showDashboard(session.user);
       else if (event === "SIGNED_OUT") showAuth();
     });
-
     const {data,error} = await client.auth.getSession();
     if (!error && data.session) showDashboard(data.session.user);
   }
