@@ -3,418 +3,479 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Altap.Biz — Video Reklam</title>
+<meta name="theme-color" content="#080910">
+<title>Altap.Biz — TikTok-da paylaş, pul qazan</title>
+
 <style>
 :root {
-  --bg: #080b14;
-  --card: #101624;
-  --border: #26344b;
+  --bg: #080910;
+  --panel: #11131e;
+  --border: #272a3b;
+  --white: #f7f8ff;
+  --muted: #9299ad;
   --cyan: #25f4ee;
   --pink: #fe2c55;
-  --text: #f5f7ff;
-  --muted: #94a3bd;
 }
 * { box-sizing: border-box; }
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 10% 10%, #25f4ee13, transparent 40%),
+    radial-gradient(ellipse at 90% 65%, #fe2c5512, transparent 40%),
+    var(--bg);
+  color: var(--white);
+  font-family: Inter, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Arial, sans-serif;
 }
+a { color: inherit; text-decoration: none; }
 button, input { font: inherit; }
 button { cursor: pointer; }
+
+.container {
+  width: min(1100px, 100%);
+  margin: auto;
+  padding: 0 22px;
+}
 header {
-  padding: 17px 20px;
-  border-bottom: 1px solid var(--border);
+  height: 76px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
-  position: sticky;
-  top: 0;
-  background: #080b14ee;
-  backdrop-filter: blur(15px);
-  z-index: 5;
+  border-bottom: 1px solid #ffffff0c;
 }
 .logo {
-  font-size: 25px;
+  font-size: 26px;
   font-weight: 900;
-  letter-spacing: -1px;
+  letter-spacing: -1.2px;
 }
-.logo span { color: var(--pink); }
-.logo small {
-  display: block;
-  font-size: 10px;
+.logo .dot { color: var(--pink); }
+.logo-icon {
+  color: var(--cyan);
+  margin-right: 5px;
+}
+.header-label {
   color: var(--muted);
-  letter-spacing: 0;
-}
-.profile {
-  border: 1px solid var(--border);
-  padding: 9px 12px;
-  border-radius: 12px;
   font-size: 12px;
+  letter-spacing: 1px;
 }
 main {
-  max-width: 760px;
-  margin: auto;
-  padding: 16px;
-  padding-bottom: 85px;
+  display: grid;
+  grid-template-columns: 1fr 390px;
+  align-items: center;
+  gap: 65px;
+  min-height: calc(100vh - 140px);
+  padding-top: 45px;
+  padding-bottom: 45px;
 }
-.hero {
-  padding: 25px 20px;
-  border: 1px solid #183c53;
-  border-radius: 22px;
-  background:
-    radial-gradient(ellipse at top right, #fe2c5533, transparent 55%),
-    radial-gradient(ellipse at bottom left, #25f4ee22, transparent 60%),
-    #0b101d;
-  overflow: hidden;
-  position: relative;
-}
-.hero .tag {
-  display: inline-block;
-  padding: 6px 10px;
-  background: #25f4ee15;
-  border: 1px solid #25f4ee55;
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   color: var(--cyan);
-  border-radius: 20px;
+  border: 1px solid #25f4ee40;
+  background: #25f4ee0b;
+  padding: 9px 12px;
+  border-radius: 30px;
   font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
 }
 h1 {
-  font-size: clamp(29px, 7vw, 42px);
-  line-height: 1.12;
-  margin: 17px 0 12px;
-  letter-spacing: -1.5px;
+  font-size: clamp(40px, 5.3vw, 64px);
+  line-height: 1.06;
+  letter-spacing: -2.8px;
+  margin: 25px 0 18px;
 }
 .gradient {
-  background: linear-gradient(90deg, var(--cyan), #a17bff, var(--pink));
+  background: linear-gradient(90deg, var(--cyan), #8e9aff, var(--pink));
   -webkit-background-clip: text;
+  background-clip: text;
   color: transparent;
 }
-p { color: var(--muted); line-height: 1.6; }
-.btn {
-  border: 0;
-  border-radius: 12px;
-  padding: 13px 18px;
-  color: white;
-  font-weight: 750;
-  background: linear-gradient(100deg, #25bde9, #8d48f5, #fe2c78);
+.description {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 480px;
 }
-.btn.full { width: 100%; }
-.stats {
+.features {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-  margin: 15px 0;
+  gap: 18px;
+  margin-top: 34px;
 }
-.card {
-  min-width: 0;
-  background: var(--card);
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.feature-icon {
+  flex-shrink: 0;
+  width: 45px;
+  height: 45px;
   border: 1px solid var(--border);
-  border-radius: 17px;
-  padding: 16px;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  background: var(--panel);
 }
-.stat-label { font-size: 12px; color: var(--muted); }
-.stat-value {
-  font-size: 22px;
-  font-weight: 800;
-  margin-top: 10px;
-  overflow-wrap: anywhere;
+.feature-icon svg {
+  width: 21px;
+  height: 21px;
+  stroke: var(--cyan);
 }
-.section-title {
-  font-size: 18px;
-  margin: 0 0 7px;
+.feature:nth-child(2) svg { stroke: var(--pink); }
+.feature-title {
+  font-size: 14px;
+  font-weight: 750;
 }
-.section-desc { font-size: 12px; margin: 0 0 17px; }
-input {
-  width: 100%;
-  color: white;
-  background: #080e1b;
-  border: 1px solid #31415b;
-  border-radius: 11px;
-  padding: 14px;
-  outline: none;
-  margin: 8px 0 12px;
-}
-input:focus { border-color: var(--cyan); }
-.note {
-  border-radius: 12px;
-  padding: 12px;
-  background: #25f4ee0b;
+.feature-description {
   color: var(--muted);
   font-size: 12px;
-  line-height: 1.8;
-  margin-top: 12px;
+  margin-top: 5px;
+  line-height: 1.5;
 }
-.reward-list { display: grid; gap: 8px; }
-.reward {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  align-items: center;
-  border-bottom: 1px solid var(--border);
-  padding: 12px 0;
-  font-size: 13px;
+.login-card {
+  background: linear-gradient(145deg, #151826, #0e1019);
+  border: 1px solid #303348;
+  border-radius: 24px;
+  padding: 29px;
+  box-shadow: 0 25px 90px #0006;
 }
-.reward strong { color: var(--cyan); white-space: nowrap; }
-.menu {
+.card-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
-  margin: 15px 0;
+  place-items: center;
+  background: linear-gradient(135deg, #25f4ee25, #fe2c5525);
+  border: 1px solid #ffffff18;
+  margin-bottom: 20px;
 }
-.menu button {
-  background: var(--card);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 13px 3px;
-  font-size: 11px;
+.card-logo svg {
+  width: 26px;
+  height: 26px;
+  stroke: var(--cyan);
 }
-.menu button span {
-  display: block;
-  font-size: 20px;
-  margin-bottom: 7px;
+h2 {
+  font-size: 25px;
+  margin: 0 0 9px;
+  letter-spacing: -0.7px;
 }
-.menu button.active { border-color: var(--cyan); }
-.page { display: none; }
-.page.active { display: block; }
-.history-item {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 13px 0;
-  border-bottom: 1px solid var(--border);
+.card-subtitle {
+  color: var(--muted);
   font-size: 13px;
+  line-height: 1.7;
+  margin: 0 0 25px;
 }
-.history-item small { display: block; color: var(--muted); margin-top: 5px; }
-footer {
-  text-align: center;
-  color: var(--muted);
-  font-size: 11px;
-  padding: 22px 10px;
-  border-top: 1px solid var(--border);
+.field-label {
+  display: block;
+  color: #d9dceb;
+  font-size: 12px;
+  font-weight: 650;
+  margin: 16px 0 8px;
 }
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  background: #0c111eee;
-  border-top: 1px solid var(--border);
+.input-wrap { position: relative; }
+.input-wrap svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  stroke: var(--muted);
+}
+input {
+  width: 100%;
+  height: 49px;
+  padding: 0 14px 0 43px;
+  color: white;
+  border: 1px solid #303449;
+  border-radius: 11px;
+  background: #090b13;
+  outline: none;
+}
+input:focus { border-color: var(--cyan); }
+input::placeholder { color: #676e83; }
+.forgot {
+  display: block;
+  text-align: right;
+  color: var(--cyan);
+  font-size: 12px;
+  margin: 13px 0 20px;
+}
+.btn {
+  width: 100%;
+  height: 49px;
   display: flex;
-  justify-content: space-around;
-  padding: 10px 3px calc(10px + env(safe-area-inset-bottom));
-  backdrop-filter: blur(16px);
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border-radius: 11px;
+  font-size: 14px;
+  font-weight: 800;
+  transition: .2s;
 }
-.bottom-nav button {
-  background: none;
-  color: var(--muted);
-  border: 0;
-  font-size: 10px;
+.btn svg { width: 18px; height: 18px; }
+.btn-primary {
+  color: #080910;
+  border: none;
+  background: linear-gradient(100deg, var(--cyan), #b0fff6);
 }
-.bottom-nav button span { display: block; font-size: 19px; margin-bottom: 4px; }
-.bottom-nav button.active { color: var(--cyan); }
-.status { color: #ffc45c; font-size: 12px; }
-@media(min-width:600px) {
-  main { padding: 24px; }
-  .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .hero { padding: 35px; }
+.btn-primary:hover { filter: brightness(1.08); }
+.btn-secondary {
+  color: white;
+  border: 1px solid #393d51;
+  background: #ffffff05;
+  margin-top: 11px;
+}
+.btn-secondary:hover { border-color: var(--pink); }
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #71788b;
+  font-size: 11px;
+  margin: 22px 0;
+}
+.divider::before, .divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: #292d3e;
+}
+.card-footer {
+  font-size: 11px;
+  color: #747c91;
+  text-align: center;
+  line-height: 1.7;
+  margin-top: 20px;
+}
+.message {
+  font-size: 12px;
+  color: var(--cyan);
+  line-height: 1.6;
+  margin-top: 14px;
+}
+footer {
+  border-top: 1px solid #ffffff0c;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  color: #737b8f;
+  font-size: 11px;
+}
+footer a:hover { color: var(--cyan); }
+
+@media(max-width: 850px) {
+  main {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding-top: 38px;
+  }
+  .intro { text-align: center; }
+  .description { margin: auto; }
+  .features {
+    width: min(420px, 100%);
+    margin: 28px auto 0;
+    text-align: left;
+  }
+  h1 { font-size: clamp(39px, 9vw, 58px); }
+  .login-card {
+    width: min(440px, 100%);
+    margin: auto;
+  }
+}
+@media(max-width: 420px) {
+  .container { padding: 0 16px; }
+  header { height: 66px; }
+  .logo { font-size: 23px; }
+  .header-label { font-size: 10px; }
+  main { padding-top: 30px; }
+  .login-card { padding: 22px; }
+  h1 { letter-spacing: -1.8px; }
+  footer { flex-direction: column; justify-content: center; padding: 16px 0; }
 }
 </style>
 </head>
-<body>
 
-<header>
-  <div class="logo">♪ Altap<span>.Biz</span>
-    <small>Video paylaş, qazanc əldə et!</small>
-  </div>
-  <div class="profile">👤 İstifadəçi</div>
+<body>
+<header class="container">
+  <a class="logo" href="#" aria-label="Altap Biz ana səhifə">
+    <span class="logo-icon">A</span>Altap<span class="dot">.Biz</span>
+  </a>
+  <div class="header-label">VIDEO REKLAM PLATFORMASI</div>
 </header>
 
-<main>
-  <section class="hero">
-    <span class="tag">● TIKTOK REKLAM PLATFORMASI</span>
-    <h1>TikTok-da video paylaş,<br><span class="gradient">pul qazan!</span></h1>
-    <p>Altap.Biz saytını tanıt, real və orqanik baxışlar topla, qazanc əldə et.</p>
-    <button class="btn" onclick="showPage('link')">＋ Link əlavə et →</button>
-  </section>
+<main class="container">
+  <section class="intro">
+    <div class="tag">
+      <svg width="15" height="15" viewBox="0 0 24 24"
+        fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 3v18M3 12h18"/>
+      </svg>
+      ALTAP.BİZ İLƏ QAZAN
+    </div>
 
-  <div class="stats">
-    <div class="card">
-      <div class="stat-label">🎬 Bugünkü videolar</div>
-      <div class="stat-value">0 / 2</div>
-    </div>
-    <div class="card">
-      <div class="stat-label">👁 Ümumi baxışlar</div>
-      <div class="stat-value">0</div>
-    </div>
-    <div class="card">
-      <div class="stat-label">💳 Balans</div>
-      <div class="stat-value">0.00 AZN</div>
-    </div>
-    <div class="card">
-      <div class="stat-label">👥 Referal qazancı</div>
-      <div class="stat-value">0.00 AZN</div>
-    </div>
-  </div>
+    <h1>
+      TikTok-da video<br>
+      paylaş,<br>
+      <span class="gradient">pul qazan!</span>
+    </h1>
 
-  <nav class="menu">
-    <button class="active" onclick="showPage('home',this)"><span>⌂</span>Ana səhifə</button>
-    <button onclick="showPage('link',this)"><span>🔗</span>Link əlavə et</button>
-    <button onclick="showPage('balance',this)"><span>💳</span>Balans</button>
-    <button onclick="showPage('referral',this)"><span>👥</span>Referal</button>
-  </nav>
+    <p class="description">
+      Altap.Biz saytını TikTok videolarında tanıt.
+      Real və orqanik baxışlar topla, videon yoxlanıldıqdan
+      sonra qazanc əldə et.
+    </p>
 
-  <section id="home" class="page active">
-    <div class="card">
-      <h2 class="section-title">💰 Baxışlara görə ödəniş</h2>
-      <p class="section-desc">Ödəniş yalnız yoxlanılmış nəticələrə əsasən hesablanır.</p>
-      <div class="reward"><span>1.000 real baxış</span><strong>3 AZN</strong></div>
-      <div class="reward"><span>5.000 real baxış</span><strong>20 AZN</strong></div>
-      <div class="reward"><span>10.000 real baxış</span><strong>45 AZN</strong></div>
-      <div class="reward"><span>50.000 real baxış</span><strong>134,82 AZN</strong></div>
-      <div class="reward"><span>100.000 real baxış</span><strong>234,84 AZN</strong></div>
-      <div class="note">✓ Yalnız real və orqanik baxışlar qəbul edilir.<br>
-      ✓ Gündə maksimum 2 video.<br>
-      ✕ Bot, süni baxış və sponsorlu reklamla artırılmış nəticələr qəbul edilmir.</div>
-    </div>
-  </section>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none"
+            stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round">
+            <rect x="3" y="5" width="18" height="14" rx="3"/>
+            <path d="m10 9 5 3-5 3z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="feature-title">TikTok-da video paylaş</div>
+          <div class="feature-description">Gündə maksimum 2 video təqdim et.</div>
+        </div>
+      </div>
 
-  <section id="link" class="page">
-    <div class="card">
-      <h2 class="section-title">🔗 TikTok video linki</h2>
-      <p class="section-desc">Altap.Biz reklamı olan videonun linkini daxil et.</p>
-      <form onsubmit="submitLink(event)">
-        <input id="videoLink" type="url" placeholder="https://www.tiktok.com/@..." required>
-        <button class="btn full" type="submit">Linki göndər →</button>
-      </form>
-      <div class="note">Gündəlik limit: 2 video. Göndərilən linklər yoxlama üçün növbəyə əlavə olunmalıdır.</div>
-      <div id="linkMessage" class="status"></div>
-    </div>
-  </section>
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none"
+            stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M3 3v18h18"/>
+            <path d="m7 14 4-4 4 3 6-7"/>
+          </svg>
+        </div>
+        <div>
+          <div class="feature-title">Real baxışlar topla</div>
+          <div class="feature-description">Orqanik nəticələr yoxlamadan keçirilir.</div>
+        </div>
+      </div>
 
-  <section id="balance" class="page">
-    <div class="card">
-      <h2 class="section-title">💳 Mənim balansım</h2>
-      <p>Hazırkı balans</p>
-      <div class="stat-value">0.00 AZN</div>
-      <p class="section-desc">Təsdiqlənmiş videolardan qazancın burada görünəcək.</p>
-      <h3>💸 Pul çıxarışı</h3>
-      <input id="withdrawAmount" type="number" min="1" step="0.01" placeholder="Məbləğ (AZN)">
-      <input id="withdrawMethod" placeholder="Ödəniş üsulu">
-      <input id="withdrawAccount" placeholder="Kart və ya hesab məlumatı">
-      <button class="btn full" onclick="requestWithdrawal()">Çıxarış sorğusu yarat</button>
-      <p id="withdrawMessage" class="status"></p>
-      <div class="note">Çıxarış yalnız admin yoxlamasından sonra həyata keçiriləcək. Bu HTML nümunəsində real pul köçürülmür.</div>
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none"
+            stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round">
+            <rect x="3" y="5" width="18" height="14" rx="3"/>
+            <path d="M3 10h18M7 15h4"/>
+          </svg>
+        </div>
+        <div>
+          <div class="feature-title">Qazancını əldə et</div>
+          <div class="feature-description">Təsdiqlənmiş baxışlara görə ödəniş.</div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="history" class="page">
-    <div class="card">
-      <h2 class="section-title">🕒 Əməliyyat tarixçəsi</h2>
-      <div id="historyList"><p>Hələ əməliyyat yoxdur.</p></div>
+  <section class="login-card">
+    <div class="card-logo">
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke-width="1.8" stroke-linecap="round"
+        stroke-linejoin="round">
+        <rect x="4" y="3" width="16" height="18" rx="4"/>
+        <path d="M10 8v8l6-4z"/>
+      </svg>
+    </div>
+
+    <h2>Hesabına daxil ol</h2>
+    <p class="card-subtitle">
+      Qazanc imkanlarından istifadə etmək üçün hesabına daxil ol
+      və ya yeni hesab yarat.
+    </p>
+
+    <form id="loginForm">
+      <label class="field-label" for="email">E-poçt ünvanı</label>
+      <div class="input-wrap">
+        <svg viewBox="0 0 24 24" fill="none"
+          stroke-width="1.8" stroke-linecap="round"
+          stroke-linejoin="round">
+          <rect x="3" y="5" width="18" height="14" rx="3"/>
+          <path d="m4 7 8 6 8-6"/>
+        </svg>
+        <input id="email" type="email" placeholder="email@example.com"
+          autocomplete="email" required>
+      </div>
+
+      <label class="field-label" for="password">Şifrə</label>
+      <div class="input-wrap">
+        <svg viewBox="0 0 24 24" fill="none"
+          stroke-width="1.8" stroke-linecap="round"
+          stroke-linejoin="round">
+          <rect x="4" y="10" width="16" height="11" rx="3"/>
+          <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+        </svg>
+        <input id="password" type="password" placeholder="Şifrənizi daxil edin"
+          autocomplete="current-password" required>
+      </div>
+
+      <a href="#" class="forgot" id="forgotLink">Şifrəni unutmusunuz?</a>
+
+      <button type="submit" class="btn btn-primary">
+        Daxil ol
+        <svg viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14m-6-6 6 6-6 6"/>
+        </svg>
+      </button>
+    </form>
+
+    <div class="divider">YENİ İSTİFADƏÇİSƏN?</div>
+
+    <button type="button" class="btn btn-secondary" id="registerButton">
+      Qeydiyyatdan keç
+    </button>
+
+    <div class="message" id="message" role="status"></div>
+
+    <div class="card-footer">
+      Davam etməklə istifadə şərtləri və məxfilik qaydaları ilə
+      razılaşmış olursan.
     </div>
   </section>
-
-  <section id="referral" class="page">
-    <div class="card">
-      <h2 class="section-title">👥 Dostlarını dəvət et</h2>
-      <p>Referal linkini dostlarınla paylaş.</p>
-      <input id="refLink" value="https://altap.biz/?ref=YOUR_ID" readonly>
-      <button class="btn full" onclick="copyReferral()">Linki kopyala</button>
-      <p id="refMessage" class="status"></p>
-      <div class="note">Referal bonusunun məbləği və şərtləri admin tərəfindən müəyyən ediləcək. Saxta hesablar qəbul edilmir.</div>
-    </div>
-  </section>
-
-  <section id="profile" class="page">
-    <div class="card">
-      <h2 class="section-title">👤 Hesab</h2>
-      <p>Altap.Biz istifadəçi profili</p>
-      <button class="btn full" onclick="alert('Qeydiyyat və giriş Supabase inteqrasiyasında qurulacaq.')">Qeydiyyat / Daxil ol</button>
-    </div>
-  </section>
-
-  <footer>© 2026 Altap.Biz · Bütün hüquqlar qorunur.</footer>
 </main>
 
-<nav class="bottom-nav">
-  <button class="active" onclick="showPage('home',this)"><span>⌂</span>Ana səhifə</button>
-  <button onclick="showPage('link',this)"><span>＋</span>Video</button>
-  <button onclick="showPage('balance',this)"><span>▣</span>Balans</button>
-  <button onclick="showPage('history',this)"><span>◷</span>Tarixçə</button>
-  <button onclick="showPage('profile',this)"><span>♙</span>Profil</button>
-</nav>
+<footer class="container">
+  <span>© 2026 Altap.Biz</span>
+  <span>Video reklam platforması</span>
+</footer>
 
 <script>
-function showPage(id, button) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  const page = document.getElementById(id);
-  if (page) page.classList.add('active');
+/*
+  Bu, giriş səhifəsinin frontend nümunəsidir.
+  Real hesab yaratmaq və daxil olmaq üçün Supabase Auth
+  inteqrasiyası növbəti mərhələdə əlavə olunmalıdır.
+*/
+const message = document.getElementById("message");
 
-  document.querySelectorAll('.menu button, .bottom-nav button')
-    .forEach(b => b.classList.remove('active'));
-  if (button) button.classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  message.textContent =
+    "Giriş sistemini aktivləşdirmək üçün Supabase Auth bağlantısı lazımdır.";
+});
 
-function submitLink(event) {
-  event.preventDefault();
-  const link = document.getElementById('videoLink').value.trim();
-  if (!/^https:\/\/(www\.)?tiktok\.com\//i.test(link)) {
-    document.getElementById('linkMessage').textContent =
-      'Düzgün TikTok video linki daxil et.';
-    return;
-  }
-  document.getElementById('linkMessage').textContent =
-    'Dizayn nümunəsi: link qəbul edildi kimi göstərildi. Real yoxlama üçün Supabase bağlantısı lazımdır.';
-  addHistory('Video linki göndərildi', 'Yoxlama gözləyir');
-}
+document.getElementById("registerButton").addEventListener("click", function() {
+  message.textContent =
+    "Qeydiyyat forması Supabase inteqrasiyası zamanı aktiv ediləcək.";
+});
 
-function requestWithdrawal() {
-  const amount = Number(document.getElementById('withdrawAmount').value);
-  const method = document.getElementById('withdrawMethod').value.trim();
-  const account = document.getElementById('withdrawAccount').value.trim();
-  const msg = document.getElementById('withdrawMessage');
-
-  if (!(amount > 0) || !method || !account) {
-    msg.textContent = 'Bütün sahələri düzgün doldur.';
-    return;
-  }
-  msg.textContent =
-    'Nümunə sorğu yaradıldı. Real balansdan pul çıxarılmır.';
-  addHistory('Pul çıxarışı sorğusu: ' + amount.toFixed(2) + ' AZN',
-             'Admin yoxlaması gözləyir');
-}
-
-function addHistory(title, status) {
-  const list = document.getElementById('historyList');
-  if (list.textContent.includes('Hələ əməliyyat yoxdur')) list.innerHTML = '';
-  const item = document.createElement('div');
-  item.className = 'history-item';
-  const left = document.createElement('div');
-  left.textContent = title;
-  const right = document.createElement('div');
-  right.className = 'status';
-  right.textContent = status;
-  item.append(left, right);
-  list.prepend(item);
-}
-
-function copyReferral() {
-  const input = document.getElementById('refLink');
-  input.select();
-  input.setSelectionRange(0, 99999);
-  document.getElementById('refMessage').textContent =
-    'Link seçildi. Kopyalama işləməsə, linki əl ilə kopyala.';
-  if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(input.value).then(() => {
-      document.getElementById('refMessage').textContent = 'Link kopyalandı!';
-    }).catch(() => {});
-  }
-}
+document.getElementById("forgotLink").addEventListener("click", function(e) {
+  e.preventDefault();
+  message.textContent =
+    "Şifrə bərpa funksiyası Supabase Auth ilə qoşulacaq.";
+});
 </script>
 </body>
 </html>
