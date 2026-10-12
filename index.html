@@ -9,175 +9,92 @@
 
 <style>
 :root{
-  --bg:#080910;
-  --panel:#11131e;
-  --border:#292d40;
-  --white:#f7f8ff;
-  --muted:#9299ad;
-  --cyan:#25f4ee;
-  --pink:#fe2c55;
+  --bg:#080910;--panel:#11131e;--border:#292d40;
+  --white:#f7f8ff;--muted:#9299ad;--cyan:#25f4ee;--pink:#fe2c55
 }
 *{box-sizing:border-box}
 body{
   margin:0;
-  background:
-    radial-gradient(ellipse at 10% 10%,#25f4ee18,transparent 40%),
-    radial-gradient(ellipse at 90% 65%,#fe2c5518,transparent 40%),
-    var(--bg);
-  color:var(--white);
-  font-family:Arial,sans-serif;
+  background:radial-gradient(ellipse at 10% 10%,#25f4ee18,transparent 40%),
+  radial-gradient(ellipse at 90% 65%,#fe2c5518,transparent 40%),var(--bg);
+  color:var(--white);font-family:Arial,sans-serif
 }
 .container{width:min(1000px,100%);margin:auto;padding:0 20px}
-header{
-  min-height:75px;display:flex;align-items:center;
-  justify-content:space-between;gap:12px;
-  border-bottom:1px solid #ffffff12
-}
+header{min-height:75px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #ffffff12}
 .logo{font-size:26px;font-weight:900;color:white;text-decoration:none;white-space:nowrap}
 .dot{color:var(--pink)}
 .muted{color:var(--muted);font-size:13px;line-height:1.7}
 main{padding:25px 0 60px}
 h1{font-size:clamp(34px,6vw,58px);line-height:1.1;letter-spacing:-2px}
 h2{line-height:1.3}
-.gradient{
-  background:linear-gradient(90deg,var(--cyan),#a4aaff,var(--pink));
-  color:transparent;background-clip:text
-}
-.panel{
-  background:linear-gradient(145deg,#151826,#0e1019);
-  border:1px solid #303348;border-radius:20px;
-  padding:24px;margin:20px 0;min-width:0
-}
+.gradient{background:linear-gradient(90deg,var(--cyan),#a4aaff,var(--pink));color:transparent;background-clip:text}
+.panel{background:linear-gradient(145deg,#151826,#0e1019);border:1px solid #303348;border-radius:20px;padding:24px;margin:20px 0;min-width:0}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-input{
-  width:100%;padding:14px;margin:8px 0 15px;
-  border:1px solid #303449;border-radius:10px;
-  background:#090b13;color:white;font-size:15px
-}
+input{width:100%;padding:14px;margin:8px 0 15px;border:1px solid #303449;border-radius:10px;background:#090b13;color:white;font-size:15px}
 input:focus{outline:1px solid var(--cyan);border-color:var(--cyan)}
-button{
-  cursor:pointer;border-radius:10px;padding:13px 16px;
-  font-weight:bold;font-size:14px;transition:.2s
-}
-button:hover{filter:brightness(1.12);transform:translateY(-1px)}
-.primary{
-  background:linear-gradient(100deg,var(--cyan),#b0fff6);
-  border:0;color:#080910;width:100%
-}
-.secondary{
-  background:#ffffff08;border:1px solid #393d51;
-  color:white;margin:4px 4px 4px 0
-}
+button{cursor:pointer;border-radius:10px;padding:13px 16px;font-weight:bold;font-size:14px;transition:.2s}
+button:hover{filter:brightness(1.12)}
+.primary{background:linear-gradient(100deg,var(--cyan),#b0fff6);border:0;color:#080910;width:100%}
+.secondary{background:#ffffff08;border:1px solid #393d51;color:white;margin:4px 4px 4px 0}
 button:disabled{opacity:.55;cursor:wait}
 .label{font-size:13px;color:#d9dceb;font-weight:bold}
 .balance{font-size:35px;font-weight:900;color:var(--cyan);margin:12px 0}
 .message{font-size:13px;line-height:1.7;overflow-wrap:anywhere;margin-top:12px;color:var(--cyan)}
-.video{
-  border:1px solid var(--border);border-radius:12px;
-  padding:14px;margin-top:10px;overflow-wrap:anywhere
-}
+.video{border:1px solid var(--border);border-radius:12px;padding:14px;margin-top:10px;overflow-wrap:anywhere}
 .video a{color:var(--cyan);word-break:break-all}
 .status{font-size:12px;font-weight:bold;margin-top:10px}
 .hidden{display:none!important}
 footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-size:12px}
-
-.m10-mark{
-  display:inline-flex;align-items:center;justify-content:center;
-  background:#fff;color:#6738c7;border-radius:6px;
-  font-size:13px;font-weight:900;padding:5px 7px;
-  letter-spacing:-.6px;flex-shrink:0
-}
-.m10-action{
-  display:inline-flex;align-items:center;justify-content:center;
-  gap:9px;flex-shrink:0;white-space:nowrap;
-  background:linear-gradient(110deg,#6330c8,#8050e8);
-  color:white;border:0;padding:10px 13px;
-  box-shadow:0 5px 18px #7040dc25
-}
-.m10-action:hover,.m10-button:hover{background:linear-gradient(110deg,#7542dc,#936cf0)}
-.m10-button{
-  background:linear-gradient(110deg,#6330c8,#8050e8);
-  color:white;border:0;width:100%;padding:15px;
-  box-shadow:0 5px 18px #7040dc25
-}
+.m10-mark{display:inline-flex;align-items:center;justify-content:center;background:#fff;color:#6738c7;border-radius:6px;font-size:13px;font-weight:900;padding:5px 7px;letter-spacing:-.6px;flex-shrink:0}
+.m10-action{display:inline-flex;align-items:center;justify-content:center;gap:9px;flex-shrink:0;white-space:nowrap;background:linear-gradient(110deg,#6330c8,#8050e8);color:white;border:0;padding:10px 13px;box-shadow:0 5px 18px #7040dc25}
+.m10-button{background:linear-gradient(110deg,#6330c8,#8050e8);color:white;border:0;width:100%;padding:15px;box-shadow:0 5px 18px #7040dc25}
 .account-balance-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px}
 .account-balance-info{flex:1;min-width:0}
 .account-balance-info p{margin:0}
 .account-balance-info .balance{margin:8px 0;font-size:clamp(25px,5vw,35px);overflow-wrap:anywhere}
 .notice{background:#ffffff08;border:1px solid #ffffff12;border-radius:12px;padding:12px;color:#c5c9d8;font-size:12px;line-height:1.7}
 .minimum-note{color:#ffcf70;font-size:13px;font-weight:bold;margin:0 0 15px}
-.tariff-toggle{
-  width:100%;display:flex;justify-content:space-between;
-  align-items:center;gap:12px;text-align:left;
-  background:#ffffff08;border:1px solid #393d51;
-  color:white;padding:16px;border-radius:12px;font-size:15px
+
+/* BÜTÜN AÇILAN BÖLMƏLƏRİN EYNİ ÖLÇÜSÜ VƏ MƏSAFƏSİ */
+.dashboard-sections{display:flex;flex-direction:column;gap:16px;margin-top:16px}
+.dashboard-sections>.panel{margin:0}
+.dashboard-sections .tariff-toggle{
+  width:100%;min-height:58px;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;text-align:left;
+  background:#ffffff08;border:1px solid #393d51;color:white;
+  padding:16px;border-radius:12px;font-size:15px;margin:0
 }
+.tariff-toggle .toggle-label{display:flex;align-items:center;gap:11px;min-width:0}
 .tariff-toggle .arrow{color:var(--cyan);font-size:20px;transition:transform .2s;flex-shrink:0}
 .tariff-toggle[aria-expanded="true"] .arrow{transform:rotate(180deg)}
 .tariff-content{margin-top:12px}
-.tariff-rate{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:12px;padding:15px;border:1px solid var(--border);
-  border-radius:10px;margin-top:9px;background:#ffffff04
-}
+.tariff-rate{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:15px;border:1px solid var(--border);border-radius:10px;margin-top:9px;background:#ffffff04}
 .tariff-rate b{color:var(--cyan);white-space:nowrap}
 .section-description{margin:10px 0}
 .withdraw-inline{border-top:1px solid #ffffff16;margin-top:20px;padding-top:20px}
-
-/* Bölmə ikonları */
-.section-heading{display:flex;align-items:center;gap:10px}
 .section-icon{
-  width:38px;height:38px;flex:0 0 38px;
-  display:inline-flex;align-items:center;justify-content:center;
-  border:1px solid #25f4ee55;border-radius:12px;
-  background:linear-gradient(135deg,#25f4ee18,#fe2c5518);
-  color:var(--cyan);font-size:19px;font-weight:900
+  width:30px;height:30px;flex:0 0 30px;display:inline-flex;
+  align-items:center;justify-content:center;border:1px solid #25f4ee55;
+  border-radius:9px;background:linear-gradient(135deg,#25f4ee18,#fe2c5518);
+  color:var(--cyan);font-size:16px;font-weight:900
 }
 .pink-icon{color:var(--pink);border-color:#fe2c5555}
-.cyan-icon{color:var(--cyan)}
 .purple-icon{color:#b9a0ff;border-color:#b9a0ff55}
-
-/* Pul qazanmaq qaydaları */
-.rules-panel{
-  border:1px solid #25f4ee66;
-  background:linear-gradient(145deg,#101b22,#15101b);
-  box-shadow:0 0 28px #25f4ee0b;
-}
-.rules-toggle{
-  width:100%;display:flex;align-items:center;
-  justify-content:space-between;gap:12px;
-  text-align:left;border:0;color:white;
-  background:transparent;padding:0;font-size:17px
-}
+.section-heading{display:flex;align-items:center;gap:10px}
+.rules-panel{border:1px solid #25f4ee66;background:linear-gradient(145deg,#101b22,#15101b);box-shadow:0 0 28px #25f4ee0b}
+.rules-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;border:0;color:white;background:transparent;padding:0;font-size:17px}
 .rules-toggle-left{display:flex;align-items:center;gap:12px}
 .rules-toggle .arrow{color:var(--cyan);font-size:23px;transition:transform .2s}
 .rules-toggle[aria-expanded="true"] .arrow{transform:rotate(180deg)}
 .rules-content{padding-top:18px}
 .rules-intro{color:#c5c9d8;line-height:1.8;font-size:14px}
-.rule-item{
-  display:flex;align-items:flex-start;gap:12px;
-  padding:14px 0;border-bottom:1px solid #ffffff12
-}
+.rule-item{display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-bottom:1px solid #ffffff12}
 .rule-item:last-child{border-bottom:0}
-.rule-number{
-  display:flex;align-items:center;justify-content:center;
-  flex:0 0 31px;height:31px;border-radius:10px;
-  background:#25f4ee16;border:1px solid #25f4ee55;
-  color:var(--cyan);font-size:13px;font-weight:900
-}
+.rule-number{display:flex;align-items:center;justify-content:center;flex:0 0 31px;height:31px;border-radius:10px;background:#25f4ee16;border:1px solid #25f4ee55;color:var(--cyan);font-size:13px;font-weight:900}
 .rule-item p{margin:0;font-size:14px;line-height:1.8;color:#e3e5ef}
 .rule-item strong{color:white}
-.rule-warning{
-  margin-top:16px;padding:15px;border-radius:12px;
-  border:1px solid #fe2c5577;background:#fe2c5510;
-  color:#ffc2cd;font-size:13px;line-height:1.8
-}
-.rule-highlight{
-  display:block;margin-top:10px;padding:12px;
-  border-radius:10px;background:#25f4ee0c;
-  border:1px solid #25f4ee33;color:var(--cyan);
-  font-weight:900;text-align:center;line-height:1.7
-}
+.rule-warning{margin-top:16px;padding:15px;border-radius:12px;border:1px solid #fe2c5577;background:#fe2c5510;color:#ffc2cd;font-size:13px;line-height:1.8}
+.rule-highlight{display:block;margin-top:10px;padding:12px;border-radius:10px;background:#25f4ee0c;border:1px solid #25f4ee33;color:var(--cyan);font-weight:900;text-align:center;line-height:1.7}
 .history-row{display:flex;justify-content:space-between;gap:10px;align-items:center}
 .pill{font-size:11px;padding:5px 9px;border-radius:20px;background:#ffffff12;color:#e6e8f2}
 
@@ -188,6 +105,7 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
   main{padding-top:15px}
   .muted.header-text{font-size:10px;text-align:right}
   .tariff-rate{font-size:13px}
+  .dashboard-sections{gap:16px}
 }
 @media(max-width:380px){
   .account-balance-row{gap:7px}
@@ -205,32 +123,25 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
 </header>
 
 <main class="container">
-
 <section id="authPanel" class="panel">
   <h1>TikTok-da paylaş,<br><span class="gradient">pul qazan!</span></h1>
   <p class="muted">Altap.Biz-i TikTok videolarında tanıt. Video yoxlanıldıqdan sonra təsdiqlənmiş baxışlara görə qazanc əldə et.</p>
-
   <h2 class="section-heading"><span class="section-icon">↪</span><span id="authTitle">Hesabına daxil ol</span></h2>
-
   <form id="authForm">
     <label class="label" for="email">✉ E-poçt ünvanı</label>
     <input id="email" type="email" autocomplete="email" placeholder="email@example.com" required>
-
     <div id="passwordArea">
       <label class="label" for="password">▣ Şifrə</label>
       <input id="password" type="password" minlength="6" autocomplete="current-password" placeholder="Ən azı 6 simvol" required>
     </div>
-
     <button class="primary" id="authSubmit">↪ Daxil ol</button>
   </form>
-
   <p><button type="button" class="secondary" id="switchAuth">＋ Qeydiyyatdan keç</button></p>
   <p><button type="button" class="secondary" id="resetPassword">↻ Şifrəni unutmusunuz?</button></p>
   <div id="authMessage" class="message" role="status"></div>
 </section>
 
 <section id="dashboard" class="hidden">
-
   <div class="panel" id="accountPanel">
     <p class="muted">▣ HESABIN</p>
     <h2 class="section-heading"><span class="section-icon">♙</span><span>Xoş gəldin!</span></h2>
@@ -257,86 +168,35 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
         <div class="muted">◈ Çıxarıla bilən balansın</div>
         <div class="balance" id="withdrawAvailable" style="font-size:27px">0.00 AZN</div>
       </div>
-
       <form id="withdrawForm" style="margin-top:20px">
         <label class="label" for="withdrawAmount">₼ Çıxarış məbləği (AZN)</label>
         <input id="withdrawAmount" type="number" min="120" step="0.01" placeholder="Minimum 120 AZN" required>
         <p class="minimum-note">! Minimum pul çıxarışı: 120 AZN</p>
-
         <label class="label" for="m10Phone">▣ M10-a bağlı mobil nömrə</label>
         <input id="m10Phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+994501234567" maxlength="16" required>
         <p class="muted">Nömrəni +994XXXXXXXXX formatında daxil et. Məsələn: +994501234567.</p>
-
-        <button type="submit" id="withdrawSubmit" class="m10-button">
-          <span class="m10-mark">m10</span>
-          &nbsp; Pul çıxarışı tələb et
-        </button>
+        <button type="submit" id="withdrawSubmit" class="m10-button"><span class="m10-mark">m10</span> &nbsp; Pul çıxarışı tələb et</button>
       </form>
-
       <div id="withdrawMessage" class="message" role="status"></div>
-      <div class="notice" style="margin-top:18px">
-        <b>Ödəniş qaydası:</b> Minimum çıxarış məbləği 120 AZN-dir. Sorğu yoxlanıldıqdan sonra ödəniş M10 nömrənə köçürüləcək. Sorğu göndərmək avtomatik ödəniş demək deyil.
-      </div>
+      <div class="notice" style="margin-top:18px"><b>Ödəniş qaydası:</b> Minimum çıxarış məbləği 120 AZN-dir. Sorğu yoxlanıldıqdan sonra ödəniş M10 nömrənə köçürüləcək. Sorğu göndərmək avtomatik ödəniş demək deyil.</div>
     </div>
   </div>
 
-  <!-- PUL NECƏ QAZANMAQ BÖLMƏSİ -->
   <section class="panel rules-panel">
     <button type="button" class="rules-toggle" id="rulesToggle" aria-expanded="false" aria-controls="rulesContent">
-      <span class="rules-toggle-left">
-        <span class="section-icon cyan-icon">ⓘ</span>
-        <span>▸ Pul Necə Qazanmaq?</span>
-      </span>
+      <span class="rules-toggle-left"><span class="section-icon">ⓘ</span><span>Pul Necə Qazanmaq?</span></span>
       <span class="arrow">⌄</span>
     </button>
-
     <div id="rulesContent" class="rules-content hidden">
-      <p class="rules-intro">
-        Altap.Biz vasitəsilə qazanc əldə etmək üçün aşağıdakı qaydalara əməl et. Video göndərməzdən əvvəl bütün şərtləri oxu.
-      </p>
-
-      <div class="rule-item">
-        <span class="rule-number">01</span>
-        <p><strong>Videonu TikTok-da paylaş.</strong><br>Sənə aid olan və Altap.Biz qaydalarına uyğun videonu öz TikTok hesabında dərc et.</p>
-      </div>
-
-      <div class="rule-item">
-        <span class="rule-number">02</span>
-        <p><strong>Tanıtım yazısı videonun tam mərkəzində olmalıdır.</strong><br>Yazı kiçik olmamalı, böyük və aydın görünməlidir. Videonun əsas məzmunu ilə qarışmamalı və oxunması asan olmalıdır.
-          <span class="rule-highlight">Altap.Biz saytına daxil ol, sən də qazan!</span>
-        </p>
-      </div>
-
-      <div class="rule-item">
-        <span class="rule-number">03</span>
-        <p><strong>Video linkini kopyala.</strong><br>TikTok-da paylaşdığın videonun linkini götür.</p>
-      </div>
-
-      <div class="rule-item">
-        <span class="rule-number">04</span>
-        <p><strong>Linki Altap.Biz-ə göndər.</strong><br>Hesabına daxil ol, “TikTok videosu göndər” bölməsinə linki yapışdır və yoxlamaya göndər.</p>
-      </div>
-
-      <div class="rule-item">
-        <span class="rule-number">05</span>
-        <p><strong>7 gün ərzində tələb olunan baxış sayına çat.</strong><br>Video üçün müəyyən edilmiş baxış hədəfi 7 gün ərzində tamamlanmalıdır. Müddətin sonunda tələb olunan baxış sayı əldə edilməyibsə, video qəbul edilməyə və ona görə qazanc hesablanmaya bilər.</p>
-      </div>
-
-      <div class="rule-item">
-        <span class="rule-number">06</span>
-        <p><strong>Yoxlamanın nəticəsini gözlə.</strong><br>Video, baxış sayı və qaydalara uyğunluq yoxlanıldıqdan sonra təsdiq və qazanc barədə məlumat hesabında görünə bilər.</p>
-      </div>
-
-      <div class="rule-warning">
-        <strong>⚠ QADAĞANDIR</strong><br>
-        • Süni baxış artırmaq və baxış panellərindən istifadə etmək.<br>
-        • Videoya ödənişli reklam verərək baxış toplamaq.<br>
-        • Bot, saxta hesab və digər süni üsullarla göstəriciləri artırmaq.<br>
-        • Video və baxış nəticələrini saxtalaşdırmaq.<br><br>
-        Bu qaydaların pozulması videonun rədd edilməsinə və qazancın hesablanmamasına səbəb ola bilər.
-      </div>
-
-      <p class="muted">Qeyd: Baxış hədəfi, 7 günlük müddət və qayda pozuntuları ilə bağlı qərarların server tərəfində də yoxlanılması lazımdır. Bu məlumat bölməsi qaydaları izah edir, özü-özlüyündə baxışları və qazancı avtomatik təsdiqləmir.</p>
+      <p class="rules-intro">Altap.Biz vasitəsilə qazanc əldə etmək üçün aşağıdakı qaydalara əməl et. Video göndərməzdən əvvəl bütün şərtləri oxu.</p>
+      <div class="rule-item"><span class="rule-number">01</span><p><strong>Videonu TikTok-da paylaş.</strong><br>Sənə aid olan və Altap.Biz qaydalarına uyğun videonu öz TikTok hesabında dərc et.</p></div>
+      <div class="rule-item"><span class="rule-number">02</span><p><strong>Tanıtım yazısı videonun tam mərkəzində olmalıdır.</strong><br>Yazı böyük, aydın və oxunaqlı görünməlidir.<span class="rule-highlight">Altap.Biz saytına daxil ol, sən də qazan!</span></p></div>
+      <div class="rule-item"><span class="rule-number">03</span><p><strong>Video linkini kopyala.</strong><br>TikTok-da paylaşdığın videonun linkini götür.</p></div>
+      <div class="rule-item"><span class="rule-number">04</span><p><strong>Linki Altap.Biz-ə göndər.</strong><br>Hesabına daxil ol, “TikTok videosu göndər” bölməsinə linki yapışdır və yoxlamaya göndər.</p></div>
+      <div class="rule-item"><span class="rule-number">05</span><p><strong>7 gün ərzində tələb olunan baxış sayına çat.</strong><br>Müddətin sonunda tələb olunan baxış sayı əldə edilməyibsə, video qəbul edilməyə və qazanc hesablanmaya bilər.</p></div>
+      <div class="rule-item"><span class="rule-number">06</span><p><strong>Yoxlamanın nəticəsini gözlə.</strong><br>Video və baxış sayı yoxlanıldıqdan sonra nəticə hesabında görünə bilər.</p></div>
+      <div class="rule-warning"><strong>⚠ QADAĞANDIR</strong><br>• Süni baxış artırmaq və baxış panellərindən istifadə etmək.<br>• Videoya ödənişli reklam vermək.<br>• Bot və saxta hesablarla baxış artırmaq.<br>• Video və baxış nəticələrini saxtalaşdırmaq.<br><br>Qaydaların pozulması videonun rədd edilməsinə və qazancın hesablanmamasına səbəb ola bilər.</div>
+      <p class="muted">Qeyd: Baxış hədəfi və 7 günlük müddətin avtomatik yoxlanması üçün server tərəfində də qaydalar qurulmalıdır.</p>
     </div>
   </section>
 
@@ -344,7 +204,6 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
     <section class="panel">
       <h2 class="section-heading"><span class="section-icon pink-icon">▷</span><span>TikTok videosu göndər</span></h2>
       <p class="muted">Gündə maksimum 2 video göndərə bilərsən. Link öz TikTok videona aid olmalıdır.</p>
-
       <form id="videoForm">
         <label class="label" for="tiktokUrl">↗ TikTok video linki</label>
         <input id="tiktokUrl" type="url" placeholder="https://www.tiktok.com/..." required>
@@ -354,11 +213,10 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
     </section>
 
     <section class="panel">
-      <h2 class="section-heading"><span class="section-icon cyan-icon">₼</span><span>Qazanc tarifləri</span></h2>
+      <h2 class="section-heading"><span class="section-icon">₼</span><span>Qazanc tarifləri</span></h2>
       <button type="button" class="tariff-toggle" id="tariffToggle" aria-expanded="false" aria-controls="tariffContent">
-        <span id="tariffButtonText">▤ Qazanc qiymətlərinə bax</span><span class="arrow">⌄</span>
+        <span class="toggle-label"><span class="section-icon">▤</span><span id="tariffButtonText">Qazanc qiymətlərinə bax</span></span><span class="arrow">⌄</span>
       </button>
-
       <div id="tariffContent" class="tariff-content hidden">
         <div class="tariff-rate"><span>10 000 baxış</span><b>7 AZN</b></div>
         <div class="tariff-rate"><span>20 000 baxış</span><b>14 AZN</b></div>
@@ -371,25 +229,30 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
     </section>
   </div>
 
-  <section class="panel">
-    <button type="button" class="tariff-toggle" id="withdrawalToggle" aria-expanded="false" aria-controls="withdrawalContent">
-      <span id="withdrawalButtonText">▤ Çıxarış tarixçəm</span><span class="arrow">⌄</span>
-    </button>
-    <div id="withdrawalContent" class="tariff-content hidden">
-      <p class="muted section-description">M10 pul çıxarışı sorğularının statusları burada görünəcək.</p>
-      <div id="withdrawalList" class="muted">Məlumatlar yüklənir...</div>
-    </div>
-  </section>
+  <!-- ÜÇ BÖLMƏ EYNİ ARALIQ VƏ EYNİ DÜYMƏ ÖLÇÜSÜ İLƏ -->
+  <div class="dashboard-sections">
+    <section class="panel">
+      <button type="button" class="tariff-toggle" id="withdrawalToggle" aria-expanded="false" aria-controls="withdrawalContent">
+        <span class="toggle-label"><span class="section-icon pink-icon">↗</span><span id="withdrawalButtonText">Çıxarış tarixçəm</span></span>
+        <span class="arrow">⌄</span>
+      </button>
+      <div id="withdrawalContent" class="tariff-content hidden">
+        <p class="muted section-description">M10 pul çıxarışı sorğularının statusları burada görünəcək.</p>
+        <div id="withdrawalList" class="muted">Məlumatlar yüklənir...</div>
+      </div>
+    </section>
 
-  <section class="panel">
-    <button type="button" class="tariff-toggle" id="videosToggle" aria-expanded="false" aria-controls="videosContent">
-      <span id="videosButtonText">▷ Göndərdiyim videolar</span><span class="arrow">⌄</span>
-    </button>
-    <div id="videosContent" class="tariff-content hidden">
-      <p class="muted section-description">Videoların və yoxlama statusları burada görünəcək.</p>
-      <div id="videoList" class="muted">Məlumatlar yüklənir...</div>
-    </div>
-  </section>
+    <section class="panel">
+      <button type="button" class="tariff-toggle" id="videosToggle" aria-expanded="false" aria-controls="videosContent">
+        <span class="toggle-label"><span class="section-icon">▷</span><span id="videosButtonText">Göndərdiyim videolar</span></span>
+        <span class="arrow">⌄</span>
+      </button>
+      <div id="videosContent" class="tariff-content hidden">
+        <p class="muted section-description">Videoların və yoxlama statusları burada görünəcək.</p>
+        <div id="videoList" class="muted">Məlumatlar yüklənir...</div>
+      </div>
+    </section>
+  </div>
 </section>
 </main>
 
@@ -413,14 +276,14 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
       const isOpen = button.getAttribute("aria-expanded") === "true";
       button.setAttribute("aria-expanded", String(!isOpen));
       content.classList.toggle("hidden", isOpen);
-      if (label) label.textContent = isOpen ? closedText : openText;
+      if (label && openText && closedText) label.textContent = isOpen ? closedText : openText;
     });
   }
 
   setupToggle("rulesToggle","rulesContent",null);
-  setupToggle("tariffToggle","tariffContent","tariffButtonText","▤ Qazanc qiymətlərini bağla","▤ Qazanc qiymətlərinə bax");
-  setupToggle("withdrawalToggle","withdrawalContent","withdrawalButtonText","▤ Çıxarış tarixçəsini bağla","▤ Çıxarış tarixçəm");
-  setupToggle("videosToggle","videosContent","videosButtonText","▷ Göndərdiyim videoları bağla","▷ Göndərdiyim videolar");
+  setupToggle("tariffToggle","tariffContent","tariffButtonText","Qazanc qiymətlərini bağla","Qazanc qiymətlərinə bax");
+  setupToggle("withdrawalToggle","withdrawalContent","withdrawalButtonText","Çıxarış tarixçəsini bağla","Çıxarış tarixçəm");
+  setupToggle("videosToggle","videosContent","videosButtonText","Göndərdiyim videoları bağla","Göndərdiyim videolar");
 
   function setM10Open(open) {
     $("m10Content").classList.toggle("hidden", !open);
