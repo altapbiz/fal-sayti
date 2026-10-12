@@ -40,6 +40,7 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
 .notice{background:#ffffff08;border:1px solid #ffffff12;border-radius:12px;padding:12px;color:#c5c9d8;font-size:12px;line-height:1.7}
 .history-row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
 .pill{display:inline-block;border-radius:20px;padding:5px 9px;background:#ffffff12;font-size:11px;font-weight:bold}
+.minimum-note{color:#ffcf70;font-size:13px;font-weight:bold;margin:0 0 15px}
 @media(max-width:650px){.grid{grid-template-columns:1fr}header{min-height:65px}.panel{padding:18px}main{padding-top:15px}.muted.header-text{font-size:10px;text-align:right}}
 </style>
 </head>
@@ -105,7 +106,6 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
     </section>
   </div>
 
-  <!-- M10 WITHDRAWAL -->
   <section class="panel" id="withdrawalPanel">
     <div class="m10-heading">
       <div class="m10-icon" aria-label="M10 ikonu">m10</div>
@@ -122,7 +122,8 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
 
     <form id="withdrawForm" style="margin-top:20px">
       <label class="label" for="withdrawAmount">Çıxarış məbləği (AZN)</label>
-      <input id="withdrawAmount" type="number" min="0.01" step="0.01" placeholder="Məsələn: 10" required>
+      <input id="withdrawAmount" type="number" min="120" step="0.01" placeholder="Minimum 120 AZN" required>
+      <p class="minimum-note">Minimum pul çıxarışı: 120 AZN</p>
 
       <label class="label" for="m10Phone">M10-a bağlı mobil nömrə</label>
       <input id="m10Phone" type="tel" inputmode="tel" autocomplete="tel"
@@ -135,7 +136,7 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
     <div id="withdrawMessage" class="message" role="status"></div>
 
     <div class="notice" style="margin-top:18px">
-      <b>Ödəniş qaydası:</b> Sorğun yoxlanıldıqdan sonra ödəniş əl ilə M10 nömrənə köçürüləcək. Sorğu göndərmək avtomatik ödəniş demək deyil. Ödəniş tamamlanana qədər balansın hesabında görünə bilər.
+      <b>Ödəniş qaydası:</b> Minimum çıxarış məbləği 120 AZN-dir. Sorğun yoxlanıldıqdan sonra ödəniş əl ilə M10 nömrənə köçürüləcək. Sorğu göndərmək avtomatik ödəniş demək deyil.
     </div>
   </section>
 
@@ -160,6 +161,7 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
 (() => {
   const URL = "https://fxidqmqoqlkijwdvvzyk.supabase.co";
   const KEY = "sb_publishable_o9BKKtPtpBUqUrx5cZYiqg_TXiWqYYg";
+  const MIN_WITHDRAWAL = 120;
   const $ = id => document.getElementById(id);
   let client, mode = "login", currentUser = null, busy = false;
   let loadingUserId = null;
@@ -212,6 +214,9 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
     if (t.includes("already registered")) return "Bu e-poçtla hesab var. Daxil ol.";
     if (t.includes("gündə maksimum 2 video")) return "Bu gün artıq 2 video göndərmisən.";
     if (t.includes("düzgün tiktok")) return "Düzgün TikTok video linki daxil et.";
+    if (t.includes("minimum pul çıxarışı 120 azn") || t.includes("minimum 120")) {
+      return "Minimum pul çıxarışı 120 AZN-dir.";
+    }
     if (t.includes("düzgün çıxarış")) return "Düzgün çıxarış məbləği daxil et.";
     if (t.includes("m10 nömrəsini")) return "M10 nömrəsini +994XXXXXXXXX formatında yaz.";
     if (t.includes("balans kifayət etmir")) return "Balansın çıxarış üçün kifayət etmir.";
@@ -411,14 +416,21 @@ footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-siz
     const amount = Number($("withdrawAmount").value);
     let phone = $("m10Phone").value.trim().replace(/[\s()-]/g,"");
 
+    if (!Number.isFinite(amount) || amount < MIN_WITHDRAWAL) {
+      msg("withdrawMessage","Minimum pul çıxarışı 120 AZN-dir.",true);
+      $("withdrawAmount").focus();
+      return;
+    }
+
+    if (Math.round(amount * 100) !== amount * 100) {
+      msg("withdrawMessage","Məbləği maksimum iki onluq rəqəmlə daxil et.",true);
+      return;
+    }
+
     if (phone.startsWith("00")) phone = "+" + phone.slice(2);
     if (/^994[0-9]{9}$/.test(phone)) phone = "+" + phone;
     if (!/^\+994[0-9]{9}$/.test(phone)) {
       msg("withdrawMessage","M10 nömrəsini +994XXXXXXXXX formatında yaz.",true);
-      return;
-    }
-    if (!Number.isFinite(amount) || amount <= 0 || Math.round(amount * 100) !== amount * 100) {
-      msg("withdrawMessage","Düzgün çıxarış məbləği daxil et.",true);
       return;
     }
 
