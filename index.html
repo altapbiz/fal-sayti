@@ -16,7 +16,9 @@
   --cyan: #25f4ee;
   --pink: #fe2c55;
 }
+
 * { box-sizing: border-box; }
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -28,6 +30,7 @@ body {
   font-family: Inter, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Arial, sans-serif;
 }
+
 a { color: inherit; text-decoration: none; }
 button, input { font: inherit; }
 button { cursor: pointer; }
@@ -37,6 +40,7 @@ button { cursor: pointer; }
   margin: auto;
   padding: 0 22px;
 }
+
 header {
   height: 76px;
   display: flex;
@@ -44,21 +48,22 @@ header {
   justify-content: space-between;
   border-bottom: 1px solid #ffffff0c;
 }
+
+/* DÜZƏLDİLMİŞ LOQO: ƏLAVƏ A İŞARƏSİ YOXDUR */
 .logo {
   font-size: 26px;
   font-weight: 900;
   letter-spacing: -1.2px;
 }
+
 .logo .dot { color: var(--pink); }
-.logo-icon {
-  color: var(--cyan);
-  margin-right: 5px;
-}
+
 .header-label {
   color: var(--muted);
   font-size: 12px;
   letter-spacing: 1px;
 }
+
 main {
   display: grid;
   grid-template-columns: 1fr 390px;
@@ -68,6 +73,7 @@ main {
   padding-top: 45px;
   padding-bottom: 45px;
 }
+
 .tag {
   display: inline-flex;
   align-items: center;
@@ -81,34 +87,40 @@ main {
   font-weight: 800;
   letter-spacing: 1.2px;
 }
+
 h1 {
   font-size: clamp(40px, 5.3vw, 64px);
   line-height: 1.06;
   letter-spacing: -2.8px;
   margin: 25px 0 18px;
 }
+
 .gradient {
   background: linear-gradient(90deg, var(--cyan), #8e9aff, var(--pink));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
+
 .description {
   font-size: 16px;
   color: var(--muted);
   line-height: 1.8;
   max-width: 480px;
 }
+
 .features {
   display: grid;
   gap: 18px;
   margin-top: 34px;
 }
+
 .feature {
   display: flex;
   align-items: center;
   gap: 14px;
 }
+
 .feature-icon {
   flex-shrink: 0;
   width: 45px;
@@ -119,22 +131,27 @@ h1 {
   place-items: center;
   background: var(--panel);
 }
+
 .feature-icon svg {
   width: 21px;
   height: 21px;
   stroke: var(--cyan);
 }
+
 .feature:nth-child(2) svg { stroke: var(--pink); }
+
 .feature-title {
   font-size: 14px;
   font-weight: 750;
 }
+
 .feature-description {
   color: var(--muted);
   font-size: 12px;
   margin-top: 5px;
   line-height: 1.5;
 }
+
 .login-card {
   background: linear-gradient(145deg, #151826, #0e1019);
   border: 1px solid #303348;
@@ -142,6 +159,7 @@ h1 {
   padding: 29px;
   box-shadow: 0 25px 90px #0006;
 }
+
 .card-logo {
   width: 52px;
   height: 52px;
@@ -152,22 +170,26 @@ h1 {
   border: 1px solid #ffffff18;
   margin-bottom: 20px;
 }
+
 .card-logo svg {
   width: 26px;
   height: 26px;
   stroke: var(--cyan);
 }
+
 h2 {
   font-size: 25px;
   margin: 0 0 9px;
   letter-spacing: -0.7px;
 }
+
 .card-subtitle {
   color: var(--muted);
   font-size: 13px;
   line-height: 1.7;
   margin: 0 0 25px;
 }
+
 .field-label {
   display: block;
   color: #d9dceb;
@@ -175,7 +197,9 @@ h2 {
   font-weight: 650;
   margin: 16px 0 8px;
 }
+
 .input-wrap { position: relative; }
+
 .input-wrap svg {
   position: absolute;
   left: 14px;
@@ -185,6 +209,7 @@ h2 {
   height: 18px;
   stroke: var(--muted);
 }
+
 input {
   width: 100%;
   height: 49px;
@@ -195,8 +220,10 @@ input {
   background: #090b13;
   outline: none;
 }
+
 input:focus { border-color: var(--cyan); }
 input::placeholder { color: #676e83; }
+
 .forgot {
   display: block;
   text-align: right;
@@ -204,6 +231,7 @@ input::placeholder { color: #676e83; }
   font-size: 12px;
   margin: 13px 0 20px;
 }
+
 .btn {
   width: 100%;
   height: 49px;
@@ -216,20 +244,26 @@ input::placeholder { color: #676e83; }
   font-weight: 800;
   transition: .2s;
 }
+
 .btn svg { width: 18px; height: 18px; }
+
 .btn-primary {
   color: #080910;
   border: none;
   background: linear-gradient(100deg, var(--cyan), #b0fff6);
 }
+
 .btn-primary:hover { filter: brightness(1.08); }
+
 .btn-secondary {
   color: white;
   border: 1px solid #393d51;
   background: #ffffff05;
   margin-top: 11px;
 }
+
 .btn-secondary:hover { border-color: var(--pink); }
+
 .divider {
   display: flex;
   align-items: center;
@@ -238,12 +272,15 @@ input::placeholder { color: #676e83; }
   font-size: 11px;
   margin: 22px 0;
 }
-.divider::before, .divider::after {
+
+.divider::before,
+.divider::after {
   content: "";
   height: 1px;
   flex: 1;
   background: #292d3e;
 }
+
 .card-footer {
   font-size: 11px;
   color: #747c91;
@@ -251,12 +288,14 @@ input::placeholder { color: #676e83; }
   line-height: 1.7;
   margin-top: 20px;
 }
+
 .message {
   font-size: 12px;
   color: var(--cyan);
   line-height: 1.6;
   margin-top: 14px;
 }
+
 footer {
   border-top: 1px solid #ffffff0c;
   min-height: 64px;
@@ -267,6 +306,7 @@ footer {
   color: #737b8f;
   font-size: 11px;
 }
+
 footer a:hover { color: var(--cyan); }
 
 @media(max-width: 850px) {
@@ -275,19 +315,24 @@ footer a:hover { color: var(--cyan); }
     gap: 36px;
     padding-top: 38px;
   }
+
   .intro { text-align: center; }
   .description { margin: auto; }
+
   .features {
     width: min(420px, 100%);
     margin: 28px auto 0;
     text-align: left;
   }
+
   h1 { font-size: clamp(39px, 9vw, 58px); }
+
   .login-card {
     width: min(440px, 100%);
     margin: auto;
   }
 }
+
 @media(max-width: 420px) {
   .container { padding: 0 16px; }
   header { height: 66px; }
@@ -296,20 +341,27 @@ footer a:hover { color: var(--cyan); }
   main { padding-top: 30px; }
   .login-card { padding: 22px; }
   h1 { letter-spacing: -1.8px; }
-  footer { flex-direction: column; justify-content: center; padding: 16px 0; }
+
+  footer {
+    flex-direction: column;
+    justify-content: center;
+    padding: 16px 0;
+  }
 }
 </style>
 </head>
 
 <body>
+
 <header class="container">
-  <a class="logo" href="#" aria-label="Altap Biz ana səhifə">
-    <span class="logo-icon">A</span>Altap<span class="dot">.Biz</span>
+  <a class="logo" href="#" aria-label="Altap.Biz">
+    Altap<span class="dot">.Biz</span>
   </a>
-  <div class="header-label">VIDEO REKLAM PLATFORMASI</div>
+  <div class="header-label">VİDEO REKLAM PLATFORMASI</div>
 </header>
 
 <main class="container">
+
   <section class="intro">
     <div class="tag">
       <svg width="15" height="15" viewBox="0 0 24 24"
@@ -332,6 +384,7 @@ footer a:hover { color: var(--cyan); }
     </p>
 
     <div class="features">
+
       <div class="feature">
         <div class="feature-icon">
           <svg viewBox="0 0 24 24" fill="none"
@@ -343,7 +396,9 @@ footer a:hover { color: var(--cyan); }
         </div>
         <div>
           <div class="feature-title">TikTok-da video paylaş</div>
-          <div class="feature-description">Gündə maksimum 2 video təqdim et.</div>
+          <div class="feature-description">
+            Gündə maksimum 2 video təqdim et.
+          </div>
         </div>
       </div>
 
@@ -358,7 +413,9 @@ footer a:hover { color: var(--cyan); }
         </div>
         <div>
           <div class="feature-title">Real baxışlar topla</div>
-          <div class="feature-description">Orqanik nəticələr yoxlamadan keçirilir.</div>
+          <div class="feature-description">
+            Orqanik nəticələr yoxlamadan keçirilir.
+          </div>
         </div>
       </div>
 
@@ -373,13 +430,17 @@ footer a:hover { color: var(--cyan); }
         </div>
         <div>
           <div class="feature-title">Qazancını əldə et</div>
-          <div class="feature-description">Təsdiqlənmiş baxışlara görə ödəniş.</div>
+          <div class="feature-description">
+            Təsdiqlənmiş baxışlara görə ödəniş.
+          </div>
         </div>
       </div>
+
     </div>
   </section>
 
   <section class="login-card">
+
     <div class="card-logo">
       <svg viewBox="0 0 24 24" fill="none"
         stroke-width="1.8" stroke-linecap="round"
@@ -390,13 +451,17 @@ footer a:hover { color: var(--cyan); }
     </div>
 
     <h2>Hesabına daxil ol</h2>
+
     <p class="card-subtitle">
       Qazanc imkanlarından istifadə etmək üçün hesabına daxil ol
       və ya yeni hesab yarat.
     </p>
 
     <form id="loginForm">
-      <label class="field-label" for="email">E-poçt ünvanı</label>
+      <label class="field-label" for="email">
+        E-poçt ünvanı
+      </label>
+
       <div class="input-wrap">
         <svg viewBox="0 0 24 24" fill="none"
           stroke-width="1.8" stroke-linecap="round"
@@ -404,11 +469,14 @@ footer a:hover { color: var(--cyan); }
           <rect x="3" y="5" width="18" height="14" rx="3"/>
           <path d="m4 7 8 6 8-6"/>
         </svg>
-        <input id="email" type="email" placeholder="email@example.com"
+
+        <input id="email" type="email"
+          placeholder="email@example.com"
           autocomplete="email" required>
       </div>
 
       <label class="field-label" for="password">Şifrə</label>
+
       <div class="input-wrap">
         <svg viewBox="0 0 24 24" fill="none"
           stroke-width="1.8" stroke-linecap="round"
@@ -416,11 +484,15 @@ footer a:hover { color: var(--cyan); }
           <rect x="4" y="10" width="16" height="11" rx="3"/>
           <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
         </svg>
-        <input id="password" type="password" placeholder="Şifrənizi daxil edin"
+
+        <input id="password" type="password"
+          placeholder="Şifrənizi daxil edin"
           autocomplete="current-password" required>
       </div>
 
-      <a href="#" class="forgot" id="forgotLink">Şifrəni unutmusunuz?</a>
+      <a href="#" class="forgot" id="forgotLink">
+        Şifrəni unutmusunuz?
+      </a>
 
       <button type="submit" class="btn btn-primary">
         Daxil ol
@@ -434,7 +506,8 @@ footer a:hover { color: var(--cyan); }
 
     <div class="divider">YENİ İSTİFADƏÇİSƏN?</div>
 
-    <button type="button" class="btn btn-secondary" id="registerButton">
+    <button type="button" class="btn btn-secondary"
+      id="registerButton">
       Qeydiyyatdan keç
     </button>
 
@@ -444,7 +517,9 @@ footer a:hover { color: var(--cyan); }
       Davam etməklə istifadə şərtləri və məxfilik qaydaları ilə
       razılaşmış olursan.
     </div>
+
   </section>
+
 </main>
 
 <footer class="container">
@@ -454,28 +529,31 @@ footer a:hover { color: var(--cyan); }
 
 <script>
 /*
-  Bu, giriş səhifəsinin frontend nümunəsidir.
-  Real hesab yaratmaq və daxil olmaq üçün Supabase Auth
-  inteqrasiyası növbəti mərhələdə əlavə olunmalıdır.
+  Hazırkı versiya giriş səhifəsinin dizaynıdır.
+  Real qeydiyyat və giriş üçün Supabase Auth qoşulmalıdır.
 */
+
 const message = document.getElementById("message");
 
 document.getElementById("loginForm").addEventListener("submit", function(e) {
   e.preventDefault();
+
   message.textContent =
-    "Giriş sistemini aktivləşdirmək üçün Supabase Auth bağlantısı lazımdır.";
+    "Giriş sistemini aktivləşdirmək üçün Supabase bağlantısı lazımdır.";
 });
 
 document.getElementById("registerButton").addEventListener("click", function() {
   message.textContent =
-    "Qeydiyyat forması Supabase inteqrasiyası zamanı aktiv ediləcək.";
+    "Qeydiyyat Supabase inteqrasiyası zamanı aktiv ediləcək.";
 });
 
 document.getElementById("forgotLink").addEventListener("click", function(e) {
   e.preventDefault();
+
   message.textContent =
-    "Şifrə bərpa funksiyası Supabase Auth ilə qoşulacaq.";
+    "Şifrə bərpası Supabase Auth ilə qoşulacaq.";
 });
 </script>
+
 </body>
 </html>
