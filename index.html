@@ -1,509 +1,277 @@
+
 <!DOCTYPE html>
 <html lang="az">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080910">
 <title>Altap.Biz — TikTok-da paylaş, pul qazan</title>
-
 <style>
-:root {
-  --bg:#080910;--panel:#11131e;--border:#272a3b;
-  --white:#f7f8ff;--muted:#9299ad;--cyan:#25f4ee;--pink:#fe2c55;
-}
+:root{--bg:#080910;--panel:#11131e;--border:#292d40;--white:#f7f8ff;--muted:#9299ad;--cyan:#25f4ee;--pink:#fe2c55}
 *{box-sizing:border-box}
-body{
-  margin:0;min-height:100vh;
-  background:radial-gradient(ellipse at 10% 10%,#25f4ee13,transparent 40%),
-  radial-gradient(ellipse at 90% 65%,#fe2c5512,transparent 40%),var(--bg);
-  color:var(--white);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif
-}
-a{color:inherit;text-decoration:none}
-button,input{font:inherit}
-button{cursor:pointer}
-.container{width:min(1100px,100%);margin:auto;padding:0 22px}
-header{
-  height:76px;display:flex;align-items:center;justify-content:space-between;
-  border-bottom:1px solid #ffffff0c
-}
-.logo{font-size:26px;font-weight:900;letter-spacing:-1.2px}
-.logo .dot{color:var(--pink)}
-.header-label{color:var(--muted);font-size:12px;letter-spacing:1px}
-main{
-  display:grid;grid-template-columns:1fr 390px;align-items:center;gap:65px;
-  min-height:calc(100vh - 140px);padding-top:45px;padding-bottom:45px
-}
-.tag{
-  display:inline-flex;align-items:center;gap:8px;color:var(--cyan);
-  border:1px solid #25f4ee40;background:#25f4ee0b;padding:9px 12px;
-  border-radius:30px;font-size:11px;font-weight:800;letter-spacing:1.2px
-}
-h1{font-size:clamp(40px,5.3vw,64px);line-height:1.06;letter-spacing:-2.8px;margin:25px 0 18px}
-.gradient{
-  background:linear-gradient(90deg,var(--cyan),#8e9aff,var(--pink));
-  -webkit-background-clip:text;background-clip:text;color:transparent
-}
-.description{font-size:16px;color:var(--muted);line-height:1.8;max-width:480px}
-.features{display:grid;gap:18px;margin-top:34px}
-.feature{display:flex;align-items:center;gap:14px}
-.feature-icon{
-  flex-shrink:0;width:45px;height:45px;border:1px solid var(--border);
-  border-radius:13px;display:grid;place-items:center;background:var(--panel)
-}
-.feature-icon svg{width:21px;height:21px;stroke:var(--cyan)}
-.feature:nth-child(2) svg{stroke:var(--pink)}
-.feature-title{font-size:14px;font-weight:750}
-.feature-description{color:var(--muted);font-size:12px;margin-top:5px;line-height:1.5}
-.login-card{
-  background:linear-gradient(145deg,#151826,#0e1019);border:1px solid #303348;
-  border-radius:24px;padding:29px;box-shadow:0 25px 90px #0006
-}
-.card-logo{
-  width:52px;height:52px;border-radius:16px;display:grid;place-items:center;
-  background:linear-gradient(135deg,#25f4ee25,#fe2c5525);
-  border:1px solid #ffffff18;margin-bottom:20px
-}
-.card-logo svg{width:26px;height:26px;stroke:var(--cyan)}
-h2{font-size:25px;margin:0 0 9px;letter-spacing:-.7px}
-.card-subtitle{color:var(--muted);font-size:13px;line-height:1.7;margin:0 0 25px}
-.field-label{display:block;color:#d9dceb;font-size:12px;font-weight:650;margin:16px 0 8px}
-.input-wrap{position:relative}
-.input-wrap svg{
-  position:absolute;left:14px;top:50%;transform:translateY(-50%);
-  width:18px;height:18px;stroke:var(--muted);pointer-events:none
-}
-input{
-  width:100%;height:49px;padding:0 14px 0 43px;color:white;
-  border:1px solid #303449;border-radius:11px;background:#090b13;outline:none
-}
-input:focus{border-color:var(--cyan)}
-input::placeholder{color:#676e83}
-.forgot{display:block;text-align:right;color:var(--cyan);font-size:12px;margin:13px 0 20px}
-.btn{
-  width:100%;min-height:49px;display:flex;align-items:center;justify-content:center;
-  gap:9px;border-radius:11px;font-size:14px;font-weight:800;transition:.2s;padding:12px
-}
-.btn svg{width:18px;height:18px;flex-shrink:0}
-.btn-primary{color:#080910;border:none;background:linear-gradient(100deg,var(--cyan),#b0fff6)}
-.btn-primary:hover{filter:brightness(1.08)}
-.btn-secondary{color:white;border:1px solid #393d51;background:#ffffff05;margin-top:11px}
-.btn-secondary:hover{border-color:var(--pink)}
-.btn:disabled{opacity:.6;cursor:wait}
-.divider{display:flex;align-items:center;gap:12px;color:#71788b;font-size:11px;margin:22px 0}
-.divider:before,.divider:after{content:"";height:1px;flex:1;background:#292d3e}
-.card-footer{font-size:11px;color:#747c91;text-align:center;line-height:1.7;margin-top:20px}
-.message{font-size:12px;line-height:1.7;margin-top:14px;overflow-wrap:anywhere}
-.message:empty{display:none}
-footer{
-  border-top:1px solid #ffffff0c;min-height:64px;display:flex;align-items:center;
-  justify-content:space-between;gap:15px;color:#737b8f;font-size:11px
-}
-footer a:hover{color:var(--cyan)}
-.dashboard-email{color:var(--cyan);overflow-wrap:anywhere;margin:12px 0}
+body{margin:0;background:radial-gradient(ellipse at 10% 10%,#25f4ee13,transparent 40%),radial-gradient(ellipse at 90% 65%,#fe2c5512,transparent 40%),var(--bg);color:var(--white);font-family:Arial,sans-serif}
+.container{width:min(1000px,100%);margin:auto;padding:0 20px}
+header{height:75px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff12}
+.logo{font-size:26px;font-weight:900;color:white;text-decoration:none}.dot{color:var(--pink)}
+.muted{color:var(--muted);font-size:13px;line-height:1.7}
+main{padding:35px 0 60px}
+h1{font-size:clamp(34px,6vw,58px);line-height:1.1;letter-spacing:-2px}
+.gradient{background:linear-gradient(90deg,var(--cyan),#a4aaff,var(--pink));color:transparent;background-clip:text}
+.panel{background:linear-gradient(145deg,#151826,#0e1019);border:1px solid #303348;border-radius:20px;padding:24px;margin:20px 0;min-width:0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+input{width:100%;padding:14px;margin:8px 0 15px;border:1px solid #303449;border-radius:10px;background:#090b13;color:white;font-size:15px}
+button{cursor:pointer;border-radius:10px;padding:13px 16px;font-weight:bold;font-size:14px}
+.primary{background:linear-gradient(100deg,var(--cyan),#b0fff6);border:0;color:#080910;width:100%}
+.secondary{background:#ffffff08;border:1px solid #393d51;color:white}
+button:disabled{opacity:.55;cursor:wait}
+.label{font-size:13px;color:#d9dceb;font-weight:bold}
+.balance{font-size:35px;font-weight:900;color:var(--cyan);margin:12px 0}
+.message{font-size:13px;line-height:1.7;overflow-wrap:anywhere;margin-top:12px;color:var(--cyan)}
+.video{border:1px solid var(--border);border-radius:12px;padding:14px;margin-top:10px;overflow-wrap:anywhere}
+.video a{color:var(--cyan);word-break:break-all}
+.status{font-size:12px;font-weight:bold;margin-top:10px}
 .hidden{display:none!important}
-@media(max-width:850px){
-  main{grid-template-columns:1fr;gap:36px;padding-top:38px}
-  .intro{text-align:center}.description{margin:auto}
-  .features{width:min(420px,100%);margin:28px auto 0;text-align:left}
-  h1{font-size:clamp(39px,9vw,58px)}
-  .login-card{width:min(440px,100%);margin:auto}
-}
-@media(max-width:420px){
-  .container{padding:0 16px}header{height:66px}
-  .logo{font-size:23px}.header-label{font-size:10px}
-  main{padding-top:30px}.login-card{padding:22px}
-  h1{letter-spacing:-1.8px}
-  footer{flex-direction:column;justify-content:center;padding:16px 0}
-}
+footer{padding:22px 0;border-top:1px solid #ffffff12;color:var(--muted);font-size:12px}
+@media(max-width:650px){.grid{grid-template-columns:1fr}header{height:65px}.panel{padding:18px}main{padding-top:20px}}
 </style>
 </head>
-
 <body>
 <header class="container">
-  <a class="logo" href="/" aria-label="Altap.Biz">Altap<span class="dot">.Biz</span></a>
-  <div class="header-label">VİDEO REKLAM PLATFORMASI</div>
+  <a class="logo" href="/">Altap<span class="dot">.Biz</span></a>
+  <span class="muted">VİDEO REKLAM PLATFORMASI</span>
 </header>
 
 <main class="container">
-<section class="intro">
-  <div class="tag">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M12 3v18M3 12h18"/>
-    </svg>
-    ALTAP.BİZ İLƏ QAZAN
-  </div>
-
-  <h1>TikTok-da video<br>paylaş,<br><span class="gradient">pul qazan!</span></h1>
-  <p class="description">
-    Altap.Biz saytını TikTok videolarında tanıt.
-    Real və orqanik baxışlar topla, videon yoxlanıldıqdan
-    sonra qazanc əldə et.
-  </p>
-
-  <div class="features">
-    <div class="feature">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3z"/>
-        </svg>
-      </div>
-      <div>
-        <div class="feature-title">TikTok-da video paylaş</div>
-        <div class="feature-description">Gündə maksimum 2 video təqdim et.</div>
-      </div>
-    </div>
-
-    <div class="feature">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 3v18h18"/><path d="m7 14 4-4 4 3 6-7"/>
-        </svg>
-      </div>
-      <div>
-        <div class="feature-title">Real baxışlar topla</div>
-        <div class="feature-description">Orqanik nəticələr yoxlamadan keçirilir.</div>
-      </div>
-    </div>
-
-    <div class="feature">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18M7 15h4"/>
-        </svg>
-      </div>
-      <div>
-        <div class="feature-title">Qazancını əldə et</div>
-        <div class="feature-description">Təsdiqlənmiş baxışlara görə ödəniş.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="login-card" id="authCard">
-  <div class="card-logo">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="4" y="3" width="16" height="18" rx="4"/><path d="M10 8v8l6-4z"/>
-    </svg>
-  </div>
-
-  <h2 id="formTitle">Hesabına daxil ol</h2>
-  <p class="card-subtitle" id="formSubtitle">
-    Qazanc imkanlarından istifadə etmək üçün hesabına daxil ol və ya yeni hesab yarat.
-  </p>
-
+<section id="authPanel" class="panel">
+  <h1>TikTok-da paylaş,<br><span class="gradient">pul qazan!</span></h1>
+  <p class="muted">Altap.Biz-i TikTok videolarında tanıt. Video yoxlanıldıqdan sonra təsdiqlənmiş baxışlara görə qazanc əldə et.</p>
+  <h2 id="authTitle">Hesabına daxil ol</h2>
   <form id="authForm">
-    <label class="field-label" for="email">E-poçt ünvanı</label>
-    <div class="input-wrap">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/>
-      </svg>
-      <input id="email" type="email" placeholder="email@example.com" autocomplete="email" required>
+    <label class="label" for="email">E-poçt ünvanı</label>
+    <input id="email" type="email" autocomplete="email" placeholder="email@example.com" required>
+    <div id="passwordArea">
+      <label class="label" for="password">Şifrə</label>
+      <input id="password" type="password" minlength="6" autocomplete="current-password" placeholder="Ən azı 6 simvol" required>
     </div>
-
-    <div id="passwordGroup">
-      <label class="field-label" for="password">Şifrə</label>
-      <div class="input-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="4" y="10" width="16" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>
-        </svg>
-        <input id="password" type="password" placeholder="Ən azı 6 simvol" autocomplete="current-password" minlength="6">
-      </div>
-    </div>
-
-    <a href="#" class="forgot" id="forgotLink">Şifrəni unutmusunuz?</a>
-
-    <button type="submit" class="btn btn-primary" id="submitButton">
-      Daxil ol
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M5 12h14m-6-6 6 6-6 6"/>
-      </svg>
-    </button>
+    <button class="primary" id="authSubmit">Daxil ol</button>
   </form>
-
-  <div class="divider" id="divider">YENİ İSTİFADƏÇİSƏN?</div>
-  <button type="button" class="btn btn-secondary" id="switchButton">Qeydiyyatdan keç</button>
-
-  <div class="message" id="message" role="status" aria-live="polite"></div>
-
-  <div class="card-footer" id="cardFooter">
-    Davam etməklə istifadə şərtləri və məxfilik qaydaları ilə razılaşmış olursan.
-  </div>
+  <p><button class="secondary" id="switchAuth">Qeydiyyatdan keç</button></p>
+  <p><button class="secondary" id="resetPassword">Şifrəni unutmusunuz?</button></p>
+  <div id="authMessage" class="message" role="status"></div>
 </section>
 
-<section class="login-card hidden" id="dashboardCard">
-  <div class="card-logo">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M20 7 10 17l-5-5"/><circle cx="12" cy="12" r="10"/>
-    </svg>
+<section id="dashboard" class="hidden">
+  <div class="panel">
+    <p class="muted">HESABIN</p>
+    <h2>Xoş gəldin!</h2>
+    <div id="userEmail" class="muted"></div>
+    <p class="muted">Mövcud balansın</p>
+    <div class="balance" id="balance">0.00 AZN</div>
+    <p class="muted">Balans yalnız təsdiqlənmiş qazanc əsasında dəyişməlidir.</p>
+    <button id="refresh" class="secondary">Məlumatları yenilə</button>
+    <button id="logout" class="secondary">Hesabdan çıx</button>
+    <div id="dashboardMessage" class="message" role="status"></div>
   </div>
-  <h2>Hesabına xoş gəldin!</h2>
-  <p class="card-subtitle">Giriş uğurla tamamlandı.</p>
-  <div class="field-label">Hesab e-poçtu</div>
-  <div class="dashboard-email" id="accountEmail"></div>
-  <p class="card-subtitle">
-    Bu, hesab girişinin ilkin mərhələsidir. Video təqdim etmək, balans və pul çıxarışı funksiyaları ayrıca hazırlanmalıdır.
-  </p>
-  <button type="button" class="btn btn-secondary" id="logoutButton">Hesabdan çıx</button>
-  <div class="message" id="dashboardMessage" role="status"></div>
+
+  <div class="grid">
+    <section class="panel">
+      <h2>TikTok videosu göndər</h2>
+      <p class="muted">Gündə maksimum 2 video göndərə bilərsən. Link öz TikTok videona aid olmalıdır.</p>
+      <form id="videoForm">
+        <label class="label" for="tiktokUrl">TikTok video linki</label>
+        <input id="tiktokUrl" type="url" placeholder="https://www.tiktok.com/..." required>
+        <button id="submitVideo" class="primary">Videonu göndər</button>
+      </form>
+      <div id="videoMessage" class="message" role="status"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Qazanc tarifləri</h2>
+      <div class="video">10 000 baxış — <b>7 AZN</b></div>
+      <div class="video">20 000 baxış — <b>14 AZN</b></div>
+      <div class="video">50 000 baxış — <b>35 AZN</b></div>
+      <div class="video">100 000 baxış — <b>71 AZN</b></div>
+      <div class="video">500 000 baxış — <b>155 AZN</b></div>
+      <div class="video">1 000 000 baxış — <b>284 AZN</b></div>
+      <p class="muted">Baxış və qazanc admin yoxlamasından sonra təsdiqlənir. Bu mərhələdə avtomatik ödəniş yoxdur.</p>
+    </section>
+  </div>
+
+  <section class="panel">
+    <h2>Göndərdiyim videolar</h2>
+    <p class="muted">Videoların və yoxlama statusları burada görünəcək.</p>
+    <div id="videoList" class="muted">Məlumatlar yüklənir...</div>
+  </section>
 </section>
 </main>
 
-<footer class="container">
-  <span>© 2026 Altap.Biz</span>
-  <span>Video reklam platforması</span>
-</footer>
+<footer class="container">© 2026 Altap.Biz · Video reklam platforması</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 (() => {
-  const SUPABASE_URL = "https://fxidqmqoqlkijwdvvzyk.supabase.co";
-  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_o9BKKtPtpBUqUrx5cZYiqg_TXiWqYYg";
+  const URL = "https://fxidqmqoqlkijwdvvzyk.supabase.co";
+  const KEY = "sb_publishable_o9BKKtPtpBUqUrx5cZYiqg_TXiWqYYg";
+  const $ = id => document.getElementById(id);
+  let client, mode = "login", currentUser = null, busy = false;
 
-  const authCard = document.getElementById("authCard");
-  const dashboardCard = document.getElementById("dashboardCard");
-  const authForm = document.getElementById("authForm");
-  const emailInput = document.getElementById("email");
-  const passwordInput = document.getElementById("password");
-  const passwordGroup = document.getElementById("passwordGroup");
-  const formTitle = document.getElementById("formTitle");
-  const formSubtitle = document.getElementById("formSubtitle");
-  const submitButton = document.getElementById("submitButton");
-  const switchButton = document.getElementById("switchButton");
-  const forgotLink = document.getElementById("forgotLink");
-  const divider = document.getElementById("divider");
-  const message = document.getElementById("message");
-  const cardFooter = document.getElementById("cardFooter");
-  const accountEmail = document.getElementById("accountEmail");
-  const dashboardMessage = document.getElementById("dashboardMessage");
-  const logoutButton = document.getElementById("logoutButton");
-
-  let supabaseClient;
-  let mode = "login";
-  let busy = false;
-
-  function showMessage(text, error = false) {
-    message.textContent = text;
-    message.style.color = error ? "#ff718c" : "#25f4ee";
+  function msg(id, text, error = false) {
+    $(id).textContent = text;
+    $(id).style.color = error ? "#ff718c" : "#25f4ee";
   }
-
-  function setBusy(value) {
-    busy = value;
-    submitButton.disabled = value;
-    switchButton.disabled = value;
-    submitButton.style.opacity = value ? ".6" : "1";
+  function setMode(next) {
+    mode = next;
+    $("authTitle").textContent = mode === "register" ? "Yeni hesab yarat" : mode === "reset" ? "Şifrəni bərpa et" : "Hesabına daxil ol";
+    $("authSubmit").textContent = mode === "register" ? "Qeydiyyatdan keç" : mode === "reset" ? "Bərpa məktubu göndər" : "Daxil ol";
+    $("passwordArea").classList.toggle("hidden", mode === "reset");
+    $("password").required = mode !== "reset";
+    $("switchAuth").classList.toggle("hidden", mode === "reset");
+    $("resetPassword").classList.toggle("hidden", mode === "reset");
+    $("switchAuth").textContent = mode === "register" ? "Artıq hesabın var? Daxil ol" : "Qeydiyyatdan keç";
+    msg("authMessage", "");
   }
-
-  function setMode(nextMode) {
-    mode = nextMode;
-    showMessage("");
-
-    passwordGroup.classList.remove("hidden");
-    passwordInput.required = true;
-    forgotLink.classList.remove("hidden");
-    divider.classList.remove("hidden");
-    switchButton.classList.remove("hidden");
-    cardFooter.classList.remove("hidden");
-
-    if (mode === "login") {
-      formTitle.textContent = "Hesabına daxil ol";
-      formSubtitle.textContent = "Hesabına daxil olmaq üçün e-poçtunu və şifrənı yaz.";
-      submitButton.textContent = "Daxil ol";
-      switchButton.textContent = "Qeydiyyatdan keç";
-      divider.textContent = "YENİ İSTİFADƏÇİSƏN?";
-      passwordInput.autocomplete = "current-password";
-    } else if (mode === "register") {
-      formTitle.textContent = "Yeni hesab yarat";
-      formSubtitle.textContent = "E-poçt ünvanını və yeni şifrəni daxil et. Təsdiq məktubu göndəriləcək.";
-      submitButton.textContent = "Qeydiyyatdan keç";
-      switchButton.textContent = "Artıq hesabın var? Daxil ol";
-      divider.textContent = "ARTIQ HESABIN VAR?";
-      passwordInput.autocomplete = "new-password";
-    } else {
-      formTitle.textContent = "Şifrəni bərpa et";
-      formSubtitle.textContent = "E-poçtunu daxil et. Şifrəni yeniləmək üçün məktub göndəriləcək.";
-      submitButton.textContent = "Bərpa məktubu göndər";
-      passwordGroup.classList.add("hidden");
-      passwordInput.required = false;
-      forgotLink.classList.add("hidden");
-      divider.classList.add("hidden");
-      switchButton.classList.add("hidden");
-      cardFooter.classList.add("hidden");
-    }
-  }
-
   function showDashboard(user) {
-    authCard.classList.add("hidden");
-    dashboardCard.classList.remove("hidden");
-    accountEmail.textContent = user.email || "E-poçt göstərilməyib";
-    dashboardMessage.textContent = "";
+    currentUser = user;
+    $("authPanel").classList.add("hidden");
+    $("dashboard").classList.remove("hidden");
+    $("userEmail").textContent = user.email || "";
+    loadData();
   }
-
   function showAuth() {
-    dashboardCard.classList.add("hidden");
-    authCard.classList.remove("hidden");
+    currentUser = null;
+    $("dashboard").classList.add("hidden");
+    $("authPanel").classList.remove("hidden");
+  }
+  function errorText(error) {
+    const t = (error?.message || "").toLowerCase();
+    if (t.includes("invalid login credentials")) return "E-poçt və ya şifrə yanlışdır.";
+    if (t.includes("email not confirmed")) return "Əvvəlcə e-poçtunu təsdiqlə.";
+    if (t.includes("already registered")) return "Bu e-poçtla hesab var. Daxil ol.";
+    if (t.includes("gündə maksimum 2 video")) return "Bu gün artıq 2 video göndərmisən.";
+    if (t.includes("düzgün tiktok")) return "Düzgün TikTok video linki daxil et.";
+    return error?.message || "Xəta baş verdi. Yenidən yoxla.";
+  }
+  async function loadData() {
+    if (!currentUser) return;
+    msg("dashboardMessage", "Məlumatlar yüklənir...");
+    const uid = currentUser.id;
+    const [profileResult, videosResult] = await Promise.all([
+      client.from("profiles").select("balance").eq("id", uid).maybeSingle(),
+      client.from("video_submissions").select("id,tiktok_url,status,reward,views_count,created_at").eq("user_id", uid).order("created_at", {ascending:false}).limit(50)
+    ]);
+    if (profileResult.error) {
+      msg("dashboardMessage", "Balansı yükləmək olmadı: " + profileResult.error.message, true);
+    } else if (!profileResult.data) {
+      msg("dashboardMessage", "Profil tapılmadı. Supabase profil trigger-ini yoxlamaq lazımdır.", true);
+    } else {
+      const amount = Number(profileResult.data.balance || 0);
+      $("balance").textContent = amount.toFixed(2) + " AZN";
+      msg("dashboardMessage", "");
+    }
+    if (videosResult.error) {
+      $("videoList").textContent = "Videoları yükləmək olmadı: " + videosResult.error.message;
+      return;
+    }
+    $("videoList").replaceChildren();
+    if (!videosResult.data.length) {
+      $("videoList").textContent = "Hələ video göndərməmisən.";
+      return;
+    }
+    const statusText = {pending:"Yoxlanılır",approved:"Təsdiqlənib",rejected:"Rədd edilib"};
+    for (const video of videosResult.data) {
+      const item = document.createElement("div");
+      item.className = "video";
+      const link = document.createElement("a");
+      link.href = video.tiktok_url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = video.tiktok_url;
+      const status = document.createElement("div");
+      status.className = "status";
+      status.textContent = "Status: " + (statusText[video.status] || video.status);
+      const detail = document.createElement("div");
+      detail.className = "muted";
+      detail.textContent = "Baxış: " + Number(video.views_count || 0).toLocaleString("az-AZ") + " · Qazanc: " + Number(video.reward || 0).toFixed(2) + " AZN";
+      item.append(link, status, detail);
+      $("videoList").append(item);
+    }
   }
 
-  function friendlyError(error) {
-    const text = (error && error.message ? error.message : "").toLowerCase();
+  $("switchAuth").addEventListener("click", () => setMode(mode === "login" ? "register" : "login"));
+  $("resetPassword").addEventListener("click", () => setMode("reset"));
+  $("authForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    if (!client || busy) return;
+    const email = $("email").value.trim();
+    const password = $("password").value;
+    busy = true;
+    $("authSubmit").disabled = true;
+    try {
+      let result;
+      if (mode === "register") {
+        result = await client.auth.signUp({email,password,options:{emailRedirectTo:"https://altap.biz/"}});
+        if (!result.error) msg("authMessage", result.data.session ? "Qeydiyyat uğurludur." : "Qeydiyyat yaradıldı. E-poçt təsdiq linkini yoxla.");
+      } else if (mode === "login") {
+        result = await client.auth.signInWithPassword({email,password});
+      } else {
+        result = await client.auth.resetPasswordForEmail(email,{redirectTo:"https://altap.biz/"});
+        if (!result.error) msg("authMessage","Əgər hesab mövcuddursa, bərpa məktubu göndəriləcək.");
+      }
+      if (result?.error) throw result.error;
+      if (result?.data?.user && result.data.session) showDashboard(result.data.user);
+    } catch (error) {
+      msg("authMessage", errorText(error), true);
+    } finally {
+      busy = false;
+      $("authSubmit").disabled = false;
+    }
+  });
 
-    if (text.includes("invalid login credentials")) {
-      return "E-poçt və ya şifrə yanlışdır.";
+  $("videoForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    if (!currentUser) return;
+    const link = $("tiktokUrl").value.trim();
+    if (!/^https?:\/\/(www\.)?(vm\.tiktok\.com|vt\.tiktok\.com|tiktok\.com)\//i.test(link)) {
+      msg("videoMessage","Düzgün TikTok video linki daxil et.",true);
+      return;
     }
-    if (text.includes("email not confirmed")) {
-      return "E-poçt ünvanın təsdiqlənməyib. E-poçtunu yoxla.";
+    $("submitVideo").disabled = true;
+    msg("videoMessage","Video göndərilir...");
+    try {
+      const {error} = await client.rpc("submit_altap_video",{p_tiktok_url:link});
+      if (error) throw error;
+      $("tiktokUrl").value = "";
+      msg("videoMessage","Video uğurla göndərildi. Yoxlama gözlənilir.");
+      await loadData();
+    } catch (error) {
+      msg("videoMessage",errorText(error),true);
+    } finally {
+      $("submitVideo").disabled = false;
     }
-    if (text.includes("user already registered")) {
-      return "Bu e-poçtla artıq hesab yaradılıb. Daxil ol.";
-    }
-    if (text.includes("password should be at least")) {
-      return "Şifrə ən azı 6 simvol olmalıdır.";
-    }
-    if (text.includes("rate limit") || text.includes("too many requests")) {
-      return "Çox sayda cəhd etdin. Bir az gözlə və yenidən yoxla.";
-    }
-    if (text.includes("failed to fetch")) {
-      return "Serverə qoşulmaq olmadı. İnternet bağlantını yoxla.";
-    }
-    return error && error.message ? error.message : "Xəta baş verdi. Yenidən cəhd et.";
-  }
+  });
+
+  $("refresh").addEventListener("click", loadData);
+  $("logout").addEventListener("click", async () => {
+    const {error} = await client.auth.signOut();
+    if (error) msg("dashboardMessage",errorText(error),true);
+    else showAuth();
+  });
 
   async function init() {
-    if (!window.supabase || !window.supabase.createClient) {
-      showMessage("Giriş sistemi yüklənmədi. Səhifəni yenilə.", true);
+    if (!window.supabase?.createClient) {
+      msg("authMessage","Giriş sistemi yüklənmədi. Səhifəni yenilə.",true);
       return;
     }
-
-    supabaseClient = window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_PUBLISHABLE_KEY,
-      {
-        auth: {
-          persistSession: true,
-          autoRefreshToken: true,
-          detectSessionInUrl: true
-        }
-      }
-    );
-
-    supabaseClient.auth.onAuthStateChange((event, session) => {
-      if (session && session.user) {
-        showDashboard(session.user);
-      } else if (event === "SIGNED_OUT") {
-        showAuth();
-        setMode("login");
-      }
+    client = window.supabase.createClient(URL,KEY);
+    client.auth.onAuthStateChange((event,session) => {
+      if (session?.user) showDashboard(session.user);
+      else if (event === "SIGNED_OUT") showAuth();
     });
-
-    const { data, error } = await supabaseClient.auth.getSession();
-    if (!error && data.session) {
-      showDashboard(data.session.user);
-    }
-
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("error_description")) {
-      showAuth();
-      showMessage(decodeURIComponent(params.get("error_description").replace(/\+/g, " ")), true);
-    }
+    const {data,error} = await client.auth.getSession();
+    if (!error && data.session) showDashboard(data.session.user);
   }
-
-  authForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    if (busy || !supabaseClient) return;
-
-    const email = emailInput.value.trim();
-    const password = passwordInput.value;
-
-    if (!email) {
-      showMessage("E-poçt ünvanını daxil et.", true);
-      return;
-    }
-
-    if (mode !== "reset" && password.length < 6) {
-      showMessage("Şifrə ən azı 6 simvol olmalıdır.", true);
-      return;
-    }
-
-    setBusy(true);
-    showMessage("Zəhmət olmasa gözlə...");
-
-    try {
-      if (mode === "register") {
-        const { data, error } = await supabaseClient.auth.signUp({
-          email,
-          password,
-          options: {
-            emailRedirectTo: "https://altap.biz/"
-          }
-        });
-
-        if (error) throw error;
-
-        if (data.session && data.user) {
-          showDashboard(data.user);
-        } else {
-          showMessage("Qeydiyyat yaradıldı. E-poçtuna gələn təsdiq linkinə bas, sonra hesabına daxil ol.");
-        }
-      } else if (mode === "login") {
-        const { data, error } = await supabaseClient.auth.signInWithPassword({
-          email,
-          password
-        });
-
-        if (error) throw error;
-
-        if (data.user) showDashboard(data.user);
-      } else {
-        const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
-          redirectTo: "https://altap.biz/"
-        });
-
-        if (error) throw error;
-
-        showMessage("Əgər bu e-poçt qeydiyyatdadırsa, şifrə bərpası üçün məktub göndəriləcək.");
-      }
-    } catch (error) {
-      showMessage(friendlyError(error), true);
-    } finally {
-      setBusy(false);
-    }
-  });
-
-  switchButton.addEventListener("click", () => {
-    if (busy) return;
-    setMode(mode === "login" ? "register" : "login");
-  });
-
-  forgotLink.addEventListener("click", (event) => {
-    event.preventDefault();
-    if (busy) return;
-    setMode("reset");
-  });
-
-  logoutButton.addEventListener("click", async () => {
-    if (!supabaseClient) return;
-
-    logoutButton.disabled = true;
-    dashboardMessage.textContent = "Hesabdan çıxılır...";
-
-    const { error } = await supabaseClient.auth.signOut();
-
-    logoutButton.disabled = false;
-
-    if (error) {
-      dashboardMessage.style.color = "#ff718c";
-      dashboardMessage.textContent = friendlyError(error);
-    } else {
-      showAuth();
-      setMode("login");
-      passwordInput.value = "";
-      showMessage("Hesabdan uğurla çıxdın.");
-    }
-  });
-
   setMode("login");
-  init().catch(() => {
-    showMessage("Sistem yüklənərkən xəta baş verdi. Səhifəni yenilə.", true);
-  });
+  init().catch(error => msg("authMessage",errorText(error),true));
 })();
 </script>
 </body>
