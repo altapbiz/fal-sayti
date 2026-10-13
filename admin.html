@@ -25,6 +25,7 @@ small{color:#b8b8ca}
 .status{white-space:pre-wrap;overflow-wrap:anywhere}
 .top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 a{color:#aaa0ff}
+.reward-input{min-width:110px;max-width:160px}
 </style>
 </head>
 <body>
@@ -57,6 +58,7 @@ a{color:#aaa0ff}
 </div>
 <div class="card">
 <h2>TikTok video müraciətləri</h2>
+<p>Balans artırmaq üçün məbləği yaz və “Təsdiqlə və balansı artır” düyməsinə bas.</p>
 <div class="scroll"><table>
 <thead><tr><th>İstifadəçi</th><th>Video</th><th>Baxış</th><th>Mükafat</th><th>Status</th><th>Əməliyyat</th></tr></thead>
 <tbody id="videos"></tbody>
@@ -99,10 +101,10 @@ $("loginMsg").textContent=t;
 }
 async function checkAdmin(){
 const {data:{session},error}=await db.auth.getSession();
-if(error) throw error;
+if(error)throw error;
 if(!session){showLogin();return false}
 const {data:allowed,error:roleError}=await db.rpc("is_altap_admin");
-if(roleError) throw roleError;
+if(roleError)throw roleError;
 if(allowed!==true){
 await db.auth.signOut();
 showLogin("Bu hesabın admin icazəsi yoxdur.");
@@ -114,58 +116,83 @@ $("adminEmail").textContent="Hesab: "+(session.user.email||"");
 return true;
 }
 function actionButtons(table,id,status){
-if(status!=="pending") return "—";
+if(status!=="pending")return "—";
 return `<button class="ok" data-table="${table}" data-id="${safe(id)}" data-status="approved">Təsdiqlə</button>
 <button class="danger" data-table="${table}" data-id="${safe(id)}" data-status="rejected">Rədd et</button>`;
+}
+function videoActions(v){
+if(v.status!=="pending")return "—";
+return `
+<div>
+<input class="reward-input" type="number" min="0.01" step="0.01"
+id="reward-${safe(v.id)}" placeholder="Məbləğ (AZN)">
+<button class="ok" data-video-approve="${safe(v.id)}">
+Təsdiqlə və balansı artır
+</button>
+<button class="danger" data-video-reject="${safe(v.id)}">
+Rədd et
+</button>
+</div>`;
 }
 async function loadUsers(){
 const {data,error}=await db.from("profiles")
 .select("id,email,balance,role,created_at")
 .order("created_at",{ascending:false}).limit(500);
-if(error) throw error;
+if(error)throw error;
 $("users").innerHTML=(data||[]).map(u=>`<tr>
-<td>${safe(u.id)}</td><td>${safe(u.email)}</td>
-<td>${safe(u.balance)}</td><td>${safe(u.role)}</td>
-<td>${date(u.created_at)}</td></tr>`).join("")||"<tr><td colspan='5'>İstifadəçi yoxdur.</td></tr>";
+<td>${safe(u.id)}</td>
+<td>${safe(u.email)}</td>
+<td>${safe(u.balance)}</td>
+<td>${safe(u.role)}</td>
+<td>${date(u.created_at)}</td>
+</tr>`).join("")||"<tr><td colspan='5'>İstifadəçi yoxdur.</td></tr>";
 }
 async function loadVideos(){
 const {data,error}=await db.from("video_submissions")
 .select("id,user_id,tiktok_url,status,reward,admin_note,created_at,views_count")
 .order("created_at",{ascending:false}).limit(500);
-if(error) throw error;
+if(error)throw error;
 $("videos").innerHTML=(data||[]).map(v=>`<tr>
 <td>${safe(v.user_id)}<br><small>${date(v.created_at)}</small></td>
 <td><a href="${safe(v.tiktok_url)}" target="_blank" rel="noopener">Videonu aç</a></td>
-<td>${safe(v.views_count)}</td><td>${safe(v.reward)}</td>
+<td>${safe(v.views_count)}</td>
+<td>${safe(v.reward)}</td>
 <td>${statusLabel(v.status)}<br><small>${safe(v.admin_note)}</small></td>
-<td>${actionButtons("video_submissions",v.id,v.status)}</td></tr>`).join("")||"<tr><td colspan='6'>Müraciət yoxdur.</td></tr>";
+<td>${videoActions(v)}</td>
+</tr>`).join("")||"<tr><td colspan='6'>Müraciət yoxdur.</td></tr>";
 }
 async function loadAltapWithdrawals(){
 const {data,error}=await db.from("altap_withdrawal_requests")
 .select("id,user_id,amount,wallet_address,network,status,created_at,admin_note")
 .order("created_at",{ascending:false}).limit(500);
-if(error) throw error;
+if(error)throw error;
 $("altapWithdrawals").innerHTML=(data||[]).map(w=>`<tr>
 <td>${safe(w.user_id)}<br><small>${date(w.created_at)}</small></td>
-<td>${safe(w.amount)}</td><td>${safe(w.network)}</td>
+<td>${safe(w.amount)}</td>
+<td>${safe(w.network)}</td>
 <td>${safe(w.wallet_address)}</td>
 <td>${statusLabel(w.status)}<br><small>${safe(w.admin_note)}</small></td>
-<td>${actionButtons("altap_withdrawal_requests",w.id,w.status)}</td></tr>`).join("")||"<tr><td colspan='6'>Müraciət yoxdur.</td></tr>";
+<td>${actionButtons("altap_withdrawal_requests",w.id,w.status)}</td>
+</tr>`).join("")||"<tr><td colspan='6'>Müraciət yoxdur.</td></tr>";
 }
 async function loadWithdrawals(){
 const {data,error}=await db.from("withdrawal_requests")
 .select("id,user_id,amount,payment_method,payment_details,status,created_at")
 .order("created_at",{ascending:false}).limit(500);
-if(error) throw error;
+if(error)throw error;
 $("withdrawals").innerHTML=(data||[]).map(w=>`<tr>
 <td>${safe(w.user_id)}<br><small>${date(w.created_at)}</small></td>
-<td>${safe(w.amount)}</td><td>${safe(w.payment_method)}</td>
-<td>${safe(w.payment_details)}</td><td>${statusLabel(w.status)}</td>
-<td>${actionButtons("withdrawal_requests",w.id,w.status)}</td></tr>`).join("")||"<tr><td colspan='6'>Müraciət yoxdur.</td></tr>";
+<td>${safe(w.amount)}</td>
+<td>${safe(w.payment_method)}</td>
+<td>${safe(w.payment_details)}</td>
+<td>${statusLabel(w.status)}</td>
+<td>${actionButtons("withdrawal_requests",w.id,w.status)}</td>
+</tr>`).join("")||"<tr><td colspan='6'>Müraciət yoxdur.</td></tr>";
 }
 async function loadAll(){
 if(busy)return;
-busy=true;$("refreshBtn").disabled=true;
+busy=true;
+$("refreshBtn").disabled=true;
 showMessage("Məlumatlar yüklənir...");
 try{
 if(!await checkAdmin())return;
@@ -174,36 +201,98 @@ loadUsers(),loadVideos(),loadAltapWithdrawals(),loadWithdrawals()
 ]);
 const failed=results.filter(r=>r.status==="rejected");
 if(failed.length){
-showMessage("Bəzi bölmələr yüklənmədi: "+failed.map(r=>r.reason?.message||"Xəta").join(" | "));
-}else showMessage("Məlumatlar yeniləndi.");
-}catch(e){showMessage("Xəta: "+e.message)}
-finally{busy=false;$("refreshBtn").disabled=false}
+showMessage("Bəzi bölmələr yüklənmədi: "+
+failed.map(r=>r.reason?.message||"Xəta").join(" | "));
+}else{
+showMessage("Məlumatlar yeniləndi.");
+}
+}catch(e){
+showMessage("Xəta: "+e.message);
+}finally{
+busy=false;
+$("refreshBtn").disabled=false;
+}
 }
 $("loginForm").addEventListener("submit",async e=>{
-e.preventDefault();$("loginBtn").disabled=true;
+e.preventDefault();
+$("loginBtn").disabled=true;
 $("loginMsg").textContent="Giriş yoxlanılır...";
 try{
 const {error}=await db.auth.signInWithPassword({
-email:$("email").value.trim(),password:$("password").value
+email:$("email").value.trim(),
+password:$("password").value
 });
 if(error)throw error;
 await loadAll();
-}catch(err){showLogin("Giriş xətası: "+err.message)}
-finally{$("loginBtn").disabled=false}
+}catch(err){
+showLogin("Giriş xətası: "+err.message);
+}finally{
+$("loginBtn").disabled=false;
+}
 });
 $("refreshBtn").addEventListener("click",loadAll);
 $("logoutBtn").addEventListener("click",async()=>{
-await db.auth.signOut();showLogin("Çıxış edildi.");
+await db.auth.signOut();
+showLogin("Çıxış edildi.");
 });
 document.addEventListener("click",async e=>{
+const approve=e.target.closest("button[data-video-approve]");
+const rejectVideo=e.target.closest("button[data-video-reject]");
 const b=e.target.closest("button[data-table]");
+if(approve){
+const id=approve.dataset.videoApprove;
+const input=$("reward-"+id);
+const amount=Number(input?.value);
+if(!Number.isFinite(amount)||amount<=0){
+showMessage("Düzgün mükafat məbləği yaz. Məbləğ 0-dan böyük olmalıdır.");
+return;
+}
+if(!confirm(amount+" AZN mükafatı istifadəçinin balansına əlavə edib videonu təsdiqləmək istəyirsən?"))return;
+approve.disabled=true;
+if(input)input.disabled=true;
+try{
+const {data,error}=await db.rpc("approve_video_reward",{
+p_submission_id:id,
+p_amount:amount
+});
+if(error)throw error;
+showMessage(data||"Video təsdiqləndi və mükafat əlavə edildi.");
+await loadAll();
+}catch(err){
+showMessage("Mükafat əlavə edilmədi: "+err.message);
+approve.disabled=false;
+if(input)input.disabled=false;
+}
+return;
+}
+if(rejectVideo){
+const id=rejectVideo.dataset.videoReject;
+if(!confirm("Bu TikTok müraciətini rədd etmək istəyirsən?"))return;
+rejectVideo.disabled=true;
+try{
+const note=prompt("Rədd etmə səbəbi (istəyə bağlı):")||"Müraciət rədd edildi";
+const {error}=await db.from("video_submissions")
+.update({status:"rejected",admin_note:note})
+.eq("id",id)
+.eq("status","pending");
+if(error)throw error;
+showMessage("Video müraciəti rədd edildi.");
+await loadAll();
+}catch(err){
+showMessage("Əməliyyat alınmadı: "+err.message);
+rejectVideo.disabled=false;
+}
+return;
+}
 if(!b)return;
-const table=b.dataset.table,id=b.dataset.id,next=b.dataset.status;
+const table=b.dataset.table;
+const id=b.dataset.id;
+const next=b.dataset.status;
 if(!confirm("Müraciətin statusunu '"+next+"' etmək istəyirsən?"))return;
 b.disabled=true;
 try{
 const changes={status:next};
-if(table==="video_submissions"||table==="altap_withdrawal_requests"){
+if(table==="altap_withdrawal_requests"||table==="withdrawal_requests"){
 changes.admin_note=prompt("Admin qeydi (istəyə bağlı):")||null;
 }
 if(table==="altap_withdrawal_requests"){
