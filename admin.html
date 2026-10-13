@@ -1,224 +1,227 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#080910">
-  <title>Altap.Biz — Admin Paneli</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      padding: 24px 16px;
-      background: #080910;
-      color: #fff;
-      font-family: Arial, sans-serif;
-    }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .panel, .card {
-      background: #151622;
-      border: 1px solid #303044;
-      border-radius: 16px;
-      padding: 22px;
-      margin-bottom: 18px;
-    }
-    h1 { color: #9385ff; margin-top: 0; }
-    p { color: #b8b8ca; line-height: 1.6; }
-    .hidden { display: none !important; }
-    input {
-      display: block;
-      width: 100%;
-      padding: 14px;
-      margin: 12px 0;
-      border: 1px solid #39394d;
-      border-radius: 9px;
-      background: #090a12;
-      color: white;
-      font-size: 16px;
-    }
-    button {
-      padding: 13px 16px;
-      border: 0;
-      border-radius: 9px;
-      background: #7565ff;
-      color: white;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    button:disabled {
-      opacity: .6;
-      cursor: wait;
-    }
-    .full { width: 100%; }
-    .top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .status {
-      overflow-wrap: anywhere;
-      white-space: pre-wrap;
-    }
-    .note {
-      border-left: 3px solid #7565ff;
-      padding-left: 12px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080910">
+<title>Altap.Biz — Admin</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:18px;background:#080910;color:#fff;font-family:Arial,sans-serif}
+main{max-width:1100px;margin:auto}
+.card{background:#151622;border:1px solid #303044;border-radius:14px;padding:18px;margin:14px 0}
+h1{color:#9385ff}
+p{color:#b8b8ca;overflow-wrap:anywhere}
+input{width:100%;padding:12px;margin:8px 0;background:#090a12;color:#fff;border:1px solid #39394d;border-radius:8px}
+button{padding:10px 13px;border:0;border-radius:8px;background:#7565ff;color:white;font-weight:bold;margin:4px;cursor:pointer}
+button:disabled{opacity:.5}
+.danger{background:#a83249}
+.ok{background:#16845b}
+.hidden{display:none!important}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:600px}
+td,th{text-align:left;padding:10px;border-bottom:1px solid #303044;vertical-align:top}
+small{color:#b8b8ca}
+.status{white-space:pre-wrap;overflow-wrap:anywhere}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+a{color:#aaa0ff}
+</style>
 </head>
 <body>
-  <main class="container">
-    <section id="loginPanel" class="panel">
-      <h1>ALTAP.BIZ</h1>
-      <h2>Admin girişi</h2>
-      <p>İdarəetmə panelinə daxil olmaq üçün hesabına giriş et.</p>
-      <form id="loginForm">
-        <input
-          id="email"
-          type="email"
-          placeholder="E-poçt ünvanı"
-          autocomplete="username"
-          required
-        >
-        <input
-          id="password"
-          type="password"
-          placeholder="Parol"
-          autocomplete="current-password"
-          required
-        >
-        <button id="loginButton" class="full" type="submit">
-          Daxil ol
-        </button>
-      </form>
-      <p id="loginMessage" class="status" role="status"></p>
-    </section>
-    <section id="adminPanel" class="hidden">
-      <div class="top">
-        <div>
-          <h1>ALTAP.BIZ</h1>
-          <p>Admin idarəetmə paneli</p>
-        </div>
-        <button id="logoutButton" type="button">Çıxış</button>
-      </div>
-      <div class="card">
-        <h2>Admin hesabı</h2>
-        <p id="adminEmail"></p>
-        <p class="note">
-          Admin icazəsi təsdiqləndi. Aşağıdakı idarəetmə bölmələri
-          server bağlantısı qurulduqdan sonra aktiv olacaq.
-        </p>
-      </div>
-      <div class="card">
-        <h2>İstifadəçilər və balanslar</h2>
-        <p>İstifadəçi məlumatları hələ qoşulmayıb.</p>
-      </div>
-      <div class="card">
-        <h2>TikTok video müraciətləri</h2>
-        <p>Video müraciətlərini görmək və qərar vermək funksiyası hələ qoşulmayıb.</p>
-      </div>
-      <div class="card">
-        <h2>M10 pul çıxarışları</h2>
-        <p>Ödəniş müraciətlərini idarə etmək funksiyası hələ qoşulmayıb.</p>
-      </div>
-    </section>
-  </main>
-  <script type="module">
-    import { createClient } from
-      "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
-    const SUPABASE_URL =
-      "https://fxidqmqoqlkijwdvvzyk.supabase.co";
-    const SUPABASE_PUBLISHABLE_KEY =
-      "sb_publishable_o9BKKtPtpBUqUrx5cZYiqg_TXiWqYYg";
-    const supabase = createClient(
-      SUPABASE_URL,
-      SUPABASE_PUBLISHABLE_KEY
-    );
-    const loginPanel = document.getElementById("loginPanel");
-    const adminPanel = document.getElementById("adminPanel");
-    const loginForm = document.getElementById("loginForm");
-    const loginButton = document.getElementById("loginButton");
-    const loginMessage = document.getElementById("loginMessage");
-    let checking = false;
-    function showLogin(message = "") {
-      loginPanel.classList.remove("hidden");
-      adminPanel.classList.add("hidden");
-      loginMessage.textContent = message;
-    }
-    async function checkAdmin() {
-      if (checking) return;
-      checking = true;
-      try {
-        const { data: sessionData, error: sessionError } =
-          await supabase.auth.getSession();
-        if (sessionError) throw sessionError;
-        const session = sessionData.session;
-        if (!session) {
-          showLogin();
-          return;
-        }
-        const { data: allowed, error: roleError } =
-          await supabase.rpc("is_altap_admin");
-        if (roleError) {
-          await supabase.auth.signOut();
-          showLogin(
-            "Admin icazəsi yoxlanmadı. Supabase funksiyasını yoxlamaq lazımdır."
-          );
-          return;
-        }
-        if (allowed !== true) {
-          await supabase.auth.signOut();
-          showLogin("Bu hesabın admin icazəsi yoxdur.");
-          return;
-        }
-        document.getElementById("adminEmail").textContent =
-          "Hesab: " + (session.user.email || "E-poçt göstərilmir");
-        loginPanel.classList.add("hidden");
-        adminPanel.classList.remove("hidden");
-      } catch (error) {
-        showLogin("Xəta: " + error.message);
-      } finally {
-        checking = false;
-      }
-    }
-    loginForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      loginButton.disabled = true;
-      loginMessage.textContent = "Giriş yoxlanılır...";
-      try {
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value;
-        const { error } = await supabase.auth.signInWithPassword({
-          email,
-          password
-        });
-        if (error) throw error;
-        await checkAdmin();
-      } catch (error) {
-        showLogin("Giriş alınmadı: " + error.message);
-      } finally {
-        loginButton.disabled = false;
-      }
-    });
-    document.getElementById("logoutButton").addEventListener(
-      "click",
-      async () => {
-        await supabase.auth.signOut();
-        showLogin("Hesabdan çıxış edildi.");
-      }
-    );
-    supabase.auth.onAuthStateChange((event, session) => {
-      if (event === "SIGNED_OUT" || !session) {
-        showLogin();
-      }
-    });
-    checkAdmin();
-  </script>
+<main>
+<section id="login" class="card">
+<h1>ALTAP.BIZ</h1>
+<h2>Admin girişi</h2>
+<form id="loginForm">
+<input id="email" type="email" placeholder="E-poçt" required>
+<input id="password" type="password" placeholder="Parol" required>
+<button id="loginBtn" type="submit">Daxil ol</button>
+</form>
+<p id="loginMsg" class="status"></p>
+</section>
+<section id="panel" class="hidden">
+<div class="top">
+<div><h1>ALTAP.BIZ</h1><p id="adminEmail"></p></div>
+<div>
+<button id="refreshBtn">Yenilə</button>
+<button id="logoutBtn" class="danger">Çıxış</button>
+</div>
+</div>
+<p id="message" class="status"></p>
+<div class="card">
+<h2>İstifadəçilər və balanslar</h2>
+<div class="scroll"><table>
+<thead><tr><th>ID</th><th>E-poçt</th><th>Balans</th><th>Rol</th><th>Qeydiyyat</th></tr></thead>
+<tbody id="users"></tbody>
+</table></div>
+</div>
+<div class="card">
+<h2>TikTok video müraciətləri</h2>
+<div class="scroll"><table>
+<thead><tr><th>İstifadəçi</th><th>Video</th><th>Baxış</th><th>Mükafat</th><th>Status</th><th>Əməliyyat</th></tr></thead>
+<tbody id="videos"></tbody>
+</table></div>
+</div>
+<div class="card">
+<h2>Altap pul çıxarışları</h2>
+<div class="scroll"><table>
+<thead><tr><th>İstifadəçi</th><th>Məbləğ</th><th>Şəbəkə</th><th>Cüzdan</th><th>Status</th><th>Əməliyyat</th></tr></thead>
+<tbody id="altapWithdrawals"></tbody>
+</table></div>
+</div>
+<div class="card">
+<h2>Digər pul çıxarışları</h2>
+<div class="scroll"><table>
+<thead><tr><th>İstifadəçi</th><th>Məbləğ</th><th>Ödəniş üsulu</th><th>Detallar</th><th>Status</th><th>Əməliyyat</th></tr></thead>
+<tbody id="withdrawals"></tbody>
+</table></div>
+</div>
+</section>
+</main>
+<script type="module">
+import {createClient} from
+"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+const URL="https://fxidqmqoqlkijwdvvzyk.supabase.co";
+const KEY="sb_publishable_o9BKKtPtpBUqUrx5cZYiqg_TXiWqYYg";
+const db=createClient(URL,KEY);
+const $=id=>document.getElementById(id);
+const safe=v=>String(v??"").replace(/[&<>"']/g,c=>({
+"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+}[c]));
+const date=v=>v?new Date(v).toLocaleString("az-AZ"):"—";
+const statusLabel=v=>safe(v||"—");
+let busy=false;
+function showMessage(t){$("message").textContent=t}
+function showLogin(t=""){
+$("login").classList.remove("hidden");
+$("panel").classList.add("hidden");
+$("loginMsg").textContent=t;
+}
+async function checkAdmin(){
+const {data:{session},error}=await db.auth.getSession();
+if(error) throw error;
+if(!session){showLogin();return false}
+const {data:allowed,error:roleError}=await db.rpc("is_altap_admin");
+if(roleError) throw roleError;
+if(allowed!==true){
+await db.auth.signOut();
+showLogin("Bu hesabın admin icazəsi yoxdur.");
+return false;
+}
+$("login").classList.add("hidden");
+$("panel").classList.remove("hidden");
+$("adminEmail").textContent="Hesab: "+(session.user.email||"");
+return true;
+}
+function actionButtons(table,id,status){
+if(status!=="pending") return "—";
+return `<button class="ok" data-table="${table}" data-id="${safe(id)}" data-status="approved">Təsdiqlə</button>
+<button class="danger" data-table="${table}" data-id="${safe(id)}" data-status="rejected">Rədd et</button>`;
+}
+async function loadUsers(){
+const {data,error}=await db.from("profiles")
+.select("id,email,balance,role,created_at")
+.order("created_at",{ascending:false}).limit(500);
+if(error) throw error;
+$("users").innerHTML=(data||[]).map(u=>`<tr>
+<td>${safe(u.id)}</td><td>${safe(u.email)}</td>
+<td>${safe(u.balance)}</td><td>${safe(u.role)}</td>
+<td>${date(u.created_at)}</td></tr>`).join("")||"<tr><td colspan='5'>İstifadəçi yoxdur.</td></tr>";
+}
+async function loadVideos(){
+const {data,error}=await db.from("video_submissions")
+.select("id,user_id,tiktok_url,status,reward,admin_note,created_at,views_count")
+.order("created_at",{ascending:false}).limit(500);
+if(error) throw error;
+$("videos").innerHTML=(data||[]).map(v=>`<tr>
+<td>${safe(v.user_id)}<br><small>${date(v.created_at)}</small></td>
+<td><a href="${safe(v.tiktok_url)}" target="_blank" rel="noopener">Videonu aç</a></td>
+<td>${safe(v.views_count)}</td><td>${safe(v.reward)}</td>
+<td>${statusLabel(v.status)}<br><small>${safe(v.admin_note)}</small></td>
+<td>${actionButtons("video_submissions",v.id,v.status)}</td></tr>`).join("")||"<tr><td colspan='6'>Müraciət yoxdur.</td></tr>";
+}
+async function loadAltapWithdrawals(){
+const {data,error}=await db.from("altap_withdrawal_requests")
+.select("id,user_id,amount,wallet_address,network,status,created_at,admin_note")
+.order("created_at",{ascending:false}).limit(500);
+if(error) throw error;
+$("altapWithdrawals").innerHTML=(data||[]).map(w=>`<tr>
+<td>${safe(w.user_id)}<br><small>${date(w.created_at)}</small></td>
+<td>${safe(w.amount)}</td><td>${safe(w.network)}</td>
+<td>${safe(w.wallet_address)}</td>
+<td>${statusLabel(w.status)}<br><small>${safe(w.admin_note)}</small></td>
+<td>${actionButtons("altap_withdrawal_requests",w.id,w.status)}</td></tr>`).join("")||"<tr><td colspan='6'>Müraciət yoxdur.</td></tr>";
+}
+async function loadWithdrawals(){
+const {data,error}=await db.from("withdrawal_requests")
+.select("id,user_id,amount,payment_method,payment_details,status,created_at")
+.order("created_at",{ascending:false}).limit(500);
+if(error) throw error;
+$("withdrawals").innerHTML=(data||[]).map(w=>`<tr>
+<td>${safe(w.user_id)}<br><small>${date(w.created_at)}</small></td>
+<td>${safe(w.amount)}</td><td>${safe(w.payment_method)}</td>
+<td>${safe(w.payment_details)}</td><td>${statusLabel(w.status)}</td>
+<td>${actionButtons("withdrawal_requests",w.id,w.status)}</td></tr>`).join("")||"<tr><td colspan='6'>Müraciət yoxdur.</td></tr>";
+}
+async function loadAll(){
+if(busy)return;
+busy=true;$("refreshBtn").disabled=true;
+showMessage("Məlumatlar yüklənir...");
+try{
+if(!await checkAdmin())return;
+const results=await Promise.allSettled([
+loadUsers(),loadVideos(),loadAltapWithdrawals(),loadWithdrawals()
+]);
+const failed=results.filter(r=>r.status==="rejected");
+if(failed.length){
+showMessage("Bəzi bölmələr yüklənmədi: "+failed.map(r=>r.reason?.message||"Xəta").join(" | "));
+}else showMessage("Məlumatlar yeniləndi.");
+}catch(e){showMessage("Xəta: "+e.message)}
+finally{busy=false;$("refreshBtn").disabled=false}
+}
+$("loginForm").addEventListener("submit",async e=>{
+e.preventDefault();$("loginBtn").disabled=true;
+$("loginMsg").textContent="Giriş yoxlanılır...";
+try{
+const {error}=await db.auth.signInWithPassword({
+email:$("email").value.trim(),password:$("password").value
+});
+if(error)throw error;
+await loadAll();
+}catch(err){showLogin("Giriş xətası: "+err.message)}
+finally{$("loginBtn").disabled=false}
+});
+$("refreshBtn").addEventListener("click",loadAll);
+$("logoutBtn").addEventListener("click",async()=>{
+await db.auth.signOut();showLogin("Çıxış edildi.");
+});
+document.addEventListener("click",async e=>{
+const b=e.target.closest("button[data-table]");
+if(!b)return;
+const table=b.dataset.table,id=b.dataset.id,next=b.dataset.status;
+if(!confirm("Müraciətin statusunu '"+next+"' etmək istəyirsən?"))return;
+b.disabled=true;
+try{
+const changes={status:next};
+if(table==="video_submissions"||table==="altap_withdrawal_requests"){
+changes.admin_note=prompt("Admin qeydi (istəyə bağlı):")||null;
+}
+if(table==="altap_withdrawal_requests"){
+changes.processed_at=new Date().toISOString();
+}
+const {error}=await db.from(table).update(changes).eq("id",id);
+if(error)throw error;
+showMessage("Status yeniləndi.");
+await loadAll();
+}catch(err){
+showMessage("Əməliyyat alınmadı: "+err.message);
+b.disabled=false;
+}
+});
+db.auth.onAuthStateChange((event,session)=>{
+if(event==="SIGNED_OUT"||!session)showLogin();
+});
+loadAll();
+</script>
 </body>
 </html>
