@@ -4,29 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080910">
-  <title>Altap.Biz — Admin Girişi</title>
+  <title>Altap.Biz — Admin Paneli</title>
   <style>
     * { box-sizing: border-box; }
     body {
       margin: 0;
       min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 20px;
+      padding: 24px 16px;
       background: #080910;
-      color: white;
+      color: #fff;
       font-family: Arial, sans-serif;
     }
-    .panel {
-      width: 100%;
-      max-width: 390px;
-      padding: 28px;
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .panel, .card {
       background: #151622;
       border: 1px solid #303044;
-      border-radius: 18px;
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 18px;
     }
     h1 { color: #9385ff; margin-top: 0; }
-    p { color: #b8b8ca; line-height: 1.5; }
+    p { color: #b8b8ca; line-height: 1.6; }
+    .hidden { display: none !important; }
     input {
       display: block;
       width: 100%;
@@ -39,89 +41,184 @@
       font-size: 16px;
     }
     button {
-      width: 100%;
-      padding: 14px;
-      margin-top: 8px;
+      padding: 13px 16px;
       border: 0;
       border-radius: 9px;
       background: #7565ff;
       color: white;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: bold;
+      cursor: pointer;
     }
-    #message { overflow-wrap: anywhere; }
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+    .full { width: 100%; }
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .status {
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+    .note {
+      border-left: 3px solid #7565ff;
+      padding-left: 12px;
+    }
   </style>
 </head>
 <body>
-  <main class="panel">
-    <h1>ALTAP.BIZ</h1>
-    <h2>Admin girişi</h2>
-    <p>İdarəetmə panelinə daxil olmaq üçün hesab məlumatlarını yaz.</p>
-
-    <form id="loginForm">
-      <input id="email" type="email" placeholder="E-poçt ünvanı"
-             autocomplete="username" required>
-      <input id="password" type="password" placeholder="Parol"
-             autocomplete="current-password" required>
-      <button type="submit">Daxil ol</button>
-    </form>
-    <p id="message" role="status"></p>
+  <main class="container">
+    <section id="loginPanel" class="panel">
+      <h1>ALTAP.BIZ</h1>
+      <h2>Admin girişi</h2>
+      <p>İdarəetmə panelinə daxil olmaq üçün hesabına giriş et.</p>
+      <form id="loginForm">
+        <input
+          id="email"
+          type="email"
+          placeholder="E-poçt ünvanı"
+          autocomplete="username"
+          required
+        >
+        <input
+          id="password"
+          type="password"
+          placeholder="Parol"
+          autocomplete="current-password"
+          required
+        >
+        <button id="loginButton" class="full" type="submit">
+          Daxil ol
+        </button>
+      </form>
+      <p id="loginMessage" class="status" role="status"></p>
+    </section>
+    <section id="adminPanel" class="hidden">
+      <div class="top">
+        <div>
+          <h1>ALTAP.BIZ</h1>
+          <p>Admin idarəetmə paneli</p>
+        </div>
+        <button id="logoutButton" type="button">Çıxış</button>
+      </div>
+      <div class="card">
+        <h2>Admin hesabı</h2>
+        <p id="adminEmail"></p>
+        <p class="note">
+          Admin icazəsi təsdiqləndi. Aşağıdakı idarəetmə bölmələri
+          server bağlantısı qurulduqdan sonra aktiv olacaq.
+        </p>
+      </div>
+      <div class="card">
+        <h2>İstifadəçilər və balanslar</h2>
+        <p>İstifadəçi məlumatları hələ qoşulmayıb.</p>
+      </div>
+      <div class="card">
+        <h2>TikTok video müraciətləri</h2>
+        <p>Video müraciətlərini görmək və qərar vermək funksiyası hələ qoşulmayıb.</p>
+      </div>
+      <div class="card">
+        <h2>M10 pul çıxarışları</h2>
+        <p>Ödəniş müraciətlərini idarə etmək funksiyası hələ qoşulmayıb.</p>
+      </div>
+    </section>
   </main>
-
   <script type="module">
     import { createClient } from
       "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
-
     const SUPABASE_URL =
       "https://fxidqmqoqlkijwdvvzyk.supabase.co";
-
-    // Buraya Supabase-in publishable (anon) açarını əlavə et.
-    // service_role / secret açarını bura YAZMA.
-    const SUPABASE_PUBLISHABLE_KEY = "BURAYA_PUBLISHABLE_KEY";
-
-    const message = document.getElementById("message");
-    const form = document.getElementById("loginForm");
-
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
-
-      if (SUPABASE_PUBLISHABLE_KEY === "BURAYA_PUBLISHABLE_KEY") {
-        message.textContent =
-          "Əvvəlcə Supabase publishable açarı əlavə edilməlidir.";
-        return;
-      }
-
-      message.textContent = "Giriş yoxlanılır...";
-
+    const SUPABASE_PUBLISHABLE_KEY =
+      "sb_publishable_o9BKKtPtpBUqUrx5cZYiqg_TXiWqYYg";
+    const supabase = createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+    const loginPanel = document.getElementById("loginPanel");
+    const adminPanel = document.getElementById("adminPanel");
+    const loginForm = document.getElementById("loginForm");
+    const loginButton = document.getElementById("loginButton");
+    const loginMessage = document.getElementById("loginMessage");
+    let checking = false;
+    function showLogin(message = "") {
+      loginPanel.classList.remove("hidden");
+      adminPanel.classList.add("hidden");
+      loginMessage.textContent = message;
+    }
+    async function checkAdmin() {
+      if (checking) return;
+      checking = true;
       try {
-        const supabase = createClient(
-          SUPABASE_URL,
-          SUPABASE_PUBLISHABLE_KEY
-        );
-
-        const { data, error } = await supabase.auth.signInWithPassword({
-          email: document.getElementById("email").value.trim(),
-          password: document.getElementById("password").value
-        });
-
-        if (error) throw error;
-
-        const { data: allowed, error: roleError } =
-          await supabase.rpc("is_altap_admin");
-
-        if (roleError || allowed !== true) {
-          await supabase.auth.signOut();
-          message.textContent =
-            "Bu hesabın admin icazəsi yoxdur.";
+        const { data: sessionData, error: sessionError } =
+          await supabase.auth.getSession();
+        if (sessionError) throw sessionError;
+        const session = sessionData.session;
+        if (!session) {
+          showLogin();
           return;
         }
-
-        message.textContent =
-          "Admin icazəsi təsdiqləndi. İdarəetmə bölmələri növbəti mərhələdə qoşulmalıdır.";
+        const { data: allowed, error: roleError } =
+          await supabase.rpc("is_altap_admin");
+        if (roleError) {
+          await supabase.auth.signOut();
+          showLogin(
+            "Admin icazəsi yoxlanmadı. Supabase funksiyasını yoxlamaq lazımdır."
+          );
+          return;
+        }
+        if (allowed !== true) {
+          await supabase.auth.signOut();
+          showLogin("Bu hesabın admin icazəsi yoxdur.");
+          return;
+        }
+        document.getElementById("adminEmail").textContent =
+          "Hesab: " + (session.user.email || "E-poçt göstərilmir");
+        loginPanel.classList.add("hidden");
+        adminPanel.classList.remove("hidden");
       } catch (error) {
-        message.textContent = "Giriş alınmadı: " + error.message;
+        showLogin("Xəta: " + error.message);
+      } finally {
+        checking = false;
+      }
+    }
+    loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      loginButton.disabled = true;
+      loginMessage.textContent = "Giriş yoxlanılır...";
+      try {
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+        const { error } = await supabase.auth.signInWithPassword({
+          email,
+          password
+        });
+        if (error) throw error;
+        await checkAdmin();
+      } catch (error) {
+        showLogin("Giriş alınmadı: " + error.message);
+      } finally {
+        loginButton.disabled = false;
       }
     });
+    document.getElementById("logoutButton").addEventListener(
+      "click",
+      async () => {
+        await supabase.auth.signOut();
+        showLogin("Hesabdan çıxış edildi.");
+      }
+    );
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "SIGNED_OUT" || !session) {
+        showLogin();
+      }
+    });
+    checkAdmin();
   </script>
 </body>
 </html>
