@@ -2,128 +2,180 @@
 <html lang="az">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mostbet Bonus</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
+:root{--yellow:#ffdf00;--black:#111;--panel:#1d1d1d}
 body{
-  background:#171717;
-  font-family:Arial,sans-serif;
+  background:var(--black);
   color:#fff;
-  padding:20px;
+  font-family:Arial,Helvetica,sans-serif;
+  min-height:100vh
 }
-.card{
-  max-width:480px;
-  margin:20px auto;
-  background:#242424;
-  border:1px solid #f5c400;
-  border-radius:10px;
-  overflow:hidden;
-  text-align:center;
-}
-.header{
-  background:#f5c400;
-  padding:22px 10px;
-}
-.logo{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  font-size:37px;
-  font-weight:900;
-  font-style:italic;
-  letter-spacing:-2px;
-  color:#171717;
-}
-.logo-mark{
-  width:34px;
-  height:34px;
-  margin-right:7px;
-}
-.content{padding:28px 22px}
-.gift-icon{
-  width:66px;
-  height:66px;
-  margin:0 auto 22px;
-  color:#f5c400;
-}
-.message{
-  font-size:22px;
-  line-height:1.5;
-  font-weight:700;
-  margin-bottom:22px;
-}
-.highlight{color:#f5c400}
-.arrow-icon{
-  display:block;
-  width:32px;
-  height:32px;
-  margin:14px auto;
-  color:#f5c400;
-}
-.button{
+.topbar{
+  height:76px;
+  background:#191919;
+  border-bottom:2px solid var(--yellow);
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:10px;
-  width:100%;
-  padding:17px 12px;
-  background:#f5c400;
-  color:#171717;
-  text-decoration:none;
-  font-weight:900;
-  font-size:18px;
-  border-radius:5px;
+  padding:12px 18px
 }
-.button svg{width:22px;height:22px}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-size:35px;
+  font-weight:1000;
+  font-style:italic;
+  letter-spacing:-2px;
+  color:var(--yellow)
+}
+.logo svg{width:35px;height:35px}
+main{
+  max-width:760px;
+  margin:auto;
+  padding:24px 16px 40px
+}
+.hero{
+  background:linear-gradient(145deg,#252525,#151515);
+  border:1px solid #494000;
+  border-radius:14px;
+  overflow:hidden
+}
+.hero-top{
+  background:var(--yellow);
+  color:#111;
+  padding:13px 18px;
+  text-align:center;
+  font-weight:900;
+  font-size:14px;
+  letter-spacing:1px
+}
+.hero-content{
+  padding:32px 22px;
+  text-align:center
+}
+.gift{
+  width:76px;
+  height:76px;
+  margin:0 auto 24px;
+  color:var(--yellow)
+}
+h1{
+  font-size:clamp(27px,6vw,40px);
+  line-height:1.2;
+  font-weight:900;
+  margin-bottom:18px
+}
+.description{
+  color:#e1e1e1;
+  font-size:18px;
+  line-height:1.65;
+  max-width:540px;
+  margin:0 auto 25px
+}
+.amount{color:var(--yellow);white-space:nowrap}
+.arrow{
+  width:34px;
+  height:34px;
+  color:var(--yellow);
+  margin:0 auto 20px;
+  display:block
+}
+.cta{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:11px;
+  width:100%;
+  min-height:60px;
+  padding:16px;
+  border-radius:7px;
+  background:var(--yellow);
+  color:#111;
+  text-decoration:none;
+  font-size:19px;
+  font-weight:900;
+  transition:filter .2s
+}
+.cta:hover{filter:brightness(1.08)}
+.cta svg{width:23px;height:23px}
+.bottom{
+  padding:21px 8px 0;
+  text-align:center;
+  color:#929292;
+  font-size:12px;
+  line-height:1.6
+}
+@media(min-width:600px){
+  main{padding-top:45px}
+  .hero-content{padding:44px 48px}
+}
 </style>
 </head>
 <body>
-<div class="card">
-  <div class="header">
-    <div class="logo">
-      <svg class="logo-mark" viewBox="0 0 40 40" fill="none"
-           xmlns="http://www.w3.org/2000/svg">
-        <path d="M4 5H36L25 17L36 35H23L15 22L4 35V5Z"
-              fill="#171717"/>
-        <path d="M4 5H16L4 19V5Z" fill="#fff"/>
-      </svg>
-      MOSTBET
-    </div>
-  </div>
-  <div class="content">
-    <svg class="gift-icon" viewBox="0 0 64 64" fill="none"
-         stroke="currentColor" stroke-width="3"
-         stroke-linecap="round" stroke-linejoin="round">
-      <rect x="8" y="26" width="48" height="31" rx="3"/>
-      <path d="M5 18h54v10H5z"/>
-      <path d="M32 18v39"/>
-      <path d="M32 18C13 20 12 5 23 5c8 0 9 13 9 13Z"/>
-      <path d="M32 18C51 20 52 5 41 5c-8 0-9 13-9 13Z"/>
+
+<header class="topbar">
+  <div class="logo">
+    <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+      <path d="M4 4H36L24 17L36 36H23L15 23L4 36V4Z" fill="#ffdf00"/>
+      <path d="M4 4H16L4 18V4Z" fill="#fff"/>
     </svg>
-    <div class="message">
-      Mostbetdə yeni hesab açıb
-      <span class="highlight">20₼</span>
-      depozit edənlərə bonus pul verilir, elə indi sən də qeydiyyatdan keç, qazan
-    </div>
-    <svg class="arrow-icon" viewBox="0 0 24 24" fill="none"
-         stroke="currentColor" stroke-width="3"
-         stroke-linecap="round" stroke-linejoin="round">
-      <path d="M12 3v17"/>
-      <path d="m5 13 7 7 7-7"/>
-    </svg>
-    <a class="button"
-       href="https://66avrzh.com/MXKF"
-       target="_blank" rel="noopener noreferrer">
-      <svg viewBox="0 0 24 24" fill="none"
-           stroke="currentColor" stroke-width="2.5"
-           stroke-linecap="round" stroke-linejoin="round">
-        <path d="M7 17 17 7"/>
-        <path d="M7 7h10v10"/>
-      </svg>
-      QEYDİYYATDAN KEÇ
-    </a>
+    MOSTBET
   </div>
-</div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-top">BONUS TƏKLİFİ</div>
+
+    <div class="hero-content">
+      <svg class="gift" viewBox="0 0 64 64" fill="none"
+           stroke="currentColor" stroke-width="2.8"
+           stroke-linecap="round" stroke-linejoin="round"
+           aria-hidden="true">
+        <rect x="8" y="26" width="48" height="31" rx="3"/>
+        <path d="M5 18H59V28H5Z"/>
+        <path d="M32 18V57"/>
+        <path d="M32 18C12 20 11 5 22 5C30 5 32 18 32 18Z"/>
+        <path d="M32 18C52 20 53 5 42 5C34 5 32 18 32 18Z"/>
+      </svg>
+
+      <h1>Mostbet-də qeydiyyatdan keç!</h1>
+
+      <p class="description">
+        Mostbetdə yeni hesab açıb
+        <strong class="amount">20₼</strong>
+        depozit edənlərə bonus pul verilir.
+        Elə indi sən də qeydiyyatdan keç, qazan!
+      </p>
+
+      <svg class="arrow" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2.8"
+           stroke-linecap="round" stroke-linejoin="round"
+           aria-hidden="true">
+        <path d="M12 3V21"/>
+        <path d="M5 14L12 21L19 14"/>
+      </svg>
+
+      <a class="cta"
+         href="https://66avrzh.com/MXKF"
+         target="_blank"
+         rel="nofollow sponsored noopener">
+        QEYDİYYATDAN KEÇ
+        <svg viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5"
+             stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true">
+          <path d="M7 17L17 7"/>
+          <path d="M7 7H17V17"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+</main>
+
 </body>
 </html>
