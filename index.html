@@ -1,49 +1,370 @@
-/* Bonus yazısı aydın görünsün */
-.bonus{
-  position:absolute;
-  z-index:10;
-  top:0;
-  left:-35px;
-  right:-35px;
-  padding:12px 5px;
-  border:2px solid #36e27b;
-  border-radius:10px;
-  background:#101010;
-  color:#36e27b;
-  font-size:25px;
-  font-weight:900;
-  line-height:1.35;
-  opacity:0;
-  transform:translateY(25px) scale(.7);
-  animation:bonusShow 3s ease-in-out infinite;
-  text-shadow:none;
-  box-shadow:0 0 20px #36e27b55;
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mostbet Bonus</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-/* Oxun hərəkəti */
-.bottom-arrow{
-  width:42px;
-  height:42px;
-  display:block;
-  margin:0 auto 18px;
-  color:#ffdf00;
-  animation:arrowMove 1s ease-in-out infinite;
+:root {
+  --yellow: #ffdf00;
+  --black: #111111;
+  --panel: #1d1d1d;
+  --green: #36e27b;
 }
-/* Bonus qutudan yuxarı çıxsın */
-@keyframes bonusShow{
-  0%,20%{
-    opacity:0;
-    transform:translateY(25px) scale(.7);
+body {
+  background: var(--black);
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+}
+.topbar {
+  height: 76px;
+  background: #191919;
+  border-bottom: 2px solid var(--yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo {
+  font-size: 36px;
+  font-weight: 1000;
+  font-style: italic;
+  letter-spacing: -2px;
+  color: var(--yellow);
+}
+main {
+  width: 100%;
+  max-width: 760px;
+  margin: auto;
+  padding: 25px 16px 40px;
+}
+.hero {
+  background: linear-gradient(145deg, #252525, #151515);
+  border: 1px solid #494000;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.hero-top {
+  background: var(--yellow);
+  color: #111111;
+  padding: 13px;
+  text-align: center;
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+.hero-content {
+  padding: 32px 22px;
+  text-align: center;
+}
+/* HƏDİYYƏ QUTUSU */
+.gift-area {
+  position: relative;
+  width: 200px;
+  height: 190px;
+  margin: 0 auto 25px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.gift {
+  position: relative;
+  width: 120px;
+  height: 105px;
+  margin-bottom: 5px;
+  animation: giftBounce 1.5s ease-in-out infinite;
+}
+.gift-body {
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  width: 100px;
+  height: 72px;
+  background: var(--yellow);
+  border: 3px solid #d4a900;
+  border-radius: 4px;
+}
+.gift-body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 39px;
+  width: 16px;
+  background: #fff4a3;
+}
+.gift-lid {
+  position: absolute;
+  z-index: 3;
+  top: 9px;
+  left: 2px;
+  width: 116px;
+  height: 25px;
+  background: var(--yellow);
+  border: 3px solid #d4a900;
+  border-radius: 5px;
+  transform-origin: 12px 22px;
+  animation: openLid 3s ease-in-out infinite;
+}
+.gift-lid::before {
+  content: "";
+  position: absolute;
+  left: 45px;
+  top: 0;
+  height: 19px;
+  width: 16px;
+  background: #fff4a3;
+}
+.bow {
+  position: absolute;
+  z-index: 4;
+  top: -12px;
+  left: 44px;
+  width: 36px;
+  height: 25px;
+}
+.bow::before,
+.bow::after {
+  content: "";
+  position: absolute;
+  width: 21px;
+  height: 17px;
+  border: 5px solid var(--yellow);
+  border-radius: 50% 50% 0 50%;
+}
+.bow::before {
+  left: -2px;
+  transform: rotate(25deg);
+}
+.bow::after {
+  right: -2px;
+  transform: scaleX(-1) rotate(25deg);
+}
+/* BONUS YAZISI */
+.bonus {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: -15px;
+  right: -15px;
+  padding: 12px 5px;
+  border: 2px solid var(--green);
+  border-radius: 10px;
+  background: #101010;
+  color: var(--green);
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.35;
+  opacity: 0;
+  transform: translateY(25px) scale(.7);
+  animation: bonusShow 3s ease-in-out infinite;
+  box-shadow: 0 0 20px #36e27b55;
+}
+.bonus small {
+  display: block;
+  color: #ffffff;
+  font-size: 13px;
+  margin-top: 4px;
+}
+/* PARILTILAR */
+.sparkle {
+  position: absolute;
+  color: var(--yellow);
+  font-size: 24px;
+  font-weight: bold;
+  animation: sparkle 1.2s ease-in-out infinite alternate;
+}
+.s1 {
+  left: 4px;
+  top: 45px;
+}
+.s2 {
+  right: 2px;
+  top: 25px;
+  animation-delay: .4s;
+}
+.s3 {
+  right: 12px;
+  top: 100px;
+  animation-delay: .7s;
+}
+/* MƏTN */
+h1 {
+  font-size: clamp(25px, 6vw, 38px);
+  line-height: 1.25;
+  font-weight: 900;
+  margin-bottom: 18px;
+}
+.description {
+  color: #e1e1e1;
+  font-size: 18px;
+  line-height: 1.65;
+  margin: 0 auto 22px;
+}
+.amount {
+  color: var(--yellow);
+}
+/* AŞAĞI OX — DÜYMƏNİN ÜSTÜNDƏ */
+.bottom-arrow {
+  width: 42px;
+  height: 42px;
+  display: block;
+  margin: 5px auto 18px;
+  color: var(--yellow);
+  animation: arrowMove 1s ease-in-out infinite;
+}
+/* QEYDİYYAT DÜYMƏSİ */
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 60px;
+  padding: 16px;
+  border-radius: 7px;
+  background: var(--yellow);
+  color: #111111;
+  text-decoration: none;
+  font-size: 19px;
+  font-weight: 900;
+  transition: filter .2s;
+}
+.cta:hover {
+  filter: brightness(1.08);
+}
+.cta svg {
+  width: 23px;
+  height: 23px;
+}
+/* ANİMASİYALAR */
+@keyframes openLid {
+  0%, 15% {
+    transform: rotate(0) translateY(0);
   }
-  35%,75%{
-    opacity:1;
-    transform:translateY(-12px) scale(1);
+  35%, 75% {
+    transform: rotate(-32deg) translate(-9px, -28px);
   }
-  90%,100%{
-    opacity:0;
-    transform:translateY(20px) scale(.8);
+  90%, 100% {
+    transform: rotate(0) translateY(0);
   }
 }
-@keyframes arrowMove{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-8px)}
+@keyframes bonusShow {
+  0%, 20% {
+    opacity: 0;
+    transform: translateY(25px) scale(.7);
+  }
+  35%, 75% {
+    opacity: 1;
+    transform: translateY(-12px) scale(1);
+  }
+  90%, 100% {
+    opacity: 0;
+    transform: translateY(20px) scale(.8);
+  }
 }
+@keyframes giftBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+@keyframes sparkle {
+  from {
+    opacity: .35;
+    transform: scale(.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+@keyframes arrowMove {
+  0%, 100% {
+    transform: translateY(-8px);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+@media (min-width: 600px) {
+  main {
+    padding-top: 45px;
+  }
+  .hero-content {
+    padding: 44px 48px;
+  }
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="logo">MOSTBET</div>
+</header>
+<main>
+  <section class="hero">
+    <div class="hero-top">
+      BONUS TƏKLİFİ
+    </div>
+    <div class="hero-content">
+      <div class="gift-area">
+        <div class="sparkle s1">✦</div>
+        <div class="sparkle s2">✦</div>
+        <div class="sparkle s3">✦</div>
+        <div class="bonus">
+          200₼ BONUS
+          <small>BONUS PUL QAZANDINIZ</small>
+        </div>
+        <div class="gift">
+          <div class="bow"></div>
+          <div class="gift-lid"></div>
+          <div class="gift-body"></div>
+        </div>
+      </div>
+      <h1>Mostbet-də qeydiyyatdan keç!</h1>
+      <p class="description">
+        Mostbetdə yeni hesab açıb
+        <strong class="amount">20₼</strong>
+        depozit edənlərə bonus pul verilir.
+        Elə indi sən də qeydiyyatdan keç, qazan!
+      </p>
+      <!-- OX DÜYMƏNİN ÜSTÜNDƏDİR -->
+      <svg class="bottom-arrow"
+           viewBox="0 0 24 24"
+           fill="none"
+           stroke="currentColor"
+           stroke-width="2.8"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           aria-hidden="true">
+        <path d="M12 21V3"/>
+        <path d="M5 10L12 3L19 10"/>
+      </svg>
+      <a class="cta"
+         href="https://66avrzh.com/MXKF"
+         target="_blank"
+         rel="nofollow sponsored noopener">
+        QEYDİYYATDAN KEÇ
+        <svg viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2.5"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             aria-hidden="true">
+          <path d="M7 17L17 7"/>
+          <path d="M7 7H17V17"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+</main>
+</body>
+</html>
