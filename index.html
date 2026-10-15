@@ -62,7 +62,6 @@ main {
   padding: 32px 22px;
   text-align: center;
 }
-/* HƏDİYYƏ QUTUSU */
 .gift-area {
   position: relative;
   width: 200px;
@@ -145,7 +144,6 @@ main {
   right: -2px;
   transform: scaleX(-1) rotate(25deg);
 }
-/* BONUS YAZISI */
 .bonus {
   position: absolute;
   z-index: 10;
@@ -171,7 +169,6 @@ main {
   font-size: 13px;
   margin-top: 4px;
 }
-/* PARILTILAR */
 .sparkle {
   position: absolute;
   color: var(--yellow);
@@ -193,7 +190,6 @@ main {
   top: 100px;
   animation-delay: .7s;
 }
-/* MƏTN */
 h1 {
   font-size: clamp(25px, 6vw, 38px);
   line-height: 1.25;
@@ -209,7 +205,6 @@ h1 {
 .amount {
   color: var(--yellow);
 }
-/* AŞAĞI OX — DÜYMƏNİN ÜSTÜNDƏ */
 .bottom-arrow {
   width: 42px;
   height: 42px;
@@ -218,7 +213,6 @@ h1 {
   color: var(--yellow);
   animation: arrowMove 1s ease-in-out infinite;
 }
-/* QEYDİYYAT DÜYMƏSİ */
 .cta {
   display: flex;
   align-items: center;
@@ -242,7 +236,6 @@ h1 {
   width: 23px;
   height: 23px;
 }
-/* ANİMASİYALAR */
 @keyframes openLid {
   0%, 15% {
     transform: rotate(0) translateY(0);
@@ -288,10 +281,10 @@ h1 {
 }
 @keyframes arrowMove {
   0%, 100% {
-    transform: translateY(-8px);
+    transform: translateY(0);
   }
   50% {
-    transform: translateY(5px);
+    transform: translateY(8px);
   }
 }
 @media (min-width: 600px) {
@@ -335,7 +328,6 @@ h1 {
         depozit edənlərə bonus pul verilir.
         Elə indi sən də qeydiyyatdan keç, qazan!
       </p>
-      <!-- OX DÜYMƏNİN ÜSTÜNDƏDİR -->
       <svg class="bottom-arrow"
            viewBox="0 0 24 24"
            fill="none"
@@ -344,8 +336,8 @@ h1 {
            stroke-linecap="round"
            stroke-linejoin="round"
            aria-hidden="true">
-        <path d="M12 21V3"/>
-        <path d="M5 10L12 3L19 10"/>
+        <path d="M12 3V21"/>
+        <path d="M5 14L12 21L19 14"/>
       </svg>
       <a class="cta"
          href="https://66avrzh.com/MXKF"
