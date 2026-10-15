@@ -2,16 +2,20 @@
 <html lang="az">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mostbet Bonus</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--yellow:#ffdf00;--black:#111;--panel:#1d1d1d}
+:root{
+  --yellow:#ffdf00;
+  --black:#111;
+  --panel:#1d1d1d;
+}
 body{
   background:var(--black);
   color:#fff;
   font-family:Arial,Helvetica,sans-serif;
-  min-height:100vh
+  min-height:100vh;
 }
 .topbar{
   height:76px;
@@ -20,75 +24,160 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:12px 18px
 }
 .logo{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  font-size:35px;
+  font-size:36px;
   font-weight:1000;
   font-style:italic;
   letter-spacing:-2px;
-  color:var(--yellow)
+  color:var(--yellow);
 }
-.logo svg{width:35px;height:35px}
 main{
   max-width:760px;
   margin:auto;
-  padding:24px 16px 40px
+  padding:25px 16px 40px;
 }
 .hero{
   background:linear-gradient(145deg,#252525,#151515);
   border:1px solid #494000;
   border-radius:14px;
-  overflow:hidden
+  overflow:hidden;
 }
 .hero-top{
   background:var(--yellow);
   color:#111;
-  padding:13px 18px;
+  padding:13px;
   text-align:center;
   font-weight:900;
   font-size:14px;
-  letter-spacing:1px
+  letter-spacing:1px;
 }
 .hero-content{
   padding:32px 22px;
-  text-align:center
+  text-align:center;
+}
+.gift-area{
+  position:relative;
+  width:170px;
+  height:180px;
+  margin:0 auto 18px;
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
 }
 .gift{
-  width:76px;
-  height:76px;
-  margin:0 auto 24px;
-  color:var(--yellow)
+  position:relative;
+  width:120px;
+  height:105px;
+  animation:giftBounce 1.5s ease-in-out infinite;
+}
+.gift-body{
+  position:absolute;
+  bottom:0;
+  left:10px;
+  width:100px;
+  height:72px;
+  background:var(--yellow);
+  border:3px solid #d4a900;
+  border-radius:4px;
+}
+.gift-body:before{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:39px;
+  width:16px;
+  background:#fff4a3;
+}
+.gift-lid{
+  position:absolute;
+  z-index:3;
+  top:9px;
+  left:2px;
+  width:116px;
+  height:25px;
+  background:var(--yellow);
+  border:3px solid #d4a900;
+  border-radius:5px;
+  transform-origin:12px 22px;
+  animation:openLid 3s ease-in-out infinite;
+}
+.gift-lid:before{
+  content:"";
+  position:absolute;
+  left:45px;
+  top:0;
+  height:19px;
+  width:16px;
+  background:#fff4a3;
+}
+.bow{
+  position:absolute;
+  z-index:4;
+  top:-12px;
+  left:44px;
+  width:36px;
+  height:25px;
+}
+.bow:before,.bow:after{
+  content:"";
+  position:absolute;
+  width:21px;
+  height:17px;
+  border:5px solid var(--yellow);
+  border-radius:50% 50% 0 50%;
+}
+.bow:before{
+  left:-2px;
+  transform:rotate(25deg);
+}
+.bow:after{
+  right:-2px;
+  transform:scaleX(-1) rotate(25deg);
+}
+.sparkle{
+  position:absolute;
+  color:var(--yellow);
+  font-size:24px;
+  font-weight:bold;
+  animation:sparkle 1.2s ease-in-out infinite alternate;
+}
+.s1{left:4px;top:35px}
+.s2{right:2px;top:18px;animation-delay:.4s}
+.s3{right:12px;top:90px;animation-delay:.7s}
+.bonus{
+  position:absolute;
+  z-index:5;
+  top:0;
+  left:0;
+  right:0;
+  font-size:23px;
+  font-weight:900;
+  color:var(--yellow);
+  opacity:0;
+  transform:translateY(25px) scale(.7);
+  animation:bonusShow 3s ease-in-out infinite;
+  text-shadow:0 0 15px #ffdf0080;
 }
 h1{
-  font-size:clamp(27px,6vw,40px);
-  line-height:1.2;
+  font-size:clamp(25px,6vw,38px);
+  line-height:1.25;
   font-weight:900;
-  margin-bottom:18px
+  margin-bottom:18px;
 }
 .description{
   color:#e1e1e1;
   font-size:18px;
   line-height:1.65;
-  max-width:540px;
-  margin:0 auto 25px
+  margin:0 auto 22px;
 }
-.amount{color:var(--yellow);white-space:nowrap}
-.arrow{
-  width:34px;
-  height:34px;
-  color:var(--yellow);
-  margin:0 auto 20px;
-  display:block
-}
+.amount{color:var(--yellow)}
 .cta{
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:11px;
+  gap:10px;
   width:100%;
   min-height:60px;
   padding:16px;
@@ -98,68 +187,75 @@ h1{
   text-decoration:none;
   font-size:19px;
   font-weight:900;
-  transition:filter .2s
 }
-.cta:hover{filter:brightness(1.08)}
 .cta svg{width:23px;height:23px}
-.bottom{
-  padding:21px 8px 0;
-  text-align:center;
-  color:#929292;
-  font-size:12px;
-  line-height:1.6
+.bottom-arrow{
+  width:42px;
+  height:42px;
+  display:block;
+  margin:28px auto 0;
+  color:var(--yellow);
+  animation:arrowMove 1s ease-in-out infinite;
 }
-@media(min-width:600px){
-  main{padding-top:45px}
-  .hero-content{padding:44px 48px}
+@keyframes openLid{
+  0%,15%{transform:rotate(0) translateY(0)}
+  35%,75%{transform:rotate(-32deg) translate(-9px,-28px)}
+  90%,100%{transform:rotate(0) translateY(0)}
+}
+@keyframes bonusShow{
+  0%,20%{opacity:0;transform:translateY(25px) scale(.7)}
+  35%,75%{opacity:1;transform:translateY(-4px) scale(1)}
+  90%,100%{opacity:0;transform:translateY(20px) scale(.8)}
+}
+@keyframes giftBounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-5px)}
+}
+@keyframes sparkle{
+  from{opacity:.35;transform:scale(.7)}
+  to{opacity:1;transform:scale(1.2)}
+}
+@keyframes arrowMove{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(12px)}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{
+    animation-duration:0.01ms!important;
+    animation-iteration-count:1!important;
+  }
 }
 </style>
 </head>
 <body>
-
 <header class="topbar">
-  <div class="logo">
-    <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
-      <path d="M4 4H36L24 17L36 36H23L15 23L4 36V4Z" fill="#ffdf00"/>
-      <path d="M4 4H16L4 18V4Z" fill="#fff"/>
-    </svg>
-    MOSTBET
-  </div>
+  <div class="logo">MOSTBET</div>
 </header>
-
 <main>
   <section class="hero">
     <div class="hero-top">BONUS TƏKLİFİ</div>
-
     <div class="hero-content">
-      <svg class="gift" viewBox="0 0 64 64" fill="none"
-           stroke="currentColor" stroke-width="2.8"
-           stroke-linecap="round" stroke-linejoin="round"
-           aria-hidden="true">
-        <rect x="8" y="26" width="48" height="31" rx="3"/>
-        <path d="M5 18H59V28H5Z"/>
-        <path d="M32 18V57"/>
-        <path d="M32 18C12 20 11 5 22 5C30 5 32 18 32 18Z"/>
-        <path d="M32 18C52 20 53 5 42 5C34 5 32 18 32 18Z"/>
-      </svg>
-
+      <div class="gift-area">
+        <div class="sparkle s1">+</div>
+        <div class="sparkle s2">✦</div>
+        <div class="sparkle s3">+</div>
+        <div class="bonus">
+          200₼ BONUS<br>
+          <span style="font-size:15px">BONUS PUL QAZANDINIZ</span>
+        </div>
+        <div class="gift">
+          <div class="bow"></div>
+          <div class="gift-lid"></div>
+          <div class="gift-body"></div>
+        </div>
+      </div>
       <h1>Mostbet-də qeydiyyatdan keç!</h1>
-
       <p class="description">
         Mostbetdə yeni hesab açıb
         <strong class="amount">20₼</strong>
         depozit edənlərə bonus pul verilir.
         Elə indi sən də qeydiyyatdan keç, qazan!
       </p>
-
-      <svg class="arrow" viewBox="0 0 24 24" fill="none"
-           stroke="currentColor" stroke-width="2.8"
-           stroke-linecap="round" stroke-linejoin="round"
-           aria-hidden="true">
-        <path d="M12 3V21"/>
-        <path d="M5 14L12 21L19 14"/>
-      </svg>
-
       <a class="cta"
          href="https://66avrzh.com/MXKF"
          target="_blank"
@@ -167,15 +263,20 @@ h1{
         QEYDİYYATDAN KEÇ
         <svg viewBox="0 0 24 24" fill="none"
              stroke="currentColor" stroke-width="2.5"
-             stroke-linecap="round" stroke-linejoin="round"
-             aria-hidden="true">
+             stroke-linecap="round" stroke-linejoin="round">
           <path d="M7 17L17 7"/>
           <path d="M7 7H17V17"/>
         </svg>
       </a>
+      <svg class="bottom-arrow" viewBox="0 0 24 24"
+           fill="none" stroke="currentColor"
+           stroke-width="2.8" stroke-linecap="round"
+           stroke-linejoin="round">
+        <path d="M12 3V21"/>
+        <path d="M5 14L12 21L19 14"/>
+      </svg>
     </div>
   </section>
 </main>
-
 </body>
 </html>
