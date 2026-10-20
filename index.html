@@ -1,559 +1,865 @@
 
+
 <!DOCTYPE html>
+
 <html lang="az">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <meta name="theme-color" content="#080b14">
-<title>Altap.Biz — Son xəbərlər</title>
+
+<title>Altap.Biz — Xəbərlər</title>
+
 <meta name="description" content="Azərbaycandan və dünyadan son xəbərlər — Altap.Biz">
+
 <style>
-:root{
- --bg:#080b14;--surface:#101827;--card:#121d2f;
- --line:#253149;--text:#f4f7ff;--muted:#9aa9c0;
- --cyan:#35d9ee;--pink:#ff4c82;--green:#46e6ad;
-}
+
+:root{--bg:#080b14;--surface:#0f1523;--card:#121b2b;--line:#253149;--text:#f4f7ff;--muted:#9aa9c0;--cyan:#35d9ee;--pink:#ff4c82;--green:#46e6ad}
+
 *{box-sizing:border-box}
+
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);
- font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+
 a{color:inherit;text-decoration:none}
+
 button,input{font:inherit}
+
 button{cursor:pointer}
-.wrap{width:min(1220px,calc(100% - 32px));margin:auto}
-header{position:sticky;top:0;z-index:20;background:#080b14ed;
- backdrop-filter:blur(18px);border-bottom:1px solid #ffffff12}
-.top{height:72px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.brand{display:flex;align-items:center;gap:10px;font-size:24px;font-weight:950;letter-spacing:-1px}
-.brandmark{width:39px;height:39px;display:grid;place-items:center;
- border-radius:13px;background:linear-gradient(135deg,var(--cyan),#6474ff);color:#07111b}
+
+.wrap{width:min(1220px,100% - 34px);margin:auto}
+
+header{position:sticky;top:0;z-index:20;background:rgba(8,11,20,.91);backdrop-filter:blur(18px);border-bottom:1px solid #ffffff12}
+
+.top{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+
+.brand{display:flex;align-items:center;gap:11px;font-weight:950;font-size:25px;letter-spacing:-1.2px}
+
+.brandmark{height:40px;width:40px;display:grid;place-items:center;border-radius:13px;background:linear-gradient(135deg,var(--cyan),#5275ff);color:#06111d;box-shadow:0 0 30px #35d9ee24}
+
 .brandmark svg{width:25px;height:25px}
-.brand-name span,.footer-brand span{color:var(--cyan)}
-.top-right{display:flex;align-items:center;gap:14px}
-.live{display:flex;align-items:center;gap:8px;color:#ff789d;font-size:11px;font-weight:900;letter-spacing:1px}
-.live-dot{width:8px;height:8px;background:var(--pink);border-radius:50%;
- box-shadow:0 0 12px var(--pink);animation:pulse 1.3s infinite}
-@keyframes pulse{50%{opacity:.3;transform:scale(.75)}}
-.icon-button{width:42px;height:42px;display:grid;place-items:center;
- background:var(--surface);border:1px solid var(--line);border-radius:13px;color:white}
+
+.brand-name span{color:var(--cyan)}
+
+.top-right{display:flex;align-items:center;gap:18px}
+
+.live{display:flex;align-items:center;gap:8px;color:#ff779e;font-size:11px;font-weight:850;letter-spacing:1.3px}
+
+.live-dot{width:8px;height:8px;border-radius:50%;background:var(--pink);box-shadow:0 0 12px var(--pink);animation:pulse 1.5s infinite}
+
+@keyframes pulse{50%{opacity:.4}}
+
+.icon-button{width:41px;height:41px;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:13px;display:grid;place-items:center}
+
 .icon-button svg{width:19px;height:19px}
-.icon-button:hover{border-color:var(--cyan);color:var(--cyan);transform:rotate(25deg)}
-.hero{padding:43px 0 22px;animation:fadeUp .6s ease both}
-.kicker{display:flex;align-items:center;gap:9px;color:var(--cyan);
- font-size:11px;font-weight:900;letter-spacing:2px}
-.kicker svg{width:18px;height:18px}
-h1{font-size:clamp(35px,6vw,62px);letter-spacing:-2.6px;
- line-height:1.07;margin:17px 0 12px;font-weight:950}
+
+.hero{padding:45px 0 25px}
+
+.kicker{display:flex;align-items:center;gap:9px;color:var(--cyan);font-size:11px;font-weight:850;letter-spacing:2px;text-transform:uppercase}
+
+.kicker svg{width:17px;height:17px}
+
+h1{font-size:clamp(35px,6vw,62px);letter-spacing:-2.7px;line-height:1.05;margin:17px 0 13px;font-weight:900}
+
 h1 span{color:var(--cyan)}
-.hero p{max-width:600px;color:var(--muted);font-size:14px;line-height:1.8;margin:0}
-.toolbar{display:flex;gap:10px;margin-top:25px}
-.searchbox{display:flex;align-items:center;gap:11px;flex:1;min-width:0;
- border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:0 14px}
-.searchbox svg{width:19px;height:19px;color:var(--muted);flex-shrink:0}
-.searchbox input{width:100%;min-width:0;background:transparent;border:0;
- outline:0;color:white;padding:15px 0}
+
+.hero p{color:var(--muted);font-size:15px;line-height:1.7;margin:0;max-width:590px}
+
+.toolbar{display:flex;gap:11px;margin-top:25px}
+
+.searchbox{display:flex;align-items:center;gap:11px;flex:1;min-width:0;border:1px solid var(--line);background:var(--surface);border-radius:15px;padding:0 15px}
+
+.searchbox svg{width:19px;height:19px;flex-shrink:0;color:var(--muted)}
+
+.searchbox input{width:100%;min-width:0;background:transparent;border:0;outline:0;color:var(--text);padding:15px 0}
+
 .searchbox input::placeholder{color:#7888a2}
-.primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;
- background:var(--cyan);color:#06121b;border:0;border-radius:13px;padding:13px 17px;
- font-weight:900;white-space:nowrap;transition:transform .2s,filter .2s}
-.primary:hover{filter:brightness(1.1);transform:translateY(-2px)}
+
+.primary{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--cyan);color:#06121b;border:0;border-radius:14px;padding:0 18px;font-weight:850;white-space:nowrap}
+
 .primary svg{width:18px;height:18px}
-.primary:disabled{opacity:.6;cursor:wait;transform:none}
-.categories{display:flex;gap:9px;overflow-x:auto;padding:22px 0;
- scrollbar-width:none}
+
+.primary:disabled{opacity:.65}
+
+.categories{display:flex;gap:9px;overflow-x:auto;padding:24px 0 20px;scrollbar-width:none}
+
 .categories::-webkit-scrollbar{display:none}
-.category{display:flex;align-items:center;gap:7px;white-space:nowrap;
- background:var(--surface);border:1px solid var(--line);border-radius:12px;
- padding:11px 14px;color:#aab7cb;font-size:12px;font-weight:800;transition:.2s}
-.category:hover{border-color:#35d9ee88;color:white}
-.category.active{background:#35d9ee18;border-color:#35d9ee70;color:var(--cyan)}
+
+.category{display:flex;align-items:center;gap:8px;white-space:nowrap;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:11px 14px;color:#aab7cb;font-size:12px;font-weight:750}
+
 .category svg{width:16px;height:16px}
-.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0 16px}
-.section-title{font-size:21px;font-weight:950;display:flex;align-items:center;gap:10px}
-.section-title svg{width:23px;height:23px;color:var(--cyan)}
+
+.category.active{background:#35d9ee16;border-color:#35d9ee66;color:var(--cyan)}
+
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:12px 0 18px}
+
+.section-title{font-size:21px;font-weight:900;letter-spacing:-.5px;display:flex;align-items:center;gap:10px}
+
+.section-title svg{width:22px;height:22px;color:var(--cyan)}
+
 .count{font-size:11px;color:var(--muted)}
-.status{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:12px;padding-bottom:19px}
-.status svg{width:17px;height:17px;color:var(--cyan);flex-shrink:0}
-.status .spin{animation:rotate 1s linear infinite}
-@keyframes rotate{to{transform:rotate(360deg)}}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;padding-bottom:25px}
-.card{min-width:0;overflow:hidden;background:linear-gradient(150deg,#141f32,#0e1421);
- border:1px solid var(--line);border-radius:18px;transition:transform .25s,border-color .25s,box-shadow .25s;
- animation:fadeUp .45s ease both;animation-delay:var(--delay,0ms)}
-.card:hover{transform:translateY(-5px);border-color:#35d9ee75;box-shadow:0 18px 40px #0005}
-@keyframes fadeUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+
+.status{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--muted);padding:0 0 20px}
+
+.status svg{width:16px;height:16px;color:var(--cyan);flex-shrink:0}
+
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:19px;padding-bottom:48px}
+
+.card{min-width:0;overflow:hidden;background:linear-gradient(160deg,#141e30,#0e1421);border:1px solid var(--line);border-radius:19px;transition:transform .2s,border-color .2s,box-shadow .2s}
+
+.card:hover{transform:translateY(-4px);border-color:#35d9ee65;box-shadow:0 18px 40px #0003}
+
 .image-wrap{position:relative;aspect-ratio:16/9;overflow:hidden;background:#111d30}
-.news-image{width:100%;height:100%;display:block;object-fit:cover;transition:transform .5s}
-.card:hover .news-image{transform:scale(1.055)}
-.image-placeholder{width:100%;height:100%;min-height:130px;display:grid;place-items:center;
- background:radial-gradient(ellipse at top right,#18465a,#111729 68%)}
-.image-placeholder svg{width:44px;height:44px;color:var(--cyan);opacity:.8}
-.image-label{position:absolute;left:12px;top:12px;background:#080d1de8;
- border:1px solid #ffffff20;border-radius:8px;padding:7px 9px;font-size:10px;font-weight:900}
-.card-body{padding:16px}
-.meta{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--muted);font-size:10px;margin-bottom:12px}
-.brand-mini{display:flex;align-items:center;gap:5px;color:var(--cyan);font-weight:950;letter-spacing:.4px}
+
+.news-image{width:100%;height:100%;display:block;object-fit:cover;transition:transform .35s}
+
+.card:hover .news-image{transform:scale(1.04)}
+
+.image-placeholder{width:100%;height:100%;display:grid;place-items:center;background:radial-gradient(ellipse at top right,#183b52,#111729 65%)}
+
+.image-placeholder svg{width:43px;height:43px;color:#35d9ee;opacity:.8}
+
+.image-label{position:absolute;left:13px;top:13px;border:1px solid #ffffff26;background:#090e1bd9;backdrop-filter:blur(8px);border-radius:9px;padding:7px 9px;font-size:10px;font-weight:900;letter-spacing:.5px}
+
+.card-body{padding:17px}
+
+.meta{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--muted);font-size:10px;margin-bottom:13px}
+
+.brand-mini{display:flex;align-items:center;gap:6px;color:var(--cyan);font-weight:900;letter-spacing:.4px}
+
 .brand-mini svg{width:15px;height:15px}
-h2{font-size:16px;line-height:1.5;letter-spacing:-.2px;margin:0 0 10px;font-weight:850;overflow-wrap:anywhere}
-.summary{color:#aebbd0;font-size:12px;line-height:1.75;margin:0 0 16px}
-.card-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;
- border-top:1px solid #ffffff0e;padding-top:13px}
-.read-link{display:inline-flex;align-items:center;gap:7px;color:var(--cyan);font-size:12px;font-weight:900}
+
+h2{font-size:17px;line-height:1.5;letter-spacing:-.25px;margin:0 0 11px;font-weight:800;overflow-wrap:anywhere}
+
+.summary{color:#aebbd0;font-size:12px;line-height:1.75;margin:0 0 17px}
+
+.card-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid #ffffff0d;padding-top:14px}
+
+.read-link{display:flex;align-items:center;gap:7px;color:var(--cyan);font-size:12px;font-weight:850}
+
 .read-link svg{width:16px;height:16px;transition:transform .2s}
-.read-link:hover svg{transform:translateX(4px)}
+
+.card:hover .read-link svg{transform:translateX(3px)}
+
 .date-short{font-size:10px;color:#8493aa}
-.more-wrap{text-align:center;padding:5px 0 45px}
-.more-button{display:inline-flex;align-items:center;justify-content:center;gap:9px;
- background:#121c2c;border:1px solid #35d9ee60;color:var(--cyan);border-radius:13px;
- padding:14px 24px;font-weight:850;transition:.2s}
-.more-button:hover{background:#35d9ee15;transform:translateY(-2px)}
-.more-button svg{width:18px;height:18px}
-.empty{grid-column:1/-1;text-align:center;padding:48px 16px;
- border:1px dashed var(--line);border-radius:18px;color:var(--muted);line-height:1.8}
-.empty svg{display:block;margin:0 auto 14px;width:36px;height:36px;color:var(--cyan)}
+
+.empty{grid-column:1/-1;text-align:center;padding:55px 18px;border:1px dashed var(--line);border-radius:18px;color:var(--muted);line-height:1.8}
+
+.empty svg{display:block;margin:0 auto 15px;width:34px;height:34px;color:var(--cyan)}
+
 footer{border-top:1px solid var(--line);padding:25px 0 35px;color:var(--muted);font-size:11px}
-.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
-.footer-brand{font-size:18px;font-weight:950;color:white}
-.modal{position:fixed;inset:0;z-index:50;background:#03060de8;backdrop-filter:blur(9px);
- display:none;align-items:center;justify-content:center;padding:16px}
-.modal.open{display:flex;animation:fadeIn .2s ease}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.modal-box{width:min(740px,100%);max-height:88vh;overflow:auto;background:#101827;
- border:1px solid var(--line);border-radius:22px;padding:clamp(20px,5vw,36px);
- animation:fadeUp .25s ease}
-.modal-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:22px}
-.modal-title{font-size:clamp(23px,5vw,36px);line-height:1.35;letter-spacing:-.8px;margin:0 0 16px}
+
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+.footer-brand{font-size:17px;font-weight:900;color:var(--text)}
+
+.footer-brand span{color:var(--cyan)}
+
+.modal{position:fixed;inset:0;z-index:50;background:#03060ddf;backdrop-filter:blur(9px);display:none;align-items:center;justify-content:center;padding:18px}
+
+.modal.open{display:flex}
+
+.modal-box{width:min(720px,100%);max-height:88vh;overflow:auto;background:#101827;border:1px solid var(--line);border-radius:22px;padding:clamp(20px,5vw,36px)}
+
+.modal-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}
+
+.modal-title{font-size:clamp(24px,5vw,36px);line-height:1.3;letter-spacing:-1px;margin:0 0 17px}
+
 .modal-date{font-size:12px;color:var(--muted);margin-bottom:20px}
-.modal-summary{font-size:14px;color:#bdc9db;line-height:1.9;overflow-wrap:anywhere}
+
+.modal-summary{font-size:15px;color:#bdc9db;line-height:1.9;white-space:pre-wrap;overflow-wrap:anywhere}
+
 .modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}
-.secondary{display:inline-flex;align-items:center;gap:8px;padding:12px 15px;
- border:1px solid var(--line);border-radius:12px;background:#172235;color:white;font-weight:800}
+
+.secondary{display:inline-flex;align-items:center;gap:8px;padding:12px 15px;border:1px solid var(--line);border-radius:12px;background:#172235;color:var(--text);font-weight:750;font-size:12px}
+
+.secondary svg{width:16px;height:16px}
+
 @media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:600px){
- .wrap{width:calc(100% - 24px)}.top{height:64px}.brand{font-size:21px}.brandmark{width:35px;height:35px}
- .live{font-size:9px;letter-spacing:.4px}.top-right{gap:8px}.hero{padding-top:30px}
- h1{letter-spacing:-1.7px}.hero p{font-size:13px}.toolbar{gap:7px}
- .primary{padding:0 12px;font-size:12px}.searchbox{padding:0 10px}
- .grid{grid-template-columns:1fr;gap:13px}
- .card{display:grid;grid-template-columns:36% minmax(0,1fr)}
- .image-wrap{aspect-ratio:auto;height:100%;min-height:205px}
- .card-body{padding:12px}.meta{align-items:flex-start;flex-direction:column;gap:5px;margin-bottom:8px}
- h2{font-size:14px;line-height:1.45}.summary{font-size:11px;line-height:1.55;
- margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
- .card-bottom{padding-top:9px}.read-link{font-size:10px}.date-short{display:none}
- .image-label{left:7px;top:7px;font-size:8px;padding:5px 6px}
- .section-title{font-size:18px}.categories{padding-top:16px}.modal{padding:9px}
- .modal-box{border-radius:17px}
-}
-@media(max-width:390px){
- .card{grid-template-columns:34% minmax(0,1fr)}.card-body{padding:10px}
- .summary{display:none}h2{font-size:13px}.brand-mini{letter-spacing:0}
-}
-@media(prefers-reduced-motion:reduce){
- *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
- scroll-behavior:auto!important;transition-duration:.01ms!important}
-}
+
+@media(max-width:600px){.wrap{width:calc(100% - 26px)}.top{height:66px}.brand{font-size:22px}.brandmark{width:36px;height:36px}.live{font-size:9px;letter-spacing:.5px}.top-right{gap:10px}.hero{padding-top:32px}h1{letter-spacing:-1.7px}.hero p{font-size:13px}.toolbar{gap:8px}.primary{padding:0 13px;font-size:12px}.searchbox{padding:0 11px}.grid{grid-template-columns:1fr;gap:14px}.card{display:grid;grid-template-columns:37% minmax(0,1fr);align-items:stretch}.image-wrap{aspect-ratio:auto;min-height:205px;height:100%}.card-body{padding:13px}.meta{margin-bottom:9px;align-items:flex-start;flex-direction:column;gap:5px}.brand-mini{font-size:9px}h2{font-size:14px;line-height:1.45}.summary{font-size:11px;line-height:1.55;margin-bottom:11px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.card-bottom{padding-top:10px}.read-link{font-size:10px}.date-short{display:none}.image-label{left:7px;top:7px;font-size:8px;padding:5px 6px}.section-title{font-size:18px}.categories{padding-top:19px}.modal{padding:10px}.modal-box{border-radius:17px}}
+
+@media(max-width:390px){.card{grid-template-columns:34% minmax(0,1fr)}.card-body{padding:10px}.summary{display:none}h2{font-size:13px}.card-bottom{margin-top:12px}.brand-mini{letter-spacing:0}}
+
 </style>
+
 </head>
+
 <body>
+
 <header>
- <div class="wrap top">
-  <a class="brand" href="/" aria-label="Altap.Biz ana səhifə">
-   <span class="brandmark">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 12 4l8 14h-5l-3-5-3 5Z"/></svg>
-   </span>
-   <span class="brand-name">Altap<span>.Biz</span></span>
-  </a>
-  <div class="top-right">
-   <div class="live"><span class="live-dot"></span> CANLI XƏBƏR</div>
-   <button class="icon-button" id="topRefresh" type="button" aria-label="Xəbərləri yenilə" title="Yenilə">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7v5h-5"/><path d="M4.8 9A7.5 7.5 0 0 1 18 6l2 6M4 17v-5h5"/><path d="M19.2 15A7.5 7.5 0 0 1 6 18l-2-6"/></svg>
-   </button>
+
+  <div class="wrap top">
+
+    <a class="brand" href="/" aria-label="Altap.Biz ana səhifə">
+
+      <span class="brandmark">
+
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 11.8 4 20 18h-5l-3.2-5.5L8.5 18Z"/><path d="M9 18h10"/></svg>
+
+      </span>
+
+      <span class="brand-name">Altap<span>.Biz</span></span>
+
+    </a>
+
+    <div class="top-right">
+
+      <div class="live"><span class="live-dot"></span> CANLI XƏBƏR</div>
+
+      <button class="icon-button" id="topRefresh" aria-label="Xəbərləri yenilə" title="Yenilə">
+
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7v5h-5"/><path d="M4.8 9A7.5 7.5 0 0 1 18 6l2 6M4 17v-5h5"/><path d="M19.2 15A7.5 7.5 0 0 1 6 18l-2-6"/></svg>
+
+      </button>
+
+    </div>
+
   </div>
- </div>
+
 </header>
 
 <main class="wrap">
- <section class="hero">
-  <div class="kicker">
-   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-   GÜNDƏMİN NƏBZİ
-  </div>
-  <h1>Xəbərdən <span>geri qalma.</span></h1>
-  <p>Azərbaycanda və dünyada baş verənləri izlə. Ən son başlıqlar bir ünvanda.</p>
-  <div class="toolbar">
-   <label class="searchbox">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4 4"/></svg>
-    <input id="search" type="search" placeholder="Xəbərlərdə axtar..." aria-label="Xəbərlərdə axtar">
-   </label>
-   <button class="primary" id="refresh" type="button">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7v5h-5"/><path d="M4.8 9A7.5 7.5 0 0 1 18 6l2 6M4 17v-5h5"/><path d="M19.2 15A7.5 7.5 0 0 1 6 18l-2-6"/></svg>
-    Yenilə
-   </button>
-  </div>
- </section>
 
- <nav class="categories" aria-label="Xəbər kateqoriyaları">
-  <button class="category active" data-category="all">
-   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-   Bütün xəbərlər
-  </button>
-  <button class="category" data-category="azərbaycan">Azərbaycan</button>
-  <button class="category" data-category="dünya">Dünya</button>
-  <button class="category" data-category="siyasət">Siyasət</button>
-  <button class="category" data-category="iqtisadiyyat">İqtisadiyyat</button>
-  <button class="category" data-category="idman">İdman</button>
-  <button class="category" data-category="texnologiya">Texnologiya</button>
- </nav>
+  <section class="hero">
 
- <section>
-  <div class="section-head">
-   <div class="section-title">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 5h16M4 10h16M4 15h10M4 20h10"/></svg>
-    Son xəbərlər
-   </div>
-   <div class="count" id="count">Yüklənir...</div>
-  </div>
-  <div class="status" id="status" role="status">
-   <svg class="spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-   Canlı xəbər lenti yüklənir...
-  </div>
-  <div class="grid" id="news" aria-live="polite"></div>
-  <div class="more-wrap" id="moreWrap" hidden>
-   <button class="more-button" id="loadMore" type="button">
-    Daha çox xəbər göstər
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-   </button>
-  </div>
- </section>
+    <div class="kicker">
+
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="8"/></svg>
+
+      GÜNDƏMİN NƏBZİ
+
+    </div>
+
+    <h1>Xəbərdən <span>geri qalma.</span></h1>
+
+    <p>Azərbaycanda və dünyada baş verənləri izlə. Ən son başlıqlar bir ünvanda.</p>
+
+    <div class="toolbar">
+
+      <label class="searchbox">
+
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4 4"/></svg>
+
+        <input id="search" type="search" placeholder="Xəbərlərdə axtar..." aria-label="Xəbərlərdə axtar">
+
+      </label>
+
+      <button class="primary" id="refresh" type="button">
+
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7v5h-5"/><path d="M4.8 9A7.5 7.5 0 0 1 18 6l2 6M4 17v-5h5"/><path d="M19.2 15A7.5 7.5 0 0 1 6 18l-2-6"/></svg>
+
+        Yenilə
+
+      </button>
+
+    </div>
+
+  </section>
+
+  <nav class="categories" aria-label="Xəbər kateqoriyaları">
+
+    <button class="category active" data-category="all">
+
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+
+      Bütün xəbərlər
+
+    </button>
+
+    <button class="category" data-category="azərbaycan">Azərbaycan</button>
+
+    <button class="category" data-category="dünya">Dünya</button>
+
+    <button class="category" data-category="siyasət">Siyasət</button>
+
+    <button class="category" data-category="iqtisadiyyat">İqtisadiyyat</button>
+
+    <button class="category" data-category="idman">İdman</button>
+
+    <button class="category" data-category="texnologiya">Texnologiya</button>
+
+  </nav>
+
+  <section>
+
+    <div class="section-head">
+
+      <div class="section-title">
+
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16M4 10h16M4 15h10M4 20h10"/></svg>
+
+        Son xəbərlər
+
+      </div>
+
+      <div class="count" id="count">Xəbərlər yüklənir</div>
+
+    </div>
+
+    <div class="status" id="status" role="status">
+
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+
+      Xəbər lenti yüklənir...
+
+    </div>
+
+    <div class="grid" id="news" aria-live="polite"></div>
+
+  </section>
+
 </main>
 
 <footer>
- <div class="wrap footer-inner">
-  <div class="footer-brand">Altap<span>.Biz</span></div>
-  <div>Son yenilənmə: <span id="updated">—</span></div>
- </div>
+
+  <div class="wrap footer-inner">
+
+    <div class="footer-brand">Altap<span>.Biz</span></div>
+
+    <div>Son yenilənmə: <span id="updated">—</span></div>
+
+  </div>
+
 </footer>
 
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
- <div class="modal-box">
-  <div class="modal-top">
-   <div class="brand-mini">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 18 12 4l8 14h-5l-3-5-3 5Z"/></svg>
-    ALTAP.BIZ
-   </div>
-   <button class="icon-button" id="closeModal" type="button" aria-label="Bağla">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m18 6-12 12M6 6l12 12"/></svg>
-   </button>
+
+  <div class="modal-box">
+
+    <div class="modal-top">
+
+      <div class="brand-mini">
+
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 11.8 4 20 18h-5l-3.2-5.5L8.5 18Z"/></svg>
+
+        ALTAP.BIZ
+
+      </div>
+
+      <button class="icon-button" id="closeModal" aria-label="Bağla">
+
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m18 6-12 12M6 6l12 12"/></svg>
+
+      </button>
+
+    </div>
+
+    <h2 class="modal-title" id="modalTitle"></h2>
+
+    <div class="modal-date" id="modalDate"></div>
+
+    <div class="modal-summary" id="modalSummary"></div>
+
+    <div class="modal-actions">
+
+      <a class="primary" id="originalLink" target="_blank" rel="noopener noreferrer" href="#" style="padding:13px 16px">
+
+        Tam xəbəri aç
+
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg>
+
+      </a>
+
+      <button class="secondary" id="closeModal2" type="button">Bağla</button>
+
+    </div>
+
   </div>
-  <h2 class="modal-title" id="modalTitle"></h2>
-  <div class="modal-date" id="modalDate"></div>
-  <div class="modal-summary" id="modalSummary"></div>
-  <div class="modal-actions">
-   <a class="primary" id="originalLink" target="_blank" rel="noopener noreferrer" href="#">
-    Tam xəbəri aç
-    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg>
-   </a>
-   <button class="secondary" id="closeModal2" type="button">Bağla</button>
-  </div>
- </div>
+
 </div>
 
 <script>
+
 (() => {
- "use strict";
 
- const RSS_URL = "https://oxu.az/feed";
- const API_URL = "https://api.rss2json.com/v1/api.json?count=100&rss_url=" +
-   encodeURIComponent(RSS_URL);
- const PAGE_SIZE = 12;
+  "use strict";
 
- const $ = id => document.getElementById(id);
- const newsBox = $("news");
- const statusBox = $("status");
- const searchBox = $("search");
- const refreshButton = $("refresh");
- const topRefresh = $("topRefresh");
- const countBox = $("count");
- const updatedBox = $("updated");
- const modal = $("modal");
- const moreWrap = $("moreWrap");
- const loadMoreButton = $("loadMore");
+  const RSS_URL = "https://oxu.az/feed";
 
- let articles = [];
- let visibleCount = PAGE_SIZE;
- let loading = false;
- let activeCategory = "all";
+  const API_URL = "https://api.rss2json.com/v1/api.json?rss_url=" +
 
- const iconNews = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h8M8 16h5"/></svg>';
+    encodeURIComponent(RSS_URL);
 
- function textOnly(value) {
-  const doc = new DOMParser().parseFromString(String(value || ""), "text/html");
-  return (doc.body.textContent || "").replace(/\s+/g, " ").trim();
- }
+  const $ = id => document.getElementById(id);
 
- function safeDate(value) {
-  if (!value) return "Tarix göstərilməyib";
-  const d = new Date(value);
-  if (Number.isNaN(d.getTime())) return "Tarix göstərilməyib";
-  return new Intl.DateTimeFormat("az-AZ", {
-   day:"2-digit",month:"long",year:"numeric",hour:"2-digit",minute:"2-digit"
-  }).format(d);
- }
+  const newsBox = $("news");
 
- function shortDate(value) {
-  if (!value) return "";
-  const d = new Date(value);
-  if (Number.isNaN(d.getTime())) return "";
-  return new Intl.DateTimeFormat("az-AZ",{day:"2-digit",month:"short"}).format(d);
- }
+  const statusBox = $("status");
 
- function getImage(item) {
-  if (item.thumbnail && /^https?:\/\//i.test(item.thumbnail)) return item.thumbnail;
-  if (item.enclosure && /^https?:\/\//i.test(item.enclosure.link || "")) return item.enclosure.link;
-  const doc = new DOMParser().parseFromString(
-   String(item.content || item.description || ""), "text/html"
-  );
-  const img = doc.querySelector("img[src]");
-  const src = img ? img.getAttribute("src") : "";
-  return /^https?:\/\//i.test(src || "") ? src : "";
- }
+  const searchBox = $("search");
 
- function guessCategory(item) {
-  const text = (item.title + " " + item.summary).toLocaleLowerCase("az");
-  if (/futbol|idman|komanda|matç|qol vur|çempion|oyunçu|turnir|basketbol/.test(text)) return "idman";
-  if (/dollar|manat|iqtisadiyyat|bank|qiymət|bahalaş|ucuzlaş|neftin qiyməti|valyuta/.test(text)) return "iqtisadiyyat";
-  if (/texnologiya|telefon|iphone|süni intellekt|internet|proqram|google|apple|android/.test(text)) return "texnologiya";
-  if (/prezident|parlament|nazir|hökumət|seçki|siyasət|deputat/.test(text)) return "siyasət";
-  if (/dünya|xarici ölk|amerika|rusiya|ukrayna|avropa|iran|türkiyə|israil|vaşinqton/.test(text)) return "dünya";
-  return "azərbaycan";
- }
+  const refreshButton = $("refresh");
 
- function categoryLabel(category) {
-  const names = {
-   azərbaycan:"Azərbaycan",dünya:"Dünya",siyasət:"Siyasət",
-   iqtisadiyyat:"İqtisadiyyat",idman:"İdman",texnologiya:"Texnologiya"
-  };
-  return names[category] || "Xəbər";
- }
+  const topRefresh = $("topRefresh");
 
- function createPlaceholder() {
-  const placeholder = document.createElement("div");
-  placeholder.className = "image-placeholder";
-  placeholder.innerHTML = iconNews;
-  return placeholder;
- }
+  const countBox = $("count");
 
- function filteredArticles() {
-  const query = searchBox.value.trim().toLocaleLowerCase("az");
-  return articles.filter(item => {
-   const matchesSearch = (item.title + " " + item.summary).toLocaleLowerCase("az").includes(query);
-   return matchesSearch && (activeCategory === "all" || item.category === activeCategory);
-  });
- }
+  const updatedBox = $("updated");
 
- function render() {
-  const filtered = filteredArticles();
-  const visible = filtered.slice(0, visibleCount);
-  newsBox.replaceChildren();
-  countBox.textContent = filtered.length + " xəbər";
+  const modal = $("modal");
 
-  if (!filtered.length) {
-   const empty = document.createElement("div");
-   empty.className = "empty";
-   empty.innerHTML = iconNews;
-   const message = document.createElement("div");
-   message.textContent = articles.length
-    ? "Bu axtarışa uyğun xəbər tapılmadı."
-    : "Xəbərlər yüklənmədi. Yenilə düyməsini basıb yenidən yoxlayın.";
-   empty.appendChild(message);
-   newsBox.appendChild(empty);
-   moreWrap.hidden = true;
-   return;
+  let articles = [];
+
+  let loading = false;
+
+  let activeCategory = "all";
+
+  const iconNews = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h8M8 16h5"/></svg>';
+
+  function textOnly(value) {
+
+    const doc = new DOMParser().parseFromString(String(value || ""), "text/html");
+
+    return (doc.body.textContent || "").replace(/\s+/g, " ").trim();
+
   }
 
-  visible.forEach((item,index) => {
-   const card = document.createElement("article");
-   card.className = "card";
-   card.style.setProperty("--delay", Math.min(index % PAGE_SIZE, 10) * 45 + "ms");
+  function safeDate(value) {
 
-   const imageWrap = document.createElement("div");
-   imageWrap.className = "image-wrap";
+    if (!value) return "Tarix yoxdur";
 
-   if (item.image) {
-    const img = document.createElement("img");
-    img.className = "news-image";
-    img.src = item.image;
-    img.alt = item.title;
-    img.loading = "lazy";
-    img.referrerPolicy = "no-referrer";
-    img.onerror = () => img.replaceWith(createPlaceholder());
-    imageWrap.appendChild(img);
-   } else {
-    imageWrap.appendChild(createPlaceholder());
-   }
+    const d = new Date(value);
 
-   const badge = document.createElement("div");
-   badge.className = "image-label";
-   badge.textContent = categoryLabel(item.category).toLocaleUpperCase("az");
-   imageWrap.appendChild(badge);
+    if (Number.isNaN(d.getTime())) return "Tarix yoxdur";
 
-   const body = document.createElement("div");
-   body.className = "card-body";
+    return new Intl.DateTimeFormat("az-AZ", {
 
-   const meta = document.createElement("div");
-   meta.className = "meta";
+      day: "2-digit", month: "long", year: "numeric",
 
-   const brand = document.createElement("span");
-   brand.className = "brand-mini";
-   brand.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 18 12 4l8 14h-5l-3-5-3 5Z"/></svg> ALTAP.BIZ';
+      hour: "2-digit", minute: "2-digit"
 
-   const date = document.createElement("span");
-   date.textContent = shortDate(item.pubDate);
-   meta.append(brand,date);
+    }).format(d);
 
-   const title = document.createElement("h2");
-   title.textContent = item.title;
+  }
 
-   const summary = document.createElement("p");
-   summary.className = "summary";
-   summary.textContent = item.summary
-    ? item.summary.slice(0,190) + (item.summary.length > 190 ? "…" : "")
-    : "Ətraflı məlumat üçün xəbəri açın.";
+  function shortDate(value) {
 
-   const bottom = document.createElement("div");
-   bottom.className = "card-bottom";
+    if (!value) return "";
 
-   const read = document.createElement("a");
-   read.href = item.link;
-   read.className = "read-link";
-   read.innerHTML = 'Oxumağa davam et <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
-   read.addEventListener("click",event => {
-    event.preventDefault();
-    openModal(item);
-   });
+    const d = new Date(value);
 
-   const dateShort = document.createElement("span");
-   dateShort.className = "date-short";
-   dateShort.textContent = "Ətraflı";
+    if (Number.isNaN(d.getTime())) return "";
 
-   bottom.append(read,dateShort);
-   body.append(meta,title,summary,bottom);
-   card.append(imageWrap,body);
-   newsBox.appendChild(card);
-  });
+    return new Intl.DateTimeFormat("az-AZ", {
 
-  moreWrap.hidden = filtered.length <= visibleCount;
-  loadMoreButton.disabled = false;
-  loadMoreButton.innerHTML = 'Daha çox xəbər göstər <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>';
- }
+      day: "2-digit", month: "short"
 
- function openModal(item) {
-  $("modalTitle").textContent = item.title;
-  $("modalDate").textContent = safeDate(item.pubDate);
-  $("modalSummary").textContent = item.summary ||
-   "RSS lentində əlavə mətn təqdim edilməyib. Tam xəbəri aşağıdakı keçiddən oxuya bilərsiniz.";
-  $("originalLink").href = item.link;
-  modal.classList.add("open");
-  document.body.style.overflow = "hidden";
-  $("closeModal").focus();
- }
+    }).format(d);
 
- function closeModal() {
-  modal.classList.remove("open");
-  document.body.style.overflow = "";
- }
+  }
 
- async function loadNews() {
-  if (loading) return;
-  loading = true;
-  refreshButton.disabled = true;
-  topRefresh.disabled = true;
-  refreshButton.textContent = "Yüklənir...";
-  statusBox.textContent = "Ən son xəbərlər alınır...";
+  function getImage(item) {
 
-  try {
-   const response = await fetch(API_URL,{cache:"no-store"});
-   if (!response.ok) throw new Error("RSS xidməti cavab vermədi.");
+    if (item.thumbnail && /^https?:\/\//i.test(item.thumbnail)) {
 
-   const data = await response.json();
-   if (data.status !== "ok" || !Array.isArray(data.items)) {
-    throw new Error(data.message || "RSS lentini oxumaq mümkün olmadı.");
-   }
+      return item.thumbnail;
 
-   const fresh = data.items
-    .filter(item => item.title && item.link && /^https?:\/\//i.test(item.link))
-    .map(item => {
-     const entry = {
-      title:textOnly(item.title),
-      link:item.link,
-      pubDate:item.pubDate,
-      image:getImage(item),
-      summary:textOnly(item.description || item.content || "")
-     };
-     entry.category = guessCategory(entry);
-     return entry;
+    }
+
+    if (item.enclosure && /^https?:\/\//i.test(item.enclosure.link || "")) {
+
+      return item.enclosure.link;
+
+    }
+
+    const doc = new DOMParser().parseFromString(
+
+      String(item.content || item.description || ""), "text/html"
+
+    );
+
+    const img = doc.querySelector("img[src]");
+
+    const src = img ? img.getAttribute("src") : "";
+
+    return /^https?:\/\//i.test(src || "") ? src : "";
+
+  }
+
+  function guessCategory(item) {
+
+    const text = (item.title + " " + item.summary).toLocaleLowerCase("az");
+
+    if (/futbol|idman|komanda|matç|qol vur|çempion|oyunçu|turnir/.test(text)) return "idman";
+
+    if (/dollar|manat|iqtisadiyyat|bank|qiymət|bahalaş|ucuzlaş|neftin qiyməti/.test(text)) return "iqtisadiyyat";
+
+    if (/texnologiya|telefon|iphone|süni intellekt|internet|proqram|google|apple/.test(text)) return "texnologiya";
+
+    if (/prezident|parlament|nazir|hökumət|seçki|siyasət|deputat/.test(text)) return "siyasət";
+
+    if (/dünya|xarici ölk|amerika|rusiya|ukrayna|avropa|iran|türkiyə/.test(text)) return "dünya";
+
+    return "azərbaycan";
+
+  }
+
+  function categoryLabel(category) {
+
+    const names = {
+
+      azərbaycan: "Azərbaycan",
+
+      dünya: "Dünya",
+
+      siyasət: "Siyasət",
+
+      iqtisadiyyat: "İqtisadiyyat",
+
+      idman: "İdman",
+
+      texnologiya: "Texnologiya"
+
+    };
+
+    return names[category] || "Xəbər";
+
+  }
+
+  function createPlaceholder() {
+
+    const placeholder = document.createElement("div");
+
+    placeholder.className = "image-placeholder";
+
+    placeholder.innerHTML = iconNews;
+
+    return placeholder;
+
+  }
+
+  function render() {
+
+    const query = searchBox.value.trim().toLocaleLowerCase("az");
+
+    const filtered = articles.filter(item => {
+
+      const matchesSearch = (item.title + " " + item.summary)
+
+        .toLocaleLowerCase("az").includes(query);
+
+      const matchesCategory = activeCategory === "all" ||
+
+        item.category === activeCategory;
+
+      return matchesSearch && matchesCategory;
+
     });
 
-   // Eyni keçidə malik xəbərləri təkrarlama.
-   const unique = new Map();
-   fresh.forEach(item => unique.set(item.link,item));
-   articles = [...unique.values()];
+    newsBox.replaceChildren();
 
-   visibleCount = PAGE_SIZE;
-   render();
-   updatedBox.textContent = new Date().toLocaleString("az-AZ",{
-    day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"
-   });
-   statusBox.textContent = "Lent yeniləndi · " + articles.length +
-    " xəbər əldə edildi · Avtomatik yenilənmə hər 5 dəqiqədən bir";
-  } catch(error) {
-   statusBox.textContent = articles.length
-    ? "Yeni xəbərləri almaq mümkün olmadı. Əvvəl yüklənmiş xəbərlər göstərilir."
-    : "Xəbər lenti hazırda cavab vermir. Bir az sonra yenidən yoxlayın.";
-   render();
-  } finally {
-   loading = false;
-   refreshButton.disabled = false;
-   topRefresh.disabled = false;
-   refreshButton.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7v5h-5"/><path d="M4.8 9A7.5 7.5 0 0 1 18 6l2 6M4 17v-5h5"/><path d="M19.2 15A7.5 7.5 0 0 1 6 18l-2-6"/></svg> Yenilə';
+    countBox.textContent = filtered.length + " xəbər";
+
+    if (!filtered.length) {
+
+      const empty = document.createElement("div");
+
+      empty.className = "empty";
+
+      empty.innerHTML = iconNews;
+
+      const message = document.createElement("div");
+
+      message.textContent = articles.length
+
+        ? "Bu axtarışa uyğun xəbər tapılmadı."
+
+        : "Hazırda xəbərləri yükləmək mümkün deyil. Yenidən yoxlayın.";
+
+      empty.appendChild(message);
+
+      newsBox.appendChild(empty);
+
+      return;
+
+    }
+
+    filtered.forEach(item => {
+
+      const card = document.createElement("article");
+
+      card.className = "card";
+
+      const imageWrap = document.createElement("div");
+
+      imageWrap.className = "image-wrap";
+
+      if (item.image) {
+
+        const img = document.createElement("img");
+
+        img.className = "news-image";
+
+        img.src = item.image;
+
+        img.alt = item.title;
+
+        img.loading = "lazy";
+
+        img.referrerPolicy = "no-referrer";
+
+        img.onerror = () => img.replaceWith(createPlaceholder());
+
+        imageWrap.appendChild(img);
+
+      } else {
+
+        imageWrap.appendChild(createPlaceholder());
+
+      }
+
+      const badge = document.createElement("div");
+
+      badge.className = "image-label";
+
+      badge.textContent = categoryLabel(item.category).toLocaleUpperCase("az");
+
+      imageWrap.appendChild(badge);
+
+      const body = document.createElement("div");
+
+      body.className = "card-body";
+
+      const meta = document.createElement("div");
+
+      meta.className = "meta";
+
+      const brand = document.createElement("span");
+
+      brand.className = "brand-mini";
+
+      brand.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 11.8 4 20 18h-5l-3.2-5.5L8.5 18Z"/></svg> ALTAP.BIZ';
+
+      const date = document.createElement("span");
+
+      date.textContent = shortDate(item.pubDate);
+
+      meta.append(brand, date);
+
+      const title = document.createElement("h2");
+
+      title.textContent = item.title;
+
+      const summary = document.createElement("p");
+
+      summary.className = "summary";
+
+      summary.textContent = item.summary
+
+        ? item.summary.slice(0, 170) + (item.summary.length > 170 ? "…" : "")
+
+        : "Xəbərin ətraflı məlumatını oxumaq üçün açın.";
+
+      const bottom = document.createElement("div");
+
+      bottom.className = "card-bottom";
+
+      const read = document.createElement("a");
+
+      read.href = item.link;
+
+      read.className = "read-link";
+
+      read.innerHTML = 'Oxumağa davam et <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+      read.addEventListener("click", event => {
+
+        event.preventDefault();
+
+        openModal(item);
+
+      });
+
+      const more = document.createElement("span");
+
+      more.className = "date-short";
+
+      more.textContent = "Ətraflı";
+
+      bottom.append(read, more);
+
+      body.append(meta, title, summary, bottom);
+
+      card.append(imageWrap, body);
+
+      newsBox.appendChild(card);
+
+    });
+
   }
- }
 
- document.querySelectorAll(".category").forEach(button => {
-  button.addEventListener("click",() => {
-   document.querySelectorAll(".category").forEach(item => item.classList.remove("active"));
-   button.classList.add("active");
-   activeCategory = button.dataset.category;
-   visibleCount = PAGE_SIZE;
-   render();
+  function openModal(item) {
+
+    $("modalTitle").textContent = item.title;
+
+    $("modalDate").textContent = safeDate(item.pubDate);
+
+    $("modalSummary").textContent = item.summary ||
+
+      "Bu xəbər üçün əlavə mətn RSS lentində təqdim edilməyib. Tam xəbər orijinal səhifədə mövcuddur.";
+
+    $("originalLink").href = item.link;
+
+    modal.classList.add("open");
+
+    document.body.style.overflow = "hidden";
+
+    $("closeModal").focus();
+
+  }
+
+  function closeModal() {
+
+    modal.classList.remove("open");
+
+    document.body.style.overflow = "";
+
+  }
+
+  async function loadNews() {
+
+    if (loading) return;
+
+    loading = true;
+
+    refreshButton.disabled = true;
+
+    refreshButton.textContent = "Yüklənir...";
+
+    statusBox.textContent = "Xəbərlər yenilənir...";
+
+    try {
+
+      const response = await fetch(API_URL, { cache: "no-store" });
+
+      if (!response.ok) throw new Error("RSS xidməti cavab vermədi.");
+
+      const data = await response.json();
+
+      if (data.status !== "ok" || !Array.isArray(data.items)) {
+
+        throw new Error(data.message || "RSS lentini oxumaq olmadı.");
+
+      }
+
+      articles = data.items
+
+        .filter(item => item.title && item.link &&
+
+          /^https?:\/\//i.test(item.link))
+
+        .map(item => {
+
+          const entry = {
+
+            title: textOnly(item.title),
+
+            link: item.link,
+
+            pubDate: item.pubDate,
+
+            image: getImage(item),
+
+            summary: textOnly(item.description || item.content || "")
+
+          };
+
+          entry.category = guessCategory(entry);
+
+          return entry;
+
+        });
+
+      render();
+
+      updatedBox.textContent = new Date().toLocaleString("az-AZ", {
+
+        day: "2-digit", month: "2-digit", year: "numeric",
+
+        hour: "2-digit", minute: "2-digit"
+
+      });
+
+      statusBox.textContent = "Canlı lent yeniləndi · " +
+
+        articles.length + " xəbər · Növbəti yenilənmə 5 dəqiqəyə";
+
+    } catch (error) {
+
+      statusBox.textContent =
+
+        "Xəbər bağlantısı cavab vermədi. Yenidən cəhd edin.";
+
+      if (!articles.length) render();
+
+    } finally {
+
+      loading = false;
+
+      refreshButton.disabled = false;
+
+      refreshButton.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7v5h-5"/><path d="M4.8 9A7.5 7.5 0 0 1 18 6l2 6M4 17v-5h5"/><path d="M19.2 15A7.5 7.5 0 0 1 6 18l-2-6"/></svg> Yenilə';
+
+    }
+
+  }
+
+  document.querySelectorAll(".category").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      document.querySelectorAll(".category").forEach(item =>
+
+        item.classList.remove("active")
+
+      );
+
+      button.classList.add("active");
+
+      activeCategory = button.dataset.category;
+
+      render();
+
+    });
+
   });
- });
 
- searchBox.addEventListener("input",() => {
-  visibleCount = PAGE_SIZE;
-  render();
- });
+  searchBox.addEventListener("input", render);
 
- loadMoreButton.addEventListener("click",() => {
-  visibleCount += PAGE_SIZE;
-  render();
- });
+  refreshButton.addEventListener("click", loadNews);
 
- refreshButton.addEventListener("click",loadNews);
- topRefresh.addEventListener("click",loadNews);
- $("closeModal").addEventListener("click",closeModal);
- $("closeModal2").addEventListener("click",closeModal);
- modal.addEventListener("click",event => {
-  if (event.target === modal) closeModal();
- });
- document.addEventListener("keydown",event => {
-  if (event.key === "Escape") closeModal();
- });
+  topRefresh.addEventListener("click", loadNews);
 
- loadNews();
- setInterval(loadNews,5 * 60 * 1000);
+  $("closeModal").addEventListener("click", closeModal);
+
+  $("closeModal2").addEventListener("click", closeModal);
+
+  modal.addEventListener("click", event => {
+
+    if (event.target === modal) closeModal();
+
+  });
+
+  document.addEventListener("keydown", event => {
+
+    if (event.key === "Escape") closeModal();
+
+  });
+
+  loadNews();
+
+  setInterval(loadNews, 5 * 60 * 1000);
+
 })();
+
 </script>
+
 </body>
+
 </html>
