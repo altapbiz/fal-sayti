@@ -12,7 +12,7 @@
     --border: #252a3d;
     --cyan: #00e5ff;
     --pink: #ff3cac;
-    --text: #ffffff;
+    --text: #fff;
     --muted: #a9aec1;
 }
 
@@ -47,6 +47,11 @@ body::before {
     to { transform: translate(2%, 2%) scale(1.08); }
 }
 
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 header {
     text-align: center;
     padding: 18px 12px;
@@ -58,14 +63,12 @@ header {
     font-size: 28px;
     font-weight: 900;
     letter-spacing: 1px;
-    text-shadow: 0 0 20px #00e5ff24;
 }
 
 .logo span {
     color: var(--cyan);
 }
 
-/* Canlı tarix və saat */
 .clock-panel {
     max-width: 600px;
     margin: 18px auto 0;
@@ -73,14 +76,12 @@ header {
     border: 1px solid #00e5ff42;
     border-radius: 15px;
     background: linear-gradient(135deg, #111724, #17101e);
-    box-shadow: 0 0 25px #00e5ff0c;
 }
 
 .clock-label {
     color: var(--muted);
     font-size: 12px;
     letter-spacing: 1.5px;
-    text-transform: uppercase;
     margin-bottom: 7px;
 }
 
@@ -89,13 +90,11 @@ header {
     font-weight: 800;
     color: var(--cyan);
     font-variant-numeric: tabular-nums;
-    text-shadow: 0 0 18px #00e5ff35;
 }
 
 .clock-date {
     margin-top: 7px;
     font-size: 14px;
-    color: #f1f2fa;
     line-height: 1.6;
 }
 
@@ -133,7 +132,6 @@ header {
     font-weight: bold;
     font-size: 17px;
     background: #101722;
-    box-shadow: 0 0 18px #00e5ff12;
     transition: .25s;
 }
 
@@ -165,11 +163,10 @@ header {
     border-radius: 10px;
     font-size: 13px;
     transition: transform .2s, border-color .2s;
-    cursor: default;
 }
 
-.feature:hover {
-    transform: translateY(-3px);
+.feature:active {
+    transform: scale(.96);
     border-color: var(--cyan);
 }
 
@@ -188,7 +185,6 @@ header {
 .search-box {
     margin: 0 auto 22px;
     max-width: 600px;
-    animation: fadeUp .8s ease both;
 }
 
 .search-box input {
@@ -198,7 +194,7 @@ header {
     border-radius: 13px;
     outline: none;
     background: #11131e;
-    color: white;
+    color: #fff;
     font-size: 16px;
     transition: .25s;
 }
@@ -229,8 +225,7 @@ header {
     border-radius: 15px;
     background: linear-gradient(145deg, #121522f5, #0e1019f5);
     transition: transform .22s, border-color .22s, box-shadow .22s;
-    animation: cardAppear .4s ease both;
-    cursor: pointer;
+    animation: fadeUp .35s ease both;
 }
 
 .country-card:hover {
@@ -250,7 +245,7 @@ header {
 }
 
 .country-card:hover .flag {
-    transform: scale(1.13) rotate(-3deg);
+    transform: scale(1.12) rotate(-3deg);
 }
 
 .country-info {
@@ -280,12 +275,11 @@ header {
     border-radius: 8px;
     font-weight: bold;
     font-size: 13px;
-    transition: transform .2s, background .2s, box-shadow .2s;
+    transition: transform .2s, background .2s;
 }
 
 .buy-btn:hover {
-    background: white;
-    box-shadow: 0 0 16px #00e5ff25;
+    background: #fff;
     transform: translateY(-1px);
 }
 
@@ -321,7 +315,6 @@ header {
     background: var(--cyan);
     color: #080910;
     transform: translateY(-2px);
-    box-shadow: 0 5px 20px #00e5ff20;
 }
 
 footer {
@@ -330,16 +323,6 @@ footer {
     text-align: center;
     color: #73798e;
     font-size: 13px;
-}
-
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes cardAppear {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 480px) {
@@ -378,7 +361,7 @@ footer {
         <div class="clock-label">Azərbaycan vaxtı</div>
         <div class="clock-time" id="clockTime">--:--:--</div>
         <div class="clock-date" id="clockDate">Tarix yüklənir...</div>
-        <div class="clock-zone">AZT · Asia/Baku</div>
+        <div class="clock-zone">AZT · Bakı</div>
     </div>
 </header>
 
@@ -397,19 +380,20 @@ footer {
 <main class="container">
     <div class="search-box">
         <input
-            type="text"
+            type="search"
             id="countrySearch"
-            placeholder="Ölkə axtar... Məs: Azərbaycan, Türkiyə, ABŞ"
+            placeholder="Ölkə axtar... Məs: Rusiya"
             autocomplete="off"
         >
     </div>
 
-    <h2 class="section-title" id="sectionTitle">Mövcud ölkələr</h2>
+    <h2 class="section-title" id="sectionTitle">Ölkə seç</h2>
+
     <div class="countries" id="countries"></div>
 
     <div class="empty" id="emptyMessage">
         Bu ölkə tapılmadı.<br>
-        Başqa adla axtar və ya dəstək xidməti ilə əlaqə saxla.
+        Ölkənin adını başqa cür yazıb yenidən yoxla.
     </div>
 
     <div class="support">
@@ -424,6 +408,36 @@ footer {
 </footer>
 
 <script>
+/* Bakı vaxtı ilə canlı saat və tarix */
+function updateClock() {
+    const now = new Date();
+
+    document.getElementById("clockTime").textContent =
+        new Intl.DateTimeFormat("az-AZ", {
+            timeZone: "Asia/Baku",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false
+        }).format(now);
+
+    document.getElementById("clockDate").textContent =
+        new Intl.DateTimeFormat("az-AZ", {
+            timeZone: "Asia/Baku",
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+        }).format(now);
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+/* Ölkələr siyahısı */
 const countries = [
     { name: "Azərbaycan", flag: "🇦🇿", code: "+994" },
     { name: "Türkiyə", flag: "🇹🇷", code: "+90" },
@@ -523,56 +537,40 @@ const countries = [
     { name: "Panama", flag: "🇵🇦", code: "+507" }
 ];
 
-/* Azərbaycan vaxtı ilə canlı tarix və saat */
-function updateClock() {
-    const now = new Date();
+const container = document.getElementById("countries");
+const search = document.getElementById("countrySearch");
+const empty = document.getElementById("emptyMessage");
+const title = document.getElementById("sectionTitle");
 
-    const time = new Intl.DateTimeFormat("az-AZ", {
-        timeZone: "Asia/Baku",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false
-    }).format(now);
+/*
+  Vacib:
+  Axtarış boşdursa yalnız ilk 4 ölkə göstərilir.
+  Axtarış yazıldıqda uyğun ölkələr göstərilir.
+*/
+function renderCountries() {
+    const query = search.value
+        .toLocaleLowerCase("az")
+        .trim();
 
-    const date = new Intl.DateTimeFormat("az-AZ", {
-        timeZone: "Asia/Baku",
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric"
-    }).format(now);
+    let results;
 
-    document.getElementById("clockTime").textContent = time;
-    document.getElementById("clockDate").textContent = date;
-}
+    if (query === "") {
+        results = countries.slice(0, 4);
+        title.textContent = "Ölkə seç";
+    } else {
+        results = countries.filter(country =>
+            country.name.toLocaleLowerCase("az").includes(query) ||
+            country.code.includes(query)
+        );
+        title.textContent = "Axtarış nəticələri";
+    }
 
-updateClock();
-setInterval(updateClock, 1000);
+    container.innerHTML = "";
 
-document.getElementById("year").textContent =
-    new Date().getFullYear();
-
-/* Ölkə axtarışı və kartlar */
-const countriesContainer = document.getElementById("countries");
-const searchInput = document.getElementById("countrySearch");
-const emptyMessage = document.getElementById("emptyMessage");
-const sectionTitle = document.getElementById("sectionTitle");
-
-function renderCountries(query = "") {
-    const normalizedQuery = query.toLocaleLowerCase("az").trim();
-
-    const filtered = countries.filter(country =>
-        country.name.toLocaleLowerCase("az").includes(normalizedQuery) ||
-        country.code.includes(normalizedQuery)
-    );
-
-    countriesContainer.innerHTML = "";
-
-    filtered.forEach((country, index) => {
+    results.forEach((country, index) => {
         const card = document.createElement("article");
         card.className = "country-card";
-        card.style.animationDelay = Math.min(index * 25, 250) + "ms";
+        card.style.animationDelay = Math.min(index * 35, 200) + "ms";
 
         const flag = document.createElement("div");
         flag.className = "flag";
@@ -607,19 +605,13 @@ function renderCountries(query = "") {
 
         card.appendChild(flag);
         card.appendChild(info);
-        countriesContainer.appendChild(card);
+        container.appendChild(card);
     });
 
-    emptyMessage.style.display = filtered.length ? "none" : "block";
-
-    sectionTitle.textContent = normalizedQuery
-        ? "Axtarış nəticələri"
-        : "Mövcud ölkələr";
+    empty.style.display = results.length === 0 ? "block" : "none";
 }
 
-searchInput.addEventListener("input", event => {
-    renderCountries(event.target.value);
-});
+search.addEventListener("input", renderCountries);
 
 renderCountries();
 </script>
