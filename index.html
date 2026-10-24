@@ -1,620 +1,658 @@
+
 <!DOCTYPE html>
 <html lang="az">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080910">
 <title>ALTAP.BIZ — Virtual Nömrələr</title>
-
 <style>
 :root {
-    --bg: #080910;
-    --panel: #11131e;
-    --border: #252a3d;
-    --cyan: #00e5ff;
-    --pink: #ff3cac;
-    --text: #fff;
-    --muted: #a9aec1;
+  --bg:#080910;
+  --panel:#121522;
+  --border:rgba(170,180,220,.15);
+  --cyan:#32e6ff;
+  --pink:#ff38bd;
+  --muted:#9ba3ba;
+  --white:#f7f8ff;
 }
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;
+  overflow-x:hidden;
+  background:var(--bg);
+  color:var(--white);
+  font-family:Arial,Helvetica,sans-serif;
 }
-
-body {
-    font-family: Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+  background:
+    radial-gradient(ellipse at 8% 35%,rgba(0,220,255,.09),transparent 38%),
+    radial-gradient(ellipse at 92% 48%,rgba(255,45,180,.08),transparent 38%),
+    #080910;
 }
-
-body::before {
-    content: "";
-    position: fixed;
-    inset: -30%;
-    background:
-        radial-gradient(circle at 20% 20%, #00e5ff16, transparent 35%),
-        radial-gradient(circle at 80% 70%, #ff3cac13, transparent 35%);
-    animation: backgroundMove 12s ease-in-out infinite alternate;
-    pointer-events: none;
-    z-index: -1;
+a{color:inherit}
+header{
+  position:relative;
+  z-index:2;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  padding:23px clamp(20px,4vw,48px);
+  border-bottom:1px solid var(--border);
+  background:rgba(8,9,16,.94);
 }
-
-@keyframes backgroundMove {
-    from { transform: translate(-2%, -1%) scale(1); }
-    to { transform: translate(2%, 2%) scale(1.08); }
+.logo{
+  font-size:clamp(25px,4vw,35px);
+  font-weight:900;
+  letter-spacing:-1.5px;
+  white-space:nowrap;
 }
-
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+.logo span{color:var(--cyan)}
+.support-top{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:14px 19px;
+  border:1px solid rgba(50,230,255,.4);
+  border-radius:17px;
+  background:rgba(50,230,255,.055);
+  color:var(--cyan);
+  text-decoration:none;
+  font-weight:800;
+  letter-spacing:.4px;
+  transition:.25s;
 }
-
-header {
-    text-align: center;
-    padding: 18px 12px;
-    background: #0c0d17ed;
-    border-bottom: 1px solid var(--border);
+.support-top:hover{
+  background:var(--cyan);
+  color:#080910;
+  transform:translateY(-2px);
+  box-shadow:0 0 25px #32e6ff25;
 }
-
-.logo {
-    font-size: 28px;
-    font-weight: 900;
-    letter-spacing: 1px;
+.telegram-icon{width:23px;height:23px;flex-shrink:0}
+.hero{
+  max-width:1050px;
+  margin:auto;
+  padding:clamp(60px,9vw,105px) 22px 70px;
+  text-align:center;
+  animation:fadeUp .8s ease both;
 }
-
-.logo span {
-    color: var(--cyan);
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  padding:13px 21px;
+  margin-bottom:42px;
+  border:1px solid rgba(50,230,255,.27);
+  border-radius:100px;
+  background:rgba(50,230,255,.045);
+  color:var(--cyan);
+  font-size:clamp(12px,2.3vw,18px);
+  font-weight:800;
+  letter-spacing:2px;
 }
-
-.clock-panel {
-    max-width: 600px;
-    margin: 18px auto 0;
-    padding: 15px 12px;
-    border: 1px solid #00e5ff42;
-    border-radius: 15px;
-    background: linear-gradient(135deg, #111724, #17101e);
+.live-dot{
+  width:11px;height:11px;border-radius:50%;
+  background:#42e9a7;
+  box-shadow:0 0 15px #42e9a7;
+  animation:pulse 1.8s infinite;
 }
-
-.clock-label {
-    color: var(--muted);
-    font-size: 12px;
-    letter-spacing: 1.5px;
-    margin-bottom: 7px;
+h1{
+  max-width:950px;
+  margin:0 auto 28px;
+  font-size:clamp(39px,7.8vw,76px);
+  line-height:1.1;
+  font-weight:900;
+  letter-spacing:-2.5px;
 }
-
-.clock-time {
-    font-size: clamp(27px, 7vw, 36px);
-    font-weight: 800;
-    color: var(--cyan);
-    font-variant-numeric: tabular-nums;
+.gradient-text{
+  color:#56c9ff;
+  background:linear-gradient(100deg,#50caff,#9b72ff 50%,#ff3cbd);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
-
-.clock-date {
-    margin-top: 7px;
-    font-size: 14px;
-    line-height: 1.6;
+.hero-description{
+  max-width:900px;
+  margin:0 auto;
+  color:#a9aec1;
+  font-size:clamp(16px,2.5vw,25px);
+  line-height:1.9;
 }
-
-.clock-zone {
-    margin-top: 5px;
-    color: #858ba2;
-    font-size: 11px;
+.hero-description strong{color:#fff}
+.hero-highlights{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  gap:18px;
+  margin-top:43px;
 }
-
-.hero {
-    max-width: 850px;
-    margin: 26px auto 20px;
-    padding: 10px 18px;
-    text-align: center;
-    animation: fadeUp .7s ease both;
+.highlight{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:13px;
+  padding:18px 23px;
+  border:1px solid var(--border);
+  border-radius:23px;
+  background:linear-gradient(110deg,rgba(24,29,43,.94),rgba(25,19,34,.9));
+  font-size:clamp(14px,2.2vw,19px);
+  line-height:1.4;
+  transition:.25s;
 }
-
-.hero h1 {
-    font-size: clamp(27px, 5vw, 39px);
-    margin-bottom: 13px;
-    line-height: 1.25;
+.highlight:hover{
+  transform:translateY(-3px);
+  border-color:#32e6ff66;
 }
-
-.hero h1 span {
-    color: var(--cyan);
+.highlight strong{color:#fff}
+.highlight-icon{
+  display:grid;
+  place-items:center;
+  width:42px;height:42px;
+  flex-shrink:0;
+  border-radius:14px;
+  background:rgba(45,231,174,.12);
+  color:#45e7ad;
+  font-size:23px;
+  font-weight:900;
 }
-
-.price {
-    display: inline-block;
-    margin: 4px 0 15px;
-    padding: 12px 18px;
-    border: 1px solid var(--cyan);
-    border-radius: 12px;
-    color: var(--cyan);
-    font-weight: bold;
-    font-size: 17px;
-    background: #101722;
-    transition: .25s;
+.highlight.price-highlight{
+  font-size:clamp(18px,3.5vw,31px);
+  font-weight:900;
 }
-
-.price:hover {
-    transform: scale(1.04);
-    box-shadow: 0 0 25px #00e5ff25;
+.highlight.price-highlight .highlight-icon{
+  background:rgba(255,56,189,.12);
+  color:var(--pink);
 }
-
-.hero p {
-    color: #b7bac9;
-    font-size: 15px;
-    line-height: 1.7;
+main{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 25px 75px;
 }
-
-.features {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    max-width: 850px;
-    margin: 0 auto 25px;
-    padding: 0 14px;
+.section-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:32px;
 }
-
-.feature {
-    padding: 12px 14px;
-    border: 1px solid var(--border);
-    background: #11131ee8;
-    border-radius: 10px;
-    font-size: 13px;
-    transition: transform .2s, border-color .2s;
+.section-head h2{
+  font-size:clamp(29px,4vw,43px);
+  letter-spacing:-1.5px;
 }
-
-.feature:active {
-    transform: scale(.96);
-    border-color: var(--cyan);
+.section-head p{
+  margin-top:15px;
+  color:var(--muted);
+  font-size:clamp(15px,2.2vw,21px);
+  line-height:1.5;
 }
-
-.feature span {
-    color: #00e5a0;
-    font-weight: bold;
-    margin-right: 5px;
+.count{
+  flex-shrink:0;
+  padding:13px 18px;
+  border:1px solid var(--border);
+  border-radius:17px;
+  color:#c2c6d8;
+  background:rgba(255,255,255,.035);
+  font-size:15px;
 }
-
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 10px 16px 35px;
+.search-box{
+  position:relative;
+  margin-bottom:28px;
 }
-
-.search-box {
-    margin: 0 auto 22px;
-    max-width: 600px;
+.search-icon{
+  position:absolute;
+  left:25px;
+  top:50%;
+  transform:translateY(-50%);
+  width:26px;height:26px;
+  color:#939bb6;
+  pointer-events:none;
 }
-
-.search-box input {
-    width: 100%;
-    padding: 16px 18px;
-    border: 1px solid #303447;
-    border-radius: 13px;
-    outline: none;
-    background: #11131e;
-    color: #fff;
-    font-size: 16px;
-    transition: .25s;
+.search-box input{
+  width:100%;
+  padding:25px 24px 25px 70px;
+  border:2px solid rgba(170,180,220,.15);
+  outline:none;
+  border-radius:30px;
+  background:rgba(18,20,33,.93);
+  color:#fff;
+  font:inherit;
+  font-size:clamp(17px,3vw,27px);
+  transition:.25s;
 }
-
-.search-box input:focus {
-    border-color: var(--cyan);
-    box-shadow: 0 0 0 3px #00e5ff18;
+.search-box input::placeholder{color:#777f99}
+.search-box input:focus{
+  border-color:rgba(50,230,255,.7);
+  box-shadow:0 0 0 4px #32e6ff0d,0 0 28px #32e6ff0b;
 }
-
-.section-title {
-    text-align: center;
-    font-size: 21px;
-    margin-bottom: 18px;
+.countries{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:20px;
 }
-
-.countries {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-    gap: 14px;
+.country-card{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:17px;
+  min-width:0;
+  padding:25px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  border-radius:27px;
+  background:
+    radial-gradient(ellipse at 95% 25%,rgba(0,220,255,.08),transparent 45%),
+    linear-gradient(130deg,rgba(21,24,40,.98),rgba(15,16,27,.98));
+  transition:transform .25s,border-color .25s,box-shadow .25s;
+  animation:fadeUp .45s ease both;
 }
-
-.country-card {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    padding: 17px;
-    border: 1px solid var(--border);
-    border-radius: 15px;
-    background: linear-gradient(145deg, #121522f5, #0e1019f5);
-    transition: transform .22s, border-color .22s, box-shadow .22s;
-    animation: fadeUp .35s ease both;
+.country-card:after{
+  content:"";
+  position:absolute;
+  left:0;top:20%;bottom:20%;
+  width:3px;
+  border-radius:5px;
+  background:linear-gradient(var(--cyan),var(--pink));
+  opacity:0;
+  transition:opacity .25s;
 }
-
-.country-card:hover {
-    border-color: var(--cyan);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px #00e5ff0b;
+.country-card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(50,230,255,.4);
+  box-shadow:0 15px 40px rgba(0,0,0,.2),0 0 25px #32e6ff08;
 }
-
-.country-card:active {
-    transform: scale(.97);
+.country-card:hover:after{opacity:1}
+.flag-box{
+  display:grid;
+  place-items:center;
+  width:76px;height:76px;
+  flex-shrink:0;
+  border:1px solid rgba(170,180,220,.1);
+  border-radius:24px;
+  background:linear-gradient(145deg,#202437,#151724);
+  font-size:39px;
+  transition:transform .25s;
 }
-
-.flag {
-    font-size: 35px;
-    line-height: 1;
-    transition: transform .25s;
+.country-card:hover .flag-box{transform:scale(1.04)}
+.country-info{flex:1;min-width:0}
+.country-name{
+  margin-bottom:8px;
+  font-size:clamp(17px,2.4vw,24px);
+  font-weight:900;
+  overflow-wrap:anywhere;
 }
-
-.country-card:hover .flag {
-    transform: scale(1.12) rotate(-3deg);
+.country-code{color:#9ba3ba;font-size:16px}
+.buy-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  margin-top:17px;
+  padding:13px 17px;
+  border:1px solid transparent;
+  border-radius:13px;
+  background:linear-gradient(100deg,#35dfff,#6fc9ff);
+  color:#071019;
+  text-decoration:none;
+  font-weight:900;
+  font-size:15px;
+  transition:.2s;
 }
-
-.country-info {
-    flex: 1;
-    min-width: 0;
+.buy-btn:hover{
+  background:#fff;
+  transform:translateY(-2px);
+  box-shadow:0 7px 20px #32e6ff16;
 }
-
-.country-name {
-    font-size: 15px;
-    font-weight: bold;
-    margin-bottom: 5px;
-    overflow-wrap: anywhere;
+.buy-btn svg{width:18px;height:18px}
+.empty{
+  display:none;
+  padding:35px 15px;
+  text-align:center;
+  color:var(--muted);
+  font-size:17px;
+  line-height:1.8;
 }
-
-.country-code {
-    color: var(--muted);
-    font-size: 13px;
+.support-bottom{margin:45px auto 0;text-align:center}
+.support-bottom p{
+  color:var(--muted);
+  margin-bottom:18px;
+  line-height:1.7;
 }
-
-.buy-btn {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 14px;
-    background: var(--cyan);
-    color: #050810;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 13px;
-    transition: transform .2s, background .2s;
+.support-bottom a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  padding:17px 25px;
+  border:1px solid rgba(50,230,255,.4);
+  border-radius:17px;
+  background:rgba(50,230,255,.07);
+  color:var(--cyan);
+  font-size:17px;
+  font-weight:900;
+  text-decoration:none;
+  transition:.25s;
 }
-
-.buy-btn:hover {
-    background: #fff;
-    transform: translateY(-1px);
+.support-bottom a:hover{
+  background:var(--cyan);
+  color:#080910;
+  transform:translateY(-3px);
 }
-
-.buy-btn:active {
-    transform: scale(.94);
+footer{
+  padding:25px 15px;
+  border-top:1px solid var(--border);
+  text-align:center;
+  color:#7e859c;
+  font-size:14px;
+  line-height:1.8;
 }
-
-.empty {
-    display: none;
-    text-align: center;
-    padding: 28px 10px;
-    color: var(--muted);
-    line-height: 1.7;
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(14px)}
+  to{opacity:1;transform:translateY(0)}
 }
-
-.support {
-    text-align: center;
-    margin: 30px 0 15px;
+@keyframes pulse{
+  0%,100%{opacity:1;box-shadow:0 0 13px #42e9a7}
+  50%{opacity:.55;box-shadow:0 0 4px #42e9a7}
 }
-
-.support a {
-    display: inline-block;
-    padding: 13px 22px;
-    border: 1px solid var(--cyan);
-    border-radius: 10px;
-    color: var(--cyan);
-    text-decoration: none;
-    font-weight: bold;
-    transition: .25s;
+@media(max-width:600px){
+  header{padding:20px 18px;gap:10px}
+  .logo{font-size:26px}
+  .support-top{padding:12px 13px;gap:7px;font-size:13px}
+  .telegram-icon{width:20px;height:20px}
+  .hero{padding:57px 20px 62px}
+  .eyebrow{margin-bottom:34px;padding:12px 15px;letter-spacing:1.3px}
+  h1{letter-spacing:-1.7px;margin-bottom:28px}
+  .hero-description{line-height:1.8}
+  .hero-highlights{gap:12px;margin-top:34px}
+  .highlight{padding:13px 15px;border-radius:20px;gap:11px}
+  .highlight-icon{width:36px;height:36px;border-radius:12px}
+  .highlight.price-highlight{font-size:clamp(18px,4.3vw,25px)}
+  main{padding:0 16px 55px}
+  .section-head{margin-bottom:25px}
+  .section-head h2{font-size:30px}
+  .section-head p{margin-top:12px}
+  .count{padding:12px 14px;font-size:13px}
+  .search-box{margin-bottom:23px}
+  .search-box input{padding:23px 15px 23px 58px;border-radius:25px}
+  .search-icon{left:20px;width:23px;height:23px}
+  .countries{gap:12px}
+  .country-card{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:13px;
+    padding:15px;
+    border-radius:23px;
+  }
+  .flag-box{
+    width:58px;height:58px;
+    border-radius:19px;
+    font-size:31px;
+  }
+  .country-name{font-size:17px}
+  .country-code{font-size:14px}
+  .buy-btn{margin-top:14px;padding:12px 12px;font-size:13px}
 }
-
-.support a:hover {
-    background: var(--cyan);
-    color: #080910;
-    transform: translateY(-2px);
+@media(max-width:360px){
+  header{padding:17px 12px}
+  .logo{font-size:23px}
+  .support-top{font-size:12px;padding:11px 9px}
+  main{padding-left:11px;padding-right:11px}
+  .countries{gap:8px}
+  .country-card{padding:11px}
+  .country-name{font-size:15px}
+  .buy-btn{font-size:12px;padding:10px 8px}
+  .count{padding:10px;font-size:12px}
 }
-
-footer {
-    border-top: 1px solid var(--border);
-    padding: 20px 12px;
-    text-align: center;
-    color: #73798e;
-    font-size: 13px;
-}
-
-@media (max-width: 480px) {
-    .countries {
-        grid-template-columns: 1fr;
-    }
-
-    .country-card {
-        padding: 15px;
-    }
-
-    .clock-panel {
-        margin: 15px 14px 0;
-    }
-
-    .hero {
-        margin-top: 22px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
-    }
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
 </style>
 </head>
-
 <body>
 
 <header>
-    <div class="logo">ALTAP<span>.BIZ</span></div>
-
-    <div class="clock-panel">
-        <div class="clock-label">Azərbaycan vaxtı</div>
-        <div class="clock-time" id="clockTime">--:--:--</div>
-        <div class="clock-date" id="clockDate">Tarix yüklənir...</div>
-        <div class="clock-zone">AZT · Bakı</div>
-    </div>
+  <a class="logo" href="#" style="text-decoration:none">ALTAP<span>.BIZ</span></a>
+  <a class="support-top" href="https://t.me/Magocik" target="_blank" rel="noopener" aria-label="Telegram dəstək">
+    <svg class="telegram-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M21 3 3.8 9.7c-1.2.5-1.2 1.2-.2 1.5l4.4 1.4 1.7 5.3c.2.6.1.8.7.8.5 0 .8-.2 1.1-.5l2.1-2 4.4 3.2c.8.4 1.4.2 1.6-.8L22 4.3c.3-1.2-.4-1.7-1-1.3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="m8.1 12.4 9.8-6.2-7.7 7.4-.3 4.1" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+    </svg>
+    Dəstək xidməti
+  </a>
 </header>
 
 <section class="hero">
-    <h1>Virtual nömrələr <span>al</span></h1>
-    <div class="price">Ucuz nömrələr 7 ₼-dən başlayır</div>
-    <p>Ölkəni seç, axtarışdan tap və sifariş üçün Telegram vasitəsilə bizimlə əlaqə saxla.</p>
+  <div class="eyebrow"><span class="live-dot"></span> ALTAP.BIZ VİRTUAL NÖMRƏLƏR</div>
+  <h1>Xarici nömrələr, <span class="gradient-text">asan qeydiyyat</span></h1>
+  <p class="hero-description">
+    <strong>WhatsApp, Telegram</strong> qeydiyyatı və digər sosial şəbəkələr üçün xarici virtual nömrələr əldə edə bilərsiniz. Ölkəni seçin və sifarişinizi Telegram vasitəsilə göndərin.
+  </p>
+  <div class="hero-highlights">
+    <div class="highlight">
+      <span class="highlight-icon">✓</span>
+      <span><strong>Nömrədə Spam yoxdur!</strong></span>
+    </div>
+    <div class="highlight price-highlight">
+      <span class="highlight-icon">₼</span>
+      <span>Qiymətlər 7 ₼-dən başlayır</span>
+    </div>
+  </div>
 </section>
 
-<section class="features">
-    <div class="feature"><span>✓</span> Nömrədə spam yoxdur, bağlanmır!</div>
-    <div class="feature"><span>✓</span> Sürətli sifariş</div>
-    <div class="feature"><span>✓</span> Dəstək xidməti</div>
-</section>
-
-<main class="container">
-    <div class="search-box">
-        <input
-            type="search"
-            id="countrySearch"
-            placeholder="Ölkə axtar... Məs: Rusiya"
-            autocomplete="off"
-        >
+<main>
+  <div class="section-head">
+    <div>
+      <h2>Ölkəni seç</h2>
+      <p>Seçdiyiniz ölkə üçün nömrə sifariş edin.</p>
     </div>
+    <div class="count" id="countryCount">4 ölkə</div>
+  </div>
 
-    <h2 class="section-title" id="sectionTitle">Ölkə seç</h2>
+  <div class="search-box">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="10.8" cy="10.8" r="7.2" stroke="currentColor" stroke-width="2.2"/>
+      <path d="m16.2 16.2 4.4 4.4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>
+    <input type="search" id="countrySearch" placeholder="Ölkə axtar... Məsələn, Türkiyə" autocomplete="off" aria-label="Ölkə axtar">
+  </div>
 
-    <div class="countries" id="countries"></div>
+  <div class="countries" id="countries"></div>
+  <div class="empty" id="emptyMessage">Bu ölkə tapılmadı.<br>Ölkənin adını başqa cür yazıb yenidən yoxlayın.</div>
 
-    <div class="empty" id="emptyMessage">
-        Bu ölkə tapılmadı.<br>
-        Ölkənin adını başqa cür yazıb yenidən yoxla.
-    </div>
-
-    <div class="support">
-        <a href="https://t.me/Magocik" target="_blank" rel="noopener">
-            Telegram dəstək
-        </a>
-    </div>
+  <div class="support-bottom">
+    <p>Sifariş və suallarınız üçün Telegram vasitəsilə bizimlə əlaqə saxlayın.</p>
+    <a href="https://t.me/Magocik" target="_blank" rel="noopener">
+      <svg class="telegram-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M21 3 3.8 9.7c-1.2.5-1.2 1.2-.2 1.5l4.4 1.4 1.7 5.3c.2.6.1.8.7.8.5 0 .8-.2 1.1-.5l2.1-2 4.4 3.2c.8.4 1.4.2 1.6-.8L22 4.3c.3-1.2-.4-1.7-1-1.3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="m8.1 12.4 9.8-6.2-7.7 7.4-.3 4.1" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      </svg>
+      Telegram dəstək
+    </a>
+  </div>
 </main>
 
 <footer>
-    © <span id="year"></span> ALTAP.BIZ — Bütün hüquqlar qorunur.
+  © <span id="year"></span> ALTAP.BIZ — Bütün hüquqlar qorunur.
 </footer>
 
 <script>
-/* Bakı vaxtı ilə canlı saat və tarix */
-function updateClock() {
-    const now = new Date();
-
-    document.getElementById("clockTime").textContent =
-        new Intl.DateTimeFormat("az-AZ", {
-            timeZone: "Asia/Baku",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
-            hour12: false
-        }).format(now);
-
-    document.getElementById("clockDate").textContent =
-        new Intl.DateTimeFormat("az-AZ", {
-            timeZone: "Asia/Baku",
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric"
-        }).format(now);
-}
-
-updateClock();
-setInterval(updateClock, 1000);
-
-document.getElementById("year").textContent =
-    new Date().getFullYear();
-
-/* Ölkələr siyahısı */
 const countries = [
-    { name: "Azərbaycan", flag: "🇦🇿", code: "+994" },
-    { name: "Türkiyə", flag: "🇹🇷", code: "+90" },
-    { name: "ABŞ", flag: "🇺🇸", code: "+1" },
-    { name: "Almaniya", flag: "🇩🇪", code: "+49" },
-    { name: "Rusiya", flag: "🇷🇺", code: "+7" },
-    { name: "Böyük Britaniya", flag: "🇬🇧", code: "+44" },
-    { name: "Fransa", flag: "🇫🇷", code: "+33" },
-    { name: "İtaliya", flag: "🇮🇹", code: "+39" },
-    { name: "İspaniya", flag: "🇪🇸", code: "+34" },
-    { name: "Ukrayna", flag: "🇺🇦", code: "+380" },
-    { name: "Gürcüstan", flag: "🇬🇪", code: "+995" },
-    { name: "Qazaxıstan", flag: "🇰🇿", code: "+7" },
-    { name: "Özbəkistan", flag: "🇺🇿", code: "+998" },
-    { name: "Qırğızıstan", flag: "🇰🇬", code: "+996" },
-    { name: "Tacikistan", flag: "🇹🇯", code: "+992" },
-    { name: "Türkmənistan", flag: "🇹🇲", code: "+993" },
-    { name: "BƏƏ", flag: "🇦🇪", code: "+971" },
-    { name: "Səudiyyə Ərəbistanı", flag: "🇸🇦", code: "+966" },
-    { name: "Qətər", flag: "🇶🇦", code: "+974" },
-    { name: "Küveyt", flag: "🇰🇼", code: "+965" },
-    { name: "Hindistan", flag: "🇮🇳", code: "+91" },
-    { name: "Pakistan", flag: "🇵🇰", code: "+92" },
-    { name: "İndoneziya", flag: "🇮🇩", code: "+62" },
-    { name: "Malayziya", flag: "🇲🇾", code: "+60" },
-    { name: "Tailand", flag: "🇹🇭", code: "+66" },
-    { name: "Vyetnam", flag: "🇻🇳", code: "+84" },
-    { name: "Filippin", flag: "🇵🇭", code: "+63" },
-    { name: "Yaponiya", flag: "🇯🇵", code: "+81" },
-    { name: "Cənubi Koreya", flag: "🇰🇷", code: "+82" },
-    { name: "Çin", flag: "🇨🇳", code: "+86" },
-    { name: "Kanada", flag: "🇨🇦", code: "+1" },
-    { name: "Meksika", flag: "🇲🇽", code: "+52" },
-    { name: "Braziliya", flag: "🇧🇷", code: "+55" },
-    { name: "Argentina", flag: "🇦🇷", code: "+54" },
-    { name: "Avstraliya", flag: "🇦🇺", code: "+61" },
-    { name: "Yeni Zelandiya", flag: "🇳🇿", code: "+64" },
-    { name: "Polşa", flag: "🇵🇱", code: "+48" },
-    { name: "Niderland", flag: "🇳🇱", code: "+31" },
-    { name: "Belçika", flag: "🇧🇪", code: "+32" },
-    { name: "İsveç", flag: "🇸🇪", code: "+46" },
-    { name: "Norveç", flag: "🇳🇴", code: "+47" },
-    { name: "Danimarka", flag: "🇩🇰", code: "+45" },
-    { name: "Finlandiya", flag: "🇫🇮", code: "+358" },
-    { name: "İsveçrə", flag: "🇨🇭", code: "+41" },
-    { name: "Avstriya", flag: "🇦🇹", code: "+43" },
-    { name: "Yunanıstan", flag: "🇬🇷", code: "+30" },
-    { name: "Portuqaliya", flag: "🇵🇹", code: "+351" },
-    { name: "Rumıniya", flag: "🇷🇴", code: "+40" },
-    { name: "Bolqarıstan", flag: "🇧🇬", code: "+359" },
-    { name: "Macarıstan", flag: "🇭🇺", code: "+36" },
-    { name: "Çexiya", flag: "🇨🇿", code: "+420" },
-    { name: "Slovakiya", flag: "🇸🇰", code: "+421" },
-    { name: "Xorvatiya", flag: "🇭🇷", code: "+385" },
-    { name: "Serbiya", flag: "🇷🇸", code: "+381" },
-    { name: "İsrail", flag: "🇮🇱", code: "+972" },
-    { name: "Misir", flag: "🇪🇬", code: "+20" },
-    { name: "Cənubi Afrika", flag: "🇿🇦", code: "+27" },
-    { name: "Nigeriya", flag: "🇳🇬", code: "+234" },
-    { name: "Mərakeş", flag: "🇲🇦", code: "+212" },
-    { name: "Əlcəzair", flag: "🇩🇿", code: "+213" },
-    { name: "Tunis", flag: "🇹🇳", code: "+216" },
-    { name: "İran", flag: "🇮🇷", code: "+98" },
-    { name: "İraq", flag: "🇮🇶", code: "+964" },
-    { name: "Livan", flag: "🇱🇧", code: "+961" },
-    { name: "İordaniya", flag: "🇯🇴", code: "+962" },
-    { name: "İrlandiya", flag: "🇮🇪", code: "+353" },
-    { name: "Moldova", flag: "🇲🇩", code: "+373" },
-    { name: "Belarus", flag: "🇧🇾", code: "+375" },
-    { name: "Litva", flag: "🇱🇹", code: "+370" },
-    { name: "Latviya", flag: "🇱🇻", code: "+371" },
-    { name: "Estoniya", flag: "🇪🇪", code: "+372" },
-    { name: "İslandiya", flag: "🇮🇸", code: "+354" },
-    { name: "Lüksemburq", flag: "🇱🇺", code: "+352" },
-    { name: "Sloveniya", flag: "🇸🇮", code: "+386" },
-    { name: "Albaniya", flag: "🇦🇱", code: "+355" },
-    { name: "Bosniya və Herseqovina", flag: "🇧🇦", code: "+387" },
-    { name: "Monteneqro", flag: "🇲🇪", code: "+382" },
-    { name: "Şimali Makedoniya", flag: "🇲🇰", code: "+389" },
-    { name: "Ermənistan", flag: "🇦🇲", code: "+374" },
-    { name: "Banqladeş", flag: "🇧🇩", code: "+880" },
-    { name: "Nepal", flag: "🇳🇵", code: "+977" },
-    { name: "Şri-Lanka", flag: "🇱🇰", code: "+94" },
-    { name: "Kamboca", flag: "🇰🇭", code: "+855" },
-    { name: "Laos", flag: "🇱🇦", code: "+856" },
-    { name: "Monqolustan", flag: "🇲🇳", code: "+976" },
-    { name: "Efiopiya", flag: "🇪🇹", code: "+251" },
-    { name: "Keniya", flag: "🇰🇪", code: "+254" },
-    { name: "Qana", flag: "🇬🇭", code: "+233" },
-    { name: "Kolumbiya", flag: "🇨🇴", code: "+57" },
-    { name: "Çili", flag: "🇨🇱", code: "+56" },
-    { name: "Peru", flag: "🇵🇪", code: "+51" },
-    { name: "Venesuela", flag: "🇻🇪", code: "+58" },
-    { name: "Uruqvay", flag: "🇺🇾", code: "+598" },
-    { name: "Kuba", flag: "🇨🇺", code: "+53" },
-    { name: "Kosta Rika", flag: "🇨🇷", code: "+506" },
-    { name: "Panama", flag: "🇵🇦", code: "+507" }
+  {name:"Azərbaycan",flag:"🇦🇿",code:"+994"},
+  {name:"Türkiyə",flag:"🇹🇷",code:"+90"},
+  {name:"ABŞ",flag:"🇺🇸",code:"+1"},
+  {name:"Almaniya",flag:"🇩🇪",code:"+49"},
+  {name:"Rusiya",flag:"🇷🇺",code:"+7"},
+  {name:"Böyük Britaniya",flag:"🇬🇧",code:"+44"},
+  {name:"Fransa",flag:"🇫🇷",code:"+33"},
+  {name:"İtaliya",flag:"🇮🇹",code:"+39"},
+  {name:"İspaniya",flag:"🇪🇸",code:"+34"},
+  {name:"Ukrayna",flag:"🇺🇦",code:"+380"},
+  {name:"Gürcüstan",flag:"🇬🇪",code:"+995"},
+  {name:"Qazaxıstan",flag:"🇰🇿",code:"+7"},
+  {name:"Özbəkistan",flag:"🇺🇿",code:"+998"},
+  {name:"Qırğızıstan",flag:"🇰🇬",code:"+996"},
+  {name:"Tacikistan",flag:"🇹🇯",code:"+992"},
+  {name:"Türkmənistan",flag:"🇹🇲",code:"+993"},
+  {name:"BƏƏ",flag:"🇦🇪",code:"+971"},
+  {name:"Səudiyyə Ərəbistanı",flag:"🇸🇦",code:"+966"},
+  {name:"Qətər",flag:"🇶🇦",code:"+974"},
+  {name:"Küveyt",flag:"🇰🇼",code:"+965"},
+  {name:"Hindistan",flag:"🇮🇳",code:"+91"},
+  {name:"Pakistan",flag:"🇵🇰",code:"+92"},
+  {name:"İndoneziya",flag:"🇮🇩",code:"+62"},
+  {name:"Malayziya",flag:"🇲🇾",code:"+60"},
+  {name:"Tailand",flag:"🇹🇭",code:"+66"},
+  {name:"Vyetnam",flag:"🇻🇳",code:"+84"},
+  {name:"Filippin",flag:"🇵🇭",code:"+63"},
+  {name:"Yaponiya",flag:"🇯🇵",code:"+81"},
+  {name:"Cənubi Koreya",flag:"🇰🇷",code:"+82"},
+  {name:"Çin",flag:"🇨🇳",code:"+86"},
+  {name:"Kanada",flag:"🇨🇦",code:"+1"},
+  {name:"Meksika",flag:"🇲🇽",code:"+52"},
+  {name:"Braziliya",flag:"🇧🇷",code:"+55"},
+  {name:"Argentina",flag:"🇦🇷",code:"+54"},
+  {name:"Avstraliya",flag:"🇦🇺",code:"+61"},
+  {name:"Yeni Zelandiya",flag:"🇳🇿",code:"+64"},
+  {name:"Polşa",flag:"🇵🇱",code:"+48"},
+  {name:"Niderland",flag:"🇳🇱",code:"+31"},
+  {name:"Belçika",flag:"🇧🇪",code:"+32"},
+  {name:"İsveç",flag:"🇸🇪",code:"+46"},
+  {name:"Norveç",flag:"🇳🇴",code:"+47"},
+  {name:"Danimarka",flag:"🇩🇰",code:"+45"},
+  {name:"Finlandiya",flag:"🇫🇮",code:"+358"},
+  {name:"İsveçrə",flag:"🇨🇭",code:"+41"},
+  {name:"Avstriya",flag:"🇦🇹",code:"+43"},
+  {name:"Yunanıstan",flag:"🇬🇷",code:"+30"},
+  {name:"Portuqaliya",flag:"🇵🇹",code:"+351"},
+  {name:"Rumıniya",flag:"🇷🇴",code:"+40"},
+  {name:"Bolqarıstan",flag:"🇧🇬",code:"+359"},
+  {name:"Macarıstan",flag:"🇭🇺",code:"+36"},
+  {name:"Çexiya",flag:"🇨🇿",code:"+420"},
+  {name:"Slovakiya",flag:"🇸🇰",code:"+421"},
+  {name:"Xorvatiya",flag:"🇭🇷",code:"+385"},
+  {name:"Serbiya",flag:"🇷🇸",code:"+381"},
+  {name:"İsrail",flag:"🇮🇱",code:"+972"},
+  {name:"Misir",flag:"🇪🇬",code:"+20"},
+  {name:"Cənubi Afrika",flag:"🇿🇦",code:"+27"},
+  {name:"Nigeriya",flag:"🇳🇬",code:"+234"},
+  {name:"Mərakeş",flag:"🇲🇦",code:"+212"},
+  {name:"Əlcəzair",flag:"🇩🇿",code:"+213"},
+  {name:"Tunis",flag:"🇹🇳",code:"+216"},
+  {name:"İran",flag:"🇮🇷",code:"+98"},
+  {name:"İraq",flag:"🇮🇶",code:"+964"},
+  {name:"Livan",flag:"🇱🇧",code:"+961"},
+  {name:"İordaniya",flag:"🇯🇴",code:"+962"},
+  {name:"İrlandiya",flag:"🇮🇪",code:"+353"},
+  {name:"Moldova",flag:"🇲🇩",code:"+373"},
+  {name:"Belarus",flag:"🇧🇾",code:"+375"},
+  {name:"Litva",flag:"🇱🇹",code:"+370"},
+  {name:"Latviya",flag:"🇱🇻",code:"+371"},
+  {name:"Estoniya",flag:"🇪🇪",code:"+372"},
+  {name:"İslandiya",flag:"🇮🇸",code:"+354"},
+  {name:"Lüksemburq",flag:"🇱🇺",code:"+352"},
+  {name:"Sloveniya",flag:"🇸🇮",code:"+386"},
+  {name:"Albaniya",flag:"🇦🇱",code:"+355"},
+  {name:"Bosniya və Herseqovina",flag:"🇧🇦",code:"+387"},
+  {name:"Monteneqro",flag:"🇲🇪",code:"+382"},
+  {name:"Şimali Makedoniya",flag:"🇲🇰",code:"+389"},
+  {name:"Ermənistan",flag:"🇦🇲",code:"+374"},
+  {name:"Banqladeş",flag:"🇧🇩",code:"+880"},
+  {name:"Nepal",flag:"🇳🇵",code:"+977"},
+  {name:"Şri-Lanka",flag:"🇱🇰",code:"+94"},
+  {name:"Kamboca",flag:"🇰🇭",code:"+855"},
+  {name:"Laos",flag:"🇱🇦",code:"+856"},
+  {name:"Monqolustan",flag:"🇲🇳",code:"+976"},
+  {name:"Efiopiya",flag:"🇪🇹",code:"+251"},
+  {name:"Keniya",flag:"🇰🇪",code:"+254"},
+  {name:"Qana",flag:"🇬🇭",code:"+233"},
+  {name:"Kolumbiya",flag:"🇨🇴",code:"+57"},
+  {name:"Çili",flag:"🇨🇱",code:"+56"},
+  {name:"Peru",flag:"🇵🇪",code:"+51"},
+  {name:"Venesuela",flag:"🇻🇪",code:"+58"},
+  {name:"Uruqvay",flag:"🇺🇾",code:"+598"},
+  {name:"Kuba",flag:"🇨🇺",code:"+53"},
+  {name:"Kosta Rika",flag:"🇨🇷",code:"+506"},
+  {name:"Panama",flag:"🇵🇦",code:"+507"}
 ];
 
 const container = document.getElementById("countries");
 const search = document.getElementById("countrySearch");
 const empty = document.getElementById("emptyMessage");
-const title = document.getElementById("sectionTitle");
+const count = document.getElementById("countryCount");
 
-/*
-  Vacib:
-  Axtarış boşdursa yalnız ilk 4 ölkə göstərilir.
-  Axtarış yazıldıqda uyğun ölkələr göstərilir.
-*/
-function renderCountries() {
-    const query = search.value
-        .toLocaleLowerCase("az")
-        .trim();
+document.getElementById("year").textContent = new Date().getFullYear();
 
-    let results;
-
-    if (query === "") {
-        results = countries.slice(0, 4);
-        title.textContent = "Ölkə seç";
-    } else {
-        results = countries.filter(country =>
-            country.name.toLocaleLowerCase("az").includes(query) ||
-            country.code.includes(query)
-        );
-        title.textContent = "Axtarış nəticələri";
-    }
-
-    container.innerHTML = "";
-
-    results.forEach((country, index) => {
-        const card = document.createElement("article");
-        card.className = "country-card";
-        card.style.animationDelay = Math.min(index * 35, 200) + "ms";
-
-        const flag = document.createElement("div");
-        flag.className = "flag";
-        flag.textContent = country.flag;
-
-        const info = document.createElement("div");
-        info.className = "country-info";
-
-        const name = document.createElement("div");
-        name.className = "country-name";
-        name.textContent = country.name;
-
-        const code = document.createElement("div");
-        code.className = "country-code";
-        code.textContent = country.code;
-
-        const button = document.createElement("a");
-        button.className = "buy-btn";
-        button.textContent = "Nömrə al";
-        button.href = "https://t.me/Magocik?text=" +
-            encodeURIComponent(
-                "Salam! " + country.name + " (" +
-                country.code +
-                ") üçün virtual nömrə almaq istəyirəm."
-            );
-        button.target = "_blank";
-        button.rel = "noopener";
-
-        info.appendChild(name);
-        info.appendChild(code);
-        info.appendChild(button);
-
-        card.appendChild(flag);
-        card.appendChild(info);
-        container.appendChild(card);
-    });
-
-    empty.style.display = results.length === 0 ? "block" : "none";
+function normalize(value){
+  return value
+    .toLocaleLowerCase("az")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"")
+    .trim();
 }
 
-search.addEventListener("input", renderCountries);
+function renderCountries(){
+  const query = normalize(search.value);
+  const results = query
+    ? countries.filter(country =>
+        normalize(country.name).includes(query) ||
+        country.code.includes(query)
+      )
+    : countries.slice(0,4);
 
+  container.innerHTML = "";
+  count.textContent = results.length + " ölkə";
+  empty.style.display = results.length ? "none" : "block";
+
+  results.forEach((country,index)=>{
+    const card = document.createElement("article");
+    card.className = "country-card";
+    card.style.animationDelay = Math.min(index*35,210)+"ms";
+
+    const flag = document.createElement("div");
+    flag.className = "flag-box";
+    flag.textContent = country.flag;
+
+    const info = document.createElement("div");
+    info.className = "country-info";
+
+    const name = document.createElement("div");
+    name.className = "country-name";
+    name.textContent = country.name;
+
+    const code = document.createElement("div");
+    code.className = "country-code";
+    code.textContent = country.code;
+
+    const button = document.createElement("a");
+    button.className = "buy-btn";
+    button.href = "https://t.me/Magocik?text="+encodeURIComponent(
+      "Salam! "+country.name+" ("+country.code+") üçün virtual nömrə almaq istəyirəm."
+    );
+    button.target = "_blank";
+    button.rel = "noopener";
+    button.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M7 12h10M13 7l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Nömrə al
+    `;
+
+    info.append(name,code,button);
+    card.append(flag,info);
+    container.appendChild(card);
+  });
+}
+
+search.addEventListener("input",renderCountries);
 renderCountries();
 </script>
-
 </body>
 </html>
