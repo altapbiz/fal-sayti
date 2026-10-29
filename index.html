@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080910">
 <title>ALTAP.BIZ — Virtual Nömrələr</title>
+
 <style>
 :root {
   --bg:#080910;
@@ -37,6 +38,81 @@ body:before{
     #080910;
 }
 a{color:inherit}
+
+/* XƏBƏRDARLIQ PƏNCƏRƏSİ */
+.notice-overlay{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.84);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  animation:noticeFade .35s ease;
+}
+.notice-box{
+  width:100%;
+  max-width:450px;
+  padding:32px 25px;
+  border:1px solid rgba(50,230,255,.35);
+  border-radius:25px;
+  background:
+    radial-gradient(ellipse at 90% 0%,rgba(50,230,255,.10),transparent 45%),
+    linear-gradient(145deg,#171c2c,#10111d);
+  box-shadow:0 0 45px rgba(50,230,255,.13);
+  text-align:center;
+  animation:noticeScale .4s ease;
+}
+.notice-logo{
+  font-size:30px;
+  font-weight:900;
+  letter-spacing:-1px;
+  margin-bottom:25px;
+}
+.notice-logo span{color:var(--cyan)}
+.notice-divider{
+  width:65px;
+  height:3px;
+  margin:0 auto 24px;
+  border-radius:10px;
+  background:linear-gradient(90deg,var(--cyan),var(--pink));
+}
+.notice-text{
+  color:#c5cadb;
+  font-size:16px;
+  line-height:1.85;
+  margin-bottom:26px;
+}
+.notice-text strong{color:#fff}
+.notice-button{
+  width:100%;
+  padding:16px;
+  border:0;
+  border-radius:14px;
+  background:linear-gradient(100deg,#35dfff,#6fc9ff);
+  color:#080910;
+  font-size:16px;
+  font-weight:900;
+  cursor:pointer;
+  transition:.25s;
+}
+.notice-button:hover{
+  background:#fff;
+  transform:translateY(-2px);
+}
+.notice-overlay.hidden{display:none}
+@keyframes noticeFade{
+  from{opacity:0}
+  to{opacity:1}
+}
+@keyframes noticeScale{
+  from{opacity:0;transform:scale(.94)}
+  to{opacity:1;transform:scale(1)}
+}
+
 header{
   position:relative;
   z-index:2;
@@ -416,7 +492,27 @@ footer{
 }
 </style>
 </head>
+
 <body>
+
+<!-- XƏBƏRDARLIQ PƏNCƏRƏSİ -->
+<div class="notice-overlay" id="noticeOverlay">
+  <div class="notice-box">
+    <div class="notice-logo">ALTAP<span>.BIZ</span></div>
+    <div class="notice-divider"></div>
+
+    <div class="notice-text">
+      <strong>Hörmətli müştərilər!</strong><br><br>
+      Xarici ölkələrə aid WhatsApp nömrələrinin satışı saytımızda aktivdir.<br><br>
+      Sifariş verməzdən əvvəl nömrələrin ölkəsini, qiymətini və istifadə şərtlərini diqqətlə yoxlayın.<br><br>
+      Keyfiyyətli xidmət və operativ dəstək üçün doğru ünvandasınız!
+    </div>
+
+    <button class="notice-button" onclick="closeNotice()">
+      Başa düşdüm
+    </button>
+  </div>
+</div>
 
 <header>
   <a class="logo" href="#" style="text-decoration:none">ALTAP<span>.BIZ</span></a>
@@ -484,6 +580,10 @@ footer{
 </footer>
 
 <script>
+function closeNotice(){
+  document.getElementById("noticeOverlay").classList.add("hidden");
+}
+
 const countries = [
   {name:"Azərbaycan",flag:"🇦🇿",code:"+994"},
   {name:"Türkiyə",flag:"🇹🇷",code:"+90"},
